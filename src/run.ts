@@ -10,16 +10,18 @@ const outputDir = resolve(__dirname, '../assets/output');
 
 const files = readdirSync(inputDir).filter(f => f.endsWith('.js'));
 
-for (const file of files) {
-  const inputPath = join(inputDir, file);
-  const outputPath = join(outputDir, file);
+(async () => {
+  for (const file of files) {
+    const inputPath = join(inputDir, file);
+    const outputPath = join(outputDir, file);
 
-  const inputCode = readFileSync(inputPath, 'utf-8');
-  const src = `${BASE_URL}/${file}`;
-  const result = transpile(inputCode, { resolveModule, src, minify: false,  });
+    const inputCode = readFileSync(inputPath, 'utf-8');
+    const src = `${BASE_URL}/${file}`;
+    const result = await transpile(inputCode, { resolveModule, src, minify: false });
 
-  writeFileSync(outputPath, result);
-  console.log(`${file} -> assets/output/${file}`);
-}
+    writeFileSync(outputPath, result);
+    console.log(`${file} -> assets/output/${file}`);
+  }
 
-console.log(`\nTranspiled ${files.length} file(s)`);
+  console.log(`\nTranspiled ${files.length} file(s)`);
+})();

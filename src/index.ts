@@ -10,8 +10,8 @@ export interface TranspileOptions {
   minify?: boolean;
 }
 
-export function transpile(code: string, options: TranspileOptions): string {
-  let result = staticImportToDynamic(code, { resolveModule: options.resolveModule });
+export async function transpile(code: string, options: TranspileOptions): Promise<string> {
+  let result = await staticImportToDynamic(code, { resolveModule: options.resolveModule });
   result = replaceImportMeta(result, { url: options.src });
   result = removeExport(result, { src: options.src });
   result = removeLookbehind(result);

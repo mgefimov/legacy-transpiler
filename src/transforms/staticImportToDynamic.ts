@@ -2,7 +2,7 @@ import * as acorn from 'acorn';
 import { generate } from 'astring';
 
 export interface StaticImportToDynamicOptions {
-  resolveModule: (source: string) => string;
+  resolveModule: (source: string) => string | Promise<string>;
 }
 
 /**
@@ -36,11 +36,21 @@ function moduleExportsAccess(source: acorn.Literal, start: number, end: number):
   };
 }
 
-export function staticImportToDynamic(code: string, options: StaticImportToDynamicOptions): string {
+export async function staticImportToDynamic(code: string, options: StaticImportToDynamicOptions): Promise<string> {
   const ast = acorn.parse(code, {
     ecmaVersion: 'latest',
     sourceType: 'module',
   });
+
+  // Resolve all import sources in parallel
+  const importNodes = ast.body.filter(
+    (node): node is acorn.ImportDeclaration => node.type === 'ImportDeclaration' && node.specifiers.length > 0
+  );
+  const resolved = await Promise.all(
+    importNodes.map((node) => options.resolveModule(String(node.source.value)))
+  );
+  const resolvedMap = new Map<acorn.ImportDeclaration, string>();
+  importNodes.forEach((node, i) => resolvedMap.set(node, resolved[i]));
 
   ast.body = ast.body.flatMap((node): (acorn.Statement | acorn.ModuleDeclaration)[] => {
     if (node.type !== 'ImportDeclaration') return [node];
@@ -50,7 +60,7 @@ export function staticImportToDynamic(code: string, options: StaticImportToDynam
 
     const resolvedSource: acorn.Literal = {
       ...node.source,
-      value: options.resolveModule(String(node.source.value)),
+      value: resolvedMap.get(node)!,
       raw: undefined,
     };
 
@@ -60,7 +70,6 @@ export function staticImportToDynamic(code: string, options: StaticImportToDynam
 
     for (const spec of node.specifiers) {
       if (spec.type === 'ImportNamespaceSpecifier') {
-        // import * as x from 'm' → const x = window.LegacyTranspiler._moduleExports[m]
         const decl: acorn.VariableDeclaration = {
           type: 'VariableDeclaration',
           kind: 'const',
@@ -106,7 +115,6 @@ export function staticImportToDynamic(code: string, options: StaticImportToDynam
       }
     }
 
-    // const { x, y } = window.LegacyTranspiler._moduleExports[m]
     const decl: acorn.VariableDeclaration = {
       type: 'VariableDeclaration',
       kind: 'const',
