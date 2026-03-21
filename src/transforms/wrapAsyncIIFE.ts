@@ -1,10 +1,14 @@
 import * as acorn from 'acorn';
 import { generate } from 'astring';
 
-export function wrapAsyncIIFE(code: string): string {
+export interface WrapAsyncIIFEOptions {
+  minify?: boolean;
+}
+
+export function wrapAsyncIIFE(code: string, options?: WrapAsyncIIFEOptions): string {
   const ast = acorn.parse(code, {
     ecmaVersion: 'latest',
-    sourceType: 'script',
+    sourceType: 'module',
     allowAwaitOutsideFunction: true,
   });
 
@@ -43,5 +47,5 @@ export function wrapAsyncIIFE(code: string): string {
     end: program.end,
   }];
 
-  return generate(ast);
+  return generate(ast, options?.minify ? { indent: '', lineEnd: '' } : undefined);
 }

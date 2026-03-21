@@ -1,2 +1,2 @@
 export { staticImportToDynamic } from './staticImportToDynamic'
-export { wrapAsyncIIFE } from './wrapAsyncIIFE'
+export { wrapAsyncIIFE, type WrapAsyncIIFEOptions } from './wrapAsyncIIFE'
