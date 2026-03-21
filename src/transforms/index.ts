@@ -1,0 +1,1 @@
+export { staticImportToDynamic } from './staticImportToDynamic'

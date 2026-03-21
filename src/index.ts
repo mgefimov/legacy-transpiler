@@ -1,7 +1,7 @@
-import { functionToArrow } from './transforms/functionToArrow';
+import { staticImportToDynamic } from './transforms';
 
-export { functionToArrow };
+export { staticImportToDynamic };
 
 export function transpile(code: string): string {
-  return functionToArrow(code);
+  return staticImportToDynamic(code);
 }
