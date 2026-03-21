@@ -5,16 +5,16 @@ export { staticImportToDynamic, replaceImportMeta, removeLookbehind, removeExpor
 export type { StaticImportToDynamicOptions };
 
 export interface TranspileOptions {
+  src: string;
   resolveModule?: StaticImportToDynamicOptions['resolveModule'];
-  importMetaUrl?: string;
   minify?: boolean;
 }
 
-export function transpile(code: string, options?: TranspileOptions): string {
-  let result = staticImportToDynamic(code, { resolveModule: options?.resolveModule });
-  result = replaceImportMeta(result, { url: options?.importMetaUrl });
-  result = removeExport(result);
+export function transpile(code: string, options: TranspileOptions): string {
+  let result = staticImportToDynamic(code, { resolveModule: options.resolveModule });
+  result = replaceImportMeta(result, { url: options.src });
+  result = removeExport(result, { src: options.src });
   result = removeLookbehind(result);
   result = transformStaticBlock(result);
-  return wrapAsyncIIFE(result, { minify: options?.minify });
+  return wrapAsyncIIFE(result, { minify: options.minify });
 }
