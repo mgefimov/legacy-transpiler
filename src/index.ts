@@ -6,7 +6,7 @@ export type { StaticImportToDynamicOptions };
 
 export interface TranspileOptions {
   src: string;
-  resolveModule?: StaticImportToDynamicOptions['resolveModule'];
+  resolveModule: StaticImportToDynamicOptions['resolveModule'];
   minify?: boolean;
 }
 

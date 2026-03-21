@@ -2,69 +2,82 @@ import * as acorn from 'acorn';
 import { generate } from 'astring';
 
 export interface StaticImportToDynamicOptions {
-  resolveModule?: (source: string) => string;
+  resolveModule: (source: string) => string;
 }
 
-export function staticImportToDynamic(code: string, options?: StaticImportToDynamicOptions): string {
+/**
+ * Build AST for: window.LegacyTranspiler._moduleExports[source]
+ */
+function moduleExportsAccess(source: acorn.Literal, start: number, end: number): acorn.MemberExpression {
+  return {
+    type: 'MemberExpression',
+    object: {
+      type: 'MemberExpression',
+      object: {
+        type: 'MemberExpression',
+        object: { type: 'Identifier', name: 'window', start, end },
+        property: { type: 'Identifier', name: 'LegacyTranspiler', start, end },
+        computed: false,
+        optional: false,
+        start,
+        end,
+      },
+      property: { type: 'Identifier', name: '_moduleExports', start, end },
+      computed: false,
+      optional: false,
+      start,
+      end,
+    },
+    property: source,
+    computed: true,
+    optional: false,
+    start,
+    end,
+  };
+}
+
+export function staticImportToDynamic(code: string, options: StaticImportToDynamicOptions): string {
   const ast = acorn.parse(code, {
     ecmaVersion: 'latest',
     sourceType: 'module',
   });
 
-  ast.body = ast.body.map((node): acorn.Statement | acorn.ModuleDeclaration => {
-    if (node.type !== 'ImportDeclaration') return node;
+  ast.body = ast.body.flatMap((node): (acorn.Statement | acorn.ModuleDeclaration)[] => {
+    if (node.type !== 'ImportDeclaration') return [node];
 
-    const resolvedSource: acorn.Literal = options?.resolveModule
-      ? { ...node.source, value: options.resolveModule(String(node.source.value)), raw: undefined }
-      : node.source;
+    // Side-effect import: import 'module' → strip
+    if (node.specifiers.length === 0) return [];
 
-    const awaitImport: acorn.AwaitExpression = {
-      type: 'AwaitExpression',
-      argument: {
-        type: 'ImportExpression',
-        source: resolvedSource,
-        options: null,
-        start: node.start,
-        end: node.end,
-      },
-      start: node.start,
-      end: node.end,
+    const resolvedSource: acorn.Literal = {
+      ...node.source,
+      value: options.resolveModule(String(node.source.value)),
+      raw: undefined,
     };
 
-    // Side-effect import: import 'module' → await import('module')
-    if (node.specifiers.length === 0) {
-      const stmt: acorn.ExpressionStatement = {
-        type: 'ExpressionStatement',
-        expression: awaitImport,
-        start: node.start,
-        end: node.end,
-      };
-      return stmt;
-    }
+    const moduleAccess = moduleExportsAccess(resolvedSource, node.start, node.end);
 
     const properties: acorn.AssignmentProperty[] = [];
 
     for (const spec of node.specifiers) {
       if (spec.type === 'ImportNamespaceSpecifier') {
-        // import * as x from 'm' → const x = await import('m')
+        // import * as x from 'm' → const x = window.LegacyTranspiler._moduleExports[m]
         const decl: acorn.VariableDeclaration = {
           type: 'VariableDeclaration',
           kind: 'const',
           declarations: [{
             type: 'VariableDeclarator',
             id: spec.local,
-            init: awaitImport,
+            init: moduleAccess,
             start: node.start,
             end: node.end,
           }],
           start: node.start,
           end: node.end,
         };
-        return decl;
+        return [decl];
       }
 
       if (spec.type === 'ImportDefaultSpecifier') {
-        // import x from 'm' → { default: x }
         properties.push({
           type: 'Property',
           key: { type: 'Identifier', name: 'default', start: spec.start, end: spec.end },
@@ -77,8 +90,6 @@ export function staticImportToDynamic(code: string, options?: StaticImportToDyna
           end: spec.end,
         });
       } else if (spec.type === 'ImportSpecifier') {
-        // import { x } from 'm' → { x }
-        // import { x as y } from 'm' → { x: y }
         const imported = spec.imported;
         const shorthand = imported.type === 'Identifier' && imported.name === spec.local.name;
         properties.push({
@@ -95,6 +106,7 @@ export function staticImportToDynamic(code: string, options?: StaticImportToDyna
       }
     }
 
+    // const { x, y } = window.LegacyTranspiler._moduleExports[m]
     const decl: acorn.VariableDeclaration = {
       type: 'VariableDeclaration',
       kind: 'const',
@@ -106,14 +118,14 @@ export function staticImportToDynamic(code: string, options?: StaticImportToDyna
           start: node.start,
           end: node.end,
         },
-        init: awaitImport,
+        init: moduleAccess,
         start: node.start,
         end: node.end,
       }],
       start: node.start,
       end: node.end,
     };
-    return decl;
+    return [decl];
   });
 
   return generate(ast);

@@ -8,54 +8,54 @@ describe('staticImportToDynamic', () => {
   it('converts named import with relative path', () => {
     const input = `import { something } from './vendor-Dfbm12k5.js';`;
     expect(staticImportToDynamic(input, { resolveModule })).toBe(
-      `const {something} = await import("${BASE_URL}/vendor-Dfbm12k5.js");\n`
+      'const {something} = window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/vendor-Dfbm12k5.js"];\n'
     );
   });
 
   it('converts aliased named import', () => {
     const input = `import { x as y } from './vendor-Dfbm12k5.js';`;
     expect(staticImportToDynamic(input, { resolveModule })).toBe(
-      `const {x: y} = await import("${BASE_URL}/vendor-Dfbm12k5.js");\n`
+      'const {x: y} = window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/vendor-Dfbm12k5.js"];\n'
     );
   });
 
   it('converts default import', () => {
     const input = `import defaultExport from './vendor-Dfbm12k5.js';`;
     expect(staticImportToDynamic(input, { resolveModule })).toBe(
-      `const {default: defaultExport} = await import("${BASE_URL}/vendor-Dfbm12k5.js");\n`
+      'const {default: defaultExport} = window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/vendor-Dfbm12k5.js"];\n'
     );
   });
 
   it('converts namespace import', () => {
     const input = `import * as mod from './vendor-Dfbm12k5.js';`;
     expect(staticImportToDynamic(input, { resolveModule })).toBe(
-      `const mod = await import("${BASE_URL}/vendor-Dfbm12k5.js");\n`
+      'const mod = window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/vendor-Dfbm12k5.js"];\n'
     );
   });
 
-  it('converts side-effect import', () => {
+  it('strips side-effect import', () => {
     const input = `import './vendor-Dfbm12k5.js';`;
-    expect(staticImportToDynamic(input, { resolveModule })).toBe(
-      `await import("${BASE_URL}/vendor-Dfbm12k5.js");\n`
-    );
+    expect(staticImportToDynamic(input, { resolveModule })).toBe('');
   });
 
   it('converts mixed default and named import', () => {
     const input = `import defaultExport, { named } from './vendor-Dfbm12k5.js';`;
     expect(staticImportToDynamic(input, { resolveModule })).toBe(
-      `const {default: defaultExport, named} = await import("${BASE_URL}/vendor-Dfbm12k5.js");\n`
+      'const {default: defaultExport, named} = window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/vendor-Dfbm12k5.js"];\n'
     );
   });
 
   it('converts multiple named imports', () => {
     const input = `import { a, b, c } from './vendor-Dfbm12k5.js';`;
     expect(staticImportToDynamic(input, { resolveModule })).toBe(
-      `const {a, b, c} = await import("${BASE_URL}/vendor-Dfbm12k5.js");\n`
+      'const {a, b, c} = window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/vendor-Dfbm12k5.js"];\n'
     );
   });
 
-  it('keeps original path without resolveModule', () => {
+  it('resolves module path', () => {
     const input = `import { x } from './some-module';`;
-    expect(staticImportToDynamic(input)).toBe("const {x} = await import('./some-module');\n");
+    expect(staticImportToDynamic(input, { resolveModule })).toBe(
+      'const {x} = window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/some-module"];\n'
+    );
   });
 });
