@@ -15,7 +15,8 @@ for (const file of files) {
   const outputPath = join(outputDir, file);
 
   const inputCode = readFileSync(inputPath, 'utf-8');
-  const result = transpile(inputCode, { resolveModule, minify: true });
+  const importMetaUrl = `${BASE_URL}/${file}`;
+  const result = transpile(inputCode, { resolveModule, importMetaUrl, minify: false,  });
 
   writeFileSync(outputPath, result);
   console.log(`${file} -> assets/output/${file}`);
