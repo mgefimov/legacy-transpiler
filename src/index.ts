@@ -1,8 +1,14 @@
 import { staticImportToDynamic, wrapAsyncIIFE } from './transforms';
+import type { StaticImportToDynamicOptions } from './transforms/staticImportToDynamic';
 
 export { staticImportToDynamic, wrapAsyncIIFE };
+export type { StaticImportToDynamicOptions };
 
-export function transpile(code: string): string {
-  const dynamicImports = staticImportToDynamic(code);
+export interface TranspileOptions {
+  resolveModule?: StaticImportToDynamicOptions['resolveModule'];
+}
+
+export function transpile(code: string, options?: TranspileOptions): string {
+  const dynamicImports = staticImportToDynamic(code, { resolveModule: options?.resolveModule });
   return wrapAsyncIIFE(dynamicImports);
 }

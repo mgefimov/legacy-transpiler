@@ -1,5 +1,9 @@
 import { transpile } from './index'
 
-const inputCode = `import { something } from 'some-module'`;
+const inputCode = `import { something } from './vendor-Dfbm12k5.js';`;
 
-console.log(transpile(inputCode))
+const BASE_URL = 'https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1';
+
+const resolveModule = (source: string) => `${BASE_URL}/${source.replace(/^\.\//, '')}`;
+
+console.log(transpile(inputCode, { resolveModule }))

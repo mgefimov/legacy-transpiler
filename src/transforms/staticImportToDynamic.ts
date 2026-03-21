@@ -1,7 +1,11 @@
 import * as acorn from 'acorn';
 import { generate } from 'astring';
 
-export function staticImportToDynamic(code: string): string {
+export interface StaticImportToDynamicOptions {
+  resolveModule?: (source: string) => string;
+}
+
+export function staticImportToDynamic(code: string, options?: StaticImportToDynamicOptions): string {
   const ast = acorn.parse(code, {
     ecmaVersion: 'latest',
     sourceType: 'module',
@@ -10,11 +14,15 @@ export function staticImportToDynamic(code: string): string {
   ast.body = ast.body.map((node): acorn.Statement | acorn.ModuleDeclaration => {
     if (node.type !== 'ImportDeclaration') return node;
 
+    const resolvedSource: acorn.Literal = options?.resolveModule
+      ? { ...node.source, value: options.resolveModule(String(node.source.value)), raw: undefined }
+      : node.source;
+
     const awaitImport: acorn.AwaitExpression = {
       type: 'AwaitExpression',
       argument: {
         type: 'ImportExpression',
-        source: node.source,
+        source: resolvedSource,
         options: null,
         start: node.start,
         end: node.end,
