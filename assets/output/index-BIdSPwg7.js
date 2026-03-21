@@ -63108,7 +63108,7 @@
     this.exit(e);
   }
   function Mye(e) {
-    fye(e, [[/(https?:\/\/|www(?=\.))([-.\w]+)([^ \t\r\n]*)/gi, Sye], [/(?<=^|\s|\p{P}|\p{S})([-.\w+]+)@([-\w]+(?:\.[-\w]+)+)/gu, Nye]], {
+    fye(e, [[/(https?:\/\/|www(?=\.))([-.\w]+)([^ \t\r\n]*)/gi, Sye], [/([-.\w+]+)@([-\w]+(?:\.[-\w]+)+)/gu, Nye]], {
       ignore: ["link", "linkReference"]
     });
   }
@@ -69790,7 +69790,7 @@
       } catch {
         return String(e);
       }
-      return (t = t.replace(/\\n/g, "\n").replace(/\\t/g, "\t"), t = t.replace(/(?<!\\)"/g, "`"), t);
+      return (t = t.replace(/\\n/g, "\n").replace(/\\t/g, "\t"), t = t.replace(/"/g, "`"), t);
     }, [e]);
     return u.jsxs("div", {
       className: "flex flex-col gap-3 p-3 pt-1",
@@ -92457,7 +92457,7 @@
     const t = [], n = /\[[^\]]*\]\((computer:\/\/\/[^)]+)\)/g;
     let s;
     for (; null !== (s = n.exec(e)); ) t.push(s[1]);
-    const a = e.match(/(?<!\]\()computer:\/\/\/[^\s)\],;!?`]+(?![^[]*\])/g) || [];
+    const a = e.match(/\],;!?`]+(?![^[]*\])/g) || [];
     t.push(...a);
     const r = t.map(e => e.replace(/[.,;!?)]+$/, ""));
     return [...new Set(r)];
@@ -206371,7 +206371,7 @@
         prefix: "\\\\",
         segments: TBt(e.slice(2))
       };
-      const n = (/(?<!\\)\\(?![ ])/).test(e), s = e.includes("/");
+      const n = (/\\(?![ ])/).test(e), s = e.includes("/");
       let a;
       return (a = n && !s ? "\\" : "/", {
         separator: a,
