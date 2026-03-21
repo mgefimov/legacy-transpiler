@@ -1,4 +1,5 @@
 export { staticImportToDynamic } from './staticImportToDynamic'
 export { replaceImportMeta, type ReplaceImportMetaOptions } from './replaceImportMeta'
 export { removeLookbehind } from './removeLookbehind'
+export { transformStaticBlock } from './transformStaticBlock'
 export { wrapAsyncIIFE, type WrapAsyncIIFEOptions } from './wrapAsyncIIFE'

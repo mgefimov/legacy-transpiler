@@ -94694,15 +94694,15 @@
       const e = U6.getState();
       (e.setMicStream(null), e.setSpeakerAnalyser(null), e.setAudioLevel(null));
     }
-    static {
+    static #_0 = (() => {
       this.TELEMETRY_CONNECTION_TIMEOUT_MS = 15e3;
-    }
-    static {
+    })();
+    static #_1 = (() => {
       this.TELEMETRY_MIC_AUDIO_TIMEOUT_MS = 5e3;
-    }
-    static {
+    })();
+    static #_2 = (() => {
       this.TELEMETRY_PLAYBACK_TIMEOUT_MS = 3e4;
-    }
+    })();
     resetTelemetryState() {
       (this.telemetrySessionStartMs = Date.now(), this.telemetryTurnCount = 0, this.telemetryFirstPlaybackFired = !1, this.telemetryMicAudioReceived = !1, this.clearTelemetryWatchdogs());
     }
