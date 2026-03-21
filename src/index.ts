@@ -1,7 +1,8 @@
-import { staticImportToDynamic } from './transforms';
+import { staticImportToDynamic, wrapAsyncIIFE } from './transforms';
 
-export { staticImportToDynamic };
+export { staticImportToDynamic, wrapAsyncIIFE };
 
 export function transpile(code: string): string {
-  return staticImportToDynamic(code);
+  const dynamicImports = staticImportToDynamic(code);
+  return wrapAsyncIIFE(dynamicImports);
 }
