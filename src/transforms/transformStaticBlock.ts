@@ -1,10 +1,9 @@
 import * as acorn from 'acorn';
 import * as walk from 'acorn-walk';
-import { generate } from 'astring';
 
 let counter = 0;
 
-function transformStaticBlocks(classNode: { body: acorn.ClassBody }): void {
+function processClassStaticBlocks(classNode: { body: acorn.ClassBody }): void {
   classNode.body.body = classNode.body.body.map((member): acorn.MethodDefinition | acorn.PropertyDefinition | acorn.StaticBlock => {
     if (member.type !== 'StaticBlock') return member;
 
@@ -50,22 +49,16 @@ function transformStaticBlocks(classNode: { body: acorn.ClassBody }): void {
   });
 }
 
-export function transformStaticBlock(code: string): string {
+export function transformStaticBlocks(ast: acorn.Program): void {
   counter = 0;
-
-  const ast = acorn.parse(code, {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-  });
 
   walk.simple(ast, {
     ClassDeclaration(node) {
-      transformStaticBlocks(node);
+      processClassStaticBlocks(node);
     },
     ClassExpression(node) {
-      transformStaticBlocks(node);
+      processClassStaticBlocks(node);
     },
   });
-
-  return generate(ast);
 }
+

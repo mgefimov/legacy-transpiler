@@ -1,32 +1,29 @@
 import { describe, it, expect } from 'vitest';
-import { replaceImportMeta } from '../src/transforms/replaceImportMeta';
+import { transpile } from '../src/index';
 
-const URL = 'https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/index-BIdSPwg7.js';
+const BASE_URL = 'https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1';
+const resolveModule = (source: string) => `${BASE_URL}/${source.replace(/^\.\//, '')}`;
+const src = `${BASE_URL}/index-BIdSPwg7.js`;
 
 describe('replaceImportMeta', () => {
-  it('replaces import.meta.url with string literal', () => {
+  it('replaces import.meta.url with string literal', async () => {
     const input = `const url = import.meta.url;`;
-    expect(replaceImportMeta(input, { url: URL })).toBe(
-      `const url = "${URL}";\n`
+    expect(await transpile(input, { src, resolveModule })).toBe(
+      `const url = "${src}";\n`
     );
   });
 
-  it('replaces import.meta.url inside expressions', () => {
+  it('replaces import.meta.url inside expressions', async () => {
     const input = `new URL("./worker.js", import.meta.url);`;
-    expect(replaceImportMeta(input, { url: URL })).toBe(
-      `new URL("./worker.js", "${URL}");\n`
+    expect(await transpile(input, { src, resolveModule })).toBe(
+      `new URL("./worker.js", "${src}");\n`
     );
   });
 
-  it('replaces multiple occurrences', () => {
+  it('replaces multiple occurrences', async () => {
     const input = `console.log(import.meta.url, import.meta.url);`;
-    expect(replaceImportMeta(input, { url: URL })).toBe(
-      `console.log("${URL}", "${URL}");\n`
+    expect(await transpile(input, { src, resolveModule })).toBe(
+      `console.log("${src}", "${src}");\n`
     );
-  });
-
-  it('falls back to document.currentScript.src without url option', () => {
-    const input = `const url = import.meta.url;`;
-    expect(replaceImportMeta(input)).toBe('const url = document.currentScript.src;\n');
   });
 });

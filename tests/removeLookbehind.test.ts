@@ -1,34 +1,38 @@
 import { describe, it, expect } from 'vitest';
-import { removeLookbehind } from '../src/transforms/removeLookbehind';
+import { transpile } from '../src/index';
+
+const BASE_URL = 'https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1';
+const resolveModule = (source: string) => `${BASE_URL}/${source.replace(/^\.\//, '')}`;
+const src = `${BASE_URL}/test.js`;
 
 describe('removeLookbehind', () => {
-  it('removes positive lookbehind', () => {
+  it('removes positive lookbehind', async () => {
     const input = `/(?<=foo)bar/g`;
-    expect(removeLookbehind(input)).toBe('/bar/g;\n');
+    expect(await transpile(input, { src, resolveModule })).toBe('/bar/g;\n');
   });
 
-  it('removes negative lookbehind', () => {
+  it('removes negative lookbehind', async () => {
     const input = `/(?<!foo)bar/g`;
-    expect(removeLookbehind(input)).toBe('/bar/g;\n');
+    expect(await transpile(input, { src, resolveModule })).toBe('/bar/g;\n');
   });
 
-  it('removes lookbehind with escaped chars', () => {
+  it('removes lookbehind with escaped chars', async () => {
     const input = `/(?<=\\d{3})\\d+/`;
-    expect(removeLookbehind(input)).toBe('/\\d+/;\n');
+    expect(await transpile(input, { src, resolveModule })).toBe('/\\d+/;\n');
   });
 
-  it('removes multiple lookbehinds', () => {
+  it('removes multiple lookbehinds', async () => {
     const input = `/(?<=foo)(?<!bar)baz/g`;
-    expect(removeLookbehind(input)).toBe('/baz/g;\n');
+    expect(await transpile(input, { src, resolveModule })).toBe('/baz/g;\n');
   });
 
-  it('does not modify regex without lookbehinds', () => {
+  it('does not modify regex without lookbehinds', async () => {
     const input = `/^hello$/`;
-    expect(removeLookbehind(input)).toBe('/^hello$/;\n');
+    expect(await transpile(input, { src, resolveModule })).toBe('/^hello$/;\n');
   });
 
-  it('handles regex in variable declaration', () => {
+  it('handles regex in variable declaration', async () => {
     const input = `const re = /(?<=prefix-)\\w+/g;`;
-    expect(removeLookbehind(input)).toBe('const re = /\\w+/g;\n');
+    expect(await transpile(input, { src, resolveModule })).toBe('const re = /\\w+/g;\n');
   });
 });

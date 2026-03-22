@@ -1,6 +1,5 @@
 import * as acorn from 'acorn';
 import * as walk from 'acorn-walk';
-import { generate } from 'astring';
 import { moduleExportsAccess } from './moduleExportsAccess';
 
 export interface ResolveDynamicImportOptions {
@@ -8,12 +7,7 @@ export interface ResolveDynamicImportOptions {
   src: string;
 }
 
-export async function resolveDynamicImport(code: string, options: ResolveDynamicImportOptions): Promise<string> {
-  const ast = acorn.parse(code, {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-  });
-
+export async function transformDynamicImports(ast: acorn.Program, options: ResolveDynamicImportOptions): Promise<void> {
   // Collect AwaitExpressions wrapping ImportExpressions so we can unwrap them
   const awaitImports = new Set<acorn.Node>();
   walk.simple(ast, {
@@ -32,18 +26,18 @@ export async function resolveDynamicImport(code: string, options: ResolveDynamic
     },
   } as walk.SimpleVisitors<unknown>);
 
-  if (dynamicImports.length === 0) return code;
+  if (dynamicImports.length === 0) return;
 
   // Filter out non-literal sources (e.g. import(variable), import(`template`))
   const literalImports = dynamicImports.filter((node) => {
     const isLiteral = node.source.type === 'Literal' && typeof (node.source as acorn.Literal).value === 'string';
     if (!isLiteral) {
-      console.warn(`[resolveDynamicImport] skipping non-literal import source: ${code.slice(node.start, node.end)}. File: ${options.src}`);
+      console.warn(`[resolveDynamicImport] skipping non-literal import(${node.source.type}) in ${options.src}`);
     }
     return isLiteral;
   });
 
-  if (literalImports.length === 0) return code;
+  if (literalImports.length === 0) return;
 
   const resolved = await Promise.all(
     literalImports.map((node) => options.resolveModule(String((node.source as acorn.Literal).value)))
@@ -64,8 +58,6 @@ export async function resolveDynamicImport(code: string, options: ResolveDynamic
   for (const awaitNode of awaitImports) {
     mutateNode(awaitNode, (awaitNode as any).argument);
   }
-
-  return generate(ast);
 }
 
 function mutateNode(target: any, replacement: any): void {

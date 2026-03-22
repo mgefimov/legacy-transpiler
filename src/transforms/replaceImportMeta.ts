@@ -1,17 +1,11 @@
 import * as acorn from 'acorn';
 import * as walk from 'acorn-walk';
-import { generate } from 'astring';
 
 export interface ReplaceImportMetaOptions {
   url?: string;
 }
 
-export function replaceImportMeta(code: string, options?: ReplaceImportMetaOptions): string {
-  const ast = acorn.parse(code, {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-  });
-
+export function transformImportMeta(ast: acorn.Program, options?: ReplaceImportMetaOptions): void {
   walk.simple(ast, {
     MemberExpression(node: acorn.MemberExpression) {
       // Match import.meta.url
@@ -56,6 +50,5 @@ export function replaceImportMeta(code: string, options?: ReplaceImportMetaOptio
       }
     },
   });
-
-  return generate(ast);
 }
+

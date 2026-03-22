@@ -1,15 +1,9 @@
 import * as acorn from 'acorn';
 import * as walk from 'acorn-walk';
-import { generate } from 'astring';
 
 const LOOKBEHIND_RE = /\(\?<[=!]([^()]*(?:\([^()]*\))*[^()]*)\)/g;
 
-export function removeLookbehind(code: string): string {
-  const ast = acorn.parse(code, {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-  });
-
+export function transformLookbehind(ast: acorn.Program): void {
   walk.simple(ast, {
     Literal(node: acorn.Literal) {
       if (node.regex) {
@@ -18,6 +12,5 @@ export function removeLookbehind(code: string): string {
       }
     },
   });
-
-  return generate(ast);
 }
+

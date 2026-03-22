@@ -1,16 +1,10 @@
 import * as acorn from 'acorn';
-import { generate } from 'astring';
 
 export interface RemoveExportOptions {
   src: string;
 }
 
-export function removeExport(code: string, options: RemoveExportOptions): string {
-  const ast = acorn.parse(code, {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-  });
-
+export function transformExports(ast: acorn.Program, options: RemoveExportOptions): void {
   const exports: { key: string; value: string }[] = [];
 
   ast.body = ast.body.flatMap((node): (acorn.Statement | acorn.ModuleDeclaration)[] => {
@@ -143,6 +137,5 @@ export function removeExport(code: string, options: RemoveExportOptions): string
 
     ast.body.push(assignment);
   }
-
-  return generate(ast);
 }
+

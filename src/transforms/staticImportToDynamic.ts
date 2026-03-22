@@ -1,17 +1,11 @@
 import * as acorn from 'acorn';
-import { generate } from 'astring';
 import { moduleExportsAccess } from './moduleExportsAccess';
 
 export interface StaticImportToDynamicOptions {
   resolveModule: (source: string) => string | Promise<string>;
 }
 
-export async function staticImportToDynamic(code: string, options: StaticImportToDynamicOptions): Promise<string> {
-  const ast = acorn.parse(code, {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-  });
-
+export async function transformStaticImports(ast: acorn.Program, options: StaticImportToDynamicOptions): Promise<void> {
   // Resolve all import sources in parallel
   const importNodes = ast.body.filter(
     (node): node is acorn.ImportDeclaration => node.type === 'ImportDeclaration' && node.specifiers.length > 0
@@ -105,6 +99,5 @@ export async function staticImportToDynamic(code: string, options: StaticImportT
     };
     return [decl];
   });
-
-  return generate(ast);
 }
+

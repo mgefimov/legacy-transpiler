@@ -1,34 +1,25 @@
 import * as acorn from 'acorn';
-import { generate } from 'astring';
 
 export interface WrapAsyncIIFEOptions {
   minify?: boolean;
 }
 
-export function wrapAsyncIIFE(code: string, options?: WrapAsyncIIFEOptions): string {
-  const ast = acorn.parse(code, {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    allowAwaitOutsideFunction: true,
-  });
-
-  const program = ast as acorn.Program;
-
+export function transformWrapAsyncIIFE(ast: acorn.Program): void {
   const asyncFunc: acorn.FunctionExpression = {
     type: 'FunctionExpression',
     id: null,
     params: [],
     body: {
       type: 'BlockStatement',
-      body: program.body as acorn.Statement[],
-      start: program.start,
-      end: program.end,
+      body: ast.body as acorn.Statement[],
+      start: ast.start,
+      end: ast.end,
     },
     generator: false,
     expression: false,
     async: true,
-    start: program.start,
-    end: program.end,
+    start: ast.start,
+    end: ast.end,
   };
 
   const callExpr: acorn.CallExpression = {
@@ -36,16 +27,15 @@ export function wrapAsyncIIFE(code: string, options?: WrapAsyncIIFEOptions): str
     callee: asyncFunc,
     arguments: [],
     optional: false,
-    start: program.start,
-    end: program.end,
+    start: ast.start,
+    end: ast.end,
   };
 
-  program.body = [{
+  ast.body = [{
     type: 'ExpressionStatement',
     expression: callExpr,
-    start: program.start,
-    end: program.end,
+    start: ast.start,
+    end: ast.end,
   }];
-
-  return generate(ast, options?.minify ? { indent: '', lineEnd: '' } : undefined);
 }
+
