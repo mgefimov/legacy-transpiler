@@ -12,7 +12,7 @@ export interface TranspileOptions {
 
 export async function transpile(code: string, options: TranspileOptions): Promise<string> {
   let result = await staticImportToDynamic(code, { resolveModule: options.resolveModule });
-  result = await resolveDynamicImport(result, { resolveModule: options.resolveModule });
+  result = await resolveDynamicImport(result, { resolveModule: options.resolveModule, src: options.src });
   result = replaceImportMeta(result, { url: options.src });
   result = removeExport(result, { src: options.src });
   result = removeLookbehind(result);

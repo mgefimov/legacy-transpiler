@@ -5,6 +5,7 @@ import { moduleExportsAccess } from './moduleExportsAccess';
 
 export interface ResolveDynamicImportOptions {
   resolveModule: (source: string) => string | Promise<string>;
+  src: string;
 }
 
 export async function resolveDynamicImport(code: string, options: ResolveDynamicImportOptions): Promise<string> {
@@ -33,12 +34,23 @@ export async function resolveDynamicImport(code: string, options: ResolveDynamic
 
   if (dynamicImports.length === 0) return code;
 
+  // Filter out non-literal sources (e.g. import(variable), import(`template`))
+  const literalImports = dynamicImports.filter((node) => {
+    const isLiteral = node.source.type === 'Literal' && typeof (node.source as acorn.Literal).value === 'string';
+    if (!isLiteral) {
+      console.warn(`[resolveDynamicImport] skipping non-literal import source: ${code.slice(node.start, node.end)}. File: ${options.src}`);
+    }
+    return isLiteral;
+  });
+
+  if (literalImports.length === 0) return code;
+
   const resolved = await Promise.all(
-    dynamicImports.map((node) => options.resolveModule(String((node.source as acorn.Literal).value)))
+    literalImports.map((node) => options.resolveModule(String((node.source as acorn.Literal).value)))
   );
 
-  for (let i = 0; i < dynamicImports.length; i++) {
-    const node = dynamicImports[i];
+  for (let i = 0; i < literalImports.length; i++) {
+    const node = literalImports[i];
     const resolvedSource: acorn.Literal = {
       ...(node.source as acorn.Literal),
       value: resolved[i],
