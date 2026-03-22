@@ -1,7 +1,7 @@
-import { staticImportToDynamic, replaceImportMeta, removeLookbehind, removeExport, transformStaticBlock, wrapAsyncIIFE } from './transforms';
+import { staticImportToDynamic, resolveDynamicImport, replaceImportMeta, removeLookbehind, removeExport, transformStaticBlock, wrapAsyncIIFE } from './transforms';
 import type { StaticImportToDynamicOptions } from './transforms/staticImportToDynamic';
 
-export { staticImportToDynamic, replaceImportMeta, removeLookbehind, removeExport, transformStaticBlock, wrapAsyncIIFE };
+export { staticImportToDynamic, resolveDynamicImport, replaceImportMeta, removeLookbehind, removeExport, transformStaticBlock, wrapAsyncIIFE };
 export type { StaticImportToDynamicOptions };
 
 export interface TranspileOptions {
@@ -12,6 +12,7 @@ export interface TranspileOptions {
 
 export async function transpile(code: string, options: TranspileOptions): Promise<string> {
   let result = await staticImportToDynamic(code, { resolveModule: options.resolveModule });
+  result = await resolveDynamicImport(result, { resolveModule: options.resolveModule });
   result = replaceImportMeta(result, { url: options.src });
   result = removeExport(result, { src: options.src });
   result = removeLookbehind(result);

@@ -1,4 +1,5 @@
 export { staticImportToDynamic } from './staticImportToDynamic'
+export { resolveDynamicImport } from './resolveDynamicImport'
 export { replaceImportMeta, type ReplaceImportMetaOptions } from './replaceImportMeta'
 export { removeLookbehind } from './removeLookbehind'
 export { removeExport, type RemoveExportOptions } from './removeExport'
