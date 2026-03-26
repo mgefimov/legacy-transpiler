@@ -2,7 +2,8 @@ import * as acorn from 'acorn';
 import { moduleExportsAccess } from './moduleExportsAccess';
 
 export interface StaticImportToDynamicOptions {
-  resolveModule: (source: string) => string | Promise<string>;
+  resolveModule: (source: string) => string;
+  staticImportModule: (resolvedSource: string) => Promise<void>;
 }
 
 export async function transformStaticImports(ast: acorn.Program, options: StaticImportToDynamicOptions): Promise<void> {
@@ -11,7 +12,11 @@ export async function transformStaticImports(ast: acorn.Program, options: Static
     (node): node is acorn.ImportDeclaration => node.type === 'ImportDeclaration' && node.specifiers.length > 0
   );
   const resolved = await Promise.all(
-    importNodes.map((node) => options.resolveModule(String(node.source.value)))
+    importNodes.map(async (node) => {
+      const resolvedSource = options.resolveModule(String(node.source.value));
+      await options.staticImportModule(resolvedSource);
+      return resolvedSource;
+    })
   );
   const resolvedMap = new Map<acorn.ImportDeclaration, string>();
   importNodes.forEach((node, i) => resolvedMap.set(node, resolved[i]));
