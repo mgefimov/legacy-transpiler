@@ -1,9 +1,11 @@
+import {meta} from './app.js';
+
 class Utils {
   static greet;
   static add;
   static {
     this.greet = function(name) {
-      return 'Hello, ' + name + '!';
+      return 'Hello, ' + name + ' from ' + meta.name + '!';
     };
     this.add = function(a, b) {
       return a + b;

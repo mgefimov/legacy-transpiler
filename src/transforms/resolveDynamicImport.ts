@@ -9,16 +9,6 @@ export interface ResolveDynamicImportOptions {
 }
 
 export async function transformDynamicImports(ast: acorn.Program, options: ResolveDynamicImportOptions): Promise<void> {
-  // Collect AwaitExpressions wrapping ImportExpressions so we can unwrap them
-  const awaitImports = new Set<acorn.Node>();
-  walk.simple(ast, {
-    AwaitExpression(node: acorn.AwaitExpression) {
-      if ((node as any).argument?.type === 'ImportExpression') {
-        awaitImports.add(node);
-      }
-    },
-  } as walk.SimpleVisitors<unknown>);
-
   // Collect all dynamic import nodes
   const allImports: acorn.ImportExpression[] = [];
   walk.simple(ast, {
@@ -56,7 +46,9 @@ export async function transformDynamicImports(ast: acorn.Program, options: Resol
       value: resolved[i],
       raw: undefined,
     };
-    const replacement = moduleExportsAccess(resolvedSource, node.start, node.end);
+    const access = moduleExportsAccess(resolvedSource, node.start, node.end);
+    // Wrap in Promise.resolve() to maintain the Promise interface of import()
+    const replacement = promiseResolveCall(access, node.start, node.end);
     mutateNode(node, replacement);
   }
 
@@ -66,14 +58,28 @@ export async function transformDynamicImports(ast: acorn.Program, options: Resol
     const replacement = dynamicImportCall(node.source, node.start, node.end);
     mutateNode(node, replacement);
   }
+}
 
-  // Unwrap await only for literal imports converted to synchronous module access
-  const convertedNodes = new Set<acorn.Node>(literalImports);
-  for (const awaitNode of awaitImports) {
-    if (convertedNodes.has((awaitNode as any).argument)) {
-      mutateNode(awaitNode, (awaitNode as any).argument);
-    }
-  }
+/**
+ * Build AST for: Promise.resolve(expr)
+ */
+function promiseResolveCall(expr: any, start: number, end: number): any {
+  return {
+    type: 'CallExpression',
+    callee: {
+      type: 'MemberExpression',
+      object: { type: 'Identifier', name: 'Promise', start, end },
+      property: { type: 'Identifier', name: 'resolve', start, end },
+      computed: false,
+      optional: false,
+      start,
+      end,
+    },
+    arguments: [expr],
+    optional: false,
+    start,
+    end,
+  };
 }
 
 /**

@@ -11,9 +11,9 @@ const src = `${BASE_URL}/test.js`;
 
 function iife(body: string): string {
   const lines = body.split('\n').filter(l => l.length > 0);
-  if (lines.length === 0) return '(async function () {})();\n';
+  if (lines.length === 0) return "'use strict';\n(async function () {})();\n";
   const indented = lines.map(l => '  ' + l).join('\n');
-  return `(async function () {\n${indented}\n})();\n`;
+  return `'use strict';\n(async function () {\n${indented}\n})();\n`;
 }
 
 describe('removeLookbehind', () => {
@@ -44,6 +44,6 @@ describe('removeLookbehind', () => {
 
   it('handles regex in variable declaration', async () => {
     const input = `const re = /(?<=prefix-)\\w+/g;`;
-    expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(iife('var re = /\\w+/g;\n'));
+    expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(iife('const re = /\\w+/g;\n'));
   });
 });

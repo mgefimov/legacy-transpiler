@@ -9,19 +9,32 @@ const staticImportModule = async (resolvedSource: string) => {
 }
 const src = `${BASE_URL}/test.js`;
 
+function iife(body: string): string {
+  const lines = body.split('\n').filter(l => l.length > 0);
+  if (lines.length === 0) return "'use strict';\n(async function () {})();\n";
+  const indented = lines.map(l => '  ' + l).join('\n');
+  return `'use strict';\n(async function () {\n${indented}\n})();\n`;
+}
+
 describe('wrapAsyncIIFE', () => {
-  it.skip('wraps a single statement', async () => {
+  it('wraps a single statement', async () => {
     const input = `console.log("hello");`;
-    expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe('(async function () {\n  console.log("hello");\n})();\n');
+    expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(
+      iife('console.log("hello");\n')
+    );
   });
 
-  it.skip('wraps code containing await', async () => {
+  it('wraps code containing await', async () => {
     const input = `const x = await fetch("/api");\nconsole.log(x);`;
-    expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe('(async function () {\n  const x = await fetch("/api");\n  console.log(x);\n})();\n');
+    expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(
+      iife('const x = await fetch("/api");\nconsole.log(x);\n')
+    );
   });
 
-  it.skip('wraps multiple statements', async () => {
+  it('wraps multiple statements', async () => {
     const input = `const a = 1;\nconst b = 2;\nconsole.log(a + b);`;
-    expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe('(async function () {\n  const a = 1;\n  const b = 2;\n  console.log(a + b);\n})();\n');
+    expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(
+      iife('const a = 1;\nconst b = 2;\nconsole.log(a + b);\n')
+    );
   });
 });

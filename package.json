@@ -9,7 +9,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
-    "start": "tsx src/run.ts"
+    "start": "tsx src/run.ts",
+    "serve": "npx serve site"
   },
   "license": "MIT",
   "dependencies": {

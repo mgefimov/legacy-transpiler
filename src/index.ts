@@ -52,21 +52,22 @@ export async function transpile(code: string, options: TranspileOptions): Promis
     allowAwaitOutsideFunction: true,
   });
 
-  // await transformStaticImports(ast, {
-  //   resolveModule: options.resolveModule,
-  //   staticImportModule: options.staticImportModule
-  // });
-  // await transformDynamicImports(ast, {
-  //   resolveModule: options.resolveModule,
-  //   staticImportModule: options.staticImportModule,
-  //   src: options.src
-  // });
-  // transformImportMeta(ast, { url: options.src });
-  // transformExports(ast, { src: options.src });
-  // transformLookbehind(ast);
-  // transformStaticBlocks(ast);
+  await transformStaticImports(ast, {
+    resolveModule: options.resolveModule,
+    staticImportModule: options.staticImportModule
+  });
+  await transformDynamicImports(ast, {
+    resolveModule: options.resolveModule,
+    staticImportModule: options.staticImportModule,
+    src: options.src
+  });
+  transformImportMeta(ast, { url: options.src });
+  transformExports(ast, { src: options.src });
+  transformLookbehind(ast);
+  transformStaticBlocks(ast);
   // transformVarDeclarations(ast);
-  // transformWrapAsyncIIFE(ast);
+  transformWrapAsyncIIFE(ast);
 
-  return generate(ast, options.minify ? { indent: '', lineEnd: '' } : undefined);
+  const result = generate(ast, options.minify ? { indent: '', lineEnd: '' } : undefined);
+  return `'use strict';\n${result}`;
 }

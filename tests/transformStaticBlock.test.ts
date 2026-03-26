@@ -11,9 +11,9 @@ const src = `${BASE_URL}/test.js`;
 
 function iife(body: string): string {
   const lines = body.split('\n').filter(l => l.length > 0);
-  if (lines.length === 0) return '(async function () {})();\n';
+  if (lines.length === 0) return "'use strict';\n(async function () {})();\n";
   const indented = lines.map(l => '  ' + l).join('\n');
-  return `(async function () {\n${indented}\n})();\n`;
+  return `'use strict';\n(async function () {\n${indented}\n})();\n`;
 }
 
 describe('transformStaticBlock', () => {
@@ -41,7 +41,7 @@ describe('transformStaticBlock', () => {
   it('handles class expression in variable declaration', async () => {
     const input = `const Qux = class Qux {\n  static {\n    __name(this, "Qux");\n  }\n};`;
     expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(
-      iife('var Qux = class Qux {\n  static #_0 = (() => {\n    __name(this, "Qux");\n  })();\n};\n')
+      iife('const Qux = class Qux {\n  static #_0 = (() => {\n    __name(this, "Qux");\n  })();\n};\n')
     );
   });
 
@@ -55,7 +55,7 @@ describe('transformStaticBlock', () => {
   it('preserves this in arrow functions inside static block', async () => {
     const input = `class WithArrow {\n  static {\n    const fn = () => this;\n  }\n}`;
     expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(
-      iife('class WithArrow {\n  static #_0 = (() => {\n    var fn = () => this;\n  })();\n}\n')
+      iife('class WithArrow {\n  static #_0 = (() => {\n    const fn = () => this;\n  })();\n}\n')
     );
   });
 });

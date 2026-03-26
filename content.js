@@ -1,25 +1,26 @@
 (function () {
-  const loaded = new Set();
+  const loadPromises = new Map();
   const patched = new Set();
+  let execChain = Promise.resolve();
+
   async function loadCode(src = "") {
-    //console.log("loadCode", src);
-    if (src.includes("intercom") || loaded.has(src)) {
-      //console.log("skipped", src);
+    if (src.includes("intercom")) return [];
+    if (loadPromises.has(src)) {
+      await loadPromises.get(src);
       return [];
     }
-    loaded.add(src);
-    const r = await fetch(src);
-    const code = await r.text();
-    const res = await patchCode(src, code);
-    //console.log("loaded", src);
-    return res;
+    const promise = (async () => {
+      const r = await fetch(src);
+      const code = await r.text();
+      return patchCode(src, code);
+    })();
+    loadPromises.set(src, promise);
+    return promise;
   }
 
   const resolveModule = (source = "") => {
     const BASE_URL =
       "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1";
-    // const BASE_URL = "http://192.168.1.136:3000";
-    //console.log('resolveModule', source)
     if (!source.startsWith("./")) {
       return source;
     }
@@ -27,17 +28,12 @@
   };
 
   async function patchCode(src, code) {
-    //console.log("patch", src);
-    if (patched.has(src)) {
-      //console.log("skip patch", src);
-      return [];
-    }
+    if (patched.has(src)) return [];
     patched.add(src);
 
     const scripts = [];
 
     const staticImportModule = async (source = "") => {
-      //console.log("staticImportModule", source);
       if (!source.startsWith("./")) {
         return source;
       }
@@ -59,8 +55,15 @@
       console.warn("[patchCode] failed to transpile", src, e.message);
       scripts.push(code);
     }
-    //console.log("patched", src);
     return scripts;
+  }
+
+  function enqueueExecution(scripts) {
+    execChain = execChain.then(() => {
+      scripts.forEach((s) => {
+        window.webkit.messageHandlers.patchScript.postMessage(s);
+      });
+    });
   }
 
   const observer = new MutationObserver((mutations) => {
@@ -80,9 +83,7 @@
             };
           }
           loadCode(src).then((scripts) => {
-            scripts.forEach((patched) => {
-              window.webkit.messageHandlers.patchScript.postMessage(patched);
-            });
+            enqueueExecution(scripts);
           });
         }
       }

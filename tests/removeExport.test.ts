@@ -12,15 +12,15 @@ const prefix = `window.LegacyTranspiler._moduleExports["${src}"]`;
 
 function iife(body: string): string {
   const lines = body.split('\n').filter(l => l.length > 0);
-  if (lines.length === 0) return '(async function () {})();\n';
+  if (lines.length === 0) return "'use strict';\n(async function () {})();\n";
   const indented = lines.map(l => '  ' + l).join('\n');
-  return `(async function () {\n${indented}\n})();\n`;
+  return `'use strict';\n(async function () {\n${indented}\n})();\n`;
 }
 
 describe('removeExport', () => {
   it('exports const to _moduleExports', async () => {
     expect(await transpile(`export const foo = 1;`, { src, resolveModule, staticImportModule })).toBe(
-      iife(`var foo = 1;\n${prefix} = {\n  foo\n};\n`)
+      iife(`const foo = 1;\n${prefix} = {\n  foo\n};\n`)
     );
   });
 
@@ -39,14 +39,14 @@ describe('removeExport', () => {
   it('exports named exports to _moduleExports', async () => {
     const input = `const a = 1;\nconst b = 2;\nexport { a, b };`;
     expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(
-      iife(`var a = 1;\nvar b = 2;\n${prefix} = {\n  a,\n  b\n};\n`)
+      iife(`const a = 1;\nconst b = 2;\n${prefix} = {\n  a,\n  b\n};\n`)
     );
   });
 
   it('exports aliased names to _moduleExports', async () => {
     const input = `const foo = 1;\nexport { foo as bar };`;
     expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(
-      iife(`var foo = 1;\n${prefix} = {\n  bar: foo\n};\n`)
+      iife(`const foo = 1;\n${prefix} = {\n  bar: foo\n};\n`)
     );
   });
 
@@ -71,7 +71,7 @@ describe('removeExport', () => {
   it('exports mixed declarations to _moduleExports', async () => {
     const input = `export const a = 1;\nexport function b() {}\nexport { a as c };`;
     expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(
-      iife(`var a = 1;\nfunction b() {}\n${prefix} = {\n  a,\n  b,\n  c: a\n};\n`)
+      iife(`const a = 1;\nfunction b() {}\n${prefix} = {\n  a,\n  b,\n  c: a\n};\n`)
     );
   });
 
@@ -80,13 +80,13 @@ describe('removeExport', () => {
   });
 
   it('no assignment when no exports', async () => {
-    expect(await transpile(`const x = 1;`, { src, resolveModule, staticImportModule })).toBe(iife('var x = 1;\n'));
+    expect(await transpile(`const x = 1;`, { src, resolveModule, staticImportModule })).toBe(iife('const x = 1;\n'));
   });
 
   it('keeps surrounding code', async () => {
     const input = `const x = 1;\nexport { x };\nconsole.log(x);`;
     expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(
-      iife(`var x = 1;\nconsole.log(x);\n${prefix} = {\n  x\n};\n`)
+      iife(`const x = 1;\nconsole.log(x);\n${prefix} = {\n  x\n};\n`)
     );
   });
 });
