@@ -9,25 +9,32 @@ const staticImportModule = async (resolvedSource: string) => {
 }
 const src = `${BASE_URL}/index-BIdSPwg7.js`;
 
+function iife(body: string): string {
+  const lines = body.split('\n').filter(l => l.length > 0);
+  if (lines.length === 0) return '(async function () {})();\n';
+  const indented = lines.map(l => '  ' + l).join('\n');
+  return `(async function () {\n${indented}\n})();\n`;
+}
+
 describe('replaceImportMeta', () => {
   it('replaces import.meta.url with string literal', async () => {
     const input = `const url = import.meta.url;`;
     expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(
-      `var url = "${src}";\n`
+      iife(`var url = "${src}";\n`)
     );
   });
 
   it('replaces import.meta.url inside expressions', async () => {
     const input = `new URL("./worker.js", import.meta.url);`;
     expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(
-      `new URL("./worker.js", "${src}");\n`
+      iife(`new URL("./worker.js", "${src}");\n`)
     );
   });
 
   it('replaces multiple occurrences', async () => {
     const input = `console.log(import.meta.url, import.meta.url);`;
     expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(
-      `console.log("${src}", "${src}");\n`
+      iife(`console.log("${src}", "${src}");\n`)
     );
   });
 });

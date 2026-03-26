@@ -10,39 +10,46 @@ const staticImportModule = async (resolvedSource: string) => {
 const src = `${BASE_URL}/index.js`;
 const me = (s: string) => `window.LegacyTranspiler._moduleExports["${s}"]`;
 
+function iife(body: string): string {
+  const lines = body.split('\n').filter(l => l.length > 0);
+  if (lines.length === 0) return '(async function () {})();\n';
+  const indented = lines.map(l => '  ' + l).join('\n');
+  return `(async function () {\n${indented}\n})();\n`;
+}
+
 describe('transpile', () => {
   it('converts import with resolveModule', async () => {
     const input = `import { something } from './vendor-Dfbm12k5.js';`;
     expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(
-      `var {something} = ${me(`${BASE_URL}/vendor-Dfbm12k5.js`)};\n`
+      iife(`var {something} = ${me(`${BASE_URL}/vendor-Dfbm12k5.js`)};\n`)
     );
   });
 
   it('converts import with surrounding code', async () => {
     const input = `import { something } from './vendor-Dfbm12k5.js';\nconsole.log(something);`;
     expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(
-      `var {something} = ${me(`${BASE_URL}/vendor-Dfbm12k5.js`)};\nconsole.log(something);\n`
+      iife(`var {something} = ${me(`${BASE_URL}/vendor-Dfbm12k5.js`)};\nconsole.log(something);\n`)
     );
   });
 
   it('converts multiple imports', async () => {
     const input = `import { a } from './mod-a.js';\nimport { b } from './mod-b.js';\nconsole.log(a, b);`;
     expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(
-      `var {a} = ${me(`${BASE_URL}/mod-a.js`)};\nvar {b} = ${me(`${BASE_URL}/mod-b.js`)};\nconsole.log(a, b);\n`
+      iife(`var {a} = ${me(`${BASE_URL}/mod-a.js`)};\nvar {b} = ${me(`${BASE_URL}/mod-b.js`)};\nconsole.log(a, b);\n`)
     );
   });
 
   it('resolves import path', async () => {
     const input = `import { something } from './some-module';`;
     expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(
-      `var {something} = ${me(`${BASE_URL}/some-module`)};\n`
+      iife(`var {something} = ${me(`${BASE_URL}/some-module`)};\n`)
     );
   });
 
   it('passes through plain code', async () => {
     const input = `const x = 1;\nconsole.log(x);`;
     expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(
-      'var x = 1;\nconsole.log(x);\n'
+      iife('var x = 1;\nconsole.log(x);\n')
     );
   });
 });

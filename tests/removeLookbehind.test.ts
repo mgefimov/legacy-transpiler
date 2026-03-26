@@ -9,34 +9,41 @@ const staticImportModule = async (resolvedSource: string) => {
 }
 const src = `${BASE_URL}/test.js`;
 
+function iife(body: string): string {
+  const lines = body.split('\n').filter(l => l.length > 0);
+  if (lines.length === 0) return '(async function () {})();\n';
+  const indented = lines.map(l => '  ' + l).join('\n');
+  return `(async function () {\n${indented}\n})();\n`;
+}
+
 describe('removeLookbehind', () => {
   it('removes positive lookbehind', async () => {
     const input = `/(?<=foo)bar/g`;
-    expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe('/bar/g;\n');
+    expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(iife('/bar/g;\n'));
   });
 
   it('removes negative lookbehind', async () => {
     const input = `/(?<!foo)bar/g`;
-    expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe('/bar/g;\n');
+    expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(iife('/bar/g;\n'));
   });
 
   it('removes lookbehind with escaped chars', async () => {
     const input = `/(?<=\\d{3})\\d+/`;
-    expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe('/\\d+/;\n');
+    expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(iife('/\\d+/;\n'));
   });
 
   it('removes multiple lookbehinds', async () => {
     const input = `/(?<=foo)(?<!bar)baz/g`;
-    expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe('/baz/g;\n');
+    expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(iife('/baz/g;\n'));
   });
 
   it('does not modify regex without lookbehinds', async () => {
     const input = `/^hello$/`;
-    expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe('/^hello$/;\n');
+    expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(iife('/^hello$/;\n'));
   });
 
   it('handles regex in variable declaration', async () => {
     const input = `const re = /(?<=prefix-)\\w+/g;`;
-    expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe('var re = /\\w+/g;\n');
+    expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(iife('var re = /\\w+/g;\n'));
   });
 });

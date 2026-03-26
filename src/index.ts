@@ -52,20 +52,21 @@ export async function transpile(code: string, options: TranspileOptions): Promis
     allowAwaitOutsideFunction: true,
   });
 
-  await transformStaticImports(ast, {
-    resolveModule: options.resolveModule,
-    staticImportModule: options.staticImportModule
-  });
-  await transformDynamicImports(ast, {
-    resolveModule: options.resolveModule,
-    staticImportModule: options.staticImportModule,
-    src: options.src
-  });
-  transformImportMeta(ast, { url: options.src });
-  transformExports(ast, { src: options.src });
-  transformLookbehind(ast);
-  transformStaticBlocks(ast);
-  transformVarDeclarations(ast);
+  // await transformStaticImports(ast, {
+  //   resolveModule: options.resolveModule,
+  //   staticImportModule: options.staticImportModule
+  // });
+  // await transformDynamicImports(ast, {
+  //   resolveModule: options.resolveModule,
+  //   staticImportModule: options.staticImportModule,
+  //   src: options.src
+  // });
+  // transformImportMeta(ast, { url: options.src });
+  // transformExports(ast, { src: options.src });
+  // transformLookbehind(ast);
+  // transformStaticBlocks(ast);
+  // transformVarDeclarations(ast);
+  // transformWrapAsyncIIFE(ast);
 
   return generate(ast, options.minify ? { indent: '', lineEnd: '' } : undefined);
 }

@@ -6,7 +6,11 @@
       "Bash(npx tsx:*)",
       "Bash(yarn test:*)",
       "Bash(npx tsc:*)",
-      "Bash(npx vitest:*)"
+      "Bash(npx vitest:*)",
+      "Bash(npx serve:*)",
+      "Bash(ipconfig)",
+      "Bash(node -e \":*)",
+      "Bash(ls -la assets/input/*.js)"
     ]
   }
 }
