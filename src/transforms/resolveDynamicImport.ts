@@ -42,8 +42,9 @@ export async function transformDynamicImports(ast: acorn.Program, options: Resol
 
   const resolved = await Promise.all(
     literalImports.map(async (node) => {
-      const resolvedSource = options.resolveModule(String((node.source as acorn.Literal).value));
-      await options.staticImportModule(resolvedSource);
+      const source = String((node.source as acorn.Literal).value);
+      const resolvedSource = options.resolveModule(source);
+      await options.staticImportModule(source);
       return resolvedSource;
     })
   );

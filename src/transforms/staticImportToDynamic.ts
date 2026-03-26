@@ -13,8 +13,9 @@ export async function transformStaticImports(ast: acorn.Program, options: Static
   );
   const resolved = await Promise.all(
     importNodes.map(async (node) => {
-      const resolvedSource = options.resolveModule(String(node.source.value));
-      await options.staticImportModule(resolvedSource);
+      const source = String((node.source as acorn.Literal).value);
+      const resolvedSource = options.resolveModule(source);
+      await options.staticImportModule(source);
       return resolvedSource;
     })
   );

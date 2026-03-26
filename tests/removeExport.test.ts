@@ -13,7 +13,7 @@ const prefix = `window.LegacyTranspiler._moduleExports["${src}"]`;
 describe('removeExport', () => {
   it('exports const to _moduleExports', async () => {
     expect(await transpile(`export const foo = 1;`, { src, resolveModule, staticImportModule })).toBe(
-      `const foo = 1;\n${prefix} = {\n  foo\n};\n`
+      `var foo = 1;\n${prefix} = {\n  foo\n};\n`
     );
   });
 
@@ -32,14 +32,14 @@ describe('removeExport', () => {
   it('exports named exports to _moduleExports', async () => {
     const input = `const a = 1;\nconst b = 2;\nexport { a, b };`;
     expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(
-      `const a = 1;\nconst b = 2;\n${prefix} = {\n  a,\n  b\n};\n`
+      `var a = 1;\nvar b = 2;\n${prefix} = {\n  a,\n  b\n};\n`
     );
   });
 
   it('exports aliased names to _moduleExports', async () => {
     const input = `const foo = 1;\nexport { foo as bar };`;
     expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(
-      `const foo = 1;\n${prefix} = {\n  bar: foo\n};\n`
+      `var foo = 1;\n${prefix} = {\n  bar: foo\n};\n`
     );
   });
 
@@ -64,7 +64,7 @@ describe('removeExport', () => {
   it('exports mixed declarations to _moduleExports', async () => {
     const input = `export const a = 1;\nexport function b() {}\nexport { a as c };`;
     expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(
-      `const a = 1;\nfunction b() {}\n${prefix} = {\n  a,\n  b,\n  c: a\n};\n`
+      `var a = 1;\nfunction b() {}\n${prefix} = {\n  a,\n  b,\n  c: a\n};\n`
     );
   });
 
@@ -73,13 +73,13 @@ describe('removeExport', () => {
   });
 
   it('no assignment when no exports', async () => {
-    expect(await transpile(`const x = 1;`, { src, resolveModule, staticImportModule })).toBe('const x = 1;\n');
+    expect(await transpile(`const x = 1;`, { src, resolveModule, staticImportModule })).toBe('var x = 1;\n');
   });
 
   it('keeps surrounding code', async () => {
     const input = `const x = 1;\nexport { x };\nconsole.log(x);`;
     expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(
-      `const x = 1;\nconsole.log(x);\n${prefix} = {\n  x\n};\n`
+      `var x = 1;\nconsole.log(x);\n${prefix} = {\n  x\n};\n`
     );
   });
 });

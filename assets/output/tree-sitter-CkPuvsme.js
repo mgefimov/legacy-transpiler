@@ -1,10 +1,10 @@
-const __vite__mapDeps = (i, m = __vite__mapDeps, d = m.f || (m.f = ["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/index-BIdSPwg7.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/vendor-Dfbm12k5.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c6a992d55-BvaG5TH2.css"])) => i.map(i => d[i]);
-const scriptRel = "modulepreload", assetsURL = function (e, t) {
+var __vite__mapDeps = (i, m = __vite__mapDeps, d = m.f || (m.f = ["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/index-BIdSPwg7.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/vendor-Dfbm12k5.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c6a992d55-BvaG5TH2.css"])) => i.map(i => d[i]);
+var scriptRel = "modulepreload", assetsURL = function (e, t) {
   return new URL(e, t).href;
 }, seen = {}, __vitePreload = function (e, t, r) {
-  let s = Promise.resolve();
+  var s = Promise.resolve();
   if (t && t.length > 0) {
-    let e = function (e) {
+    var e = function (e) {
       return Promise.all(e.map(e => Promise.resolve(e).then(e => ({
         status: "fulfilled",
         value: e
@@ -13,29 +13,29 @@ const scriptRel = "modulepreload", assetsURL = function (e, t) {
         reason: e
       }))));
     };
-    const a = document.getElementsByTagName("link"), _ = document.querySelector("meta[property=csp-nonce]"), n = _?.nonce || _?.getAttribute("nonce");
+    var a = document.getElementsByTagName("link"), _ = document.querySelector("meta[property=csp-nonce]"), n = _?.nonce || _?.getAttribute("nonce");
     s = e(t.map(e => {
       if (((e = assetsURL(e, r)) in seen)) return;
       seen[e] = !0;
-      const t = e.endsWith(".css"), s = t ? '[rel="stylesheet"]' : "";
-      if (!!r) for (let r = a.length - 1; r >= 0; r--) {
-        const s = a[r];
+      var t = e.endsWith(".css"), s = t ? '[rel="stylesheet"]' : "";
+      if (!!r) for (var r = a.length - 1; r >= 0; r--) {
+        var s = a[r];
         if (s.href === e && (!t || "stylesheet" === s.rel)) return;
       } else if (document.querySelector(`link[href="${e}"]${s}`)) return;
-      const _ = document.createElement("link");
+      var _ = document.createElement("link");
       return (_.rel = t ? "stylesheet" : scriptRel, t || (_.as = "script"), _.crossOrigin = "", _.href = e, n && _.setAttribute("nonce", n), document.head.appendChild(_), t ? new Promise((t, r) => {
         (_.addEventListener("load", t), _.addEventListener("error", () => r(new Error(`Unable to preload CSS for ${e}`))));
       }) : void 0);
     }));
   }
   function a(e) {
-    const t = new Event("vite:preloadError", {
+    var t = new Event("vite:preloadError", {
       cancelable: !0
     });
     if ((t.payload = e, window.dispatchEvent(t), !t.defaultPrevented)) throw e;
   }
   return s.then(t => {
-    for (const e of t || []) "rejected" === e.status && a(e.reason);
+    for (var e of t || []) "rejected" === e.status && a(e.reason);
     return e().catch(a);
   });
 };
@@ -93,11 +93,11 @@ var LookaheadIterator = class {
   }
 };
 function getText(e, t, r, s) {
-  const a = r - t;
-  let _ = e.textCallback(t, s);
+  var a = r - t;
+  var _ = e.textCallback(t, s);
   if (_) {
     for (t += _.length; t < r; ) {
-      const r = e.textCallback(t, s);
+      var r = e.textCallback(t, s);
       if (!(r && r.length > 0)) break;
       (t += r.length, _ += r);
     }
@@ -117,7 +117,7 @@ var Tree = class e {
     (assertInternal(e), this[0] = t, this.language = r, this.textCallback = s);
   }
   copy() {
-    const t = C._ts_tree_copy(this[0]);
+    var t = C._ts_tree_copy(this[0]);
     return new e(INTERNAL, t, this.language, this.textCallback);
   }
   delete() {
@@ -127,7 +127,7 @@ var Tree = class e {
     return (C._ts_tree_root_node_wasm(this[0]), unmarshalNode(this));
   }
   rootNodeWithOffset(e, t) {
-    const r = TRANSFER_BUFFER + SIZE_OF_NODE;
+    var r = TRANSFER_BUFFER + SIZE_OF_NODE;
     return (C.setValue(r, e, "i32"), marshalPoint(r + SIZE_OF_INT, t), C._ts_tree_root_node_with_offset_wasm(this[0]), unmarshalNode(this));
   }
   edit(e) {
@@ -139,20 +139,20 @@ var Tree = class e {
   getChangedRanges(t) {
     if (!(t instanceof e)) throw new TypeError("Argument must be a Tree");
     C._ts_tree_get_changed_ranges_wasm(this[0], t[0]);
-    const r = C.getValue(TRANSFER_BUFFER, "i32"), s = C.getValue(TRANSFER_BUFFER + SIZE_OF_INT, "i32"), a = new Array(r);
+    var r = C.getValue(TRANSFER_BUFFER, "i32"), s = C.getValue(TRANSFER_BUFFER + SIZE_OF_INT, "i32"), a = new Array(r);
     if (r > 0) {
-      let e = s;
-      for (let t = 0; t < r; t++) (a[t] = unmarshalRange(e), e += SIZE_OF_RANGE);
+      var e = s;
+      for (var t = 0; t < r; t++) (a[t] = unmarshalRange(e), e += SIZE_OF_RANGE);
       C._free(s);
     }
     return a;
   }
   getIncludedRanges() {
     C._ts_tree_included_ranges_wasm(this[0]);
-    const e = C.getValue(TRANSFER_BUFFER, "i32"), t = C.getValue(TRANSFER_BUFFER + SIZE_OF_INT, "i32"), r = new Array(e);
+    var e = C.getValue(TRANSFER_BUFFER, "i32"), t = C.getValue(TRANSFER_BUFFER + SIZE_OF_INT, "i32"), r = new Array(e);
     if (e > 0) {
-      let s = t;
-      for (let t = 0; t < e; t++) (r[t] = unmarshalRange(s), s += SIZE_OF_RANGE);
+      var s = t;
+      for (var t = 0; t < e; t++) (r[t] = unmarshalRange(s), s += SIZE_OF_RANGE);
       C._free(t);
     }
     return r;
@@ -170,7 +170,7 @@ var Tree = class e {
     (assertInternal(e), this.tree = t, unmarshalTreeCursor(this));
   }
   copy() {
-    const t = new e(INTERNAL, this.tree);
+    var t = new e(INTERNAL, this.tree);
     return (C._ts_tree_cursor_copy_wasm(this.tree[0]), unmarshalTreeCursor(t), t);
   }
   delete() {
@@ -211,9 +211,9 @@ var Tree = class e {
   }
   get nodeText() {
     marshalTreeCursor(this);
-    const e = C._ts_tree_cursor_start_index_wasm(this.tree[0]), t = C._ts_tree_cursor_end_index_wasm(this.tree[0]);
+    var e = C._ts_tree_cursor_start_index_wasm(this.tree[0]), t = C._ts_tree_cursor_end_index_wasm(this.tree[0]);
     C._ts_tree_cursor_start_position_wasm(this.tree[0]);
-    const r = unmarshalPoint(TRANSFER_BUFFER);
+    var r = unmarshalPoint(TRANSFER_BUFFER);
     return getText(this.tree, e, t, r);
   }
   get startPosition() {
@@ -230,27 +230,27 @@ var Tree = class e {
   }
   gotoFirstChild() {
     marshalTreeCursor(this);
-    const e = C._ts_tree_cursor_goto_first_child_wasm(this.tree[0]);
+    var e = C._ts_tree_cursor_goto_first_child_wasm(this.tree[0]);
     return (unmarshalTreeCursor(this), 1 === e);
   }
   gotoLastChild() {
     marshalTreeCursor(this);
-    const e = C._ts_tree_cursor_goto_last_child_wasm(this.tree[0]);
+    var e = C._ts_tree_cursor_goto_last_child_wasm(this.tree[0]);
     return (unmarshalTreeCursor(this), 1 === e);
   }
   gotoParent() {
     marshalTreeCursor(this);
-    const e = C._ts_tree_cursor_goto_parent_wasm(this.tree[0]);
+    var e = C._ts_tree_cursor_goto_parent_wasm(this.tree[0]);
     return (unmarshalTreeCursor(this), 1 === e);
   }
   gotoNextSibling() {
     marshalTreeCursor(this);
-    const e = C._ts_tree_cursor_goto_next_sibling_wasm(this.tree[0]);
+    var e = C._ts_tree_cursor_goto_next_sibling_wasm(this.tree[0]);
     return (unmarshalTreeCursor(this), 1 === e);
   }
   gotoPreviousSibling() {
     marshalTreeCursor(this);
-    const e = C._ts_tree_cursor_goto_previous_sibling_wasm(this.tree[0]);
+    var e = C._ts_tree_cursor_goto_previous_sibling_wasm(this.tree[0]);
     return (unmarshalTreeCursor(this), 1 === e);
   }
   gotoDescendant(e) {
@@ -258,12 +258,12 @@ var Tree = class e {
   }
   gotoFirstChildForIndex(e) {
     (marshalTreeCursor(this), C.setValue(TRANSFER_BUFFER + SIZE_OF_CURSOR, e, "i32"));
-    const t = C._ts_tree_cursor_goto_first_child_for_index_wasm(this.tree[0]);
+    var t = C._ts_tree_cursor_goto_first_child_for_index_wasm(this.tree[0]);
     return (unmarshalTreeCursor(this), 1 === t);
   }
   gotoFirstChildForPosition(e) {
     (marshalTreeCursor(this), marshalPoint(TRANSFER_BUFFER + SIZE_OF_CURSOR, e));
-    const t = C._ts_tree_cursor_goto_first_child_for_position_wasm(this.tree[0]);
+    var t = C._ts_tree_cursor_goto_first_child_for_position_wasm(this.tree[0]);
     return (unmarshalTreeCursor(this), 1 === t);
   }
   reset(e) {
@@ -344,41 +344,41 @@ var Tree = class e {
     return (marshalNode(this), C._ts_node_child_by_field_id_wasm(this.tree[0], e), unmarshalNode(this.tree));
   }
   childForFieldName(e) {
-    const t = this.tree.language.fields.indexOf(e);
+    var t = this.tree.language.fields.indexOf(e);
     return -1 !== t ? this.childForFieldId(t) : null;
   }
   fieldNameForChild(e) {
     marshalNode(this);
-    const t = C._ts_node_field_name_for_child_wasm(this.tree[0], e);
+    var t = C._ts_node_field_name_for_child_wasm(this.tree[0], e);
     return t ? C.AsciiToString(t) : null;
   }
   fieldNameForNamedChild(e) {
     marshalNode(this);
-    const t = C._ts_node_field_name_for_named_child_wasm(this.tree[0], e);
+    var t = C._ts_node_field_name_for_named_child_wasm(this.tree[0], e);
     return t ? C.AsciiToString(t) : null;
   }
   childrenForFieldName(e) {
-    const t = this.tree.language.fields.indexOf(e);
+    var t = this.tree.language.fields.indexOf(e);
     return -1 !== t && 0 !== t ? this.childrenForFieldId(t) : [];
   }
   childrenForFieldId(e) {
     (marshalNode(this), C._ts_node_children_by_field_id_wasm(this.tree[0], e));
-    const t = C.getValue(TRANSFER_BUFFER, "i32"), r = C.getValue(TRANSFER_BUFFER + SIZE_OF_INT, "i32"), s = new Array(t);
+    var t = C.getValue(TRANSFER_BUFFER, "i32"), r = C.getValue(TRANSFER_BUFFER + SIZE_OF_INT, "i32"), s = new Array(t);
     if (t > 0) {
-      let e = r;
-      for (let r = 0; r < t; r++) (s[r] = unmarshalNode(this.tree, e), e += SIZE_OF_NODE);
+      var e = r;
+      for (var r = 0; r < t; r++) (s[r] = unmarshalNode(this.tree, e), e += SIZE_OF_NODE);
       C._free(r);
     }
     return s;
   }
   firstChildForIndex(e) {
     marshalNode(this);
-    const t = TRANSFER_BUFFER + SIZE_OF_NODE;
+    var t = TRANSFER_BUFFER + SIZE_OF_NODE;
     return (C.setValue(t, e, "i32"), C._ts_node_first_child_for_byte_wasm(this.tree[0]), unmarshalNode(this.tree));
   }
   firstNamedChildForIndex(e) {
     marshalNode(this);
-    const t = TRANSFER_BUFFER + SIZE_OF_NODE;
+    var t = TRANSFER_BUFFER + SIZE_OF_NODE;
     return (C.setValue(t, e, "i32"), C._ts_node_first_named_child_for_byte_wasm(this.tree[0]), unmarshalNode(this.tree));
   }
   get childCount() {
@@ -402,10 +402,10 @@ var Tree = class e {
   get children() {
     if (!this._children) {
       (marshalNode(this), C._ts_node_children_wasm(this.tree[0]));
-      const e = C.getValue(TRANSFER_BUFFER, "i32"), t = C.getValue(TRANSFER_BUFFER + SIZE_OF_INT, "i32");
+      var e = C.getValue(TRANSFER_BUFFER, "i32"), t = C.getValue(TRANSFER_BUFFER + SIZE_OF_INT, "i32");
       if ((this._children = new Array(e), e > 0)) {
-        let r = t;
-        for (let t = 0; t < e; t++) (this._children[t] = unmarshalNode(this.tree, r), r += SIZE_OF_NODE);
+        var r = t;
+        for (var t = 0; t < e; t++) (this._children[t] = unmarshalNode(this.tree, r), r += SIZE_OF_NODE);
         C._free(t);
       }
     }
@@ -414,10 +414,10 @@ var Tree = class e {
   get namedChildren() {
     if (!this._namedChildren) {
       (marshalNode(this), C._ts_node_named_children_wasm(this.tree[0]));
-      const e = C.getValue(TRANSFER_BUFFER, "i32"), t = C.getValue(TRANSFER_BUFFER + SIZE_OF_INT, "i32");
+      var e = C.getValue(TRANSFER_BUFFER, "i32"), t = C.getValue(TRANSFER_BUFFER + SIZE_OF_INT, "i32");
       if ((this._namedChildren = new Array(e), e > 0)) {
-        let r = t;
-        for (let t = 0; t < e; t++) (this._namedChildren[t] = unmarshalNode(this.tree, r), r += SIZE_OF_NODE);
+        var r = t;
+        for (var t = 0; t < e; t++) (this._namedChildren[t] = unmarshalNode(this.tree, r), r += SIZE_OF_NODE);
         C._free(t);
       }
     }
@@ -425,16 +425,16 @@ var Tree = class e {
   }
   descendantsOfType(e, t = ZERO_POINT, r = ZERO_POINT) {
     Array.isArray(e) || (e = [e]);
-    const s = [], a = this.tree.language.types;
-    for (const l of e) "ERROR" == l && s.push(65535);
-    for (let l = 0, u = a.length; l < u; l++) e.includes(a[l]) && s.push(l);
-    const _ = C._malloc(SIZE_OF_INT * s.length);
-    for (let l = 0, u = s.length; l < u; l++) C.setValue(_ + l * SIZE_OF_INT, s[l], "i32");
+    var s = [], a = this.tree.language.types;
+    for (var l of e) "ERROR" == l && s.push(65535);
+    for (var l = 0, u = a.length; l < u; l++) e.includes(a[l]) && s.push(l);
+    var _ = C._malloc(SIZE_OF_INT * s.length);
+    for (var l = 0, u = s.length; l < u; l++) C.setValue(_ + l * SIZE_OF_INT, s[l], "i32");
     (marshalNode(this), C._ts_node_descendants_of_type_wasm(this.tree[0], _, s.length, t.row, t.column, r.row, r.column));
-    const n = C.getValue(TRANSFER_BUFFER, "i32"), o = C.getValue(TRANSFER_BUFFER + SIZE_OF_INT, "i32"), i = new Array(n);
+    var n = C.getValue(TRANSFER_BUFFER, "i32"), o = C.getValue(TRANSFER_BUFFER + SIZE_OF_INT, "i32"), i = new Array(n);
     if (n > 0) {
-      let e = o;
-      for (let t = 0; t < n; t++) (i[t] = unmarshalNode(this.tree, e), e += SIZE_OF_NODE);
+      var e = o;
+      for (var t = 0; t < n; t++) (i[t] = unmarshalNode(this.tree, e), e += SIZE_OF_NODE);
     }
     return (C._free(o), C._free(_), i);
   }
@@ -462,25 +462,25 @@ var Tree = class e {
   descendantForIndex(e, t = e) {
     if ("number" != typeof e || "number" != typeof t) throw new Error("Arguments must be numbers");
     marshalNode(this);
-    const r = TRANSFER_BUFFER + SIZE_OF_NODE;
+    var r = TRANSFER_BUFFER + SIZE_OF_NODE;
     return (C.setValue(r, e, "i32"), C.setValue(r + SIZE_OF_INT, t, "i32"), C._ts_node_descendant_for_index_wasm(this.tree[0]), unmarshalNode(this.tree));
   }
   namedDescendantForIndex(e, t = e) {
     if ("number" != typeof e || "number" != typeof t) throw new Error("Arguments must be numbers");
     marshalNode(this);
-    const r = TRANSFER_BUFFER + SIZE_OF_NODE;
+    var r = TRANSFER_BUFFER + SIZE_OF_NODE;
     return (C.setValue(r, e, "i32"), C.setValue(r + SIZE_OF_INT, t, "i32"), C._ts_node_named_descendant_for_index_wasm(this.tree[0]), unmarshalNode(this.tree));
   }
   descendantForPosition(e, t = e) {
     if (!isPoint(e) || !isPoint(t)) throw new Error("Arguments must be {row, column} objects");
     marshalNode(this);
-    const r = TRANSFER_BUFFER + SIZE_OF_NODE;
+    var r = TRANSFER_BUFFER + SIZE_OF_NODE;
     return (marshalPoint(r, e), marshalPoint(r + SIZE_OF_POINT, t), C._ts_node_descendant_for_position_wasm(this.tree[0]), unmarshalNode(this.tree));
   }
   namedDescendantForPosition(e, t = e) {
     if (!isPoint(e) || !isPoint(t)) throw new Error("Arguments must be {row, column} objects");
     marshalNode(this);
-    const r = TRANSFER_BUFFER + SIZE_OF_NODE;
+    var r = TRANSFER_BUFFER + SIZE_OF_NODE;
     return (marshalPoint(r, e), marshalPoint(r + SIZE_OF_POINT, t), C._ts_node_named_descendant_for_position_wasm(this.tree[0]), unmarshalNode(this.tree));
   }
   walk() {
@@ -488,19 +488,19 @@ var Tree = class e {
   }
   edit(e) {
     if (this.startIndex >= e.oldEndIndex) {
-      let t, r;
+      var t, r;
       (this.startIndex = e.newEndIndex + (this.startIndex - e.oldEndIndex), this.startPosition.row > e.oldEndPosition.row ? (t = this.startPosition.row - e.oldEndPosition.row, r = this.startPosition.column) : (t = 0, r = this.startPosition.column, this.startPosition.column >= e.oldEndPosition.column && (r = this.startPosition.column - e.oldEndPosition.column)), t > 0 ? (this.startPosition.row += t, this.startPosition.column = r) : this.startPosition.column += r);
     } else this.startIndex > e.startIndex && (this.startIndex = e.newEndIndex, this.startPosition.row = e.newEndPosition.row, this.startPosition.column = e.newEndPosition.column);
   }
   toString() {
     marshalNode(this);
-    const e = C._ts_node_to_string_wasm(this.tree[0]), t = C.AsciiToString(e);
+    var e = C._ts_node_to_string_wasm(this.tree[0]), t = C.AsciiToString(e);
     return (C._free(e), t);
   }
 };
 function unmarshalCaptures(e, t, r, s, a) {
-  for (let _ = 0, n = a.length; _ < n; _++) {
-    const n = C.getValue(r, "i32"), o = unmarshalNode(t, r += SIZE_OF_INT);
+  for (var _ = 0, n = a.length; _ < n; _++) {
+    var n = C.getValue(r, "i32"), o = unmarshalNode(t, r += SIZE_OF_INT);
     (r += SIZE_OF_NODE, a[_] = {
       patternIndex: s,
       name: e.captureNames[n],
@@ -510,19 +510,19 @@ function unmarshalCaptures(e, t, r, s, a) {
   return r;
 }
 function marshalNode(e, t = 0) {
-  let r = TRANSFER_BUFFER + t * SIZE_OF_NODE;
+  var r = TRANSFER_BUFFER + t * SIZE_OF_NODE;
   (C.setValue(r, e.id, "i32"), r += SIZE_OF_INT, C.setValue(r, e.startIndex, "i32"), r += SIZE_OF_INT, C.setValue(r, e.startPosition.row, "i32"), r += SIZE_OF_INT, C.setValue(r, e.startPosition.column, "i32"), r += SIZE_OF_INT, C.setValue(r, e[0], "i32"));
 }
 function unmarshalNode(e, t = TRANSFER_BUFFER) {
-  const r = C.getValue(t, "i32");
+  var r = C.getValue(t, "i32");
   if ((t += SIZE_OF_INT, 0 === r)) return null;
-  const s = C.getValue(t, "i32");
+  var s = C.getValue(t, "i32");
   t += SIZE_OF_INT;
-  const a = C.getValue(t, "i32");
+  var a = C.getValue(t, "i32");
   t += SIZE_OF_INT;
-  const _ = C.getValue(t, "i32");
+  var _ = C.getValue(t, "i32");
   t += SIZE_OF_INT;
-  const n = C.getValue(t, "i32");
+  var n = C.getValue(t, "i32");
   return new Node(INTERNAL, {
     id: r,
     tree: e,
@@ -553,7 +553,7 @@ function marshalRange(e, t) {
   (marshalPoint(e, t.startPosition), marshalPoint(e += SIZE_OF_POINT, t.endPosition), e += SIZE_OF_POINT, C.setValue(e, t.startIndex, "i32"), e += SIZE_OF_INT, C.setValue(e, t.endIndex, "i32"), e += SIZE_OF_INT);
 }
 function unmarshalRange(e) {
-  const t = {};
+  var t = {};
   return (t.startPosition = unmarshalPoint(e), e += SIZE_OF_POINT, t.endPosition = unmarshalPoint(e), e += SIZE_OF_POINT, t.startIndex = C.getValue(e, "i32") >>> 0, e += SIZE_OF_INT, t.endIndex = C.getValue(e, "i32") >>> 0, t);
 }
 function marshalEdit(e, t = TRANSFER_BUFFER) {
@@ -576,15 +576,15 @@ var LANGUAGE_FUNCTION_REGEX = /^tree_sitter_\w+$/, Language = class e {
   fields;
   constructor(e, t) {
     (assertInternal(e), this[0] = t, this.types = new Array(C._ts_language_symbol_count(this[0])));
-    for (let r = 0, s = this.types.length; r < s; r++) C._ts_language_symbol_type(this[0], r) < 2 && (this.types[r] = C.UTF8ToString(C._ts_language_symbol_name(this[0], r)));
+    for (var r = 0, s = this.types.length; r < s; r++) C._ts_language_symbol_type(this[0], r) < 2 && (this.types[r] = C.UTF8ToString(C._ts_language_symbol_name(this[0], r)));
     this.fields = new Array(C._ts_language_field_count(this[0]) + 1);
-    for (let r = 0, s = this.fields.length; r < s; r++) {
-      const e = C._ts_language_field_name_for_id(this[0], r);
+    for (var r = 0, s = this.fields.length; r < s; r++) {
+      var e = C._ts_language_field_name_for_id(this[0], r);
       this.fields[r] = 0 !== e ? C.UTF8ToString(e) : null;
     }
   }
   get name() {
-    const e = C._ts_language_name(this[0]);
+    var e = C._ts_language_name(this[0]);
     return 0 === e ? null : C.UTF8ToString(e);
   }
   get abiVersion() {
@@ -601,23 +601,23 @@ var LANGUAGE_FUNCTION_REGEX = /^tree_sitter_\w+$/, Language = class e {
     return C._ts_language_state_count(this[0]);
   }
   fieldIdForName(e) {
-    const t = this.fields.indexOf(e);
+    var t = this.fields.indexOf(e);
     return -1 !== t ? t : null;
   }
   fieldNameForId(e) {
     return this.fields[e] ?? null;
   }
   idForNodeType(e, t) {
-    const r = C.lengthBytesUTF8(e), s = C._malloc(r + 1);
+    var r = C.lengthBytesUTF8(e), s = C._malloc(r + 1);
     C.stringToUTF8(e, s, r + 1);
-    const a = C._ts_language_symbol_for_name(this[0], s, r, t ? 1 : 0);
+    var a = C._ts_language_symbol_for_name(this[0], s, r, t ? 1 : 0);
     return (C._free(s), a || null);
   }
   get nodeTypeCount() {
     return C._ts_language_symbol_count(this[0]);
   }
   nodeTypeForId(e) {
-    const t = C._ts_language_symbol_name(this[0], e);
+    var t = C._ts_language_symbol_name(this[0], e);
     return t ? C.UTF8ToString(t) : null;
   }
   nodeTypeIsNamed(e) {
@@ -628,19 +628,19 @@ var LANGUAGE_FUNCTION_REGEX = /^tree_sitter_\w+$/, Language = class e {
   }
   get supertypes() {
     C._ts_language_supertypes_wasm(this[0]);
-    const e = C.getValue(TRANSFER_BUFFER, "i32"), t = C.getValue(TRANSFER_BUFFER + SIZE_OF_INT, "i32"), r = new Array(e);
+    var e = C.getValue(TRANSFER_BUFFER, "i32"), t = C.getValue(TRANSFER_BUFFER + SIZE_OF_INT, "i32"), r = new Array(e);
     if (e > 0) {
-      let s = t;
-      for (let t = 0; t < e; t++) (r[t] = C.getValue(s, "i16"), s += SIZE_OF_SHORT);
+      var s = t;
+      for (var t = 0; t < e; t++) (r[t] = C.getValue(s, "i16"), s += SIZE_OF_SHORT);
     }
     return r;
   }
   subtypes(e) {
     C._ts_language_subtypes_wasm(this[0], e);
-    const t = C.getValue(TRANSFER_BUFFER, "i32"), r = C.getValue(TRANSFER_BUFFER + SIZE_OF_INT, "i32"), s = new Array(t);
+    var t = C.getValue(TRANSFER_BUFFER, "i32"), r = C.getValue(TRANSFER_BUFFER + SIZE_OF_INT, "i32"), s = new Array(t);
     if (t > 0) {
-      let e = r;
-      for (let r = 0; r < t; r++) (s[r] = C.getValue(e, "i16"), e += SIZE_OF_SHORT);
+      var e = r;
+      for (var r = 0; r < t; r++) (s[r] = C.getValue(e, "i16"), e += SIZE_OF_SHORT);
     }
     return s;
   }
@@ -648,40 +648,40 @@ var LANGUAGE_FUNCTION_REGEX = /^tree_sitter_\w+$/, Language = class e {
     return C._ts_language_next_state(this[0], e, t);
   }
   lookaheadIterator(e) {
-    const t = C._ts_lookahead_iterator_new(this[0], e);
+    var t = C._ts_lookahead_iterator_new(this[0], e);
     return t ? new LookaheadIterator(INTERNAL, t, this) : null;
   }
   static async load(t) {
-    let r;
+    var r;
     if (t instanceof Uint8Array) r = t; else if (globalThis.process?.versions.node) {
-      const e = await __vitePreload(() => window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/index-BIdSPwg7.js"].then(e => e.wg), __vite__mapDeps([0, 1, 2]), "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/tree-sitter-CkPuvsme.js");
+      var e = await __vitePreload(() => window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/index-BIdSPwg7.js"].then(e => e.wg), __vite__mapDeps([0, 1, 2]), "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/tree-sitter-CkPuvsme.js");
       r = await e.readFile(t);
     } else {
-      const e = await fetch(t);
+      var e = await fetch(t);
       if (!e.ok) {
-        const t = await e.text();
+        var t = await e.text();
         throw new Error(`Language.load failed with status ${e.status}.\n\n${t}`);
       }
-      const s = e.clone();
+      var s = e.clone();
       try {
         r = await WebAssembly.compileStreaming(e);
       } catch (o) {
         (console.error("wasm streaming compile failed:", o), console.error("falling back to ArrayBuffer instantiation"), r = new Uint8Array(await s.arrayBuffer()));
       }
     }
-    const s = await C.loadWebAssemblyModule(r, {
+    var s = await C.loadWebAssemblyModule(r, {
       loadAsync: !0
     }), a = Object.keys(s), _ = a.find(e => LANGUAGE_FUNCTION_REGEX.test(e) && !e.includes("external_scanner_"));
     if (!_) throw (console.log(`Couldn't find language function in Wasm file. Symbols:\n${JSON.stringify(a, null, 2)}`), new Error("Language.load failed: no language function found in Wasm file"));
-    const n = s[_]();
+    var n = s[_]();
     return new e(INTERNAL, n);
   }
 };
 async function Module2(moduleArg = {}) {
   var moduleRtn, Module = moduleArg, ENVIRONMENT_IS_WEB = "object" == typeof window, ENVIRONMENT_IS_WORKER = "undefined" != typeof WorkerGlobalScope, ENVIRONMENT_IS_NODE = "object" == typeof process && process.versions?.node && "renderer" != process.type;
   if (ENVIRONMENT_IS_NODE) {
-    const {createRequire: e} = await __vitePreload(async () => {
-      const {createRequire: e} = await window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/index-BIdSPwg7.js"].then(e => e.wk);
+    var {createRequire: e} = await __vitePreload(async () => {
+      var {createRequire: e} = await window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/index-BIdSPwg7.js"].then(e => e.wk);
       return {
         createRequire: e
       };
@@ -963,7 +963,7 @@ async function Module2(moduleArg = {}) {
     var t = ___heap_base, r = t + alignMemory(e, 16);
     return (___heap_base = r, GOT.__heap_base.value = r, t);
   }, "getMemory"), isInternalSym = __name(e => ["__cpp_exception", "__c_longjmp", "__wasm_apply_data_relocs", "__dso_handle", "__tls_size", "__tls_align", "__set_stack_limits", "_emscripten_tls_init", "__wasm_init_tls", "__wasm_call_ctors", "__start_em_asm", "__stop_em_asm", "__start_em_js", "__stop_em_js"].includes(e) || e.startsWith("__em_js__"), "isInternalSym"), uleb128EncodeWithLen = __name(e => {
-    const t = e.length;
+    var t = e.length;
     return [t % 128 | 128, t >> 7, ...e];
   }, "uleb128EncodeWithLen"), wasmTypeCodes = {
     i: 127,
@@ -1115,11 +1115,11 @@ async function Module2(moduleArg = {}) {
     }, flags.loadAsync ? metadata.neededDynlibs.reduce((e, t) => e.then(() => loadDynamicLibrary(t, flags, localScope)), Promise.resolve()).then(loadModule) : (metadata.neededDynlibs.forEach(e => loadDynamicLibrary(e, flags, localScope)), loadModule()));
   }, "loadWebAssemblyModule"), mergeLibSymbols = __name((e, t) => {
     for (var [r, s] of Object.entries(e)) {
-      const e = __name(e => {
+      var e = __name(e => {
         isSymbolDefined(e) || (wasmImports[e] = s);
       }, "setImport");
       e(r);
-      const t = "__main_argc_argv";
+      var t = "__main_argc_argv";
       ("main" == r && e(t), r == t && e("main"));
     }
   }, "mergeLibSymbols"), asyncLoad = __name(async e => {
@@ -1253,12 +1253,12 @@ async function Module2(moduleArg = {}) {
   }, "_fd_write");
   function _tree_sitter_log_callback(e, t) {
     if (Module.currentLogCallback) {
-      const r = UTF8ToString(t);
+      var r = UTF8ToString(t);
       Module.currentLogCallback(r, 0 !== e);
     }
   }
   function _tree_sitter_parse_callback(e, t, r, s, a) {
-    const _ = Module.currentParseCallback(t, {
+    var _ = Module.currentParseCallback(t, {
       row: r,
       column: s
     });
@@ -1415,12 +1415,12 @@ var Parser = class {
     (C._ts_parser_delete(this[0]), C._free(this[1]), this[0] = 0, this[1] = 0);
   }
   setLanguage(e) {
-    let t;
+    var t;
     if (e) {
       if (e.constructor !== Language) throw new Error("Argument must be a Language");
       {
         t = e[0];
-        const r = C._ts_language_abi_version(t);
+        var r = C._ts_language_abi_version(t);
         if (r < MIN_COMPATIBLE_VERSION || LANGUAGE_VERSION < r) throw new Error(`Incompatible language version ${r}. Compatibility range ${MIN_COMPATIBLE_VERSION} through ${LANGUAGE_VERSION}.`);
         this.language = e;
       }
@@ -1433,16 +1433,16 @@ var Parser = class {
       C.currentParseCallback = e;
     }
     (C.currentProgressCallback = r?.progressCallback ? r.progressCallback : null, this.logCallback ? (C.currentLogCallback = this.logCallback, C._ts_parser_enable_logger_wasm(this[0], 1)) : (C.currentLogCallback = null, C._ts_parser_enable_logger_wasm(this[0], 0)));
-    let s = 0, a = 0;
+    var s = 0, a = 0;
     if (r?.includedRanges) {
       (s = r.includedRanges.length, a = C._calloc(s, SIZE_OF_RANGE));
-      let e = a;
-      for (let t = 0; t < s; t++) (marshalRange(e, r.includedRanges[t]), e += SIZE_OF_RANGE);
+      var e = a;
+      for (var t = 0; t < s; t++) (marshalRange(e, r.includedRanges[t]), e += SIZE_OF_RANGE);
     }
-    const _ = C._ts_parser_parse_wasm(this[0], this[1], t ? t[0] : 0, a, s);
+    var _ = C._ts_parser_parse_wasm(this[0], this[1], t ? t[0] : 0, a, s);
     if (!_) return (C.currentParseCallback = null, C.currentLogCallback = null, C.currentProgressCallback = null, null);
     if (!this.language) throw new Error("Parser must have a language to parse");
-    const n = new Tree(INTERNAL, _, this.language, C.currentParseCallback);
+    var n = new Tree(INTERNAL, _, this.language, C.currentParseCallback);
     return (C.currentParseCallback = null, C.currentLogCallback = null, C.currentProgressCallback = null, n);
   }
   reset() {
@@ -1450,10 +1450,10 @@ var Parser = class {
   }
   getIncludedRanges() {
     C._ts_parser_included_ranges_wasm(this[0]);
-    const e = C.getValue(TRANSFER_BUFFER, "i32"), t = C.getValue(TRANSFER_BUFFER + SIZE_OF_INT, "i32"), r = new Array(e);
+    var e = C.getValue(TRANSFER_BUFFER, "i32"), t = C.getValue(TRANSFER_BUFFER + SIZE_OF_INT, "i32"), r = new Array(e);
     if (e > 0) {
-      let s = t;
-      for (let t = 0; t < e; t++) (r[t] = unmarshalRange(s), s += SIZE_OF_RANGE);
+      var s = t;
+      for (var t = 0; t < e; t++) (r[t] = unmarshalRange(s), s += SIZE_OF_RANGE);
       C._free(t);
     }
     return r;
@@ -1499,21 +1499,21 @@ var Parser = class {
 function parseAnyPredicate(e, t, r, s) {
   if (3 !== e.length) throw new Error(`Wrong number of arguments to \`#${r}\` predicate. Expected 2, got ${e.length - 1}`);
   if (!isCaptureStep(e[1])) throw new Error(`First argument of \`#${r}\` predicate must be a capture. Got "${e[1].value}"`);
-  const a = "eq?" === r || "any-eq?" === r, _ = !r.startsWith("any-");
+  var a = "eq?" === r || "any-eq?" === r, _ = !r.startsWith("any-");
   if (isCaptureStep(e[2])) {
-    const r = e[1].name, n = e[2].name;
+    var r = e[1].name, n = e[2].name;
     s[t].push(e => {
-      const t = [], s = [];
-      for (const a of e) (a.name === r && t.push(a.node), a.name === n && s.push(a.node));
-      const o = __name((e, t, r) => r ? e.text === t.text : e.text !== t.text, "compare");
+      var t = [], s = [];
+      for (var a of e) (a.name === r && t.push(a.node), a.name === n && s.push(a.node));
+      var o = __name((e, t, r) => r ? e.text === t.text : e.text !== t.text, "compare");
       return _ ? t.every(e => s.some(t => o(e, t, a))) : t.some(e => s.some(t => o(e, t, a)));
     });
   } else {
-    const r = e[1].name, n = e[2].value, o = __name(e => e.text === n, "matches"), i = __name(e => e.text !== n, "doesNotMatch");
+    var r = e[1].name, n = e[2].value, o = __name(e => e.text === n, "matches"), i = __name(e => e.text !== n, "doesNotMatch");
     s[t].push(e => {
-      const t = [];
-      for (const a of e) a.name === r && t.push(a.node);
-      const s = a ? o : i;
+      var t = [];
+      for (var a of e) a.name === r && t.push(a.node);
+      var s = a ? o : i;
       return _ ? t.every(s) : t.some(s);
     });
   }
@@ -1522,30 +1522,30 @@ function parseMatchPredicate(e, t, r, s) {
   if (3 !== e.length) throw new Error(`Wrong number of arguments to \`#${r}\` predicate. Expected 2, got ${e.length - 1}.`);
   if ("capture" !== e[1].type) throw new Error(`First argument of \`#${r}\` predicate must be a capture. Got "${e[1].value}".`);
   if ("string" !== e[2].type) throw new Error(`Second argument of \`#${r}\` predicate must be a string. Got @${e[2].name}.`);
-  const a = "match?" === r || "any-match?" === r, _ = !r.startsWith("any-"), n = e[1].name, o = new RegExp(e[2].value);
+  var a = "match?" === r || "any-match?" === r, _ = !r.startsWith("any-"), n = e[1].name, o = new RegExp(e[2].value);
   s[t].push(e => {
-    const t = [];
-    for (const s of e) s.name === n && t.push(s.node.text);
-    const r = __name((e, t) => t ? o.test(e) : !o.test(e), "test");
+    var t = [];
+    for (var s of e) s.name === n && t.push(s.node.text);
+    var r = __name((e, t) => t ? o.test(e) : !o.test(e), "test");
     return 0 === t.length ? !a : _ ? t.every(e => r(e, a)) : t.some(e => r(e, a));
   });
 }
 function parseAnyOfPredicate(e, t, r, s) {
   if (e.length < 2) throw new Error(`Wrong number of arguments to \`#${r}\` predicate. Expected at least 1. Got ${e.length - 1}.`);
   if ("capture" !== e[1].type) throw new Error(`First argument of \`#${r}\` predicate must be a capture. Got "${e[1].value}".`);
-  const a = "any-of?" === r, _ = e[1].name, n = e.slice(2);
+  var a = "any-of?" === r, _ = e[1].name, n = e.slice(2);
   if (!n.every(isStringStep)) throw new Error(`Arguments to \`#${r}\` predicate must be strings.".`);
-  const o = n.map(e => e.value);
+  var o = n.map(e => e.value);
   s[t].push(e => {
-    const t = [];
-    for (const r of e) r.name === _ && t.push(r.node.text);
+    var t = [];
+    for (var r of e) r.name === _ && t.push(r.node.text);
     return 0 === t.length ? !a : t.every(e => o.includes(e)) === a;
   });
 }
 function parseIsPredicate(e, t, r, s, a) {
   if (e.length < 2 || e.length > 3) throw new Error(`Wrong number of arguments to \`#${r}\` predicate. Expected 1 or 2. Got ${e.length - 1}.`);
   if (!e.every(isStringStep)) throw new Error(`Arguments to \`#${r}\` predicate must be strings.".`);
-  const _ = "is?" === r ? s : a;
+  var _ = "is?" === r ? s : a;
   (_[t] || (_[t] = {}), _[t][e[1].value] = e[2]?.value ?? null);
 }
 function parseSetDirective(e, t, r) {
@@ -1555,7 +1555,7 @@ function parseSetDirective(e, t, r) {
 }
 function parsePattern(e, t, r, s, a, _, n, o, i, l, u) {
   if (t === PREDICATE_STEP_TYPE_CAPTURE) {
-    const e = s[r];
+    var e = s[r];
     _.push({
       type: "capture",
       name: e
@@ -1565,7 +1565,7 @@ function parsePattern(e, t, r, s, a, _, n, o, i, l, u) {
     value: a[r]
   }); else if (_.length > 0) {
     if ("string" !== _[0].type) throw new Error("Predicates must begin with a literal value");
-    const t = _[0].value;
+    var t = _[0].value;
     switch (t) {
       case "any-not-eq?":
       case "not-eq?":
@@ -1615,11 +1615,11 @@ var Query = class {
   refutedProperties;
   matchLimit;
   constructor(e, t) {
-    const r = C.lengthBytesUTF8(t), s = C._malloc(r + 1);
+    var r = C.lengthBytesUTF8(t), s = C._malloc(r + 1);
     C.stringToUTF8(t, s, r + 1);
-    const a = C._ts_query_new(e[0], s, r, TRANSFER_BUFFER, TRANSFER_BUFFER + SIZE_OF_INT);
+    var a = C._ts_query_new(e[0], s, r, TRANSFER_BUFFER, TRANSFER_BUFFER + SIZE_OF_INT);
     if (!a) {
-      const e = C.getValue(TRANSFER_BUFFER + SIZE_OF_INT, "i32"), r = C.getValue(TRANSFER_BUFFER, "i32"), a = C.UTF8ToString(s, r).length, _ = t.slice(a, a + 100).split("\n")[0], n = _.match(QUERY_WORD_REGEX)?.[0] ?? "";
+      var e = C.getValue(TRANSFER_BUFFER + SIZE_OF_INT, "i32"), r = C.getValue(TRANSFER_BUFFER, "i32"), a = C.UTF8ToString(s, r).length, _ = t.slice(a, a + 100).split("\n")[0], n = _.match(QUERY_WORD_REGEX)?.[0] ?? "";
       switch ((C._free(s), e)) {
         case QueryErrorKind.Syntax:
           throw new QueryError(QueryErrorKind.Syntax, {
@@ -1637,33 +1637,33 @@ var Query = class {
           }, a, 0);
       }
     }
-    const _ = C._ts_query_string_count(a), n = C._ts_query_capture_count(a), o = C._ts_query_pattern_count(a), i = new Array(n), l = new Array(o), u = new Array(_);
-    for (let p = 0; p < n; p++) {
-      const e = C._ts_query_capture_name_for_id(a, p, TRANSFER_BUFFER), t = C.getValue(TRANSFER_BUFFER, "i32");
+    var _ = C._ts_query_string_count(a), n = C._ts_query_capture_count(a), o = C._ts_query_pattern_count(a), i = new Array(n), l = new Array(o), u = new Array(_);
+    for (var p = 0; p < n; p++) {
+      var e = C._ts_query_capture_name_for_id(a, p, TRANSFER_BUFFER), t = C.getValue(TRANSFER_BUFFER, "i32");
       i[p] = C.UTF8ToString(e, t);
     }
-    for (let p = 0; p < o; p++) {
-      const e = new Array(n);
-      for (let t = 0; t < n; t++) {
-        const r = C._ts_query_capture_quantifier_for_id(a, p, t);
+    for (var p = 0; p < o; p++) {
+      var e = new Array(n);
+      for (var t = 0; t < n; t++) {
+        var r = C._ts_query_capture_quantifier_for_id(a, p, t);
         e[t] = r;
       }
       l[p] = e;
     }
-    for (let p = 0; p < _; p++) {
-      const e = C._ts_query_string_value_for_id(a, p, TRANSFER_BUFFER), t = C.getValue(TRANSFER_BUFFER, "i32");
+    for (var p = 0; p < _; p++) {
+      var e = C._ts_query_string_value_for_id(a, p, TRANSFER_BUFFER), t = C.getValue(TRANSFER_BUFFER, "i32");
       u[p] = C.UTF8ToString(e, t);
     }
-    const d = new Array(o), m = new Array(o), c = new Array(o), h = new Array(o), g = new Array(o);
-    for (let p = 0; p < o; p++) {
-      const e = C._ts_query_predicates_for_pattern(a, p, TRANSFER_BUFFER), t = C.getValue(TRANSFER_BUFFER, "i32");
+    var d = new Array(o), m = new Array(o), c = new Array(o), h = new Array(o), g = new Array(o);
+    for (var p = 0; p < o; p++) {
+      var e = C._ts_query_predicates_for_pattern(a, p, TRANSFER_BUFFER), t = C.getValue(TRANSFER_BUFFER, "i32");
       (h[p] = [], g[p] = []);
-      const r = new Array();
-      let s = e;
-      for (let a = 0; a < t; a++) {
-        const e = C.getValue(s, "i32");
+      var r = new Array();
+      var s = e;
+      for (var a = 0; a < t; a++) {
+        var e = C.getValue(s, "i32");
         s += SIZE_OF_INT;
-        const t = C.getValue(s, "i32");
+        var t = C.getValue(s, "i32");
         (s += SIZE_OF_INT, parsePattern(p, e, t, i, u, r, g, h, d, m, c));
       }
       (Object.freeze(g[p]), Object.freeze(h[p]), Object.freeze(d[p]), Object.freeze(m[p]), Object.freeze(c[p]));
@@ -1674,57 +1674,57 @@ var Query = class {
     (C._ts_query_delete(this[0]), this[0] = 0);
   }
   matches(e, t = {}) {
-    const r = t.startPosition ?? ZERO_POINT, s = t.endPosition ?? ZERO_POINT, a = t.startIndex ?? 0, _ = t.endIndex ?? 0, n = t.matchLimit ?? 4294967295, o = t.maxStartDepth ?? 4294967295, i = t.progressCallback;
+    var r = t.startPosition ?? ZERO_POINT, s = t.endPosition ?? ZERO_POINT, a = t.startIndex ?? 0, _ = t.endIndex ?? 0, n = t.matchLimit ?? 4294967295, o = t.maxStartDepth ?? 4294967295, i = t.progressCallback;
     if ("number" != typeof n) throw new Error("Arguments must be numbers");
     if ((this.matchLimit = n, 0 !== _ && a > _)) throw new Error("`startIndex` cannot be greater than `endIndex`");
     if (s !== ZERO_POINT && (r.row > s.row || r.row === s.row && r.column > s.column)) throw new Error("`startPosition` cannot be greater than `endPosition`");
     (i && (C.currentQueryProgressCallback = i), marshalNode(e), C._ts_query_matches_wasm(this[0], e.tree[0], r.row, r.column, s.row, s.column, a, _, n, o));
-    const l = C.getValue(TRANSFER_BUFFER, "i32"), u = C.getValue(TRANSFER_BUFFER + SIZE_OF_INT, "i32"), d = C.getValue(TRANSFER_BUFFER + 2 * SIZE_OF_INT, "i32"), m = new Array(l);
+    var l = C.getValue(TRANSFER_BUFFER, "i32"), u = C.getValue(TRANSFER_BUFFER + SIZE_OF_INT, "i32"), d = C.getValue(TRANSFER_BUFFER + 2 * SIZE_OF_INT, "i32"), m = new Array(l);
     this.exceededMatchLimit = Boolean(d);
-    let c = 0, h = u;
-    for (let g = 0; g < l; g++) {
-      const t = C.getValue(h, "i32");
+    var c = 0, h = u;
+    for (var g = 0; g < l; g++) {
+      var t = C.getValue(h, "i32");
       h += SIZE_OF_INT;
-      const r = C.getValue(h, "i32");
+      var r = C.getValue(h, "i32");
       h += SIZE_OF_INT;
-      const s = new Array(r);
+      var s = new Array(r);
       if ((h = unmarshalCaptures(this, e.tree, h, t, s), this.textPredicates[t].every(e => e(s)))) {
         m[c] = {
           patternIndex: t,
           captures: s
         };
-        const e = this.setProperties[t];
+        var e = this.setProperties[t];
         m[c].setProperties = e;
-        const r = this.assertedProperties[t];
+        var r = this.assertedProperties[t];
         m[c].assertedProperties = r;
-        const a = this.refutedProperties[t];
+        var a = this.refutedProperties[t];
         (m[c].refutedProperties = a, c++);
       }
     }
     return (m.length = c, C._free(u), C.currentQueryProgressCallback = null, m);
   }
   captures(e, t = {}) {
-    const r = t.startPosition ?? ZERO_POINT, s = t.endPosition ?? ZERO_POINT, a = t.startIndex ?? 0, _ = t.endIndex ?? 0, n = t.matchLimit ?? 4294967295, o = t.maxStartDepth ?? 4294967295, i = t.progressCallback;
+    var r = t.startPosition ?? ZERO_POINT, s = t.endPosition ?? ZERO_POINT, a = t.startIndex ?? 0, _ = t.endIndex ?? 0, n = t.matchLimit ?? 4294967295, o = t.maxStartDepth ?? 4294967295, i = t.progressCallback;
     if ("number" != typeof n) throw new Error("Arguments must be numbers");
     if ((this.matchLimit = n, 0 !== _ && a > _)) throw new Error("`startIndex` cannot be greater than `endIndex`");
     if (s !== ZERO_POINT && (r.row > s.row || r.row === s.row && r.column > s.column)) throw new Error("`startPosition` cannot be greater than `endPosition`");
     (i && (C.currentQueryProgressCallback = i), marshalNode(e), C._ts_query_captures_wasm(this[0], e.tree[0], r.row, r.column, s.row, s.column, a, _, n, o));
-    const l = C.getValue(TRANSFER_BUFFER, "i32"), u = C.getValue(TRANSFER_BUFFER + SIZE_OF_INT, "i32"), d = C.getValue(TRANSFER_BUFFER + 2 * SIZE_OF_INT, "i32"), m = new Array();
+    var l = C.getValue(TRANSFER_BUFFER, "i32"), u = C.getValue(TRANSFER_BUFFER + SIZE_OF_INT, "i32"), d = C.getValue(TRANSFER_BUFFER + 2 * SIZE_OF_INT, "i32"), m = new Array();
     this.exceededMatchLimit = Boolean(d);
-    const c = new Array();
-    let h = u;
-    for (let g = 0; g < l; g++) {
-      const t = C.getValue(h, "i32");
+    var c = new Array();
+    var h = u;
+    for (var g = 0; g < l; g++) {
+      var t = C.getValue(h, "i32");
       h += SIZE_OF_INT;
-      const r = C.getValue(h, "i32");
+      var r = C.getValue(h, "i32");
       h += SIZE_OF_INT;
-      const s = C.getValue(h, "i32");
+      var s = C.getValue(h, "i32");
       if ((h += SIZE_OF_INT, c.length = r, h = unmarshalCaptures(this, e.tree, h, t, c), this.textPredicates[t].every(e => e(c)))) {
-        const e = c[s], r = this.setProperties[t];
+        var e = c[s], r = this.setProperties[t];
         e.setProperties = r;
-        const a = this.assertedProperties[t];
+        var a = this.assertedProperties[t];
         e.assertedProperties = a;
-        const _ = this.refutedProperties[t];
+        var _ = this.refutedProperties[t];
         (e.refutedProperties = _, m.push(e));
       }
     }
@@ -1734,7 +1734,7 @@ var Query = class {
     return this.predicates[e];
   }
   disableCapture(e) {
-    const t = C.lengthBytesUTF8(e), r = C._malloc(t + 1);
+    var t = C.lengthBytesUTF8(e), r = C._malloc(t + 1);
     (C.stringToUTF8(e, r, t + 1), C._ts_query_disable_capture(this[0], r, t), C._free(r));
   }
   disablePattern(e) {

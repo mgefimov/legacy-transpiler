@@ -8,6 +8,7 @@ import {
   transformExports,
   transformStaticBlocks,
   transformWrapAsyncIIFE,
+  transformVarDeclarations,
 } from './transforms';
 import type { StaticImportToDynamicOptions } from './transforms/staticImportToDynamic';
 
@@ -19,24 +20,23 @@ export {
   transformExports,
   transformStaticBlocks,
   transformWrapAsyncIIFE,
+  transformVarDeclarations,
 };
 export type { StaticImportToDynamicOptions };
 
-export const _moduleExports: Record<string, any> = {};
-
 export let _baseURL = '';
 
-export function _resolveDynamicModule(source: string): string {
-  console.log('[_resolveDynamicModule]', source);
-  if (!_baseURL) return source;
-  return `${_baseURL}/${source.replace(/^\.\//, '')}`;
-}
+// export function _resolveDynamicModule(source: string): string {
+//   console.log('[_resolveDynamicModule]', source);
+//   if (!_baseURL) return source;
+//   return `${_baseURL}/${source.replace(/^\.\//, '')}`;
+// }
 
-export function _import(source: string): Promise<any> {
-  const resolved = _resolveDynamicModule(source);
-  console.log('[dynamic-import]', resolved);
-  return import(resolved);
-}
+// export function _import(source: string): Promise<any> {
+//   const resolved = window.LegacyTranspiler._resolveDynamicModule(source);
+//   console.log('[dynamic-import]', resolved);
+//   return import(resolved);
+// }
 
 export interface TranspileOptions {
   src: string;
@@ -65,6 +65,7 @@ export async function transpile(code: string, options: TranspileOptions): Promis
   transformExports(ast, { src: options.src });
   transformLookbehind(ast);
   transformStaticBlocks(ast);
+  transformVarDeclarations(ast);
 
   return generate(ast, options.minify ? { indent: '', lineEnd: '' } : undefined);
 }

@@ -13,7 +13,7 @@ describe('replaceImportMeta', () => {
   it('replaces import.meta.url with string literal', async () => {
     const input = `const url = import.meta.url;`;
     expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(
-      `const url = "${src}";\n`
+      `var url = "${src}";\n`
     );
   });
 

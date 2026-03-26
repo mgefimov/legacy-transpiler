@@ -14,35 +14,35 @@ describe('transpile', () => {
   it('converts import with resolveModule', async () => {
     const input = `import { something } from './vendor-Dfbm12k5.js';`;
     expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(
-      `const {something} = ${me(`${BASE_URL}/vendor-Dfbm12k5.js`)};\n`
+      `var {something} = ${me(`${BASE_URL}/vendor-Dfbm12k5.js`)};\n`
     );
   });
 
   it('converts import with surrounding code', async () => {
     const input = `import { something } from './vendor-Dfbm12k5.js';\nconsole.log(something);`;
     expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(
-      `const {something} = ${me(`${BASE_URL}/vendor-Dfbm12k5.js`)};\nconsole.log(something);\n`
+      `var {something} = ${me(`${BASE_URL}/vendor-Dfbm12k5.js`)};\nconsole.log(something);\n`
     );
   });
 
   it('converts multiple imports', async () => {
     const input = `import { a } from './mod-a.js';\nimport { b } from './mod-b.js';\nconsole.log(a, b);`;
     expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(
-      `const {a} = ${me(`${BASE_URL}/mod-a.js`)};\nconst {b} = ${me(`${BASE_URL}/mod-b.js`)};\nconsole.log(a, b);\n`
+      `var {a} = ${me(`${BASE_URL}/mod-a.js`)};\nvar {b} = ${me(`${BASE_URL}/mod-b.js`)};\nconsole.log(a, b);\n`
     );
   });
 
   it('resolves import path', async () => {
     const input = `import { something } from './some-module';`;
     expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(
-      `const {something} = ${me(`${BASE_URL}/some-module`)};\n`
+      `var {something} = ${me(`${BASE_URL}/some-module`)};\n`
     );
   });
 
   it('passes through plain code', async () => {
     const input = `const x = 1;\nconsole.log(x);`;
     expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(
-      'const x = 1;\nconsole.log(x);\n'
+      'var x = 1;\nconsole.log(x);\n'
     );
   });
 });

@@ -37,6 +37,6 @@ describe('removeLookbehind', () => {
 
   it('handles regex in variable declaration', async () => {
     const input = `const re = /(?<=prefix-)\\w+/g;`;
-    expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe('const re = /\\w+/g;\n');
+    expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe('var re = /\\w+/g;\n');
   });
 });

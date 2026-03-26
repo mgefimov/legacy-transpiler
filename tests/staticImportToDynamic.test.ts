@@ -14,28 +14,28 @@ describe('staticImportToDynamic', () => {
   it('converts named import with relative path', async () => {
     const input = `import { something } from './vendor-Dfbm12k5.js';`;
     expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(
-      `const {something} = ${me(`${BASE_URL}/vendor-Dfbm12k5.js`)};\n`
+      `var {something} = ${me(`${BASE_URL}/vendor-Dfbm12k5.js`)};\n`
     );
   });
 
   it('converts aliased named import', async () => {
     const input = `import { x as y } from './vendor-Dfbm12k5.js';`;
     expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(
-      `const {x: y} = ${me(`${BASE_URL}/vendor-Dfbm12k5.js`)};\n`
+      `var {x: y} = ${me(`${BASE_URL}/vendor-Dfbm12k5.js`)};\n`
     );
   });
 
   it('converts default import', async () => {
     const input = `import defaultExport from './vendor-Dfbm12k5.js';`;
     expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(
-      `const {default: defaultExport} = ${me(`${BASE_URL}/vendor-Dfbm12k5.js`)};\n`
+      `var {default: defaultExport} = ${me(`${BASE_URL}/vendor-Dfbm12k5.js`)};\n`
     );
   });
 
   it('converts namespace import', async () => {
     const input = `import * as mod from './vendor-Dfbm12k5.js';`;
     expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(
-      `const mod = ${me(`${BASE_URL}/vendor-Dfbm12k5.js`)};\n`
+      `var mod = ${me(`${BASE_URL}/vendor-Dfbm12k5.js`)};\n`
     );
   });
 
@@ -47,21 +47,21 @@ describe('staticImportToDynamic', () => {
   it('converts mixed default and named import', async () => {
     const input = `import defaultExport, { named } from './vendor-Dfbm12k5.js';`;
     expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(
-      `const {default: defaultExport, named} = ${me(`${BASE_URL}/vendor-Dfbm12k5.js`)};\n`
+      `var {default: defaultExport, named} = ${me(`${BASE_URL}/vendor-Dfbm12k5.js`)};\n`
     );
   });
 
   it('converts multiple named imports', async () => {
     const input = `import { a, b, c } from './vendor-Dfbm12k5.js';`;
     expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(
-      `const {a, b, c} = ${me(`${BASE_URL}/vendor-Dfbm12k5.js`)};\n`
+      `var {a, b, c} = ${me(`${BASE_URL}/vendor-Dfbm12k5.js`)};\n`
     );
   });
 
   it('resolves module path', async () => {
     const input = `import { x } from './some-module';`;
     expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(
-      `const {x} = ${me(`${BASE_URL}/some-module`)};\n`
+      `var {x} = ${me(`${BASE_URL}/some-module`)};\n`
     );
   });
 });

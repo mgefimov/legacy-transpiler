@@ -34,7 +34,7 @@ describe('transformStaticBlock', () => {
   it('handles class expression in variable declaration', async () => {
     const input = `const Qux = class Qux {\n  static {\n    __name(this, "Qux");\n  }\n};`;
     expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(
-      'const Qux = class Qux {\n  static #_0 = (() => {\n    __name(this, "Qux");\n  })();\n};\n'
+      'var Qux = class Qux {\n  static #_0 = (() => {\n    __name(this, "Qux");\n  })();\n};\n'
     );
   });
 
@@ -48,7 +48,7 @@ describe('transformStaticBlock', () => {
   it('preserves this in arrow functions inside static block', async () => {
     const input = `class WithArrow {\n  static {\n    const fn = () => this;\n  }\n}`;
     expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(
-      'class WithArrow {\n  static #_0 = (() => {\n    const fn = () => this;\n  })();\n}\n'
+      'class WithArrow {\n  static #_0 = (() => {\n    var fn = () => this;\n  })();\n}\n'
     );
   });
 });
