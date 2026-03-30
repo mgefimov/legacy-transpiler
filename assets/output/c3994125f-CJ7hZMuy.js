@@ -1,9 +1,9 @@
 'use strict';
 (async function () {
-  const {r: t, aW: e, j: i} = window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/vendor-C66HWFe4.js"];
-  const {w: s} = window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c7b83d3f0-9uOH2krP.js"];
-  const {m: n, n: r, o: a} = window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c6a992d55-B3gtE-qj.js"];
-  const {N: o} = window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/index-D27vslQQ.js"];
+  const {r: t, aW: e, j: i} = await window.LegacyTranspiler.importModule("./vendor-C66HWFe4.js");
+  const {w: s} = await window.LegacyTranspiler.importModule("./c7b83d3f0-9uOH2krP.js");
+  const {m: n, n: r, o: a} = await window.LegacyTranspiler.importModule("./c6a992d55-B3gtE-qj.js");
+  const {N: o} = await window.LegacyTranspiler.importModule("./index-D27vslQQ.js");
   const l = !("object" != typeof process || process + "" != "[object process]" || process.versions.nw || process.versions.electron && process.type && "browser" !== process.type), h = [.001, 0, 0, .001, 0, 0], c = 1.35, d = 1, u = 2, p = 4, g = 16, m = 32, f = 64, b = 128, v = 256, y = {
     DISABLE: 0,
     ENABLE: 1,
@@ -8353,7 +8353,7 @@
     static get _setupFakeWorkerGlobal() {
       return J(this, "_setupFakeWorkerGlobal", (async () => {
         if (this.#Nn) return this.#Nn;
-        return (await window.LegacyTranspiler._import(this.workerSrc)).WorkerMessageHandler;
+        return (await window.LegacyTranspiler.importModule(this.workerSrc)).WorkerMessageHandler;
       })());
     }
   }
@@ -15526,7 +15526,7 @@
     });
   }
   (s(!ar, `Loading PDF.js worker may not work on protocols other than HTTP/HTTPS. ${dr}`), Ki.workerSrc = "pdf.worker.mjs", Ki.workerSrc = new URL("https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c13dce91a-qwK7q_zL.mjs", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c3994125f-CJ7hZMuy.js").toString());
-  window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c3994125f-CJ7hZMuy.js"] = {
+  window.LegacyTranspiler.exportModule("https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c3994125f-CJ7hZMuy.js", {
     default: $r
-  };
+  });
 })();

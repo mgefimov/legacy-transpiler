@@ -94,48 +94,41 @@ export function transformExports(ast: acorn.Program, options: RemoveExportOption
       };
     });
 
-    // window.LegacyTranspiler._moduleExports[src]
-    const assignTarget: acorn.MemberExpression = {
-      type: 'MemberExpression',
-      object: {
-        type: 'MemberExpression',
-        object: {
+    // window.LegacyTranspiler.exportModule(src, { ... })
+    const callStatement: acorn.ExpressionStatement = {
+      type: 'ExpressionStatement',
+      expression: {
+        type: 'CallExpression',
+        callee: {
           type: 'MemberExpression',
-          object: { type: 'Identifier', name: 'window', start: 0, end: 0 },
-          property: { type: 'Identifier', name: 'LegacyTranspiler', start: 0, end: 0 },
+          object: {
+            type: 'MemberExpression',
+            object: { type: 'Identifier', name: 'window', start: 0, end: 0 },
+            property: { type: 'Identifier', name: 'LegacyTranspiler', start: 0, end: 0 },
+            computed: false,
+            optional: false,
+            start: 0,
+            end: 0,
+          },
+          property: { type: 'Identifier', name: 'exportModule', start: 0, end: 0 },
           computed: false,
           optional: false,
           start: 0,
           end: 0,
         },
-        property: { type: 'Identifier', name: '_moduleExports', start: 0, end: 0 },
-        computed: false,
+        arguments: [
+          { type: 'Literal', value: options.src, start: 0, end: 0 },
+          { type: 'ObjectExpression', properties: props, start: 0, end: 0 },
+        ],
         optional: false,
         start: 0,
         end: 0,
-      },
-      property: { type: 'Literal', value: options.src, start: 0, end: 0 },
-      computed: true,
-      optional: false,
+      } as acorn.CallExpression,
       start: 0,
       end: 0,
     };
 
-    const assignment: acorn.ExpressionStatement = {
-      type: 'ExpressionStatement',
-      expression: {
-        type: 'AssignmentExpression',
-        operator: '=',
-        left: assignTarget as unknown as acorn.Pattern,
-        right: { type: 'ObjectExpression', properties: props, start: 0, end: 0 },
-        start: 0,
-        end: 0,
-      },
-      start: 0,
-      end: 0,
-    };
-
-    ast.body.push(assignment);
+    ast.body.push(callStatement);
   }
 }
 

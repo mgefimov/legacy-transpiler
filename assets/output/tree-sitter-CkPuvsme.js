@@ -656,7 +656,7 @@
     static async load(t) {
       let r;
       if (t instanceof Uint8Array) r = t; else if (globalThis.process?.versions.node) {
-        const e = await __vitePreload(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/index-BIdSPwg7.js"]).then(e => e.wg), __vite__mapDeps([0, 1, 2]), "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/tree-sitter-CkPuvsme.js");
+        const e = await __vitePreload(() => window.LegacyTranspiler.importModule("./index-BIdSPwg7.js").then(e => e.wg), __vite__mapDeps([0, 1, 2]), "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/tree-sitter-CkPuvsme.js");
         r = await e.readFile(t);
       } else {
         const e = await fetch(t);
@@ -683,7 +683,7 @@
     var moduleRtn, Module = moduleArg, ENVIRONMENT_IS_WEB = "object" == typeof window, ENVIRONMENT_IS_WORKER = "undefined" != typeof WorkerGlobalScope, ENVIRONMENT_IS_NODE = "object" == typeof process && process.versions?.node && "renderer" != process.type;
     if (ENVIRONMENT_IS_NODE) {
       const {createRequire: e} = await __vitePreload(async () => {
-        const {createRequire: e} = await Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/index-BIdSPwg7.js"]).then(e => e.wk);
+        const {createRequire: e} = await window.LegacyTranspiler.importModule("./index-BIdSPwg7.js").then(e => e.wk);
         return {
           createRequire: e
         };
@@ -1770,10 +1770,10 @@
       return 1 === C._ts_query_is_pattern_guaranteed_at_step(this[0], e);
     }
   };
-  window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/tree-sitter-CkPuvsme.js"] = {
+  window.LegacyTranspiler.exportModule("https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/tree-sitter-CkPuvsme.js", {
     L: Language,
     P: Parser,
     Q: Query,
     _: __vitePreload
-  };
+  });
 })();

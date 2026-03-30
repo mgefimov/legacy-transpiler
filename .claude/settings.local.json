@@ -11,7 +11,9 @@
       "Bash(ipconfig)",
       "Bash(node -e \":*)",
       "Bash(ls -la assets/input/*.js)",
-      "Bash(yarn build:*)"
+      "Bash(yarn build:*)",
+      "Bash(npm run:*)",
+      "Bash(npm test:*)"
     ]
   }
 }

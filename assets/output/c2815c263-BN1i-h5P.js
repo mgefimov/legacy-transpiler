@@ -1,10 +1,10 @@
 'use strict';
 (async function () {
-  const {j: e, ah: a, M: c, r: t, ai: s, aj: d, ak: f, a5: i, Y: b, u: r, J: n} = window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/vendor-C66HWFe4.js"];
-  const {aD: o, C: l, J: x, by: u, cS: p, fZ: m, c: h, ei: j, bs: g, f_: w, f$: _, p: y, g0: v, g1: C, f2: N, g2: k, b_: S, fN: A, be: L, P: z, g3: O, g4: M, g5: R, ej: E, f3: $, fL: P, o: T} = window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/index-D27vslQQ.js"];
-  const {_: q} = window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/tree-sitter-BRUsc_bS.js"];
-  const {u: I} = window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c6b9e36fd-iaB1lBu_.js"];
-  const {A: B} = window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c4e248ddc-DkMUJCJy.js"];
+  const {j: e, ah: a, M: c, r: t, ai: s, aj: d, ak: f, a5: i, Y: b, u: r, J: n} = await window.LegacyTranspiler.importModule("./vendor-C66HWFe4.js");
+  const {aD: o, C: l, J: x, by: u, cS: p, fZ: m, c: h, ei: j, bs: g, f_: w, f$: _, p: y, g0: v, g1: C, f2: N, g2: k, b_: S, fN: A, be: L, P: z, g3: O, g4: M, g5: R, ej: E, f3: $, fL: P, o: T} = await window.LegacyTranspiler.importModule("./index-D27vslQQ.js");
+  const {_: q} = await window.LegacyTranspiler.importModule("./tree-sitter-BRUsc_bS.js");
+  const {u: I} = await window.LegacyTranspiler.importModule("./c6b9e36fd-iaB1lBu_.js");
+  const {A: B} = await window.LegacyTranspiler.importModule("./c4e248ddc-DkMUJCJy.js");
   const U = {
     "ac6871a2-35d6-4328-ba77-9e9be5c9993b": "f7347722-1c2a-4161-bc39-dc7cdf18d134",
     "0e6f226e-70b0-418d-a03c-77ba65e4ba14": "7ee4281a-fb3f-43ef-b73f-9290b666d323",
@@ -77,7 +77,7 @@
       if (!Y(e)) return null;
       const a = F(e);
       try {
-        const e = await q(() => window.LegacyTranspiler._import(`./${a}.ts`), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c2815c263-BN1i-h5P.js");
+        const e = await q(() => window.LegacyTranspiler.importModule(`./${a}.ts`), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c2815c263-BN1i-h5P.js");
         return e[`GALLERY_TRANSLATIONS_${a.replace(/-/g, "_").toUpperCase()}`] || e.default || null;
       } catch (c) {
         return null;
@@ -437,7 +437,7 @@
       artifact: t.data
     });
   }
-  window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c2815c263-BN1i-h5P.js"] = {
+  window.LegacyTranspiler.exportModule("https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c2815c263-BN1i-h5P.js", {
     ArtifactsInspirationRoute: W
-  };
+  });
 })();

@@ -1,6 +1,6 @@
 import { readFileSync, writeFileSync, readdirSync } from 'fs';
 import { resolve, join } from 'path';
-import { transpile } from './index';
+import { transpile, init } from './index';
 
 const BASE_URL = 'https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1';
 const resolveModule = (source: string) => `${BASE_URL}/${source.replace(/^\.\//, '')}`;
@@ -21,7 +21,8 @@ const files = readdirSync(inputDir).filter(f => f.endsWith('.js'));
 
     const inputCode = readFileSync(inputPath, 'utf-8');
     const src = `${BASE_URL}/${file}`;
-    const result = await transpile(inputCode, { resolveModule, src, minify: false, staticImportModule });
+    init({ BASE_URL, minify: false, runScript: () => {} });
+    const result = transpile(src, inputCode);
 
     writeFileSync(outputPath, result);
     console.log(`${file} -> assets/output/${file}`);

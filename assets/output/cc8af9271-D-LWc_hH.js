@@ -1,7 +1,7 @@
 'use strict';
 (async function () {
   const __vite__mapDeps = (i, m = __vite__mapDeps, d = m.f || (m.f = ["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c61b9a190-Cndd_Pa6.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/tree-sitter-BRUsc_bS.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cf400e6a4-Bx7J7WCU.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/vendor-C66HWFe4.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/index-D27vslQQ.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c6a992d55-CW1rdfVk.css", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c71ba149d-B_gkfyKo.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cce6219ff-oGLXLxHp.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/ca43e0c47-Bzjcd5d_.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c1a5a151a-Dl7m8JLY.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c4a0394fd-Bf3BxZVI.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c1af03898-GntwJVLa.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/ce43cd836-sLIG4qfT.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/ced1eadef-CFL_lXPX.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c6a992d55-LajpBUsY.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c29d86d70-DeCath-B.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cca9b2a83-Dw4cmAlp.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c93abf261-CpLWEYhs.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cfb7b725b-Dwp8StpI.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cb5da4c54-Bn4sJxlc.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c2d75c27a-ym-BCgkg.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c184b2ab0-BLFoOXoa.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c38eb0c13-ReDJkVHZ.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c0662a73e-D-H98E84.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c81ee128e-DlzTpmtN.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c23d1051c-KTi9WAoQ.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c0af56d39-C84lO6z-.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c241f73d9-Bf7zHuLM.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c62343a9d-CJlajfGs.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c3a41fcbb-DiGI4-X0.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c9560eacf-CN7opcTh.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/ce73de7b0-Bki3-3Ea.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cb5e03384-BMJQ6H23.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c5c66ffa5-DHT9Bndq.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c735b3b1b-CpGhtFVt.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c06ec2d59-CWICaq7M.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c5ac719b0-Bw87SQ-I.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c8f5e99bb-CgEYv1P3.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c1c80a133-DQgM4AW4.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c1a6dc555-CmHFu4r_.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c284c2e59-C0NASapo.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c2ff7aa9e-2XFgP9BO.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c9a3208fa-By6300K-.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c74f05e4a-D4WN-yUp.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/ca9bd5d1a-DQfZ8LbV.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/ce99eb202-Qy0kCn60.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c495d62a5-3l_Kosg8.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c2b501d54-vAQh2ffz.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c4e248ddc-DkMUJCJy.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c2eed10ca-veTA7hnq.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c6831e394-BC7-O4ZM.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cf400e6a4-8liqa0aI.css", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cb644d7b7-DizYLMhe.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cfc35fdc7-BWchPqcD.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cde9b9ed7-Bk_yc-lm.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c1e35bcba-Jl-qul2t.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cf80b6383-CfCrR8lR.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c93c3b60a-dmIjBHcb.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c23eeeb43-DXFY89VY.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c60c05c63-BxA7Wzkt.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c0f635d0e-BnsDt9om.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c6eedc03a-B9WGw_Gw.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c5e4b9672-lBvKDu63.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c3061e77c-CX7_Bq3o.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/ccae1ad18-CCPbEUG1.js", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cb10044e0-DD_8IDxS.js"])) => i.map(i => d[i]);
-  const {_: e} = window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/tree-sitter-BRUsc_bS.js"];
+  const {_: e} = await window.LegacyTranspiler.importModule("./tree-sitter-BRUsc_bS.js");
   function t(e, t = 0) {
     return e[e.length - (1 + t)];
   }
@@ -15843,7 +15843,7 @@
         };
         {
           const i = eh.asBrowserUri(`${t}.js`).toString(!0);
-          e(() => window.LegacyTranspiler._import(`${i}`), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js").then(r).catch(s);
+          e(() => window.LegacyTranspiler.importModule(`${i}`), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js").then(r).catch(s);
         }
       });
     }
@@ -67688,176 +67688,176 @@
     id: "abap",
     extensions: [".abap"],
     aliases: ["abap", "ABAP"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c76ededa5-LPLW346S.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c76ededa5-LPLW346S.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "apex",
     extensions: [".cls"],
     aliases: ["Apex", "apex"],
     mimetypes: ["text/x-apex-source", "text/x-apex"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c15f9976d-Dk-jUCUV.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c15f9976d-Dk-jUCUV.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "azcli",
     extensions: [".azcli"],
     aliases: ["Azure CLI", "azcli"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cdf99ea5e-DPUMmPlX.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./cdf99ea5e-DPUMmPlX.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "bat",
     extensions: [".bat", ".cmd"],
     aliases: ["Batch", "bat"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c5f3f4681-C1Qbg1bV.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c5f3f4681-C1Qbg1bV.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "bicep",
     extensions: [".bicep"],
     aliases: ["Bicep"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/caf7c7e06-D-e-VSJi.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./caf7c7e06-D-e-VSJi.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "cameligo",
     extensions: [".mligo"],
     aliases: ["Cameligo"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c5c6275f4-CjUqTgqL.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c5c6275f4-CjUqTgqL.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "clojure",
     extensions: [".clj", ".cljs", ".cljc", ".edn"],
     aliases: ["clojure", "Clojure"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c32c0d97f-BWsu6Kju.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c32c0d97f-BWsu6Kju.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "coffeescript",
     extensions: [".coffee"],
     aliases: ["CoffeeScript", "coffeescript", "coffee"],
     mimetypes: ["text/x-coffeescript", "text/coffeescript"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c24eb05d1-DeC36AK3.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c24eb05d1-DeC36AK3.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "c",
     extensions: [".c", ".h"],
     aliases: ["C", "c"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c2c5f2cba-DcZnmBWT.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c2c5f2cba-DcZnmBWT.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "cpp",
     extensions: [".cpp", ".cc", ".cxx", ".hpp", ".hh", ".hxx"],
     aliases: ["C++", "Cpp", "cpp"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c2c5f2cba-DcZnmBWT.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c2c5f2cba-DcZnmBWT.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "csharp",
     extensions: [".cs", ".csx", ".cake"],
     aliases: ["C#", "csharp"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/ca20d785d-DqBXBMf0.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./ca20d785d-DqBXBMf0.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "csp",
     extensions: [".csp"],
     aliases: ["CSP", "csp"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c3c2f5dec-CkO7y8ul.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c3c2f5dec-CkO7y8ul.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "css",
     extensions: [".css"],
     aliases: ["CSS", "css"],
     mimetypes: ["text/css"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc7a628cb-OAcfVtED.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./cc7a628cb-OAcfVtED.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "cypher",
     extensions: [".cypher", ".cyp"],
     aliases: ["Cypher", "OpenCypher"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cfd0f538d-40UGrUjD.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./cfd0f538d-40UGrUjD.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "dart",
     extensions: [".dart"],
     aliases: ["Dart", "dart"],
     mimetypes: ["text/x-dart-source", "text/x-dart"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cbb141276-DmixyLor.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./cbb141276-DmixyLor.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "dockerfile",
     extensions: [".dockerfile"],
     filenames: ["Dockerfile"],
     aliases: ["Dockerfile"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c60f5ad19-CayO4nTA.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c60f5ad19-CayO4nTA.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "ecl",
     extensions: [".ecl"],
     aliases: ["ECL", "Ecl", "ecl"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cb70703d8-DRrKCuVc.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./cb70703d8-DRrKCuVc.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "elixir",
     extensions: [".ex", ".exs"],
     aliases: ["Elixir", "elixir", "ex"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c74b56586-J3qpp9mX.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c74b56586-J3qpp9mX.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "flow9",
     extensions: [".flow"],
     aliases: ["Flow9", "Flow", "flow9", "flow"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c0826ec51-DzW2c4Im.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c0826ec51-DzW2c4Im.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "fsharp",
     extensions: [".fs", ".fsi", ".ml", ".mli", ".fsx", ".fsscript"],
     aliases: ["F#", "FSharp", "fsharp"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cb3073067-D00tn_6c.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./cb3073067-D00tn_6c.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "freemarker2",
     extensions: [".ftl", ".ftlh", ".ftlx"],
     aliases: ["FreeMarker2", "Apache FreeMarker2"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c61b9a190-Cndd_Pa6.js"]), __vite__mapDeps([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]), "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js").then(e => e.TagAutoInterpolationDollar)
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c61b9a190-Cndd_Pa6.js"), __vite__mapDeps([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]), "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js").then(e => e.TagAutoInterpolationDollar)
   }), N0({
     id: "freemarker2.tag-angle.interpolation-dollar",
     aliases: ["FreeMarker2 (Angle/Dollar)", "Apache FreeMarker2 (Angle/Dollar)"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c61b9a190-Cndd_Pa6.js"]), __vite__mapDeps([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]), "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js").then(e => e.TagAngleInterpolationDollar)
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c61b9a190-Cndd_Pa6.js"), __vite__mapDeps([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]), "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js").then(e => e.TagAngleInterpolationDollar)
   }), N0({
     id: "freemarker2.tag-bracket.interpolation-dollar",
     aliases: ["FreeMarker2 (Bracket/Dollar)", "Apache FreeMarker2 (Bracket/Dollar)"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c61b9a190-Cndd_Pa6.js"]), __vite__mapDeps([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]), "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js").then(e => e.TagBracketInterpolationDollar)
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c61b9a190-Cndd_Pa6.js"), __vite__mapDeps([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]), "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js").then(e => e.TagBracketInterpolationDollar)
   }), N0({
     id: "freemarker2.tag-angle.interpolation-bracket",
     aliases: ["FreeMarker2 (Angle/Bracket)", "Apache FreeMarker2 (Angle/Bracket)"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c61b9a190-Cndd_Pa6.js"]), __vite__mapDeps([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]), "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js").then(e => e.TagAngleInterpolationBracket)
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c61b9a190-Cndd_Pa6.js"), __vite__mapDeps([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]), "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js").then(e => e.TagAngleInterpolationBracket)
   }), N0({
     id: "freemarker2.tag-bracket.interpolation-bracket",
     aliases: ["FreeMarker2 (Bracket/Bracket)", "Apache FreeMarker2 (Bracket/Bracket)"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c61b9a190-Cndd_Pa6.js"]), __vite__mapDeps([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]), "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js").then(e => e.TagBracketInterpolationBracket)
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c61b9a190-Cndd_Pa6.js"), __vite__mapDeps([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]), "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js").then(e => e.TagBracketInterpolationBracket)
   }), N0({
     id: "freemarker2.tag-auto.interpolation-dollar",
     aliases: ["FreeMarker2 (Auto/Dollar)", "Apache FreeMarker2 (Auto/Dollar)"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c61b9a190-Cndd_Pa6.js"]), __vite__mapDeps([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]), "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js").then(e => e.TagAutoInterpolationDollar)
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c61b9a190-Cndd_Pa6.js"), __vite__mapDeps([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]), "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js").then(e => e.TagAutoInterpolationDollar)
   }), N0({
     id: "freemarker2.tag-auto.interpolation-bracket",
     aliases: ["FreeMarker2 (Auto/Bracket)", "Apache FreeMarker2 (Auto/Bracket)"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c61b9a190-Cndd_Pa6.js"]), __vite__mapDeps([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]), "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js").then(e => e.TagAutoInterpolationBracket)
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c61b9a190-Cndd_Pa6.js"), __vite__mapDeps([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]), "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js").then(e => e.TagAutoInterpolationBracket)
   }), N0({
     id: "go",
     extensions: [".go"],
     aliases: ["Go"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c34d1f91f-NnNmgWK_.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c34d1f91f-NnNmgWK_.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "graphql",
     extensions: [".graphql", ".gql"],
     aliases: ["GraphQL", "graphql", "gql"],
     mimetypes: ["application/graphql"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c572cda51-C9_--VLF.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c572cda51-C9_--VLF.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "handlebars",
     extensions: [".handlebars", ".hbs"],
     aliases: ["Handlebars", "handlebars", "hbs"],
     mimetypes: ["text/x-handlebars-template"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cb644d7b7-DizYLMhe.js"]), __vite__mapDeps([52, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]), "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./cb644d7b7-DizYLMhe.js"), __vite__mapDeps([52, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]), "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "hcl",
     extensions: [".tf", ".tfvars", ".hcl"],
     aliases: ["Terraform", "tf", "HCL", "hcl"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c6ba1412f-BhbOULbp.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c6ba1412f-BhbOULbp.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "html",
     extensions: [".html", ".htm", ".shtml", ".xhtml", ".mdoc", ".jsp", ".asp", ".aspx", ".jshtm"],
     aliases: ["HTML", "htm", "html", "xhtml"],
     mimetypes: ["text/html", "text/x-jshtm", "text/template", "text/ng-template"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cfc35fdc7-BWchPqcD.js"]), __vite__mapDeps([53, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]), "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./cfc35fdc7-BWchPqcD.js"), __vite__mapDeps([53, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]), "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "ini",
     extensions: [".ini", ".properties", ".gitconfig"],
     filenames: ["config", ".gitattributes", ".gitconfig", ".editorconfig"],
     aliases: ["Ini", "ini"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c4d90362d-zR-_X5iG.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c4d90362d-zR-_X5iG.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "java",
     extensions: [".java", ".jav"],
     aliases: ["Java", "java"],
     mimetypes: ["text/x-java-source", "text/x-java"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c93f725a0-CSTjsyoZ.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c93f725a0-CSTjsyoZ.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "javascript",
     extensions: [".js", ".es6", ".jsx", ".mjs", ".cjs"],
@@ -67865,293 +67865,293 @@
     filenames: ["jakefile"],
     aliases: ["JavaScript", "javascript", "js"],
     mimetypes: ["text/javascript"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cde9b9ed7-Bk_yc-lm.js"]), __vite__mapDeps([54, 55, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]), "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./cde9b9ed7-Bk_yc-lm.js"), __vite__mapDeps([54, 55, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]), "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "julia",
     extensions: [".jl"],
     aliases: ["julia", "Julia"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc2e285cb-DioMOKVu.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./cc2e285cb-DioMOKVu.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "kotlin",
     extensions: [".kt", ".kts"],
     aliases: ["Kotlin", "kotlin"],
     mimetypes: ["text/x-kotlin-source", "text/x-kotlin"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c4fba3bc0-Dsb0PKmW.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c4fba3bc0-Dsb0PKmW.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "less",
     extensions: [".less"],
     aliases: ["Less", "less"],
     mimetypes: ["text/x-less", "text/less"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/ce37e8d91-CZYLoAVD.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./ce37e8d91-CZYLoAVD.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "lexon",
     extensions: [".lex"],
     aliases: ["Lexon"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c70a3d12b-d5JUiwNk.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c70a3d12b-d5JUiwNk.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "lua",
     extensions: [".lua"],
     aliases: ["Lua", "lua"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cf8dbbbdb-1Al72GG8.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./cf8dbbbdb-1Al72GG8.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "liquid",
     extensions: [".liquid", ".html.liquid"],
     aliases: ["Liquid", "liquid"],
     mimetypes: ["application/liquid"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cf80b6383-CfCrR8lR.js"]), __vite__mapDeps([56, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]), "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./cf80b6383-CfCrR8lR.js"), __vite__mapDeps([56, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]), "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "m3",
     extensions: [".m3", ".i3", ".mg", ".ig"],
     aliases: ["Modula-3", "Modula3", "modula3", "m3"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c9678f7a7-hx1xCPC3.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c9678f7a7-hx1xCPC3.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "markdown",
     extensions: [".md", ".markdown", ".mdown", ".mkdn", ".mkd", ".mdwn", ".mdtxt", ".mdtext"],
     aliases: ["Markdown", "markdown"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c590fc197-DPGrH1xZ.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c590fc197-DPGrH1xZ.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "mdx",
     extensions: [".mdx"],
     aliases: ["MDX", "mdx"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c93c3b60a-dmIjBHcb.js"]), __vite__mapDeps([57, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]), "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c93c3b60a-dmIjBHcb.js"), __vite__mapDeps([57, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]), "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "mips",
     extensions: [".s"],
     aliases: ["MIPS", "MIPS-V"],
     mimetypes: ["text/x-mips", "text/mips", "text/plaintext"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cf981200e-CYbZjkIm.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./cf981200e-CYbZjkIm.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "msdax",
     extensions: [".dax", ".msdax"],
     aliases: ["DAX", "MSDAX"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cf8b75fc3-DAioKM5A.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./cf8b75fc3-DAioKM5A.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "mysql",
     extensions: [],
     aliases: ["MySQL", "mysql"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c81c3b080-7e9GUebS.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c81c3b080-7e9GUebS.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "objective-c",
     extensions: [".m"],
     aliases: ["Objective-C"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c5f4e1303-BGf8QNjz.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c5f4e1303-BGf8QNjz.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "pascal",
     extensions: [".pas", ".p", ".pp"],
     aliases: ["Pascal", "pas"],
     mimetypes: ["text/x-pascal-source", "text/x-pascal"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c57c2877c-hEDRz3un.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c57c2877c-hEDRz3un.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "pascaligo",
     extensions: [".ligo"],
     aliases: ["Pascaligo", "ligo"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c4b350ac1-gqEhN6pG.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c4b350ac1-gqEhN6pG.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "perl",
     extensions: [".pl", ".pm"],
     aliases: ["Perl", "pl"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cf83a0aa1-CN8Ht9Vk.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./cf83a0aa1-CN8Ht9Vk.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "pgsql",
     extensions: [],
     aliases: ["PostgreSQL", "postgres", "pg", "postgre"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c51f8bc6d-CRCqHQBx.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c51f8bc6d-CRCqHQBx.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "php",
     extensions: [".php", ".php4", ".php5", ".phtml", ".ctp"],
     aliases: ["PHP", "php"],
     mimetypes: ["application/x-php"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/ce1bfd762-DTZrlAwe.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./ce1bfd762-DTZrlAwe.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "pla",
     extensions: [".pla"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cbf688cef-CRmh4UcC.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./cbf688cef-CRmh4UcC.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "postiats",
     extensions: [".dats", ".sats", ".hats"],
     aliases: ["ATS", "ATS/Postiats"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cbcae692c-Car2G7g8.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./cbcae692c-Car2G7g8.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "powerquery",
     extensions: [".pq", ".pqm"],
     aliases: ["PQ", "M", "Power Query", "Power Query M"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c14703658-BJKl8V3o.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c14703658-BJKl8V3o.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "powershell",
     extensions: [".ps1", ".psm1", ".psd1"],
     aliases: ["PowerShell", "powershell", "ps", "ps1"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c2f2d399f-Du7a_J7r.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c2f2d399f-Du7a_J7r.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "proto",
     extensions: [".proto"],
     aliases: ["protobuf", "Protocol Buffers"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c606eaf84-ChneWI0H.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c606eaf84-ChneWI0H.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "pug",
     extensions: [".jade", ".pug"],
     aliases: ["Pug", "Jade", "jade"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c714ab9fb-BH6LSJaf.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c714ab9fb-BH6LSJaf.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "python",
     extensions: [".py", ".rpy", ".pyw", ".cpy", ".gyp", ".gypi"],
     aliases: ["Python", "py"],
     firstLine: "^#!/.*\\bpython[0-9.-]*\\b",
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c23eeeb43-DXFY89VY.js"]), __vite__mapDeps([58, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]), "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c23eeeb43-DXFY89VY.js"), __vite__mapDeps([58, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]), "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "qsharp",
     extensions: [".qs"],
     aliases: ["Q#", "qsharp"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c9bba154c-CU-Hxpxi.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c9bba154c-CU-Hxpxi.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "r",
     extensions: [".r", ".rhistory", ".rmd", ".rprofile", ".rt"],
     aliases: ["R", "r"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c4b43b0ae-Bw-W15zh.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c4b43b0ae-Bw-W15zh.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "razor",
     extensions: [".cshtml"],
     aliases: ["Razor", "razor"],
     mimetypes: ["text/x-cshtml"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c60c05c63-BxA7Wzkt.js"]), __vite__mapDeps([59, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]), "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c60c05c63-BxA7Wzkt.js"), __vite__mapDeps([59, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]), "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "redis",
     extensions: [".redis"],
     aliases: ["redis"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c86a1b907-bY-X9-ol.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c86a1b907-bY-X9-ol.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "redshift",
     extensions: [],
     aliases: ["Redshift", "redshift"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c33b2042a-CMu3ubbS.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c33b2042a-CMu3ubbS.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "restructuredtext",
     extensions: [".rst"],
     aliases: ["reStructuredText", "restructuredtext"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c1f96d614-KNkiWGNN.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c1f96d614-KNkiWGNN.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "ruby",
     extensions: [".rb", ".rbx", ".rjs", ".gemspec", ".pp"],
     filenames: ["rakefile", "Gemfile"],
     aliases: ["Ruby", "rb"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c58e53d13-dQWMhU86.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c58e53d13-dQWMhU86.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "rust",
     extensions: [".rs", ".rlib"],
     aliases: ["Rust", "rust"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c72812e30-BAcHhnEU.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c72812e30-BAcHhnEU.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "sb",
     extensions: [".sb"],
     aliases: ["Small Basic", "sb"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c26148d62-Bidr5w2z.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c26148d62-Bidr5w2z.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "scala",
     extensions: [".scala", ".sc", ".sbt"],
     aliases: ["Scala", "scala", "SBT", "Sbt", "sbt", "Dotty", "dotty"],
     mimetypes: ["text/x-scala-source", "text/x-scala", "text/x-sbt", "text/x-dotty"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cbaad2c48-imTtxsGY.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./cbaad2c48-imTtxsGY.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "scheme",
     extensions: [".scm", ".ss", ".sch", ".rkt"],
     aliases: ["scheme", "Scheme"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c41323917-BY-WHKiB.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c41323917-BY-WHKiB.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "scss",
     extensions: [".scss"],
     aliases: ["Sass", "sass", "scss"],
     mimetypes: ["text/x-scss", "text/scss"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cd711b551-NDoRP52C.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./cd711b551-NDoRP52C.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "shell",
     extensions: [".sh", ".bash"],
     aliases: ["Shell", "sh"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c2591c98b-DrIjotnh.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c2591c98b-DrIjotnh.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "sol",
     extensions: [".sol"],
     aliases: ["sol", "solidity", "Solidity"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cb2f0ad03-DTahNycF.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./cb2f0ad03-DTahNycF.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "aes",
     extensions: [".aes"],
     aliases: ["aes", "sophia", "Sophia"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c2ee0272b-DtyrjGkZ.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c2ee0272b-DtyrjGkZ.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "sparql",
     extensions: [".rq"],
     aliases: ["sparql", "SPARQL"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c393cb7f5-CFuS5E3z.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c393cb7f5-CFuS5E3z.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "sql",
     extensions: [".sql"],
     aliases: ["SQL"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cac5c74b6-BRxcnbRv.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./cac5c74b6-BRxcnbRv.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "st",
     extensions: [".st", ".iecst", ".iecplc", ".lc3lib", ".TcPOU", ".TcDUT", ".TcGVL", ".TcIO"],
     aliases: ["StructuredText", "scl", "stl"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c627fcdb6-Dz4uh7MK.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c627fcdb6-Dz4uh7MK.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "swift",
     aliases: ["Swift", "swift"],
     extensions: [".swift"],
     mimetypes: ["text/swift"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c818056db-Digsrw1G.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c818056db-Digsrw1G.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "systemverilog",
     extensions: [".sv", ".svh"],
     aliases: ["SV", "sv", "SystemVerilog", "systemverilog"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/ce51edd53-7TDrkMau.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./ce51edd53-7TDrkMau.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "verilog",
     extensions: [".v", ".vh"],
     aliases: ["V", "v", "Verilog", "verilog"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/ce51edd53-7TDrkMau.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./ce51edd53-7TDrkMau.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "tcl",
     extensions: [".tcl"],
     aliases: ["tcl", "Tcl", "tcltk", "TclTk", "tcl/tk", "Tcl/Tk"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cdd5b9598-BtaFcnDi.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./cdd5b9598-BtaFcnDi.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "twig",
     extensions: [".twig"],
     aliases: ["Twig", "twig"],
     mimetypes: ["text/x-twig"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c5669b8e4-Deid_oBs.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c5669b8e4-Deid_oBs.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "typescript",
     extensions: [".ts", ".tsx", ".cts", ".mts"],
     aliases: ["TypeScript", "ts", "typescript"],
     mimetypes: ["text/typescript"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c1e35bcba-Jl-qul2t.js"]), __vite__mapDeps([55, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]), "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c1e35bcba-Jl-qul2t.js"), __vite__mapDeps([55, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]), "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "typespec",
     extensions: [".tsp"],
     aliases: ["TypeSpec"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/ccc72bfa9-zUaxhbG8.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./ccc72bfa9-zUaxhbG8.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "vb",
     extensions: [".vb"],
     aliases: ["Visual Basic", "vb"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c2ab4f27a-DK0rKJzo.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c2ab4f27a-DK0rKJzo.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "wgsl",
     extensions: [".wgsl"],
     aliases: ["WebGPU Shading Language", "WGSL", "wgsl"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c3d1f1e61-A_930Wpq.js"]), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c3d1f1e61-A_930Wpq.js"), [], "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "xml",
     extensions: [".xml", ".xsd", ".dtd", ".ascx", ".csproj", ".config", ".props", ".targets", ".wxi", ".wxl", ".wxs", ".xaml", ".svg", ".svgz", ".opf", ".xslt", ".xsl"],
     firstLine: "(\\<\\?xml.*)|(\\<svg)|(\\<\\!doctype\\s+svg)",
     aliases: ["XML", "xml"],
     mimetypes: ["text/xml", "application/xml", "application/xaml+xml", "application/xml-dtd"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c0f635d0e-BnsDt9om.js"]), __vite__mapDeps([60, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]), "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c0f635d0e-BnsDt9om.js"), __vite__mapDeps([60, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]), "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }), N0({
     id: "yaml",
     extensions: [".yaml", ".yml"],
     aliases: ["YAML", "yaml", "YML", "yml"],
     mimetypes: ["application/x-yaml", "text/x-yaml"],
-    loader: () => e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c6eedc03a-B9WGw_Gw.js"]), __vite__mapDeps([61, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]), "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
+    loader: () => e(() => window.LegacyTranspiler.importModule("./c6eedc03a-B9WGw_Gw.js"), __vite__mapDeps([61, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]), "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")
   }));
   var I0 = Object.defineProperty, E0 = Object.getOwnPropertyDescriptor, M0 = Object.getOwnPropertyNames, T0 = Object.prototype.hasOwnProperty, R0 = {};
   ((e, t) => {
@@ -68239,7 +68239,7 @@
     documentRangeFormattingEdits: !0
   }, F0 = new P0("css", A0, O0), W0 = new P0("scss", A0, O0), B0 = new P0("less", A0, O0);
   function V0() {
-    return e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c5e4b9672-lBvKDu63.js"]), __vite__mapDeps([62, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]), "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js");
+    return e(() => window.LegacyTranspiler.importModule("./c5e4b9672-lBvKDu63.js"), __vite__mapDeps([62, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]), "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js");
   }
   (R0.languages.css = {
     cssDefaults: F0,
@@ -68324,7 +68324,7 @@
     const s = new q0(t, i, n);
     let o;
     const r = j0.languages.onLanguage(t, async () => {
-      o = (await e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c3061e77c-CX7_Bq3o.js"]), __vite__mapDeps([63, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]), "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")).setupMode(s);
+      o = (await e(() => window.LegacyTranspiler.importModule("./c3061e77c-CX7_Bq3o.js"), __vite__mapDeps([63, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]), "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js")).setupMode(s);
     });
     return {
       defaults: s,
@@ -68395,7 +68395,7 @@
     selectionRanges: !0
   });
   function c2() {
-    return e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/ccae1ad18-CCPbEUG1.js"]), __vite__mapDeps([64, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]), "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js");
+    return e(() => window.LegacyTranspiler.importModule("./ccae1ad18-CCPbEUG1.js"), __vite__mapDeps([64, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]), "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js");
   }
   (h2.languages.json = {
     jsonDefaults: d2,
@@ -68531,7 +68531,7 @@
     onlyVisible: !1
   }, {}, {}, S2);
   function x2() {
-    return e(() => Promise.resolve(window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cb10044e0-DD_8IDxS.js"]), __vite__mapDeps([65, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]), "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js");
+    return e(() => window.LegacyTranspiler.importModule("./cb10044e0-DD_8IDxS.js"), __vite__mapDeps([65, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]), "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js");
   }
   (f2.languages.typescript = {
     ModuleKind: _2,
@@ -97982,9 +97982,9 @@
   }, Symbol.toStringTag, {
     value: "Module"
   }));
-  window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js"] = {
+  window.LegacyTranspiler.exportModule("https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/cc8af9271-D-LWc_hH.js", {
     e: nce,
     m: v0,
     t: L2
-  };
+  });
 })();

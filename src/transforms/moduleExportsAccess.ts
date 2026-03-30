@@ -1,12 +1,12 @@
 import * as acorn from 'acorn';
 
 /**
- * Build AST for: window.LegacyTranspiler._moduleExports[source]
+ * Build AST for: window.LegacyTranspiler.importModule(source)
  */
-export function moduleExportsAccess(source: acorn.Literal, start: number, end: number): acorn.MemberExpression {
+export function moduleExportsAccess(source: acorn.Literal, start: number, end: number): acorn.CallExpression {
   return {
-    type: 'MemberExpression',
-    object: {
+    type: 'CallExpression',
+    callee: {
       type: 'MemberExpression',
       object: {
         type: 'MemberExpression',
@@ -17,14 +17,13 @@ export function moduleExportsAccess(source: acorn.Literal, start: number, end: n
         start,
         end,
       },
-      property: { type: 'Identifier', name: '_moduleExports', start, end },
+      property: { type: 'Identifier', name: 'importModule', start, end },
       computed: false,
       optional: false,
       start,
       end,
     },
-    property: source,
-    computed: true,
+    arguments: [source],
     optional: false,
     start,
     end,

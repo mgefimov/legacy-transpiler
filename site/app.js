@@ -20,8 +20,19 @@ function log(msg) {
   var math = await import(moduleName);
   log('3 * 4 = ' + math.multiply(3, 4));
   log('5^2 = ' + math.square(5));
-  log('=============================cyclic import========================')
 
+  log('===========================variable import========================')
+  const path1 = './math.js'
+
+  var {multiply} = await import(path1)
+  log(multiply(4, 5))
+
+  
+  log('===========================variable unsupported import========================')
+  const path = './utils.js'
+
+  var {greet} = await import(path)
+  log(greet('unsupported variable'))
 
   // static import from formatter (shared dep with math.js)
   // log(formatProduct(6, 7));
@@ -49,7 +60,6 @@ function log(msg) {
     log('Counter.increment() = ' + Counter.increment());
     log('Counter.increment() = ' + Counter.increment());
     log('Counter.count = ' + Counter.count);
-    log('=============================static block========================')
   } catch (e) {
     log('ERROR: ' + e.message);
   }

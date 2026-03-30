@@ -1,6 +1,6 @@
 'use strict';
 (async function () {
-  const {c8: t} = window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/index-CnEMqild.js"];
+  const {c8: t} = await window.LegacyTranspiler.importModule("./index-CnEMqild.js");
   function e(e, n, r, o) {
     var i = this;
     return e ? ((e instanceof Element ? [e] : ("toArray" in e) ? e.toArray() : e).forEach(function (e) {
@@ -32,8 +32,8 @@
       c ? c(e).submit(u) : e.addEventListener("submit", u, !1);
     }), this) : this;
   }
-  window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c6fceefc5-QSkN9uce.js"] = {
+  window.LegacyTranspiler.exportModule("https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c6fceefc5-QSkN9uce.js", {
     form: n,
     link: e
-  };
+  });
 })();

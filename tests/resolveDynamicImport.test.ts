@@ -1,15 +1,11 @@
 import { describe, it, expect } from 'vitest';
-import { transpile } from '../src/index';
+import { transpile, init } from '../src/index';
 
 const BASE_URL = 'https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1';
-const resolveModule = (source: string) => `${BASE_URL}/${source.replace(/^\.\//, '')}`;
-const staticImportModule = async (resolvedSource: string) => {
-  // In a real implementation, this would fetch the module and store it in a way that it can be accessed at runtime.
-  // For testing, we can just log it or do nothing.
-}
 const src = `${BASE_URL}/test.js`;
-const me = (s: string) => `Promise.resolve(window.LegacyTranspiler._moduleExports["${s}"])`;
-const di = (s: string) => `window.LegacyTranspiler._import(${s})`;
+const im = (s: string) => `window.LegacyTranspiler.importModule(${s})`;
+
+init({ BASE_URL, minify: false, runScript: () => {} });
 
 function iife(body: string): string {
   const lines = body.split('\n').filter(l => l.length > 0);
@@ -21,61 +17,61 @@ function iife(body: string): string {
 describe('resolveDynamicImport', () => {
   it('converts dynamic import with await', async () => {
     const input = `const { L } = await import('./tree-sitter-CkPuvsme.js');`;
-    expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(
-      iife(`const {L} = await ${me(`${BASE_URL}/tree-sitter-CkPuvsme.js`)};\n`)
+    expect(transpile(src,input)).toBe(
+      iife(`const {L} = await ${im(`"./tree-sitter-CkPuvsme.js"`)};\n`)
     );
   });
 
   it('converts dynamic import without await', async () => {
     const input = `const p = import('./vendor-Dfbm12k5.js');`;
-    expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(
-      iife(`const p = ${me(`${BASE_URL}/vendor-Dfbm12k5.js`)};\n`)
+    expect(transpile(src,input)).toBe(
+      iife(`const p = ${im(`"./vendor-Dfbm12k5.js"`)};\n`)
     );
   });
 
   it('converts dynamic import with .then()', async () => {
     const input = `import('./vendor-Dfbm12k5.js').then(m => m.foo());`;
-    expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(
-      iife(`${me(`${BASE_URL}/vendor-Dfbm12k5.js`)}.then(m => m.foo());\n`)
+    expect(transpile(src,input)).toBe(
+      iife(`${im(`"./vendor-Dfbm12k5.js"`)}.then(m => m.foo());\n`)
     );
   });
 
   it('wraps template literal dynamic import via _import (no compile-time resolution)', async () => {
     const input = 'const m = import(`./${name}.js`);';
-    expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(
-      iife(`const m = ${di('`./${name}.js`')};\n`)
+    expect(transpile(src,input)).toBe(
+      iife(`const m = ${im('`./${name}.js`')};\n`)
     );
   });
 
   it('preserves await on template literal dynamic import via _import', async () => {
     const input = 'const m = await import(`./${name}.js`);';
-    expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(
-      iife(`const m = await ${di('`./${name}.js`')};\n`)
+    expect(transpile(src,input)).toBe(
+      iife(`const m = await ${im('`./${name}.js`')};\n`)
     );
   });
 
   it('wraps identifier dynamic import via _import (no compile-time resolution)', async () => {
     const input = `var path = './path/to/module.js';\nconst m = await import(path);`;
-    expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(
-      iife(`var path = './path/to/module.js';\nconst m = await ${di('path')};\n`)
+    expect(transpile(src,input)).toBe(
+      iife(`var path = './path/to/module.js';\nconst m = await ${im('path')};\n`)
     );
   });
 
   it('wraps call expression dynamic import via _import', async () => {
     const input = 'const m = import(getPath());';
-    expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(
-      iife(`const m = ${di('getPath()')};\n`)
+    expect(transpile(src,input)).toBe(
+      iife(`const m = ${im('getPath()')};\n`)
     );
   });
 
   it('does not inject _import helper into output', async () => {
     const input = 'const m = import(`./${name}.js`);';
-    const result = await transpile(input, { src, resolveModule, staticImportModule });
+    const result = transpile(src,input);
     expect(result).not.toContain('function _import');
   });
 
   it('keeps code unchanged when no dynamic imports', async () => {
     const input = `const x = 1;`;
-    expect(await transpile(input, { src, resolveModule, staticImportModule })).toBe(iife('const x = 1;\n'));
+    expect(transpile(src,input)).toBe(iife('const x = 1;\n'));
   });
 });

@@ -8,64 +8,92 @@ import {
   transformExports,
   transformStaticBlocks,
   transformWrapAsyncIIFE,
-  transformVarDeclarations,
 } from './transforms';
-import type { StaticImportToDynamicOptions } from './transforms/staticImportToDynamic';
-
-export {
-  transformStaticImports,
-  transformDynamicImports,
-  transformImportMeta,
-  transformLookbehind,
-  transformExports,
-  transformStaticBlocks,
-  transformWrapAsyncIIFE,
-  transformVarDeclarations,
-};
-export type { StaticImportToDynamicOptions };
-
-export let _baseURL = '';
-
-// export function _resolveDynamicModule(source: string): string {
-//   console.log('[_resolveDynamicModule]', source);
-//   if (!_baseURL) return source;
-//   return `${_baseURL}/${source.replace(/^\.\//, '')}`;
-// }
-
-// export function _import(source: string): Promise<any> {
-//   const resolved = window.LegacyTranspiler._resolveDynamicModule(source);
-//   console.log('[dynamic-import]', resolved);
-//   return import(resolved);
-// }
 
 export interface TranspileOptions {
-  src: string;
-  resolveModule: StaticImportToDynamicOptions['resolveModule'];
-  staticImportModule: StaticImportToDynamicOptions['staticImportModule'];
+  BASE_URL: string;
   minify?: boolean;
+  runScript: (code: string, src: string) => void;
 }
 
-export async function transpile(code: string, options: TranspileOptions): Promise<string> {
+let options: TranspileOptions
+
+const _moduleExports: Record<string, any> = {}
+const _importWaitlist: Record<string, (() => void)[]> = {}
+
+const loaded = new Set();
+
+const resolveModule = (source = "") => {
+  // const BASE_URL =
+  //   "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1";
+  const BASE_URL = options.BASE_URL;
+  //console.log('resolveModule', source)
+  if (!source.startsWith("./")) {
+    return source;
+  }
+  return `${BASE_URL}/${source.replace(/^\.\//, "")}`;
+};
+
+export async function loadCode(src = "") {
+  if (src.includes("intercom") || loaded.has(src)) {
+    return [];
+  }
+  loaded.add(src);
+  const r = await fetch(src);
+  const code = await r.text();
+
+  const patchedScript = transpile(src, code);
+
+  options.runScript(patchedScript, src);
+}
+
+export function init(o: TranspileOptions) {
+  options = o
+}
+
+export function exportModule(source: string, exports: Record<string, any>): void {
+  console.log(`[exportModule] ${source} →`, exports);
+
+  _moduleExports[source] = exports;
+  if (_importWaitlist[source]) {
+    for (const resolve of _importWaitlist[source]) {
+      resolve();
+    }
+    delete _importWaitlist[source];
+  }
+}
+
+export function importModule(source: string): Promise<any> {
+  source = resolveModule(source);
+  console.log('[importModule]', source);
+  if (_moduleExports[source]) {
+    return Promise.resolve(_moduleExports[source]);
+  }
+  return new Promise((resolve) => {
+    if (!_importWaitlist[source]) {
+      _importWaitlist[source] = [];
+    }
+    _importWaitlist[source].push(() => {
+      resolve(_moduleExports[source]);
+    });
+
+    loadCode(source)
+  });
+}
+
+export function transpile(src: string, code: string): string {
   const ast = acorn.parse(code, {
     ecmaVersion: 'latest',
     sourceType: 'module',
     allowAwaitOutsideFunction: true,
   });
 
-  await transformStaticImports(ast, {
-    resolveModule: options.resolveModule,
-    staticImportModule: options.staticImportModule
-  });
-  await transformDynamicImports(ast, {
-    resolveModule: options.resolveModule,
-    staticImportModule: options.staticImportModule,
-    src: options.src
-  });
-  transformImportMeta(ast, { url: options.src });
-  transformExports(ast, { src: options.src });
+  transformStaticImports(ast);
+  transformDynamicImports(ast);
+  transformImportMeta(ast, { url: src });
+  transformExports(ast, { src });
   transformLookbehind(ast);
   transformStaticBlocks(ast);
-  // transformVarDeclarations(ast);
   transformWrapAsyncIIFE(ast);
 
   const result = generate(ast, options.minify ? { indent: '', lineEnd: '' } : undefined);

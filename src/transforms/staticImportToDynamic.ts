@@ -1,24 +1,17 @@
 import * as acorn from 'acorn';
 import { moduleExportsAccess } from './moduleExportsAccess';
 
-export interface StaticImportToDynamicOptions {
-  resolveModule: (source: string) => string;
-  staticImportModule: (resolvedSource: string) => Promise<void>;
-}
 
-export async function transformStaticImports(ast: acorn.Program, options: StaticImportToDynamicOptions): Promise<void> {
+export function transformStaticImports(ast: acorn.Program): void {
   // Resolve all import sources in parallel
   const importNodes = ast.body.filter(
     (node): node is acorn.ImportDeclaration => node.type === 'ImportDeclaration' && node.specifiers.length > 0
   );
-  const resolved = await Promise.all(
-    importNodes.map(async (node) => {
-      const source = String((node.source as acorn.Literal).value);
-      const resolvedSource = options.resolveModule(source);
-      await options.staticImportModule(source);
-      return resolvedSource;
-    })
-  );
+  const resolved = importNodes.map((node) => {
+    const source = String((node.source as acorn.Literal).value);
+
+    return source;
+  })
   const resolvedMap = new Map<acorn.ImportDeclaration, string>();
   importNodes.forEach((node, i) => resolvedMap.set(node, resolved[i]));
 
@@ -34,7 +27,13 @@ export async function transformStaticImports(ast: acorn.Program, options: Static
       raw: undefined,
     };
 
-    const moduleAccess = moduleExportsAccess(resolvedSource, node.start, node.end);
+    const moduleCall = moduleExportsAccess(resolvedSource, node.start, node.end);
+    const moduleAccess: acorn.AwaitExpression = {
+      type: 'AwaitExpression',
+      argument: moduleCall,
+      start: node.start,
+      end: node.end,
+    };
 
     const properties: acorn.AssignmentProperty[] = [];
 

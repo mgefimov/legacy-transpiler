@@ -2,13 +2,7 @@ import * as acorn from 'acorn';
 import * as walk from 'acorn-walk';
 import { moduleExportsAccess } from './moduleExportsAccess';
 
-export interface ResolveDynamicImportOptions {
-  resolveModule: (source: string) => string;
-  staticImportModule: (resolvedSource: string) => Promise<void>;
-  src: string;
-}
-
-export async function transformDynamicImports(ast: acorn.Program, options: ResolveDynamicImportOptions): Promise<void> {
+export async function transformDynamicImports(ast: acorn.Program) {
   // Collect all dynamic import nodes
   const allImports: acorn.ImportExpression[] = [];
   walk.simple(ast, {
@@ -23,21 +17,18 @@ export async function transformDynamicImports(ast: acorn.Program, options: Resol
   const literalImports = allImports.filter((node) => {
     const isLiteral = node.source.type === 'Literal' && typeof (node.source as acorn.Literal).value === 'string';
     if (!isLiteral) {
-      console.warn(`[resolveDynamicImport] skipping non-literal import(${node.source.type}) in ${options.src}`);
+      console.warn(`[resolveDynamicImport] skipping non-literal import(${node.source.type})`);
     }
     return isLiteral;
   });
 
   const dynamicImports = allImports.filter((node) => !literalImports.includes(node));
 
-  const resolved = await Promise.all(
-    literalImports.map(async (node) => {
-      const source = String((node.source as acorn.Literal).value);
-      const resolvedSource = options.resolveModule(source);
-      await options.staticImportModule(source);
-      return resolvedSource;
-    })
-  );
+  const resolved = literalImports.map((node) => {
+    const source = String((node.source as acorn.Literal).value);
+
+    return source;
+  })
 
   for (let i = 0; i < literalImports.length; i++) {
     const node = literalImports[i];
@@ -46,9 +37,7 @@ export async function transformDynamicImports(ast: acorn.Program, options: Resol
       value: resolved[i],
       raw: undefined,
     };
-    const access = moduleExportsAccess(resolvedSource, node.start, node.end);
-    // Wrap in Promise.resolve() to maintain the Promise interface of import()
-    const replacement = promiseResolveCall(access, node.start, node.end);
+    const replacement = moduleExportsAccess(resolvedSource, node.start, node.end);
     mutateNode(node, replacement);
   }
 
@@ -83,7 +72,7 @@ function promiseResolveCall(expr: any, start: number, end: number): any {
 }
 
 /**
- * Build AST for: window.LegacyTranspiler._import(source)
+ * Build AST for: window.LegacyTranspiler.importModule(source)
  */
 function dynamicImportCall(source: any, start: number, end: number): any {
   return {
@@ -99,7 +88,7 @@ function dynamicImportCall(source: any, start: number, end: number): any {
         start,
         end,
       },
-      property: { type: 'Identifier', name: '_import', start, end },
+      property: { type: 'Identifier', name: 'importModule', start, end },
       computed: false,
       optional: false,
       start,

@@ -59784,7 +59784,7 @@
     return Ehe = e;
   })());
   const Vhe = a(fse());
-  window.LegacyTranspiler._moduleExports["https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/vendor-CQ9heUBe.js"] = {
+  window.LegacyTranspiler.exportModule("https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/vendor-CQ9heUBe.js", {
     $: oQ,
     A: zy,
     B: W1,
@@ -60366,5 +60366,5 @@
     x: Y2,
     y: tY,
     z: o8
-  };
+  });
 })();
