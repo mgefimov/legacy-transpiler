@@ -1,14 +1,16 @@
 import * as acorn from 'acorn';
+import * as walk from 'acorn-walk';
 import { generate } from 'astring';
 import {
   transformStaticImports,
-  transformDynamicImports,
-  transformImportMeta,
-  transformLookbehind,
+  createDynamicImportsVisitor,
+  createImportMetaVisitor,
+  createLookbehindVisitor,
+  createStaticBlocksVisitor,
   transformExports,
-  transformStaticBlocks,
   transformWrapAsyncIIFE,
 } from './transforms';
+import { mergeVisitors } from './transforms/mergeVisitors';
 
 export interface TranspileOptions {
   BASE_URL: string;
@@ -89,11 +91,16 @@ export function transpile(src: string, code: string): string {
   });
 
   transformStaticImports(ast);
-  transformDynamicImports(ast);
-  transformImportMeta(ast, { url: src });
+
+  const merged = mergeVisitors(
+    createDynamicImportsVisitor(),
+    createImportMetaVisitor({ url: src }),
+    createLookbehindVisitor(),
+    createStaticBlocksVisitor(),
+  );
+  walk.simple(ast, merged as walk.SimpleVisitors<unknown>);
+
   transformExports(ast, { src });
-  transformLookbehind(ast);
-  transformStaticBlocks(ast);
   transformWrapAsyncIIFE(ast);
 
   const result = generate(ast, options.minify ? { indent: '', lineEnd: '' } : undefined);

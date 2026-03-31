@@ -49,16 +49,15 @@ function processClassStaticBlocks(classNode: { body: acorn.ClassBody }): void {
   });
 }
 
-export function transformStaticBlocks(ast: acorn.Program): void {
+export function createStaticBlocksVisitor(): walk.SimpleVisitors<unknown> {
   counter = 0;
 
-  walk.simple(ast, {
+  return {
     ClassDeclaration(node) {
       processClassStaticBlocks(node);
     },
     ClassExpression(node) {
       processClassStaticBlocks(node);
     },
-  });
+  };
 }
-

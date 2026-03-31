@@ -4,14 +4,16 @@ import { performance } from 'perf_hooks';
 import * as acorn from 'acorn';
 import { generate } from 'astring';
 import { init } from './index';
+import * as walk from 'acorn-walk';
 import {
   transformStaticImports,
-  transformDynamicImports,
-  transformImportMeta,
-  transformLookbehind,
+  createDynamicImportsVisitor,
+  createImportMetaVisitor,
+  createLookbehindVisitor,
+  createStaticBlocksVisitor,
   transformExports,
-  transformStaticBlocks,
   transformWrapAsyncIIFE,
+  mergeVisitors,
 } from './transforms';
 
 const BASE_URL = 'https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1';
@@ -23,11 +25,16 @@ const files = readdirSync(inputDir).filter(f => f.endsWith('.js'));
 
 const transforms = [
   { name: 'transformStaticImports',  fn: (ast: any, _src: string) => transformStaticImports(ast) },
-  { name: 'transformDynamicImports', fn: (ast: any, _src: string) => transformDynamicImports(ast) },
-  { name: 'transformImportMeta',     fn: (ast: any, src: string) => transformImportMeta(ast, { url: src }) },
+  { name: 'combinedWalk',            fn: (ast: any, src: string) => {
+    const merged = mergeVisitors(
+      createDynamicImportsVisitor(),
+      createImportMetaVisitor({ url: src }),
+      createLookbehindVisitor(),
+      createStaticBlocksVisitor(),
+    );
+    walk.simple(ast, merged as walk.SimpleVisitors<unknown>);
+  }},
   { name: 'transformExports',        fn: (ast: any, src: string) => transformExports(ast, { src }) },
-  { name: 'transformLookbehind',     fn: (ast: any, _src: string) => transformLookbehind(ast) },
-  { name: 'transformStaticBlocks',   fn: (ast: any, _src: string) => transformStaticBlocks(ast) },
   { name: 'transformWrapAsyncIIFE',  fn: (ast: any, _src: string) => transformWrapAsyncIIFE(ast) },
 ];
 

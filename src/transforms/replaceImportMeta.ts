@@ -5,10 +5,9 @@ export interface ReplaceImportMetaOptions {
   url?: string;
 }
 
-export function transformImportMeta(ast: acorn.Program, options?: ReplaceImportMetaOptions): void {
-  walk.simple(ast, {
+export function createImportMetaVisitor(options?: ReplaceImportMetaOptions): walk.SimpleVisitors<unknown> {
+  return {
     MemberExpression(node: acorn.MemberExpression) {
-      // Match import.meta.url
       if (
         node.object.type === 'MetaProperty' &&
         node.object.meta.name === 'import' &&
@@ -17,7 +16,6 @@ export function transformImportMeta(ast: acorn.Program, options?: ReplaceImportM
         node.property.name === 'url'
       ) {
         if (options?.url) {
-          // Replace with string literal
           const literal: acorn.Literal = {
             type: 'Literal',
             value: options.url,
@@ -27,7 +25,6 @@ export function transformImportMeta(ast: acorn.Program, options?: ReplaceImportM
           };
           Object.assign(node, literal);
         } else {
-          // Replace with document.currentScript.src
           const replacement: acorn.MemberExpression = {
             type: 'MemberExpression',
             object: {
@@ -49,6 +46,5 @@ export function transformImportMeta(ast: acorn.Program, options?: ReplaceImportM
         }
       }
     },
-  });
+  };
 }
-
