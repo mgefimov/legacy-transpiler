@@ -3,31 +3,13 @@ import { moduleExportsAccess } from './moduleExportsAccess';
 
 
 export function transformStaticImports(ast: acorn.Program): void {
-  // Resolve all import sources in parallel
-  const importNodes = ast.body.filter(
-    (node): node is acorn.ImportDeclaration => node.type === 'ImportDeclaration' && node.specifiers.length > 0
-  );
-  const resolved = importNodes.map((node) => {
-    const source = String((node.source as acorn.Literal).value);
-
-    return source;
-  })
-  const resolvedMap = new Map<acorn.ImportDeclaration, string>();
-  importNodes.forEach((node, i) => resolvedMap.set(node, resolved[i]));
-
   ast.body = ast.body.flatMap((node): (acorn.Statement | acorn.ModuleDeclaration)[] => {
     if (node.type !== 'ImportDeclaration') return [node];
 
     // Side-effect import: import 'module' → strip
     if (node.specifiers.length === 0) return [];
 
-    const resolvedSource: acorn.Literal = {
-      ...node.source,
-      value: resolvedMap.get(node)!,
-      raw: undefined,
-    };
-
-    const moduleCall = moduleExportsAccess(resolvedSource, node.start, node.end);
+    const moduleCall = moduleExportsAccess(node.source, node.start, node.end);
     const moduleAccess: acorn.AwaitExpression = {
       type: 'AwaitExpression',
       argument: moduleCall,

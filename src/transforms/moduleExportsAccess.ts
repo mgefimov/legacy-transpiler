@@ -3,7 +3,7 @@ import * as acorn from 'acorn';
 /**
  * Build AST for: window.LegacyTranspiler.importModule(source)
  */
-export function moduleExportsAccess(source: acorn.Literal, start: number, end: number): acorn.CallExpression {
+export function moduleExportsAccess(source: acorn.Expression, start: number, end: number): acorn.CallExpression {
   return {
     type: 'CallExpression',
     callee: {

@@ -18,21 +18,21 @@ describe('resolveDynamicImport', () => {
   it('converts dynamic import with await', async () => {
     const input = `const { L } = await import('./tree-sitter-CkPuvsme.js');`;
     expect(transpile(src,input)).toBe(
-      iife(`const {L} = await ${im(`"./tree-sitter-CkPuvsme.js"`)};\n`)
+      iife(`const {L} = await ${im(`'./tree-sitter-CkPuvsme.js'`)};\n`)
     );
   });
 
   it('converts dynamic import without await', async () => {
     const input = `const p = import('./vendor-Dfbm12k5.js');`;
     expect(transpile(src,input)).toBe(
-      iife(`const p = ${im(`"./vendor-Dfbm12k5.js"`)};\n`)
+      iife(`const p = ${im(`'./vendor-Dfbm12k5.js'`)};\n`)
     );
   });
 
   it('converts dynamic import with .then()', async () => {
     const input = `import('./vendor-Dfbm12k5.js').then(m => m.foo());`;
     expect(transpile(src,input)).toBe(
-      iife(`${im(`"./vendor-Dfbm12k5.js"`)}.then(m => m.foo());\n`)
+      iife(`${im(`'./vendor-Dfbm12k5.js'`)}.then(m => m.foo());\n`)
     );
   });
 
