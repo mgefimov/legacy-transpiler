@@ -1,6 +1,7 @@
 import * as acorn from 'acorn';
 import * as walk from 'acorn-walk';
 import { generate } from 'astring';
+import { patchFetch } from './utils'
 import {
   transformStaticImports,
   createDynamicImportsVisitor,
@@ -25,6 +26,8 @@ const _importWaitlist: Record<string, (() => void)[]> = {}
 
 const loaded = new Set();
 
+patchFetch()
+
 const resolveModule = (source = "") => {
   // const BASE_URL =
   //   "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1";
@@ -38,7 +41,7 @@ const resolveModule = (source = "") => {
 
 export async function loadCode(src = "") {
   if (src.includes("intercom") || loaded.has(src)) {
-    return [];
+    return;
   }
   loaded.add(src);
   const r = await fetch(src);
