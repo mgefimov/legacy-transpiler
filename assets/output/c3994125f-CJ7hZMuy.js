@@ -572,11 +572,10 @@
     }
   }
   const wt = "http://www.w3.org/2000/svg";
-  class At {
-    static CSS = 96;
-    static PDF = 72;
-    static PDF_TO_CSS_UNITS = this.CSS / this.PDF;
-  }
+  class At {}
+  At.CSS = 96;
+  At.PDF = 72;
+  At.PDF_TO_CSS_UNITS = this.CSS / this.PDF;
   async function xt(t, e = "text") {
     if (Dt(t, document.baseURI)) {
       const i = await fetch(t);
@@ -1318,7 +1317,6 @@
     }
   }
   class ne {
-    static _colorsMapping = new Map([["CanvasText", [0, 0, 0]], ["Canvas", [255, 255, 255]]]);
     get _colors() {
       const t = new Map([["CanvasText", null], ["Canvas", null]]);
       return ((function (t) {
@@ -1343,6 +1341,7 @@
       return e ? ct.makeHexColor(...e) : t;
     }
   }
+  ne._colorsMapping = new Map([["CanvasText", [0, 0, 0]], ["Canvas", [255, 255, 255]]]);
   class re {
     #D = new AbortController();
     #P = null;
@@ -1401,8 +1400,6 @@
     #xt = null;
     #_t = null;
     #St = null;
-    static TRANSLATE_SMALL = 1;
-    static TRANSLATE_BIG = 10;
     static get _keyboardManager() {
       const t = re.prototype, e = t => t.#At.contains(document.activeElement) && "BUTTON" !== document.activeElement.tagName && t.hasSomethingToControl(), i = (t, {target: e}) => {
         if (e instanceof HTMLInputElement) {
@@ -2288,6 +2285,8 @@
       (this.#ht ||= new Map()).set(t, e);
     }
   }
+  re.TRANSLATE_SMALL = 1;
+  re.TRANSLATE_BIG = 10;
   class ae {
     #o = null;
     #Wt = !1;
@@ -2302,7 +2301,6 @@
     #te = null;
     #ee = !1;
     static #ie = null;
-    static _l10n = null;
     constructor(t) {
       (this.#r = t, this.#ee = t._uiManager.useNewAltTextFlow, ae.#ie ||= Object.freeze({
         added: "pdfjs-editor-new-alt-text-added-button",
@@ -2442,6 +2440,7 @@
       i?.setAttribute("aria-describedby", e.id);
     }
   }
+  ae._l10n = null;
   class oe {
     #re = null;
     #ae = null;
@@ -2705,14 +2704,8 @@
     _isVisible = !0;
     _uiManager = null;
     _focusEventsAllowed = !0;
-    static _l10n = null;
-    static _l10nResizer = null;
     #Ke = !1;
     #Ye = he._zIndex++;
-    static _borderLineWidth = -1;
-    static _colorManager = new ne();
-    static _zIndex = 1;
-    static _telemetryTimeout = 1e3;
     static get _resizerKeyboardManager() {
       const t = he.prototype._resizeWithKeyboard, e = re.TRANSLATE_SMALL, i = re.TRANSLATE_BIG;
       return J(this, "_resizerKeyboardManager", new se([[["ArrowLeft", "mac+ArrowLeft"], t, {
@@ -3646,6 +3639,12 @@
       "DIV" === e?.nodeName && e.classList.contains("annotationContent") && e.remove();
     }
   }
+  he._l10n = null;
+  he._l10nResizer = null;
+  he._borderLineWidth = -1;
+  he._colorManager = new ne();
+  he._zIndex = 1;
+  he._telemetryTimeout = 1e3;
   class ce extends he {
     constructor(t) {
       (super(t), this.annotationElementId = t.annotationElementId, this.deleted = !0);
@@ -5170,7 +5169,6 @@
   }
   const Ci = 1, Ei = 2;
   class Ti {
-    static MAX_PATTERN_SIZE = 3e3;
     constructor(t, e, i, s) {
       (this.color = t[1], this.operatorList = t[2], this.matrix = t[3], this.bbox = t[4], this.xstep = t[5], this.ystep = t[6], this.paintType = t[7], this.tilingType = t[8], this.ctx = e, this.canvasGraphicsFactory = i, this.baseTransform = s);
     }
@@ -5247,6 +5245,7 @@
       return (l.setTransform(o), l);
     }
   }
+  Ti.MAX_PATTERN_SIZE = 3e3;
   function Mi({src: t, srcPos: e = 0, dest: i, width: s, height: n, nonBlackColor: r = 4294967295, inverseDecode: a = !1}) {
     const o = lt.isLittleEndian ? 4278190080 : 255, [l, h] = a ? [r, o] : [o, r], c = s >> 3, d = 7 & s, u = t.length;
     i = new Uint32Array(i.buffer);
@@ -6261,7 +6260,6 @@
     #xs;
     #_s;
     #Ss;
-    static strings = ["fontFamily", "fontWeight", "italicAngle"];
     static write(t) {
       const e = new TextEncoder(), i = {};
       let s = 0;
@@ -6297,11 +6295,11 @@
       return this.#Cs(2);
     }
   }
+  Wi.strings = ["fontFamily", "fontWeight", "italicAngle"];
   class qi {
     #xs;
     #_s;
     #Ss;
-    static strings = ["css", "loadedName", "baseFontName", "src"];
     static write(t) {
       const e = new TextEncoder(), i = {};
       let s = 0;
@@ -6358,10 +6356,8 @@
       };
     }
   }
+  qi.strings = ["css", "loadedName", "baseFontName", "src"];
   class Xi {
-    static bools = ["black", "bold", "disableFontFace", "fontExtraProperties", "isInvalidPDFjsFont", "isType3Font", "italic", "missingFile", "remeasure", "vertical"];
-    static numbers = ["ascent", "defaultWidth", "descent"];
-    static strings = ["fallbackName", "loadedName", "mimetype", "name"];
     static #Es = Math.ceil(2 * this.bools.length / 8);
     static #Ts = this.#Es + 8 * this.numbers.length;
     static #Ms = this.#Ts + 1 + 8;
@@ -6538,6 +6534,9 @@
       return (void 0 === t.data ? (h.setUint32(c, 0), c += 4) : (h.setUint32(c, t.data.length), l.set(t.data, c + 4), c += 4 + t.data.length), K(c <= o.byteLength, "FontInfo.write: Buffer overflow"), o.transferToFixedLength(c));
     }
   }
+  Xi.bools = ["black", "bold", "disableFontFace", "fontExtraProperties", "isInvalidPDFjsFont", "isType3Font", "italic", "missingFile", "remeasure", "vertical"];
+  Xi.numbers = ["ascent", "defaultWidth", "descent"];
+  Xi.strings = ["fallbackName", "loadedName", "mimetype", "name"];
   class Ki {
     static #Rs = null;
     static #Ls = "";
@@ -10743,10 +10742,6 @@
     #pa = null;
     #Gr;
     _colorPicker = null;
-    static _freeTextDefaultContent = "";
-    static _internalPadding = 0;
-    static _defaultColor = null;
-    static _defaultFontSize = 10;
     static get _keyboardManager() {
       const t = xn.prototype, e = t => t.isEmpty(), i = re.TRANSLATE_SMALL, s = re.TRANSLATE_BIG;
       return J(this, "_keyboardManager", new se([[["ctrl+s", "mac+meta+s", "ctrl+p", "mac+meta+p"], t.commitOrRemove, {
@@ -10777,8 +10772,6 @@
         checker: e
       }]]));
     }
-    static _type = "freetext";
-    static _editorType = A.FREETEXT;
     constructor(t) {
       (super({
         ...t,
@@ -11109,8 +11102,13 @@
       (super.resetAnnotationElement(t), t.resetEdited());
     }
   }
+  xn._freeTextDefaultContent = "";
+  xn._internalPadding = 0;
+  xn._defaultColor = null;
+  xn._defaultFontSize = 10;
+  xn._type = "freetext";
+  xn._editorType = A.FREETEXT;
   class _n {
-    static PRECISION = 1e-4;
     toSVGPath() {
       X("Abstract method `toSVGPath` must be implemented.");
     }
@@ -11166,6 +11164,7 @@
       return [(t + 5 * i) / 6, (e + 5 * s) / 6, (5 * i + n) / 6, (5 * s + r) / 6, (i + n) / 2, (s + r) / 2];
     }
   }
+  _n.PRECISION = 1e-4;
   class Sn {
     #xa;
     #_a = [];
@@ -11491,14 +11490,6 @@
     #ce = "";
     #Ra;
     #mo = "";
-    static _defaultColor = null;
-    static _defaultOpacity = 1;
-    static _defaultThickness = 12;
-    static _type = "highlight";
-    static _editorType = A.HIGHLIGHT;
-    static _freeHighlightId = -1;
-    static _freeHighlight = null;
-    static _freeHighlightClipId = "";
     static get _keyboardManager() {
       const t = Dn.prototype;
       return J(this, "_keyboardManager", new se([[["ArrowLeft", "mac+ArrowLeft"], t._moveCaret, {
@@ -12025,6 +12016,14 @@
       return !1;
     }
   }
+  Dn._defaultColor = null;
+  Dn._defaultOpacity = 1;
+  Dn._defaultThickness = 12;
+  Dn._type = "highlight";
+  Dn._editorType = A.HIGHLIGHT;
+  Dn._freeHighlightId = -1;
+  Dn._freeHighlight = null;
+  Dn._freeHighlightClipId = "";
   class Pn {
     #Do = Object.create(null);
     updateProperty(t, e) {
@@ -12057,8 +12056,6 @@
     #Io;
     _colorPicker = null;
     _drawId = null;
-    static _currentDrawId = -1;
-    static _currentParent = null;
     static #Ro = null;
     static #Lo = null;
     static #Fo = null;
@@ -12066,7 +12063,6 @@
     static #No = null;
     static #Oo = null;
     static #Uo = NaN;
-    static _INNER_MARGIN = 3;
     constructor(t) {
       (super(t), this.#Io = t.mustBeCommitted || !1, this._addOutlines(t));
     }
@@ -12384,6 +12380,9 @@
       return !1;
     }
   }
+  In._currentDrawId = -1;
+  In._currentParent = null;
+  In._INNER_MARGIN = 3;
   class Rn {
     #Ta = new Float64Array(6);
     #Kr;
@@ -12797,9 +12796,6 @@
     }
   }
   class Bn extends In {
-    static _type = "ink";
-    static _editorType = A.INK;
-    static _defaultDrawingOptions = null;
     constructor(t) {
       (super({
         ...t,
@@ -12912,6 +12908,9 @@
       }), null);
     }
   }
+  Bn._type = "ink";
+  Bn._editorType = A.INK;
+  Bn._defaultDrawingOptions = null;
   class Nn extends Ln {
     toSVGPath() {
       let t = super.toSVGPath();
@@ -13264,9 +13263,6 @@
     #bl = null;
     #vl = null;
     #yl = null;
-    static _type = "signature";
-    static _editorType = A.SIGNATURE;
-    static _defaultDrawingOptions = null;
     constructor(t) {
       (super({
         ...t,
@@ -13440,6 +13436,9 @@
       return (s.#fl = t.areContours, s.description = t.accessibilityData?.alt || "", s.#yl = t.uuid, s);
     }
   }
+  Hn._type = "signature";
+  Hn._editorType = A.SIGNATURE;
+  Hn._defaultDrawingOptions = null;
   class jn extends he {
     #wl = null;
     #Al = null;
@@ -13452,8 +13451,6 @@
     #Ml = null;
     #kl = !1;
     #Dl = !1;
-    static _type = "stamp";
-    static _editorType = A.STAMP;
     constructor(t) {
       (super({
         ...t,
@@ -13776,6 +13773,8 @@
       }), null);
     }
   }
+  jn._type = "stamp";
+  jn._editorType = A.STAMP;
   class $n {
     #na;
     #Ol = !1;
@@ -13793,7 +13792,6 @@
     #Yl = null;
     #Ql = -1;
     #b;
-    static _initialized = !1;
     static #G = new Map([xn, Bn, jn, Dn, Hn].map(t => [t._editorType, t]));
     constructor({uiManager: t, pageIndex: e, div: i, structTreeLayer: s, accessibilityManager: n, annotationLayer: r, drawLayer: a, textLayer: o, viewport: l, l10n: h}) {
       const c = [...$n.#G.values()];
@@ -14172,6 +14170,7 @@
       return this.#b.viewParameters.realScale;
     }
   }
+  $n._initialized = !1;
   class Vn {
     #Mr = null;
     #nh = new Map();

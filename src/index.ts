@@ -8,6 +8,7 @@ import {
   createImportMetaVisitor,
   createLookbehindVisitor,
   createStaticBlocksVisitor,
+  transformStaticClassFields,
   transformExports,
   transformWrapAsyncIIFE,
 } from './transforms';
@@ -26,7 +27,7 @@ const _importWaitlist: Record<string, (() => void)[]> = {}
 
 const loaded = new Set();
 
-patchFetch()
+if (typeof window !== 'undefined') patchFetch()
 
 const resolveModule = (source = "") => {
   // const BASE_URL =
@@ -127,6 +128,7 @@ export function transpile(src: string, code: string): string {
   walk.simple(ast, merged as walk.SimpleVisitors<unknown>);
 
   transformExports(ast, { src });
+  transformStaticClassFields(ast);
   transformWrapAsyncIIFE(ast);
 
   const result = generate(ast, options.minify ? { indent: '', lineEnd: '' } : undefined);

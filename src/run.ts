@@ -12,6 +12,7 @@ import {
   createLookbehindVisitor,
   createStaticBlocksVisitor,
   transformExports,
+  transformStaticClassFields,
   transformWrapAsyncIIFE,
   mergeVisitors,
 } from './transforms';
@@ -34,8 +35,9 @@ const transforms = [
     );
     walk.simple(ast, merged as walk.SimpleVisitors<unknown>);
   }},
-  { name: 'transformExports',        fn: (ast: any, src: string) => transformExports(ast, { src }) },
-  { name: 'transformWrapAsyncIIFE',  fn: (ast: any, _src: string) => transformWrapAsyncIIFE(ast) },
+  { name: 'transformExports',            fn: (ast: any, src: string) => transformExports(ast, { src }) },
+  { name: 'transformStaticClassFields', fn: (ast: any, _src: string) => transformStaticClassFields(ast) },
+  { name: 'transformWrapAsyncIIFE',     fn: (ast: any, _src: string) => transformWrapAsyncIIFE(ast) },
 ];
 
 function transpileWithProfile(src: string, code: string): string {
