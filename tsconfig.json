@@ -9,6 +9,7 @@
     "declaration": true,
     "declarationDir": "dist",
     "sourceMap": true,
+    "types": ["node"],
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
