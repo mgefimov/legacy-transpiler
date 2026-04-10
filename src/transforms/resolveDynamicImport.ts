@@ -10,9 +10,9 @@ export const createDynamicImportsVisitor = (): walk.SimpleVisitors<unknown> => {
   }
 };
 
-function mutateNode(target: any, replacement: any): void {
+function mutateNode(target: object, replacement: object): void {
   for (const key of Object.keys(target)) {
-    delete target[key];
+    Reflect.deleteProperty(target, key);
   }
   Object.assign(target, replacement);
 }

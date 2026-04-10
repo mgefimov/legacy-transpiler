@@ -38,4 +38,3 @@ export function transformWrapAsyncIIFE(ast: acorn.Program): void {
     end: ast.end,
   }];
 }
-

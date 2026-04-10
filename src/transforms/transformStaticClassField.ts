@@ -25,51 +25,70 @@ function extractStaticFields(classNode: { body: acorn.ClassBody }): StaticField[
 }
 
 function makeAssignment(className: string, field: StaticField): acorn.ExpressionStatement {
+  const object: acorn.Identifier = { type: 'Identifier', name: className, start: 0, end: 0 };
+  const left: acorn.MemberExpression = {
+    type: 'MemberExpression',
+    object,
+    property: field.key,
+    computed: field.computed,
+    optional: false,
+    start: 0,
+    end: 0,
+  };
+  const fallback: acorn.Identifier = { type: 'Identifier', name: 'undefined', start: 0, end: 0 };
+  const right: acorn.Expression = field.value ?? fallback;
+  const expression: acorn.AssignmentExpression = {
+    type: 'AssignmentExpression',
+    operator: '=',
+    left,
+    right,
+    start: 0,
+    end: 0,
+  };
   return {
     type: 'ExpressionStatement',
-    expression: {
-      type: 'AssignmentExpression',
-      operator: '=',
-      left: {
-        type: 'MemberExpression',
-        object: { type: 'Identifier', name: className, start: 0, end: 0 },
-        property: field.key,
-        computed: field.computed,
-        optional: false,
-        start: 0,
-        end: 0,
-      } as acorn.MemberExpression,
-      right: field.value ?? ({ type: 'Identifier', name: 'undefined', start: 0, end: 0 } as acorn.Identifier),
-      start: 0,
-      end: 0,
-    } as acorn.AssignmentExpression,
+    expression,
     start: 0,
     end: 0,
   };
 }
 
+function recurseIntoBlocks(stmt: acorn.Statement): void {
+  switch (stmt.type) {
+    case 'WhileStatement':
+    case 'DoWhileStatement':
+    case 'ForStatement':
+    case 'ForInStatement':
+    case 'ForOfStatement':
+    case 'WithStatement':
+    case 'LabeledStatement':
+      if (stmt.body.type === 'BlockStatement') {
+        stmt.body.body = processStatements(stmt.body.body);
+      }
+      break;
+    case 'IfStatement':
+      if (stmt.consequent.type === 'BlockStatement') {
+        stmt.consequent.body = processStatements(stmt.consequent.body);
+      }
+      if (stmt.alternate?.type === 'BlockStatement') {
+        stmt.alternate.body = processStatements(stmt.alternate.body);
+      }
+      break;
+    case 'TryStatement':
+      stmt.block.body = processStatements(stmt.block.body);
+      if (stmt.handler?.body) {
+        stmt.handler.body.body = processStatements(stmt.handler.body.body);
+      }
+      if (stmt.finalizer) {
+        stmt.finalizer.body = processStatements(stmt.finalizer.body);
+      }
+      break;
+  }
+}
+
 function processStatements(stmts: acorn.Statement[]): acorn.Statement[] {
   return stmts.flatMap((stmt): acorn.Statement[] => {
-    // Recurse into nested statement containers
-    const s = stmt as any;
-    if (s.body?.type === 'BlockStatement') {
-      s.body.body = processStatements(s.body.body);
-    }
-    if (s.consequent?.type === 'BlockStatement') {
-      s.consequent.body = processStatements(s.consequent.body);
-    }
-    if (s.alternate?.type === 'BlockStatement') {
-      s.alternate.body = processStatements(s.alternate.body);
-    }
-    if (s.block?.type === 'BlockStatement') {
-      s.block.body = processStatements(s.block.body);
-    }
-    if (s.handler?.body?.type === 'BlockStatement') {
-      s.handler.body.body = processStatements(s.handler.body.body);
-    }
-    if (s.finalizer?.type === 'BlockStatement') {
-      s.finalizer.body = processStatements(s.finalizer.body);
-    }
+    recurseIntoBlocks(stmt);
 
     // ClassDeclaration: extract static fields, add assignments after class
     if (stmt.type === 'ClassDeclaration' && stmt.id) {
@@ -83,8 +102,9 @@ function processStatements(stmts: acorn.Statement[]): acorn.Statement[] {
       const extra: acorn.ExpressionStatement[] = [];
       for (const decl of stmt.declarations) {
         if (decl.init?.type === 'ClassExpression' && decl.id.type === 'Identifier') {
+          const className = decl.id.name;
           const fields = extractStaticFields(decl.init);
-          extra.push(...fields.map(f => makeAssignment((decl.id as acorn.Identifier).name, f)));
+          extra.push(...fields.map(f => makeAssignment(className, f)));
         }
       }
       if (extra.length > 0) return [stmt, ...extra];

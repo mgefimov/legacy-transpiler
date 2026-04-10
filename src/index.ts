@@ -22,7 +22,7 @@ export interface TranspileOptions {
 
 let options: TranspileOptions
 
-const _moduleExports: Record<string, any> = {}
+const _moduleExports: Record<string, unknown> = {}
 const _importWaitlist: Record<string, (() => void)[]> = {}
 
 const loaded = new Set();
@@ -80,7 +80,7 @@ export function init(o: TranspileOptions) {
   options = o
 }
 
-export function exportModule(source: string, exports: Record<string, any>): void {
+export function exportModule(source: string, exports: Record<string, unknown>): void {
   console.log(`[exportModule] ${source} →`, exports);
 
   _moduleExports[source] = exports;
@@ -92,7 +92,7 @@ export function exportModule(source: string, exports: Record<string, any>): void
   }
 }
 
-export function importModule(source: string): Promise<any> {
+export function importModule(source: string): Promise<unknown> {
   source = resolveModule(source);
   console.log('[importModule]', source);
   if (_moduleExports[source]) {
@@ -125,7 +125,7 @@ export function transpile(src: string, code: string): string {
     createLookbehindVisitor(),
     createStaticBlocksVisitor(),
   );
-  walk.simple(ast, merged as walk.SimpleVisitors<unknown>);
+  walk.simple(ast, merged);
 
   transformExports(ast, { src });
   transformStaticClassFields(ast);

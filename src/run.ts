@@ -25,19 +25,19 @@ const outputDir = resolve(__dirname, '../assets/output');
 const files = readdirSync(inputDir).filter(f => f.endsWith('.js'));
 
 const transforms = [
-  { name: 'transformStaticImports',  fn: (ast: any, _src: string) => transformStaticImports(ast) },
-  { name: 'combinedWalk',            fn: (ast: any, src: string) => {
+  { name: 'transformStaticImports',  fn: (ast: acorn.Program, _src: string) => transformStaticImports(ast) },
+  { name: 'combinedWalk',            fn: (ast: acorn.Program, src: string) => {
     const merged = mergeVisitors(
       createDynamicImportsVisitor(),
       createImportMetaVisitor({ url: src }),
       createLookbehindVisitor(),
       createStaticBlocksVisitor(),
     );
-    walk.simple(ast, merged as walk.SimpleVisitors<unknown>);
+    walk.simple(ast, merged);
   }},
-  { name: 'transformExports',            fn: (ast: any, src: string) => transformExports(ast, { src }) },
-  { name: 'transformStaticClassFields', fn: (ast: any, _src: string) => transformStaticClassFields(ast) },
-  { name: 'transformWrapAsyncIIFE',     fn: (ast: any, _src: string) => transformWrapAsyncIIFE(ast) },
+  { name: 'transformExports',            fn: (ast: acorn.Program, src: string) => transformExports(ast, { src }) },
+  { name: 'transformStaticClassFields', fn: (ast: acorn.Program, _src: string) => transformStaticClassFields(ast) },
+  { name: 'transformWrapAsyncIIFE',     fn: (ast: acorn.Program, _src: string) => transformWrapAsyncIIFE(ast) },
 ];
 
 function transpileWithProfile(src: string, code: string): string {

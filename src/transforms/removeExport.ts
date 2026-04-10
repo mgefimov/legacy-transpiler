@@ -43,11 +43,11 @@ export function transformExports(ast: acorn.Program, options: RemoveExportOption
       const decl = node.declaration;
       if (decl.type === 'FunctionDeclaration' && decl.id) {
         exports.push({ key: 'default', value: decl.id.name });
-        return [decl as acorn.FunctionDeclaration];
+        return [decl];
       }
       if (decl.type === 'ClassDeclaration' && decl.id) {
         exports.push({ key: 'default', value: decl.id.name });
-        return [decl as acorn.ClassDeclaration];
+        return [decl];
       }
       // export default <expr> → var __default = <expr>
       const tempId: acorn.Identifier = { type: 'Identifier', name: '__default', start: decl.start, end: decl.end };
@@ -76,7 +76,7 @@ export function transformExports(ast: acorn.Program, options: RemoveExportOption
     return [node];
   });
 
-  // Append: window.LegacyTranspiler._moduleExports[src] = { ... }
+  // Append: window.LegacyTranspiler.exportModule(src, { ... })
   if (exports.length > 0) {
     const props: acorn.Property[] = exports.map((e) => {
       const key: acorn.Identifier = { type: 'Identifier', name: e.key, start: 0, end: 0 };
@@ -94,36 +94,45 @@ export function transformExports(ast: acorn.Program, options: RemoveExportOption
       };
     });
 
-    // window.LegacyTranspiler.exportModule(src, { ... })
+    const windowId: acorn.Identifier = { type: 'Identifier', name: 'window', start: 0, end: 0 };
+    const ltId: acorn.Identifier = { type: 'Identifier', name: 'LegacyTranspiler', start: 0, end: 0 };
+    const exportModuleId: acorn.Identifier = { type: 'Identifier', name: 'exportModule', start: 0, end: 0 };
+
+    const innerMember: acorn.MemberExpression = {
+      type: 'MemberExpression',
+      object: windowId,
+      property: ltId,
+      computed: false,
+      optional: false,
+      start: 0,
+      end: 0,
+    };
+
+    const outerMember: acorn.MemberExpression = {
+      type: 'MemberExpression',
+      object: innerMember,
+      property: exportModuleId,
+      computed: false,
+      optional: false,
+      start: 0,
+      end: 0,
+    };
+
+    const srcLiteral: acorn.Literal = { type: 'Literal', value: options.src, start: 0, end: 0 };
+    const objExpr: acorn.ObjectExpression = { type: 'ObjectExpression', properties: props, start: 0, end: 0 };
+
+    const callExpr: acorn.CallExpression = {
+      type: 'CallExpression',
+      callee: outerMember,
+      arguments: [srcLiteral, objExpr],
+      optional: false,
+      start: 0,
+      end: 0,
+    };
+
     const callStatement: acorn.ExpressionStatement = {
       type: 'ExpressionStatement',
-      expression: {
-        type: 'CallExpression',
-        callee: {
-          type: 'MemberExpression',
-          object: {
-            type: 'MemberExpression',
-            object: { type: 'Identifier', name: 'window', start: 0, end: 0 },
-            property: { type: 'Identifier', name: 'LegacyTranspiler', start: 0, end: 0 },
-            computed: false,
-            optional: false,
-            start: 0,
-            end: 0,
-          },
-          property: { type: 'Identifier', name: 'exportModule', start: 0, end: 0 },
-          computed: false,
-          optional: false,
-          start: 0,
-          end: 0,
-        },
-        arguments: [
-          { type: 'Literal', value: options.src, start: 0, end: 0 },
-          { type: 'ObjectExpression', properties: props, start: 0, end: 0 },
-        ],
-        optional: false,
-        start: 0,
-        end: 0,
-      } as acorn.CallExpression,
+      expression: callExpr,
       start: 0,
       end: 0,
     };
@@ -131,4 +140,3 @@ export function transformExports(ast: acorn.Program, options: RemoveExportOption
     ast.body.push(callStatement);
   }
 }
-
