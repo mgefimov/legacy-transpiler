@@ -14,13 +14,29 @@ import {
 } from './transforms';
 import { mergeVisitors } from './transforms/mergeVisitors';
 
+export interface Target {
+  platform: 'iOS';
+  version: string;
+}
+
 export interface TranspileOptions {
   BASE_URL: string;
   minify?: boolean;
+  target?: Target;
   runScript: (code: string, src: string) => void;
 }
 
 let options: TranspileOptions
+
+function targetAtLeast(platform: Target['platform'], min: [number, number]): boolean {
+  if (!options.target || options.target.platform !== platform) return false;
+  const parts = options.target.version.split('.');
+  const major = Number(parts[0]);
+  const minor = Number(parts[1] ?? 0);
+  if (Number.isNaN(major) || Number.isNaN(minor)) return false;
+  if (major !== min[0]) return major > min[0];
+  return minor >= min[1];
+}
 
 const _moduleExports: Record<string, unknown> = {}
 const _importWaitlist: Record<string, (() => void)[]> = {}
@@ -128,7 +144,9 @@ export function transpile(src: string, code: string): string {
   walk.simple(ast, merged);
 
   transformExports(ast, { src });
-  transformStaticClassFields(ast);
+  if (!targetAtLeast('iOS', [15, 0])) {
+    transformStaticClassFields(ast);
+  }
   transformWrapAsyncIIFE(ast);
 
   const result = generate(ast, options.minify ? { indent: '', lineEnd: '' } : undefined);

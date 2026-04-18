@@ -65,4 +65,22 @@ describe('transformStaticClassFields', () => {
       iife("class Config {\n  static getVersion() {\n    return this.version;\n  }\n}\nConfig.version = '1.0';\n")
     );
   });
+
+  it('skips the transform for iOS 15.0 and above', () => {
+    init({ BASE_URL, minify: false, target: { platform: 'iOS', version: '15.4' }, runScript: () => {} });
+    const input = `class Config {\n  static defaultLocale = 'en';\n}`;
+    expect(transpile(src, input)).toBe(
+      iife("class Config {\n  static defaultLocale = 'en';\n}\n")
+    );
+    init({ BASE_URL, minify: false, runScript: () => {} });
+  });
+
+  it('applies the transform for iOS below 15.0', () => {
+    init({ BASE_URL, minify: false, target: { platform: 'iOS', version: '14.8' }, runScript: () => {} });
+    const input = `class Config {\n  static defaultLocale = 'en';\n}`;
+    expect(transpile(src, input)).toBe(
+      iife("class Config {}\nConfig.defaultLocale = 'en';\n")
+    );
+    init({ BASE_URL, minify: false, runScript: () => {} });
+  });
 });
