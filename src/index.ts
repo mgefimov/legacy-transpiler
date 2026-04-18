@@ -9,6 +9,7 @@ import {
   createLookbehindVisitor,
   createStaticBlocksVisitor,
   transformStaticClassFields,
+  createPrivateFieldsVisitor,
   transformExports,
   transformWrapAsyncIIFE,
 } from './transforms';
@@ -135,13 +136,16 @@ export function transpile(src: string, code: string): string {
 
   transformStaticImports(ast);
 
-  const merged = mergeVisitors(
+  const visitors: walk.SimpleVisitors<unknown>[] = [
     createDynamicImportsVisitor(),
     createImportMetaVisitor({ url: src }),
     createLookbehindVisitor(),
-    createStaticBlocksVisitor(),
-  );
-  walk.simple(ast, merged);
+  ];
+  if (!targetAtLeast('iOS', [15, 0])) {
+    visitors.push(createPrivateFieldsVisitor());
+  }
+  visitors.push(createStaticBlocksVisitor());
+  walk.simple(ast, mergeVisitors(...visitors));
 
   transformExports(ast, { src });
   if (!targetAtLeast('iOS', [15, 0])) {

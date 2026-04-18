@@ -1841,7 +1841,7 @@
   }]]), ps = ("http://localhost:8000").replace(/^http/, "ws") + "/api/ws";
   const ms = new (class {
     constructor() {
-      (this.ws = null, this.connectPromise = null, this.frameSubscribers = new Map(), this.globalFrameSubscribers = new Set(), this.artifactSubscribers = new Map(), this.textChunkSubscribers = new Map(), this.compactionStatusSubscribers = new Map(), this.frameActivitySubscribers = new Map(), this.projectDeletedSubscribers = new Set(), this.displayArtifactsSubscribers = new Set(), this.folderSubscribers = new Map(), this.noteSubscribers = new Map(), this.environmentStatusSubscribers = new Set(), this.statusSubscribers = new Set(), this.hostAccessGrantedSubscribers = new Set(), this.networkAccessGrantedSubscribers = new Set(), this.rawSubscribers = new Set(), this.reconnectAttempts = 0, this.maxReconnectAttempts = 5, this.reconnectDelay = 1e3, this.reconnectTimer = null, this._connectionStatus = "disconnected", this.#e = !1);
+      (this.ws = null, this.connectPromise = null, this.frameSubscribers = new Map(), this.globalFrameSubscribers = new Set(), this.artifactSubscribers = new Map(), this.textChunkSubscribers = new Map(), this.compactionStatusSubscribers = new Map(), this.frameActivitySubscribers = new Map(), this.projectDeletedSubscribers = new Set(), this.displayArtifactsSubscribers = new Set(), this.folderSubscribers = new Map(), this.noteSubscribers = new Map(), this.environmentStatusSubscribers = new Set(), this.statusSubscribers = new Set(), this.hostAccessGrantedSubscribers = new Set(), this.networkAccessGrantedSubscribers = new Set(), this.rawSubscribers = new Set(), this.reconnectAttempts = 0, this.maxReconnectAttempts = 5, this.reconnectDelay = 1e3, this.reconnectTimer = null, this._connectionStatus = "disconnected", this._private_field__e = !1);
     }
     get connectionStatus() {
       return this._connectionStatus;
@@ -1938,11 +1938,11 @@
         this.rawSubscribers.delete(e);
       });
     }
-    #e;
+    _private_field__e;
     async connect() {
       {
-        if (this.#e) return;
-        this.#e = !0;
+        if (this._private_field__e) return;
+        this._private_field__e = !0;
         const {getTransport: e} = await Ne(async () => {
           const {getTransport: e} = await Promise.resolve().then(() => wn);
           return {
@@ -3503,15 +3503,15 @@
     return o;
   }
   class sr {
-    #t = {};
+    _private_field__t = {};
     addListener(e, t) {
-      const n = this.#t[e];
-      return (void 0 === n ? this.#t[e] = [t] : n.includes(t) || n.push(t), () => {
+      const n = this._private_field__t[e];
+      return (void 0 === n ? this._private_field__t[e] = [t] : n.includes(t) || n.push(t), () => {
         this.removeListener(e, t);
       });
     }
     emit(e, t) {
-      const n = this.#t[e];
+      const n = this._private_field__t[e];
       if (void 0 !== n) if (1 === n.length) n[0].call(null, t); else {
         let e = !1, r = null;
         const a = Array.from(n);
@@ -3527,10 +3527,10 @@
       }
     }
     removeAllListeners() {
-      this.#t = {};
+      this._private_field__t = {};
     }
     removeListener(e, t) {
-      const n = this.#t[e];
+      const n = this._private_field__t[e];
       if (void 0 !== n) {
         const e = n.indexOf(t);
         e >= 0 && n.splice(e, 1);

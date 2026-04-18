@@ -38,10 +38,10 @@ describe('transformStaticClassFields', () => {
     );
   });
 
-  it('does not touch private static fields', () => {
+  it('extracts renamed private static fields (renamed by private-fields transform)', () => {
     const input = `class Foo {\n  static #secret = 42;\n  static getSecret() {\n    return this.#secret;\n  }\n}`;
     expect(transpile(src, input)).toBe(
-      iife("class Foo {\n  static #secret = 42;\n  static getSecret() {\n    return this.#secret;\n  }\n}\n")
+      iife("class Foo {\n  static getSecret() {\n    return this._private_field__secret;\n  }\n}\nFoo._private_field__secret = 42;\n")
     );
   });
 

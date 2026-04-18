@@ -381,20 +381,20 @@
     static rectBoundingBox(t, e, i, s, n) {
       (n[0] = Math.min(n[0], t, i), n[1] = Math.min(n[1], e, s), n[2] = Math.max(n[2], t, i), n[3] = Math.max(n[3], e, s));
     }
-    static #t(t, e, i, s, n, r, a, o, l, h) {
+    static _private_field__t(t, e, i, s, n, r, a, o, l, h) {
       if (l <= 0 || l >= 1) return;
       const c = 1 - l, d = l * l, u = d * l, p = c * (c * (c * t + 3 * l * e) + 3 * d * i) + u * s, g = c * (c * (c * n + 3 * l * r) + 3 * d * a) + u * o;
       (h[0] = Math.min(h[0], p), h[1] = Math.min(h[1], g), h[2] = Math.max(h[2], p), h[3] = Math.max(h[3], g));
     }
-    static #e(t, e, i, s, n, r, a, o, l, h, c, d) {
-      if (Math.abs(l) < 1e-12) return void (Math.abs(h) >= 1e-12 && this.#t(t, e, i, s, n, r, a, o, -c / h, d));
+    static _private_field__e(t, e, i, s, n, r, a, o, l, h, c, d) {
+      if (Math.abs(l) < 1e-12) return void (Math.abs(h) >= 1e-12 && this._private_field__t(t, e, i, s, n, r, a, o, -c / h, d));
       const u = h ** 2 - 4 * c * l;
       if (u < 0) return;
       const p = Math.sqrt(u), g = 2 * l;
-      (this.#t(t, e, i, s, n, r, a, o, (-h + p) / g, d), this.#t(t, e, i, s, n, r, a, o, (-h - p) / g, d));
+      (this._private_field__t(t, e, i, s, n, r, a, o, (-h + p) / g, d), this._private_field__t(t, e, i, s, n, r, a, o, (-h - p) / g, d));
     }
     static bezierBoundingBox(t, e, i, s, n, r, a, o, l) {
-      (l[0] = Math.min(l[0], t, a), l[1] = Math.min(l[1], e, o), l[2] = Math.max(l[2], t, a), l[3] = Math.max(l[3], e, o), this.#e(t, i, n, a, e, s, r, o, 3 * (3 * (i - n) - t + a), 6 * (t - 2 * i + n), 3 * (i - t), l), this.#e(t, i, n, a, e, s, r, o, 3 * (3 * (s - r) - e + o), 6 * (e - 2 * s + r), 3 * (s - e), l));
+      (l[0] = Math.min(l[0], t, a), l[1] = Math.min(l[1], e, o), l[2] = Math.max(l[2], t, a), l[3] = Math.max(l[3], e, o), this._private_field__e(t, i, n, a, e, s, r, o, 3 * (3 * (i - n) - t + a), 6 * (t - 2 * i + n), 3 * (i - t), l), this._private_field__e(t, i, n, a, e, s, r, o, 3 * (3 * (s - r) - e + o), 6 * (e - 2 * s + r), 3 * (s - e), l));
     }
   }
   let dt = null, ut = null;
@@ -756,12 +756,11 @@
     (t.preventDefault(), t.stopPropagation());
   }
   class Rt {
-    static #i;
     static toDateObject(t) {
       if (t instanceof Date) return t;
       if (!t || "string" != typeof t) return null;
-      this.#i ||= new RegExp("^D:(\\d{4})(\\d{2})?(\\d{2})?(\\d{2})?(\\d{2})?(\\d{2})?([Z|+|-])?(\\d{2})?'?(\\d{2})?'?");
-      const e = this.#i.exec(t);
+      this._private_field__i ||= new RegExp("^D:(\\d{4})(\\d{2})?(\\d{2})?(\\d{2})?(\\d{2})?(\\d{2})?([Z|+|-])?(\\d{2})?'?(\\d{2})?'?");
+      const e = this._private_field__i.exec(t);
       if (!e) return null;
       const i = parseInt(e[1], 10);
       let s = parseInt(e[2], 10);
@@ -781,6 +780,7 @@
       return (c = c >= 0 && c <= 59 ? c : 0, "-" === l ? (r += h, a += c) : "+" === l && (r -= h, a -= c), new Date(Date.UTC(i, s, n, r, a, o)));
     }
   }
+  Rt._private_field__i = undefined;
   function Lt(t, {scale: e = 1, rotation: i = 0}) {
     const {width: s, height: n} = t.attributes.style, r = [0, 0, parseInt(s), parseInt(n)];
     return new _t({
@@ -951,17 +951,16 @@
     (n.firstChild.classList.add("richText", i), s.append(n));
   }
   class Qt {
-    #s = null;
-    #n = null;
-    #r;
-    #a = null;
-    #o = null;
-    #l = null;
-    #h = null;
-    #c = null;
-    static #d = null;
+    _private_field__s = null;
+    _private_field__n = null;
+    _private_field__r;
+    _private_field__a = null;
+    _private_field__o = null;
+    _private_field__l = null;
+    _private_field__h = null;
+    _private_field__c = null;
     constructor(t) {
-      (this.#r = t, Qt.#d ||= Object.freeze({
+      (this._private_field__r = t, Qt._private_field__d ||= Object.freeze({
         freetext: "pdfjs-editor-remove-freetext-button",
         highlight: "pdfjs-editor-remove-highlight-button",
         ink: "pdfjs-editor-remove-ink-button",
@@ -970,41 +969,41 @@
       }));
     }
     render() {
-      const t = this.#s = document.createElement("div");
+      const t = this._private_field__s = document.createElement("div");
       (t.classList.add("editToolbar", "hidden"), t.setAttribute("role", "toolbar"));
-      const e = this.#r._uiManager._signal;
+      const e = this._private_field__r._uiManager._signal;
       e instanceof AbortSignal && !e.aborted && (t.addEventListener("contextmenu", Pt, {
         signal: e
-      }), t.addEventListener("pointerdown", Qt.#u, {
+      }), t.addEventListener("pointerdown", Qt._private_field__u, {
         signal: e
       }));
-      const i = this.#a = document.createElement("div");
+      const i = this._private_field__a = document.createElement("div");
       (i.className = "buttons", t.append(i));
-      const s = this.#r.toolbarPosition;
+      const s = this._private_field__r.toolbarPosition;
       if (s) {
-        const {style: e} = t, i = "ltr" === this.#r._uiManager.direction ? 1 - s[0] : s[0];
+        const {style: e} = t, i = "ltr" === this._private_field__r._uiManager.direction ? 1 - s[0] : s[0];
         (e.insetInlineEnd = 100 * i + "%", e.top = `calc(${100 * s[1]}% + var(--editor-toolbar-vert-offset))`);
       }
       return t;
     }
     get div() {
-      return this.#s;
+      return this._private_field__s;
     }
-    static #u(t) {
+    static _private_field__u(t) {
       t.stopPropagation();
     }
-    #p(t) {
-      (this.#r._focusEventsAllowed = !1, It(t));
+    _private_field__p(t) {
+      (this._private_field__r._focusEventsAllowed = !1, It(t));
     }
-    #g(t) {
-      (this.#r._focusEventsAllowed = !0, It(t));
+    _private_field__g(t) {
+      (this._private_field__r._focusEventsAllowed = !0, It(t));
     }
-    #m(t) {
-      const e = this.#r._uiManager._signal;
-      return e instanceof AbortSignal && !e.aborted && (t.addEventListener("focusin", this.#p.bind(this), {
+    _private_field__m(t) {
+      const e = this._private_field__r._uiManager._signal;
+      return e instanceof AbortSignal && !e.aborted && (t.addEventListener("focusin", this._private_field__p.bind(this), {
         capture: !0,
         signal: e
-      }), t.addEventListener("focusout", this.#g.bind(this), {
+      }), t.addEventListener("focusout", this._private_field__g.bind(this), {
         capture: !0,
         signal: e
       }), t.addEventListener("contextmenu", Pt, {
@@ -1012,47 +1011,47 @@
       }), !0);
     }
     hide() {
-      (this.#s.classList.add("hidden"), this.#n?.hideDropdown());
+      (this._private_field__s.classList.add("hidden"), this._private_field__n?.hideDropdown());
     }
     show() {
-      (this.#s.classList.remove("hidden"), this.#o?.shown(), this.#l?.shown());
+      (this._private_field__s.classList.remove("hidden"), this._private_field__o?.shown(), this._private_field__l?.shown());
     }
     addDeleteButton() {
-      const {editorType: t, _uiManager: e} = this.#r, i = document.createElement("button");
-      (i.classList.add("basic", "deleteButton"), i.tabIndex = 0, i.setAttribute("data-l10n-id", Qt.#d[t]), this.#m(i) && i.addEventListener("click", t => {
+      const {editorType: t, _uiManager: e} = this._private_field__r, i = document.createElement("button");
+      (i.classList.add("basic", "deleteButton"), i.tabIndex = 0, i.setAttribute("data-l10n-id", Qt._private_field__d[t]), this._private_field__m(i) && i.addEventListener("click", t => {
         e.delete();
       }, {
         signal: e._signal
-      }), this.#a.append(i));
+      }), this._private_field__a.append(i));
     }
-    get #f() {
+    get _private_field__f() {
       const t = document.createElement("div");
       return (t.className = "divider", t);
     }
     async addAltText(t) {
       const e = await t.render();
-      (this.#m(e), this.#a.append(e, this.#f), this.#o = t);
+      (this._private_field__m(e), this._private_field__a.append(e, this._private_field__f), this._private_field__o = t);
     }
     addComment(t, e = null) {
-      if (this.#l) return;
+      if (this._private_field__l) return;
       const i = t.renderForToolbar();
       if (!i) return;
-      this.#m(i);
-      const s = this.#h = this.#f;
-      (e ? (this.#a.insertBefore(i, e), this.#a.insertBefore(s, e)) : this.#a.append(i, s), this.#l = t, t.toolbar = this);
+      this._private_field__m(i);
+      const s = this._private_field__h = this._private_field__f;
+      (e ? (this._private_field__a.insertBefore(i, e), this._private_field__a.insertBefore(s, e)) : this._private_field__a.append(i, s), this._private_field__l = t, t.toolbar = this);
     }
     addColorPicker(t) {
-      if (this.#n) return;
-      this.#n = t;
+      if (this._private_field__n) return;
+      this._private_field__n = t;
       const e = t.renderButton();
-      (this.#m(e), this.#a.append(e, this.#f));
+      (this._private_field__m(e), this._private_field__a.append(e, this._private_field__f));
     }
     async addEditSignatureButton(t) {
-      const e = this.#c = await t.renderEditButton(this.#r);
-      (this.#m(e), this.#a.append(e, this.#f));
+      const e = this._private_field__c = await t.renderEditButton(this._private_field__r);
+      (this._private_field__m(e), this._private_field__a.append(e, this._private_field__f));
     }
     removeButton(t) {
-      if ("comment" === t) (this.#l?.removeToolbarCommentButton(), this.#l = null, this.#h?.remove(), this.#h = null);
+      if ("comment" === t) (this._private_field__l?.removeToolbarCommentButton(), this._private_field__l = null, this._private_field__h?.remove(), this._private_field__h = null);
     }
     async addButton(t, e) {
       switch (t) {
@@ -1073,38 +1072,39 @@
       }
     }
     async addButtonBefore(t, e, i) {
-      const s = this.#a.querySelector(i);
+      const s = this._private_field__a.querySelector(i);
       s && "comment" === t && this.addComment(e, s);
     }
     updateEditSignatureButton(t) {
-      this.#c && (this.#c.title = t);
+      this._private_field__c && (this._private_field__c.title = t);
     }
     remove() {
-      (this.#s.remove(), this.#n?.destroy(), this.#n = null);
+      (this._private_field__s.remove(), this._private_field__n?.destroy(), this._private_field__n = null);
     }
   }
+  Qt._private_field__d = null;
   class Jt {
-    #a = null;
-    #s = null;
-    #b;
+    _private_field__a = null;
+    _private_field__s = null;
+    _private_field__b;
     constructor(t) {
-      this.#b = t;
+      this._private_field__b = t;
     }
-    #v() {
-      const t = this.#s = document.createElement("div");
+    _private_field__v() {
+      const t = this._private_field__s = document.createElement("div");
       (t.className = "editToolbar", t.setAttribute("role", "toolbar"));
-      const e = this.#b._signal;
+      const e = this._private_field__b._signal;
       e instanceof AbortSignal && !e.aborted && t.addEventListener("contextmenu", Pt, {
         signal: e
       });
-      const i = this.#a = document.createElement("div");
-      return (i.className = "buttons", t.append(i), this.#b.hasCommentManager() && this.#y("commentButton", "pdfjs-comment-floating-button", "pdfjs-comment-floating-button-label", () => {
-        this.#b.commentSelection("floating_button");
-      }), this.#y("highlightButton", "pdfjs-highlight-floating-button1", "pdfjs-highlight-floating-button-label", () => {
-        this.#b.highlightSelection("floating_button");
+      const i = this._private_field__a = document.createElement("div");
+      return (i.className = "buttons", t.append(i), this._private_field__b.hasCommentManager() && this._private_field__y("commentButton", "pdfjs-comment-floating-button", "pdfjs-comment-floating-button-label", () => {
+        this._private_field__b.commentSelection("floating_button");
+      }), this._private_field__y("highlightButton", "pdfjs-highlight-floating-button1", "pdfjs-highlight-floating-button-label", () => {
+        this._private_field__b.highlightSelection("floating_button");
       }), t);
     }
-    #w(t, e) {
+    _private_field__w(t, e) {
       let i = 0, s = 0;
       for (const n of t) {
         const t = n.y + n.height;
@@ -1115,38 +1115,38 @@
       return [e ? 1 - s : s, i];
     }
     show(t, e, i) {
-      const [s, n] = this.#w(e, i), {style: r} = this.#s ||= this.#v();
-      (t.append(this.#s), r.insetInlineEnd = 100 * s + "%", r.top = `calc(${100 * n}% + var(--editor-toolbar-vert-offset))`);
+      const [s, n] = this._private_field__w(e, i), {style: r} = this._private_field__s ||= this._private_field__v();
+      (t.append(this._private_field__s), r.insetInlineEnd = 100 * s + "%", r.top = `calc(${100 * n}% + var(--editor-toolbar-vert-offset))`);
     }
     hide() {
-      this.#s.remove();
+      this._private_field__s.remove();
     }
-    #y(t, e, i, s) {
+    _private_field__y(t, e, i, s) {
       const n = document.createElement("button");
       (n.classList.add("basic", t), n.tabIndex = 0, n.setAttribute("data-l10n-id", e));
       const r = document.createElement("span");
       (n.append(r), r.className = "visuallyHidden", r.setAttribute("data-l10n-id", i));
-      const a = this.#b._signal;
+      const a = this._private_field__b._signal;
       (a instanceof AbortSignal && !a.aborted && (n.addEventListener("contextmenu", Pt, {
         signal: a
       }), n.addEventListener("click", s, {
         signal: a
-      })), this.#a.append(n));
+      })), this._private_field__a.append(n));
     }
   }
   function Zt(t, e, i) {
     for (const s of i) e.addEventListener(s, t[s].bind(t));
   }
   class te {
-    #A = 0;
+    _private_field__A = 0;
     get id() {
-      return `${w}${this.#A++}`;
+      return `${w}${this._private_field__A++}`;
     }
   }
   class ee {
-    #x = gt();
-    #A = 0;
-    #_ = null;
+    _private_field__x = gt();
+    _private_field__A = 0;
+    _private_field___ = null;
     static get _isSVGFittingCanvas() {
       const t = new OffscreenCanvas(1, 3).getContext("2d", {
         willReadFrequently: !0
@@ -1154,16 +1154,16 @@
       e.src = 'data:image/svg+xml;charset=UTF-8,<svg viewBox="0 0 1 1" width="1" height="1" xmlns="http://www.w3.org/2000/svg"><rect width="1" height="1" style="fill:red;"/></svg>';
       return J(this, "_isSVGFittingCanvas", e.decode().then(() => (t.drawImage(e, 0, 0, 1, 1, 0, 0, 1, 3), 0 === new Uint32Array(t.getImageData(0, 0, 1, 1).data.buffer)[0])));
     }
-    async #S(t, e) {
-      this.#_ ||= new Map();
-      let i = this.#_.get(t);
+    async _private_field__S(t, e) {
+      this._private_field___ ||= new Map();
+      let i = this._private_field___.get(t);
       if (null === i) return null;
       if (i?.bitmap) return (i.refCounter += 1, i);
       try {
         let t;
         if ((i ||= {
           bitmap: null,
-          id: `image_${this.#x}_${this.#A++}`,
+          id: `image_${this._private_field__x}_${this._private_field__A++}`,
           refCounter: 0,
           isSvg: !1
         }, "string" == typeof e ? (i.url = e, t = await xt(e, "blob")) : e instanceof File ? t = i.file = e : e instanceof Blob && (t = e), "image/svg+xml" === t.type)) {
@@ -1181,22 +1181,22 @@
       } catch (s) {
         (q(s), i = null);
       }
-      return (this.#_.set(t, i), i && this.#_.set(i.id, i), i);
+      return (this._private_field___.set(t, i), i && this._private_field___.set(i.id, i), i);
     }
     async getFromFile(t) {
       const {lastModified: e, name: i, size: s, type: n} = t;
-      return this.#S(`${e}_${i}_${s}_${n}`, t);
+      return this._private_field__S(`${e}_${i}_${s}_${n}`, t);
     }
     async getFromUrl(t) {
-      return this.#S(t, t);
+      return this._private_field__S(t, t);
     }
     async getFromBlob(t, e) {
       const i = await e;
-      return this.#S(t, i);
+      return this._private_field__S(t, i);
     }
     async getFromId(t) {
-      this.#_ ||= new Map();
-      const e = this.#_.get(t);
+      this._private_field___ ||= new Map();
+      const e = this._private_field___.get(t);
       if (!e) return null;
       if (e.bitmap) return (e.refCounter += 1, e);
       if (e.file) return this.getFromFile(e.file);
@@ -1207,24 +1207,24 @@
       return this.getFromUrl(e.url);
     }
     getFromCanvas(t, e) {
-      this.#_ ||= new Map();
-      let i = this.#_.get(t);
+      this._private_field___ ||= new Map();
+      let i = this._private_field___.get(t);
       if (i?.bitmap) return (i.refCounter += 1, i);
       const s = new OffscreenCanvas(e.width, e.height);
       return (s.getContext("2d").drawImage(e, 0, 0), i = {
         bitmap: s.transferToImageBitmap(),
-        id: `image_${this.#x}_${this.#A++}`,
+        id: `image_${this._private_field__x}_${this._private_field__A++}`,
         refCounter: 1,
         isSvg: !1
-      }, this.#_.set(t, i), this.#_.set(i.id, i), i);
+      }, this._private_field___.set(t, i), this._private_field___.set(i.id, i), i);
     }
     getSvgUrl(t) {
-      const e = this.#_.get(t);
+      const e = this._private_field___.get(t);
       return e?.isSvg ? e.svgUrl : null;
     }
     deleteId(t) {
-      this.#_ ||= new Map();
-      const e = this.#_.get(t);
+      this._private_field___ ||= new Map();
+      const e = this._private_field___.get(t);
       if (!e) return;
       if ((e.refCounter -= 1, 0 !== e.refCounter)) return;
       const {bitmap: i} = e;
@@ -1235,57 +1235,57 @@
       (i.close?.(), e.bitmap = null);
     }
     isValidId(t) {
-      return t.startsWith(`image_${this.#x}_`);
+      return t.startsWith(`image_${this._private_field__x}_`);
     }
   }
   class ie {
-    #C = [];
-    #E = !1;
-    #T;
-    #M = -1;
+    _private_field__C = [];
+    _private_field__E = !1;
+    _private_field__T;
+    _private_field__M = -1;
     constructor(t = 128) {
-      this.#T = t;
+      this._private_field__T = t;
     }
     add({cmd: t, undo: e, post: i, mustExec: s, type: n = NaN, overwriteIfSameType: r = !1, keepUndo: a = !1}) {
-      if ((s && t(), this.#E)) return;
+      if ((s && t(), this._private_field__E)) return;
       const o = {
         cmd: t,
         undo: e,
         post: i,
         type: n
       };
-      if (-1 === this.#M) return (this.#C.length > 0 && (this.#C.length = 0), this.#M = 0, void this.#C.push(o));
-      if (r && this.#C[this.#M].type === n) return (a && (o.undo = this.#C[this.#M].undo), void (this.#C[this.#M] = o));
-      const l = this.#M + 1;
-      (l === this.#T ? this.#C.splice(0, 1) : (this.#M = l, l < this.#C.length && this.#C.splice(l)), this.#C.push(o));
+      if (-1 === this._private_field__M) return (this._private_field__C.length > 0 && (this._private_field__C.length = 0), this._private_field__M = 0, void this._private_field__C.push(o));
+      if (r && this._private_field__C[this._private_field__M].type === n) return (a && (o.undo = this._private_field__C[this._private_field__M].undo), void (this._private_field__C[this._private_field__M] = o));
+      const l = this._private_field__M + 1;
+      (l === this._private_field__T ? this._private_field__C.splice(0, 1) : (this._private_field__M = l, l < this._private_field__C.length && this._private_field__C.splice(l)), this._private_field__C.push(o));
     }
     undo() {
-      if (-1 === this.#M) return;
-      this.#E = !0;
-      const {undo: t, post: e} = this.#C[this.#M];
-      (t(), e?.(), this.#E = !1, this.#M -= 1);
+      if (-1 === this._private_field__M) return;
+      this._private_field__E = !0;
+      const {undo: t, post: e} = this._private_field__C[this._private_field__M];
+      (t(), e?.(), this._private_field__E = !1, this._private_field__M -= 1);
     }
     redo() {
-      if (this.#M < this.#C.length - 1) {
-        (this.#M += 1, this.#E = !0);
-        const {cmd: t, post: e} = this.#C[this.#M];
-        (t(), e?.(), this.#E = !1);
+      if (this._private_field__M < this._private_field__C.length - 1) {
+        (this._private_field__M += 1, this._private_field__E = !0);
+        const {cmd: t, post: e} = this._private_field__C[this._private_field__M];
+        (t(), e?.(), this._private_field__E = !1);
       }
     }
     hasSomethingToUndo() {
-      return -1 !== this.#M;
+      return -1 !== this._private_field__M;
     }
     hasSomethingToRedo() {
-      return this.#M < this.#C.length - 1;
+      return this._private_field__M < this._private_field__C.length - 1;
     }
     cleanType(t) {
-      if (-1 !== this.#M) {
-        for (let e = this.#M; e >= 0; e--) if (this.#C[e].type !== t) return (this.#C.splice(e + 1, this.#M - e), void (this.#M = e));
-        (this.#C.length = 0, this.#M = -1);
+      if (-1 !== this._private_field__M) {
+        for (let e = this._private_field__M; e >= 0; e--) if (this._private_field__C[e].type !== t) return (this._private_field__C.splice(e + 1, this._private_field__M - e), void (this._private_field__M = e));
+        (this._private_field__C.length = 0, this._private_field__M = -1);
       }
     }
     destroy() {
-      this.#C = null;
+      this._private_field__C = null;
     }
   }
   class se {
@@ -1303,14 +1303,14 @@
         }), this.allKeys.add(t.split("+").at(-1)));
       }
     }
-    #k(t) {
+    _private_field__k(t) {
       (t.altKey && this.buffer.push("alt"), t.ctrlKey && this.buffer.push("ctrl"), t.metaKey && this.buffer.push("meta"), t.shiftKey && this.buffer.push("shift"), this.buffer.push(t.key));
       const e = this.buffer.join("+");
       return (this.buffer.length = 0, e);
     }
     exec(t, e) {
       if (!this.allKeys.has(e.key)) return;
-      const i = this.callbacks.get(this.#k(e));
+      const i = this.callbacks.get(this._private_field__k(e));
       if (!i) return;
       const {callback: s, options: {bubbles: n = !1, args: r = [], checker: a = null}} = i;
       a && !a(t, e) || (s.bind(t, ...r, e)(), n || It(e));
@@ -1343,50 +1343,50 @@
   }
   ne._colorsMapping = new Map([["CanvasText", [0, 0, 0]], ["Canvas", [255, 255, 255]]]);
   class re {
-    #D = new AbortController();
-    #P = null;
-    #I = null;
-    #R = new Map();
-    #L = new Map();
-    #F = null;
-    #B = null;
-    #N = null;
-    #O = new ie();
-    #U = null;
-    #z = null;
-    #H = null;
-    #j = 0;
-    #$ = new Set();
-    #V = null;
-    #G = null;
-    #W = new Set();
+    _private_field__D = new AbortController();
+    _private_field__P = null;
+    _private_field__I = null;
+    _private_field__R = new Map();
+    _private_field__L = new Map();
+    _private_field__F = null;
+    _private_field__B = null;
+    _private_field__N = null;
+    _private_field__O = new ie();
+    _private_field__U = null;
+    _private_field__z = null;
+    _private_field__H = null;
+    _private_field__j = 0;
+    _private_field__$ = new Set();
+    _private_field__V = null;
+    _private_field__G = null;
+    _private_field__W = new Set();
     _editorUndoBar = null;
-    #q = !1;
-    #X = !1;
-    #K = !1;
-    #Y = null;
-    #Q = null;
-    #J = null;
-    #Z = null;
-    #tt = !1;
-    #et = null;
-    #it = new te();
-    #st = !1;
-    #nt = !1;
-    #rt = !1;
-    #at = null;
-    #ot = null;
-    #lt = null;
-    #ht = null;
-    #ct = null;
-    #dt = A.NONE;
-    #ut = new Set();
-    #pt = null;
-    #gt = null;
-    #mt = null;
-    #ft = null;
-    #bt = null;
-    #vt = {
+    _private_field__q = !1;
+    _private_field__X = !1;
+    _private_field__K = !1;
+    _private_field__Y = null;
+    _private_field__Q = null;
+    _private_field__J = null;
+    _private_field__Z = null;
+    _private_field__tt = !1;
+    _private_field__et = null;
+    _private_field__it = new te();
+    _private_field__st = !1;
+    _private_field__nt = !1;
+    _private_field__rt = !1;
+    _private_field__at = null;
+    _private_field__ot = null;
+    _private_field__lt = null;
+    _private_field__ht = null;
+    _private_field__ct = null;
+    _private_field__dt = A.NONE;
+    _private_field__ut = new Set();
+    _private_field__pt = null;
+    _private_field__gt = null;
+    _private_field__mt = null;
+    _private_field__ft = null;
+    _private_field__bt = null;
+    _private_field__vt = {
       isEditing: !1,
       isEmpty: !0,
       hasSomethingToUndo: !1,
@@ -1394,14 +1394,14 @@
       hasSelectedEditor: !1,
       hasSelectedText: !1
     };
-    #yt = [0, 0];
-    #wt = null;
-    #At = null;
-    #xt = null;
-    #_t = null;
-    #St = null;
+    _private_field__yt = [0, 0];
+    _private_field__wt = null;
+    _private_field__At = null;
+    _private_field__xt = null;
+    _private_field___t = null;
+    _private_field__St = null;
     static get _keyboardManager() {
-      const t = re.prototype, e = t => t.#At.contains(document.activeElement) && "BUTTON" !== document.activeElement.tagName && t.hasSomethingToControl(), i = (t, {target: e}) => {
+      const t = re.prototype, e = t => t._private_field__At.contains(document.activeElement) && "BUTTON" !== document.activeElement.tagName && t.hasSomethingToControl(), i = (t, {target: e}) => {
         if (e instanceof HTMLInputElement) {
           const {type: t} = e;
           return "text" !== t && "number" !== t;
@@ -1417,9 +1417,9 @@
       }], [["Backspace", "alt+Backspace", "ctrl+Backspace", "shift+Backspace", "mac+Backspace", "mac+alt+Backspace", "mac+ctrl+Backspace", "Delete", "ctrl+Delete", "shift+Delete", "mac+Delete"], t.delete, {
         checker: i
       }], [["Enter", "mac+Enter"], t.addNewEditorFromKeyboard, {
-        checker: (t, {target: e}) => !(e instanceof HTMLButtonElement) && t.#At.contains(e) && !t.isEnterHandled
+        checker: (t, {target: e}) => !(e instanceof HTMLButtonElement) && t._private_field__At.contains(e) && !t.isEnterHandled
       }], [[" ", "mac+ "], t.addNewEditorFromKeyboard, {
-        checker: (t, {target: e}) => !(e instanceof HTMLButtonElement) && t.#At.contains(document.activeElement)
+        checker: (t, {target: e}) => !(e instanceof HTMLButtonElement) && t._private_field__At.contains(document.activeElement)
       }], [["Escape", "mac+Escape"], t.unselectAll], [["ArrowLeft", "mac+ArrowLeft"], t.translateSelectedEditors, {
         args: [-s, 0],
         checker: e
@@ -1447,8 +1447,8 @@
       }]]));
     }
     constructor(t, e, i, s, n, r, a, o, l, h, c, d, u, p, g, m) {
-      const f = this._signal = this.#D.signal;
-      (this.#At = t, this.#xt = e, this.#_t = i, this.#F = s, this.#U = n, this.#gt = r, this.#bt = o, this._eventBus = a, a._on("editingaction", this.onEditingAction.bind(this), {
+      const f = this._signal = this._private_field__D.signal;
+      (this._private_field__At = t, this._private_field__xt = e, this._private_field___t = i, this._private_field__F = s, this._private_field__U = n, this._private_field__gt = r, this._private_field__bt = o, this._eventBus = a, a._on("editingaction", this.onEditingAction.bind(this), {
         signal: f
       }), a._on("pagechanging", this.onPageChanging.bind(this), {
         signal: f
@@ -1461,50 +1461,50 @@
       }), a._on("switchannotationeditorparams", t => this.updateParams(t.type, t.value), {
         signal: f
       }), window.addEventListener("pointerdown", () => {
-        this.#nt = !0;
+        this._private_field__nt = !0;
       }, {
         capture: !0,
         signal: f
       }), window.addEventListener("pointerup", () => {
-        this.#nt = !1;
+        this._private_field__nt = !1;
       }, {
         capture: !0,
         signal: f
-      }), this.#Ct(), this.#Et(), this.#Tt(), this.#B = o.annotationStorage, this.#Y = o.filterFactory, this.#mt = l, this.#Z = h || null, this.#q = c, this.#X = d, this.#K = u, this.#ct = p || null, this.viewParameters = {
+      }), this._private_field__Ct(), this._private_field__Et(), this._private_field__Tt(), this._private_field__B = o.annotationStorage, this._private_field__Y = o.filterFactory, this._private_field__mt = l, this._private_field__Z = h || null, this._private_field__q = c, this._private_field__X = d, this._private_field__K = u, this._private_field__ct = p || null, this.viewParameters = {
         realScale: At.PDF_TO_CSS_UNITS,
         rotation: 0
       }, this.isShiftKeyDown = !1, this._editorUndoBar = g || null, this._supportsPinchToZoom = !1 !== m, n?.setSidebarUiManager(this));
     }
     destroy() {
-      (this.#St?.resolve(), this.#St = null, this.#D?.abort(), this.#D = null, this._signal = null);
-      for (const t of this.#L.values()) t.destroy();
-      (this.#L.clear(), this.#R.clear(), this.#W.clear(), this.#ht?.clear(), this.#P = null, this.#ut.clear(), this.#O.destroy(), this.#F?.destroy(), this.#U?.destroy(), this.#gt?.destroy(), this.#et?.hide(), this.#et = null, this.#lt?.destroy(), this.#lt = null, this.#I = null, this.#Q && (clearTimeout(this.#Q), this.#Q = null), this.#wt && (clearTimeout(this.#wt), this.#wt = null), this._editorUndoBar?.destroy(), this.#bt = null);
+      (this._private_field__St?.resolve(), this._private_field__St = null, this._private_field__D?.abort(), this._private_field__D = null, this._signal = null);
+      for (const t of this._private_field__L.values()) t.destroy();
+      (this._private_field__L.clear(), this._private_field__R.clear(), this._private_field__W.clear(), this._private_field__ht?.clear(), this._private_field__P = null, this._private_field__ut.clear(), this._private_field__O.destroy(), this._private_field__F?.destroy(), this._private_field__U?.destroy(), this._private_field__gt?.destroy(), this._private_field__et?.hide(), this._private_field__et = null, this._private_field__lt?.destroy(), this._private_field__lt = null, this._private_field__I = null, this._private_field__Q && (clearTimeout(this._private_field__Q), this._private_field__Q = null), this._private_field__wt && (clearTimeout(this._private_field__wt), this._private_field__wt = null), this._editorUndoBar?.destroy(), this._private_field__bt = null);
     }
     combinedSignal(t) {
       return AbortSignal.any([this._signal, t.signal]);
     }
     get mlManager() {
-      return this.#ct;
+      return this._private_field__ct;
     }
     get useNewAltTextFlow() {
-      return this.#X;
+      return this._private_field__X;
     }
     get useNewAltTextWhenAddingImage() {
-      return this.#K;
+      return this._private_field__K;
     }
     get hcmFilter() {
-      return J(this, "hcmFilter", this.#mt ? this.#Y.addHCMFilter(this.#mt.foreground, this.#mt.background) : "none");
+      return J(this, "hcmFilter", this._private_field__mt ? this._private_field__Y.addHCMFilter(this._private_field__mt.foreground, this._private_field__mt.background) : "none");
     }
     get direction() {
-      return J(this, "direction", getComputedStyle(this.#At).direction);
+      return J(this, "direction", getComputedStyle(this._private_field__At).direction);
     }
     get _highlightColors() {
-      return J(this, "_highlightColors", this.#Z ? new Map(this.#Z.split(",").map(t => ((t = t.split("=").map(t => t.trim()))[1] = t[1].toUpperCase(), t))) : null);
+      return J(this, "_highlightColors", this._private_field__Z ? new Map(this._private_field__Z.split(",").map(t => ((t = t.split("=").map(t => t.trim()))[1] = t[1].toUpperCase(), t))) : null);
     }
     get highlightColors() {
       const {_highlightColors: t} = this;
       if (!t) return J(this, "highlightColors", null);
-      const e = new Map(), i = !!this.#mt;
+      const e = new Map(), i = !!this._private_field__mt;
       for (const [s, n] of t) {
         const t = s.endsWith("_HCM");
         i && t ? e.set(s.replace("_HCM", ""), n) : i || t || e.set(s, n);
@@ -1523,57 +1523,57 @@
       return this.highlightColorNames.get(t) || t;
     }
     setCurrentDrawingSession(t) {
-      (t ? (this.unselectAll(), this.disableUserSelect(!0)) : this.disableUserSelect(!1), this.#H = t);
+      (t ? (this.unselectAll(), this.disableUserSelect(!0)) : this.disableUserSelect(!1), this._private_field__H = t);
     }
     setMainHighlightColorPicker(t) {
-      this.#lt = t;
+      this._private_field__lt = t;
     }
     editAltText(t, e = !1) {
-      this.#F?.editAltText(this, t, e);
+      this._private_field__F?.editAltText(this, t, e);
     }
     hasCommentManager() {
-      return !!this.#U;
+      return !!this._private_field__U;
     }
     editComment(t, e, i, s) {
-      this.#U?.showDialog(this, t, e, i, s);
+      this._private_field__U?.showDialog(this, t, e, i, s);
     }
     selectComment(t, e) {
-      const i = this.#L.get(t), s = i?.getEditorByUID(e);
+      const i = this._private_field__L.get(t), s = i?.getEditorByUID(e);
       s?.toggleComment(!0, !0);
     }
     updateComment(t) {
-      this.#U?.updateComment(t.getData());
+      this._private_field__U?.updateComment(t.getData());
     }
     updatePopupColor(t) {
-      this.#U?.updatePopupColor(t);
+      this._private_field__U?.updatePopupColor(t);
     }
     removeComment(t) {
-      this.#U?.removeComments([t.uid]);
+      this._private_field__U?.removeComments([t.uid]);
     }
     toggleComment(t, e, i = void 0) {
-      this.#U?.toggleCommentPopup(t, e, i);
+      this._private_field__U?.toggleCommentPopup(t, e, i);
     }
     makeCommentColor(t, e) {
-      return t && this.#U?.makeCommentColor(t, e) || null;
+      return t && this._private_field__U?.makeCommentColor(t, e) || null;
     }
     getCommentDialogElement() {
-      return this.#U?.dialogElement || null;
+      return this._private_field__U?.dialogElement || null;
     }
     async waitForEditorsRendered(t) {
-      if (this.#L.has(t - 1)) return;
+      if (this._private_field__L.has(t - 1)) return;
       const {resolve: e, promise: i} = Promise.withResolvers(), s = i => {
         i.pageNumber === t && (this._eventBus._off("editorsrendered", s), e());
       };
       (this._eventBus.on("editorsrendered", s), await i);
     }
     getSignature(t) {
-      this.#gt?.getSignature({
+      this._private_field__gt?.getSignature({
         uiManager: this,
         editor: t
       });
     }
     get signatureManager() {
-      return this.#gt;
+      return this._private_field__gt;
     }
     switchToMode(t, e) {
       (this._eventBus.on("annotationeditormodechanged", e, {
@@ -1592,54 +1592,54 @@
       });
     }
     onSetPreference({name: t, value: e}) {
-      if ("enableNewAltTextWhenAddingImage" === t) this.#K = e;
+      if ("enableNewAltTextWhenAddingImage" === t) this._private_field__K = e;
     }
     onPageChanging({pageNumber: t}) {
-      this.#j = t - 1;
+      this._private_field__j = t - 1;
     }
     focusMainContainer() {
-      this.#At.focus();
+      this._private_field__At.focus();
     }
     findParent(t, e) {
-      for (const i of this.#L.values()) {
+      for (const i of this._private_field__L.values()) {
         const {x: s, y: n, width: r, height: a} = i.div.getBoundingClientRect();
         if (t >= s && t <= s + r && e >= n && e <= n + a) return i;
       }
       return null;
     }
     disableUserSelect(t = !1) {
-      this.#xt.classList.toggle("noUserSelect", t);
+      this._private_field__xt.classList.toggle("noUserSelect", t);
     }
     addShouldRescale(t) {
-      this.#W.add(t);
+      this._private_field__W.add(t);
     }
     removeShouldRescale(t) {
-      this.#W.delete(t);
+      this._private_field__W.delete(t);
     }
     onScaleChanging({scale: t}) {
       (this.commitOrRemove(), this.viewParameters.realScale = t * At.PDF_TO_CSS_UNITS);
-      for (const e of this.#W) e.onScaleChanging();
-      this.#H?.onScaleChanging();
+      for (const e of this._private_field__W) e.onScaleChanging();
+      this._private_field__H?.onScaleChanging();
     }
     onRotationChanging({pagesRotation: t}) {
       (this.commitOrRemove(), this.viewParameters.rotation = t);
     }
-    #Mt({anchorNode: t}) {
+    _private_field__Mt({anchorNode: t}) {
       return t.nodeType === Node.TEXT_NODE ? t.parentElement : t;
     }
-    #kt(t) {
+    _private_field__kt(t) {
       const {currentLayer: e} = this;
       if (e.hasTextLayer(t)) return e;
-      for (const i of this.#L.values()) if (i.hasTextLayer(t)) return i;
+      for (const i of this._private_field__L.values()) if (i.hasTextLayer(t)) return i;
       return null;
     }
     highlightSelection(t = "", e = !1) {
       const i = document.getSelection();
       if (!i || i.isCollapsed) return;
-      const {anchorNode: s, anchorOffset: n, focusNode: r, focusOffset: a} = i, o = i.toString(), l = this.#Mt(i).closest(".textLayer"), h = this.getSelectionBoxes(l);
+      const {anchorNode: s, anchorOffset: n, focusNode: r, focusOffset: a} = i, o = i.toString(), l = this._private_field__Mt(i).closest(".textLayer"), h = this.getSelectionBoxes(l);
       if (!h) return;
       i.empty();
-      const c = this.#kt(l), d = this.#dt === A.NONE, u = () => {
+      const c = this._private_field__kt(l), d = this._private_field__dt === A.NONE, u = () => {
         const i = c?.createAndAddNewEditor({
           x: 0,
           y: 0
@@ -1659,108 +1659,108 @@
     commentSelection(t = "") {
       this.highlightSelection(t, !0);
     }
-    #Dt() {
+    _private_field__Dt() {
       const t = document.getSelection();
       if (!t || t.isCollapsed) return;
-      const e = this.#Mt(t).closest(".textLayer"), i = this.getSelectionBoxes(e);
-      i && (this.#et ||= new Jt(this), this.#et.show(e, i, "ltr" === this.direction));
+      const e = this._private_field__Mt(t).closest(".textLayer"), i = this.getSelectionBoxes(e);
+      i && (this._private_field__et ||= new Jt(this), this._private_field__et.show(e, i, "ltr" === this.direction));
     }
     getAndRemoveDataFromAnnotationStorage(t) {
-      if (!this.#B) return null;
-      const e = `${w}${t}`, i = this.#B.getRawValue(e);
-      return (i && this.#B.remove(e), i);
+      if (!this._private_field__B) return null;
+      const e = `${w}${t}`, i = this._private_field__B.getRawValue(e);
+      return (i && this._private_field__B.remove(e), i);
     }
     addToAnnotationStorage(t) {
-      t.isEmpty() || !this.#B || this.#B.has(t.id) || this.#B.setValue(t.id, t);
+      t.isEmpty() || !this._private_field__B || this._private_field__B.has(t.id) || this._private_field__B.setValue(t.id, t);
     }
     a11yAlert(t, e = null) {
-      const i = this.#_t;
+      const i = this._private_field___t;
       i && (i.setAttribute("data-l10n-id", t), e ? i.setAttribute("data-l10n-args", JSON.stringify(e)) : i.removeAttribute("data-l10n-args"));
     }
-    #Pt() {
+    _private_field__Pt() {
       const t = document.getSelection();
-      if (!t || t.isCollapsed) return void (this.#pt && (this.#et?.hide(), this.#pt = null, this.#It({
+      if (!t || t.isCollapsed) return void (this._private_field__pt && (this._private_field__et?.hide(), this._private_field__pt = null, this._private_field__It({
         hasSelectedText: !1
       })));
       const {anchorNode: e} = t;
-      if (e === this.#pt) return;
-      const i = this.#Mt(t).closest(".textLayer");
+      if (e === this._private_field__pt) return;
+      const i = this._private_field__Mt(t).closest(".textLayer");
       if (i) {
-        if ((this.#et?.hide(), this.#pt = e, this.#It({
+        if ((this._private_field__et?.hide(), this._private_field__pt = e, this._private_field__It({
           hasSelectedText: !0
-        }), (this.#dt === A.HIGHLIGHT || this.#dt === A.NONE) && (this.#dt === A.HIGHLIGHT && this.showAllEditors("highlight", !0, !0), this.#tt = this.isShiftKeyDown, !this.isShiftKeyDown))) {
-          const t = this.#dt === A.HIGHLIGHT ? this.#kt(i) : null;
-          if ((t?.toggleDrawing(), this.#nt)) {
+        }), (this._private_field__dt === A.HIGHLIGHT || this._private_field__dt === A.NONE) && (this._private_field__dt === A.HIGHLIGHT && this.showAllEditors("highlight", !0, !0), this._private_field__tt = this.isShiftKeyDown, !this.isShiftKeyDown))) {
+          const t = this._private_field__dt === A.HIGHLIGHT ? this._private_field__kt(i) : null;
+          if ((t?.toggleDrawing(), this._private_field__nt)) {
             const e = new AbortController(), i = this.combinedSignal(e), s = i => {
-              "pointerup" === i.type && 0 !== i.button || (e.abort(), t?.toggleDrawing(!0), "pointerup" === i.type && this.#Rt("main_toolbar"));
+              "pointerup" === i.type && 0 !== i.button || (e.abort(), t?.toggleDrawing(!0), "pointerup" === i.type && this._private_field__Rt("main_toolbar"));
             };
             (window.addEventListener("pointerup", s, {
               signal: i
             }), window.addEventListener("blur", s, {
               signal: i
             }));
-          } else (t?.toggleDrawing(!0), this.#Rt("main_toolbar"));
+          } else (t?.toggleDrawing(!0), this._private_field__Rt("main_toolbar"));
         }
-      } else this.#pt && (this.#et?.hide(), this.#pt = null, this.#It({
+      } else this._private_field__pt && (this._private_field__et?.hide(), this._private_field__pt = null, this._private_field__It({
         hasSelectedText: !1
       }));
     }
-    #Rt(t = "") {
-      this.#dt === A.HIGHLIGHT ? this.highlightSelection(t) : this.#q && this.#Dt();
+    _private_field__Rt(t = "") {
+      this._private_field__dt === A.HIGHLIGHT ? this.highlightSelection(t) : this._private_field__q && this._private_field__Dt();
     }
-    #Ct() {
-      document.addEventListener("selectionchange", this.#Pt.bind(this), {
+    _private_field__Ct() {
+      document.addEventListener("selectionchange", this._private_field__Pt.bind(this), {
         signal: this._signal
       });
     }
-    #Lt() {
-      if (this.#J) return;
-      this.#J = new AbortController();
-      const t = this.combinedSignal(this.#J);
+    _private_field__Lt() {
+      if (this._private_field__J) return;
+      this._private_field__J = new AbortController();
+      const t = this.combinedSignal(this._private_field__J);
       (window.addEventListener("focus", this.focus.bind(this), {
         signal: t
       }), window.addEventListener("blur", this.blur.bind(this), {
         signal: t
       }));
     }
-    #Ft() {
-      (this.#J?.abort(), this.#J = null);
+    _private_field__Ft() {
+      (this._private_field__J?.abort(), this._private_field__J = null);
     }
     blur() {
-      if ((this.isShiftKeyDown = !1, this.#tt && (this.#tt = !1, this.#Rt("main_toolbar")), !this.hasSelection)) return;
+      if ((this.isShiftKeyDown = !1, this._private_field__tt && (this._private_field__tt = !1, this._private_field__Rt("main_toolbar")), !this.hasSelection)) return;
       const {activeElement: t} = document;
-      for (const e of this.#ut) if (e.div.contains(t)) {
-        (this.#ot = [e, t], e._focusEventsAllowed = !1);
+      for (const e of this._private_field__ut) if (e.div.contains(t)) {
+        (this._private_field__ot = [e, t], e._focusEventsAllowed = !1);
         break;
       }
     }
     focus() {
-      if (!this.#ot) return;
-      const [t, e] = this.#ot;
-      (this.#ot = null, e.addEventListener("focusin", () => {
+      if (!this._private_field__ot) return;
+      const [t, e] = this._private_field__ot;
+      (this._private_field__ot = null, e.addEventListener("focusin", () => {
         t._focusEventsAllowed = !0;
       }, {
         once: !0,
         signal: this._signal
       }), e.focus());
     }
-    #Tt() {
-      if (this.#at) return;
-      this.#at = new AbortController();
-      const t = this.combinedSignal(this.#at);
+    _private_field__Tt() {
+      if (this._private_field__at) return;
+      this._private_field__at = new AbortController();
+      const t = this.combinedSignal(this._private_field__at);
       (window.addEventListener("keydown", this.keydown.bind(this), {
         signal: t
       }), window.addEventListener("keyup", this.keyup.bind(this), {
         signal: t
       }));
     }
-    #Bt() {
-      (this.#at?.abort(), this.#at = null);
+    _private_field__Bt() {
+      (this._private_field__at?.abort(), this._private_field__at = null);
     }
-    #Nt() {
-      if (this.#z) return;
-      this.#z = new AbortController();
-      const t = this.combinedSignal(this.#z);
+    _private_field__Nt() {
+      if (this._private_field__z) return;
+      this._private_field__z = new AbortController();
+      const t = this.combinedSignal(this._private_field__z);
       (document.addEventListener("copy", this.copy.bind(this), {
         signal: t
       }), document.addEventListener("cut", this.cut.bind(this), {
@@ -1769,10 +1769,10 @@
         signal: t
       }));
     }
-    #Ot() {
-      (this.#z?.abort(), this.#z = null);
+    _private_field__Ot() {
+      (this._private_field__z?.abort(), this._private_field__z = null);
     }
-    #Et() {
+    _private_field__Et() {
       const t = this._signal;
       (document.addEventListener("dragover", this.dragOver.bind(this), {
         signal: t
@@ -1781,21 +1781,21 @@
       }));
     }
     addEditListeners() {
-      (this.#Tt(), this.#Nt());
+      (this._private_field__Tt(), this._private_field__Nt());
     }
     removeEditListeners() {
-      (this.#Bt(), this.#Ot());
+      (this._private_field__Bt(), this._private_field__Ot());
     }
     dragOver(t) {
-      for (const {type: e} of t.dataTransfer.items) for (const i of this.#G) if (i.isHandlingMimeForPasting(e)) return (t.dataTransfer.dropEffect = "copy", void t.preventDefault());
+      for (const {type: e} of t.dataTransfer.items) for (const i of this._private_field__G) if (i.isHandlingMimeForPasting(e)) return (t.dataTransfer.dropEffect = "copy", void t.preventDefault());
     }
     drop(t) {
-      for (const e of t.dataTransfer.items) for (const i of this.#G) if (i.isHandlingMimeForPasting(e.type)) return (i.paste(e, this.currentLayer), void t.preventDefault());
+      for (const e of t.dataTransfer.items) for (const i of this._private_field__G) if (i.isHandlingMimeForPasting(e.type)) return (i.paste(e, this.currentLayer), void t.preventDefault());
     }
     copy(t) {
-      if ((t.preventDefault(), this.#P?.commitOrRemove(), !this.hasSelection)) return;
+      if ((t.preventDefault(), this._private_field__P?.commitOrRemove(), !this.hasSelection)) return;
       const e = [];
-      for (const i of this.#ut) {
+      for (const i of this._private_field__ut) {
         const t = i.serialize(!0);
         t && e.push(t);
       }
@@ -1807,7 +1807,7 @@
     async paste(t) {
       t.preventDefault();
       const {clipboardData: e} = t;
-      for (const r of e.items) for (const t of this.#G) if (t.isHandlingMimeForPasting(r.type)) return void t.paste(r, this.currentLayer);
+      for (const r of e.items) for (const t of this._private_field__G) if (t.isHandlingMimeForPasting(r.type)) return void t.paste(r, this.currentLayer);
       let i = e.getData("application/pdfjs");
       if (!i) return;
       try {
@@ -1826,8 +1826,8 @@
           t.push(e);
         }
         const e = () => {
-          for (const e of t) this.#Ut(e);
-          this.#zt(t);
+          for (const e of t) this._private_field__Ut(e);
+          this._private_field__zt(t);
         }, n = () => {
           for (const e of t) e.remove();
         };
@@ -1841,10 +1841,10 @@
       }
     }
     keydown(t) {
-      (this.isShiftKeyDown || "Shift" !== t.key || (this.isShiftKeyDown = !0), this.#dt === A.NONE || this.isEditorHandlingKeyboard || re._keyboardManager.exec(this, t));
+      (this.isShiftKeyDown || "Shift" !== t.key || (this.isShiftKeyDown = !0), this._private_field__dt === A.NONE || this.isEditorHandlingKeyboard || re._keyboardManager.exec(this, t));
     }
     keyup(t) {
-      this.isShiftKeyDown && "Shift" === t.key && (this.isShiftKeyDown = !1, this.#tt && (this.#tt = !1, this.#Rt("main_toolbar")));
+      this.isShiftKeyDown && "Shift" === t.key && (this.isShiftKeyDown = !1, this._private_field__tt && (this._private_field__tt = !1, this._private_field__Rt("main_toolbar")));
     }
     onEditingAction({name: t}) {
       switch (t) {
@@ -1861,92 +1861,92 @@
           this.commentSelection("context_menu");
       }
     }
-    #It(t) {
-      Object.entries(t).some(([t, e]) => this.#vt[t] !== e) && (this._eventBus.dispatch("annotationeditorstateschanged", {
+    _private_field__It(t) {
+      Object.entries(t).some(([t, e]) => this._private_field__vt[t] !== e) && (this._eventBus.dispatch("annotationeditorstateschanged", {
         source: this,
-        details: Object.assign(this.#vt, t)
-      }), this.#dt === A.HIGHLIGHT && !1 === t.hasSelectedEditor && this.#Ht([[x.HIGHLIGHT_FREE, !0]]));
+        details: Object.assign(this._private_field__vt, t)
+      }), this._private_field__dt === A.HIGHLIGHT && !1 === t.hasSelectedEditor && this._private_field__Ht([[x.HIGHLIGHT_FREE, !0]]));
     }
-    #Ht(t) {
+    _private_field__Ht(t) {
       this._eventBus.dispatch("annotationeditorparamschanged", {
         source: this,
         details: t
       });
     }
     setEditingState(t) {
-      t ? (this.#Lt(), this.#Nt(), this.#It({
-        isEditing: this.#dt !== A.NONE,
-        isEmpty: this.#jt(),
-        hasSomethingToUndo: this.#O.hasSomethingToUndo(),
-        hasSomethingToRedo: this.#O.hasSomethingToRedo(),
+      t ? (this._private_field__Lt(), this._private_field__Nt(), this._private_field__It({
+        isEditing: this._private_field__dt !== A.NONE,
+        isEmpty: this._private_field__jt(),
+        hasSomethingToUndo: this._private_field__O.hasSomethingToUndo(),
+        hasSomethingToRedo: this._private_field__O.hasSomethingToRedo(),
         hasSelectedEditor: !1
-      })) : (this.#Ft(), this.#Ot(), this.#It({
+      })) : (this._private_field__Ft(), this._private_field__Ot(), this._private_field__It({
         isEditing: !1
       }), this.disableUserSelect(!1));
     }
     registerEditorTypes(t) {
-      if (!this.#G) {
-        this.#G = t;
-        for (const t of this.#G) this.#Ht(t.defaultPropertiesToUpdate);
+      if (!this._private_field__G) {
+        this._private_field__G = t;
+        for (const t of this._private_field__G) this._private_field__Ht(t.defaultPropertiesToUpdate);
       }
     }
     getId() {
-      return this.#it.id;
+      return this._private_field__it.id;
     }
     get currentLayer() {
-      return this.#L.get(this.#j);
+      return this._private_field__L.get(this._private_field__j);
     }
     getLayer(t) {
-      return this.#L.get(t);
+      return this._private_field__L.get(t);
     }
     get currentPageIndex() {
-      return this.#j;
+      return this._private_field__j;
     }
     addLayer(t) {
-      (this.#L.set(t.pageIndex, t), this.#st ? t.enable() : t.disable());
+      (this._private_field__L.set(t.pageIndex, t), this._private_field__st ? t.enable() : t.disable());
     }
     removeLayer(t) {
-      this.#L.delete(t.pageIndex);
+      this._private_field__L.delete(t.pageIndex);
     }
     async updateMode(t, e = null, i = !1, s = !1, n = !1) {
-      if (this.#dt !== t && (!this.#St || (await this.#St.promise, this.#St))) {
-        if ((this.#St = Promise.withResolvers(), this.#H?.commitOrRemove(), this.#dt === A.POPUP && this.#U?.hideSidebar(), this.#U?.destroyPopup(), this.#dt = t, t === A.NONE)) {
-          (this.setEditingState(!1), this.#$t());
-          for (const t of this.#R.values()) t.hideStandaloneCommentButton();
-          return (this._editorUndoBar?.hide(), this.toggleComment(null), void this.#St.resolve());
+      if (this._private_field__dt !== t && (!this._private_field__St || (await this._private_field__St.promise, this._private_field__St))) {
+        if ((this._private_field__St = Promise.withResolvers(), this._private_field__H?.commitOrRemove(), this._private_field__dt === A.POPUP && this._private_field__U?.hideSidebar(), this._private_field__U?.destroyPopup(), this._private_field__dt = t, t === A.NONE)) {
+          (this.setEditingState(!1), this._private_field__$t());
+          for (const t of this._private_field__R.values()) t.hideStandaloneCommentButton();
+          return (this._editorUndoBar?.hide(), this.toggleComment(null), void this._private_field__St.resolve());
         }
-        for (const t of this.#R.values()) t.addStandaloneCommentButton();
-        (t === A.SIGNATURE && await this.#gt?.loadSignatures(), this.setEditingState(!0), await this.#Vt(), this.unselectAll());
-        for (const e of this.#L.values()) e.updateMode(t);
+        for (const t of this._private_field__R.values()) t.addStandaloneCommentButton();
+        (t === A.SIGNATURE && await this._private_field__gt?.loadSignatures(), this.setEditingState(!0), await this._private_field__Vt(), this.unselectAll());
+        for (const e of this._private_field__L.values()) e.updateMode(t);
         if (t === A.POPUP) {
-          this.#I ||= await this.#bt.getAnnotationsByType(new Set(this.#G.map(t => t._editorType)));
+          this._private_field__I ||= await this._private_field__bt.getAnnotationsByType(new Set(this._private_field__G.map(t => t._editorType)));
           const t = new Set(), e = [];
-          for (const i of this.#R.values()) {
+          for (const i of this._private_field__R.values()) {
             const {annotationElementId: s, hasComment: n, deleted: r} = i;
             (s && t.add(s), n && !r && e.push(i.getData()));
           }
-          for (const i of this.#I) {
+          for (const i of this._private_field__I) {
             const {id: s, popupRef: n, contentsObj: r} = i;
-            n && r?.str && !t.has(s) && !this.#$.has(s) && e.push(i);
+            n && r?.str && !t.has(s) && !this._private_field__$.has(s) && e.push(i);
           }
-          this.#U?.showSidebar(e);
+          this._private_field__U?.showSidebar(e);
         }
-        if (!e) return (i && this.addNewEditorFromKeyboard(), void this.#St.resolve());
-        for (const t of this.#R.values()) t.uid === e ? (this.setSelected(t), n ? t.editComment() : s ? t.enterInEditMode() : t.focus()) : t.unselect();
-        this.#St.resolve();
+        if (!e) return (i && this.addNewEditorFromKeyboard(), void this._private_field__St.resolve());
+        for (const t of this._private_field__R.values()) t.uid === e ? (this.setSelected(t), n ? t.editComment() : s ? t.enterInEditMode() : t.focus()) : t.unselect();
+        this._private_field__St.resolve();
       }
     }
     addNewEditorFromKeyboard() {
       this.currentLayer.canCreateNewEmptyEditor() && this.currentLayer.addNewEditor();
     }
     updateToolbar(t) {
-      t.mode !== this.#dt && this._eventBus.dispatch("switchannotationeditormode", {
+      t.mode !== this._private_field__dt && this._eventBus.dispatch("switchannotationeditormode", {
         source: this,
         ...t
       });
     }
     updateParams(t, e) {
-      if (this.#G) {
+      if (this._private_field__G) {
         switch (t) {
           case x.CREATE:
             return void this.currentLayer.addNewEditor(e);
@@ -1960,83 +1960,83 @@
                   action: "toggle_visibility"
                 }
               }
-            }), (this.#ft ||= new Map()).set(t, e), this.showAllEditors("highlight", e));
+            }), (this._private_field__ft ||= new Map()).set(t, e), this.showAllEditors("highlight", e));
         }
-        if (this.hasSelection) for (const i of this.#ut) i.updateParams(t, e); else for (const i of this.#G) i.updateDefaultParams(t, e);
+        if (this.hasSelection) for (const i of this._private_field__ut) i.updateParams(t, e); else for (const i of this._private_field__G) i.updateDefaultParams(t, e);
       }
     }
     showAllEditors(t, e, i = !1) {
-      for (const s of this.#R.values()) s.editorType === t && s.show(e);
-      (this.#ft?.get(x.HIGHLIGHT_SHOW_ALL) ?? !0) !== e && this.#Ht([[x.HIGHLIGHT_SHOW_ALL, e]]);
+      for (const s of this._private_field__R.values()) s.editorType === t && s.show(e);
+      (this._private_field__ft?.get(x.HIGHLIGHT_SHOW_ALL) ?? !0) !== e && this._private_field__Ht([[x.HIGHLIGHT_SHOW_ALL, e]]);
     }
     enableWaiting(t = !1) {
-      if (this.#rt !== t) {
-        this.#rt = t;
-        for (const e of this.#L.values()) (t ? e.disableClick() : e.enableClick(), e.div.classList.toggle("waiting", t));
+      if (this._private_field__rt !== t) {
+        this._private_field__rt = t;
+        for (const e of this._private_field__L.values()) (t ? e.disableClick() : e.enableClick(), e.div.classList.toggle("waiting", t));
       }
     }
-    async #Vt() {
-      if (!this.#st) {
-        this.#st = !0;
+    async _private_field__Vt() {
+      if (!this._private_field__st) {
+        this._private_field__st = !0;
         const t = [];
-        for (const e of this.#L.values()) t.push(e.enable());
+        for (const e of this._private_field__L.values()) t.push(e.enable());
         await Promise.all(t);
-        for (const e of this.#R.values()) e.enable();
+        for (const e of this._private_field__R.values()) e.enable();
       }
     }
-    #$t() {
-      if ((this.unselectAll(), this.#st)) {
-        this.#st = !1;
-        for (const t of this.#L.values()) t.disable();
-        for (const t of this.#R.values()) t.disable();
+    _private_field__$t() {
+      if ((this.unselectAll(), this._private_field__st)) {
+        this._private_field__st = !1;
+        for (const t of this._private_field__L.values()) t.disable();
+        for (const t of this._private_field__R.values()) t.disable();
       }
     }
     *getEditors(t) {
-      for (const e of this.#R.values()) e.pageIndex === t && (yield e);
+      for (const e of this._private_field__R.values()) e.pageIndex === t && (yield e);
     }
     getEditor(t) {
-      return this.#R.get(t);
+      return this._private_field__R.get(t);
     }
     addEditor(t) {
-      this.#R.set(t.id, t);
+      this._private_field__R.set(t.id, t);
     }
     removeEditor(t) {
-      (t.div.contains(document.activeElement) && (this.#Q && clearTimeout(this.#Q), this.#Q = setTimeout(() => {
-        (this.focusMainContainer(), this.#Q = null);
-      }, 0)), this.#R.delete(t.id), t.annotationElementId && this.#ht?.delete(t.annotationElementId), this.unselect(t), t.annotationElementId && this.#$.has(t.annotationElementId) || this.#B?.remove(t.id));
+      (t.div.contains(document.activeElement) && (this._private_field__Q && clearTimeout(this._private_field__Q), this._private_field__Q = setTimeout(() => {
+        (this.focusMainContainer(), this._private_field__Q = null);
+      }, 0)), this._private_field__R.delete(t.id), t.annotationElementId && this._private_field__ht?.delete(t.annotationElementId), this.unselect(t), t.annotationElementId && this._private_field__$.has(t.annotationElementId) || this._private_field__B?.remove(t.id));
     }
     addDeletedAnnotationElement(t) {
-      (this.#$.add(t.annotationElementId), this.addChangedExistingAnnotation(t), t.deleted = !0);
+      (this._private_field__$.add(t.annotationElementId), this.addChangedExistingAnnotation(t), t.deleted = !0);
     }
     isDeletedAnnotationElement(t) {
-      return this.#$.has(t);
+      return this._private_field__$.has(t);
     }
     removeDeletedAnnotationElement(t) {
-      (this.#$.delete(t.annotationElementId), this.removeChangedExistingAnnotation(t), t.deleted = !1);
+      (this._private_field__$.delete(t.annotationElementId), this.removeChangedExistingAnnotation(t), t.deleted = !1);
     }
-    #Ut(t) {
-      const e = this.#L.get(t.pageIndex);
+    _private_field__Ut(t) {
+      const e = this._private_field__L.get(t.pageIndex);
       e ? e.addOrRebuild(t) : (this.addEditor(t), this.addToAnnotationStorage(t));
     }
     setActiveEditor(t) {
-      this.#P !== t && (this.#P = t, t && this.#Ht(t.propertiesToUpdate));
+      this._private_field__P !== t && (this._private_field__P = t, t && this._private_field__Ht(t.propertiesToUpdate));
     }
-    get #Gt() {
+    get _private_field__Gt() {
       let t = null;
-      for (t of this.#ut) ;
+      for (t of this._private_field__ut) ;
       return t;
     }
     updateUI(t) {
-      this.#Gt === t && this.#Ht(t.propertiesToUpdate);
+      this._private_field__Gt === t && this._private_field__Ht(t.propertiesToUpdate);
     }
     updateUIForDefaultProperties(t) {
-      this.#Ht(t.defaultPropertiesToUpdate);
+      this._private_field__Ht(t.defaultPropertiesToUpdate);
     }
     toggleSelected(t) {
-      if (this.#ut.has(t)) return (this.#ut.delete(t), t.unselect(), void this.#It({
+      if (this._private_field__ut.has(t)) return (this._private_field__ut.delete(t), t.unselect(), void this._private_field__It({
         hasSelectedEditor: this.hasSelection
       }));
-      (this.#ut.add(t), t.select(), this.#Ht(t.propertiesToUpdate), this.#It({
+      (this._private_field__ut.add(t), t.select(), this._private_field__Ht(t.propertiesToUpdate), this._private_field__It({
         hasSelectedEditor: !0
       }));
     }
@@ -2044,64 +2044,64 @@
       (this.updateToolbar({
         mode: t.mode,
         editId: t.id
-      }), this.#H?.commitOrRemove());
-      for (const e of this.#ut) e !== t && e.unselect();
-      (this.#ut.clear(), this.#ut.add(t), t.select(), this.#Ht(t.propertiesToUpdate), this.#It({
+      }), this._private_field__H?.commitOrRemove());
+      for (const e of this._private_field__ut) e !== t && e.unselect();
+      (this._private_field__ut.clear(), this._private_field__ut.add(t), t.select(), this._private_field__Ht(t.propertiesToUpdate), this._private_field__It({
         hasSelectedEditor: !0
       }));
     }
     isSelected(t) {
-      return this.#ut.has(t);
+      return this._private_field__ut.has(t);
     }
     get firstSelectedEditor() {
-      return this.#ut.values().next().value;
+      return this._private_field__ut.values().next().value;
     }
     unselect(t) {
-      (t.unselect(), this.#ut.delete(t), this.#It({
+      (t.unselect(), this._private_field__ut.delete(t), this._private_field__It({
         hasSelectedEditor: this.hasSelection
       }));
     }
     get hasSelection() {
-      return 0 !== this.#ut.size;
+      return 0 !== this._private_field__ut.size;
     }
     get isEnterHandled() {
-      return 1 === this.#ut.size && this.firstSelectedEditor.isEnterHandled;
+      return 1 === this._private_field__ut.size && this.firstSelectedEditor.isEnterHandled;
     }
     undo() {
-      (this.#O.undo(), this.#It({
-        hasSomethingToUndo: this.#O.hasSomethingToUndo(),
+      (this._private_field__O.undo(), this._private_field__It({
+        hasSomethingToUndo: this._private_field__O.hasSomethingToUndo(),
         hasSomethingToRedo: !0,
-        isEmpty: this.#jt()
+        isEmpty: this._private_field__jt()
       }), this._editorUndoBar?.hide());
     }
     redo() {
-      (this.#O.redo(), this.#It({
+      (this._private_field__O.redo(), this._private_field__It({
         hasSomethingToUndo: !0,
-        hasSomethingToRedo: this.#O.hasSomethingToRedo(),
-        isEmpty: this.#jt()
+        hasSomethingToRedo: this._private_field__O.hasSomethingToRedo(),
+        isEmpty: this._private_field__jt()
       }));
     }
     addCommands(t) {
-      (this.#O.add(t), this.#It({
+      (this._private_field__O.add(t), this._private_field__It({
         hasSomethingToUndo: !0,
         hasSomethingToRedo: !1,
-        isEmpty: this.#jt()
+        isEmpty: this._private_field__jt()
       }));
     }
     cleanUndoStack(t) {
-      this.#O.cleanType(t);
+      this._private_field__O.cleanType(t);
     }
-    #jt() {
-      if (0 === this.#R.size) return !0;
-      if (1 === this.#R.size) for (const t of this.#R.values()) return t.isEmpty();
+    _private_field__jt() {
+      if (0 === this._private_field__R.size) return !0;
+      if (1 === this._private_field__R.size) for (const t of this._private_field__R.values()) return t.isEmpty();
       return !1;
     }
     delete() {
       this.commitOrRemove();
       const t = this.currentLayer?.endDrawingSession(!0);
       if (!this.hasSelection && !t) return;
-      const e = t ? [t] : [...this.#ut], i = () => {
-        for (const t of e) this.#Ut(t);
+      const e = t ? [t] : [...this._private_field__ut], i = () => {
+        for (const t of e) this._private_field__Ut(t);
       };
       this.addCommands({
         cmd: () => {
@@ -2113,42 +2113,42 @@
       });
     }
     commitOrRemove() {
-      this.#P?.commitOrRemove();
+      this._private_field__P?.commitOrRemove();
     }
     hasSomethingToControl() {
-      return this.#P || this.hasSelection;
+      return this._private_field__P || this.hasSelection;
     }
-    #zt(t) {
-      for (const e of this.#ut) e.unselect();
-      this.#ut.clear();
-      for (const e of t) e.isEmpty() || (this.#ut.add(e), e.select());
-      this.#It({
+    _private_field__zt(t) {
+      for (const e of this._private_field__ut) e.unselect();
+      this._private_field__ut.clear();
+      for (const e of t) e.isEmpty() || (this._private_field__ut.add(e), e.select());
+      this._private_field__It({
         hasSelectedEditor: this.hasSelection
       });
     }
     selectAll() {
-      for (const t of this.#ut) t.commit();
-      this.#zt(this.#R.values());
+      for (const t of this._private_field__ut) t.commit();
+      this._private_field__zt(this._private_field__R.values());
     }
     unselectAll() {
-      if ((!this.#P || (this.#P.commitOrRemove(), this.#dt === A.NONE)) && !this.#H?.commitOrRemove() && this.hasSelection) {
-        for (const t of this.#ut) t.unselect();
-        (this.#ut.clear(), this.#It({
+      if ((!this._private_field__P || (this._private_field__P.commitOrRemove(), this._private_field__dt === A.NONE)) && !this._private_field__H?.commitOrRemove() && this.hasSelection) {
+        for (const t of this._private_field__ut) t.unselect();
+        (this._private_field__ut.clear(), this._private_field__It({
           hasSelectedEditor: !1
         }));
       }
     }
     translateSelectedEditors(t, e, i = !1) {
       if ((i || this.commitOrRemove(), !this.hasSelection)) return;
-      (this.#yt[0] += t, this.#yt[1] += e);
-      const [s, n] = this.#yt, r = [...this.#ut];
-      (this.#wt && clearTimeout(this.#wt), this.#wt = setTimeout(() => {
-        (this.#wt = null, this.#yt[0] = this.#yt[1] = 0, this.addCommands({
+      (this._private_field__yt[0] += t, this._private_field__yt[1] += e);
+      const [s, n] = this._private_field__yt, r = [...this._private_field__ut];
+      (this._private_field__wt && clearTimeout(this._private_field__wt), this._private_field__wt = setTimeout(() => {
+        (this._private_field__wt = null, this._private_field__yt[0] = this._private_field__yt[1] = 0, this.addCommands({
           cmd: () => {
-            for (const t of r) this.#R.has(t.id) && (t.translateInPage(s, n), t.translationDone());
+            for (const t of r) this._private_field__R.has(t.id) && (t.translateInPage(s, n), t.translationDone());
           },
           undo: () => {
-            for (const t of r) this.#R.has(t.id) && (t.translateInPage(-s, -n), t.translationDone());
+            for (const t of r) this._private_field__R.has(t.id) && (t.translateInPage(-s, -n), t.translationDone());
           },
           mustExec: !1
         }));
@@ -2157,8 +2157,8 @@
     }
     setUpDragSession() {
       if (this.hasSelection) {
-        (this.disableUserSelect(!0), this.#V = new Map());
-        for (const t of this.#ut) this.#V.set(t, {
+        (this.disableUserSelect(!0), this._private_field__V = new Map());
+        for (const t of this._private_field__ut) this._private_field__V.set(t, {
           savedX: t.x,
           savedY: t.y,
           savedPageIndex: t.pageIndex,
@@ -2169,16 +2169,16 @@
       }
     }
     endDragSession() {
-      if (!this.#V) return !1;
+      if (!this._private_field__V) return !1;
       this.disableUserSelect(!1);
-      const t = this.#V;
-      this.#V = null;
+      const t = this._private_field__V;
+      this._private_field__V = null;
       let e = !1;
       for (const [{x: s, y: n, pageIndex: r}, a] of t) (a.newX = s, a.newY = n, a.newPageIndex = r, e ||= s !== a.savedX || n !== a.savedY || r !== a.savedPageIndex);
       if (!e) return !1;
       const i = (t, e, i, s) => {
-        if (this.#R.has(t.id)) {
-          const n = this.#L.get(s);
+        if (this._private_field__R.has(t.id)) {
+          const n = this._private_field__L.get(s);
           n ? t._setParentAndPosition(n, e, i) : (t.pageIndex = s, t.x = e, t.y = i);
         }
       };
@@ -2193,7 +2193,7 @@
       }), !0);
     }
     dragSelectedEditors(t, e) {
-      if (this.#V) for (const i of this.#V.keys()) i.drag(t, e);
+      if (this._private_field__V) for (const i of this._private_field__V.keys()) i.drag(t, e);
     }
     rebuild(t) {
       if (null === t.parent) {
@@ -2202,19 +2202,19 @@
       } else t.parent.addOrRebuild(t);
     }
     get isEditorHandlingKeyboard() {
-      return this.getActive()?.shouldGetKeyboardEvents() || 1 === this.#ut.size && this.firstSelectedEditor.shouldGetKeyboardEvents();
+      return this.getActive()?.shouldGetKeyboardEvents() || 1 === this._private_field__ut.size && this.firstSelectedEditor.shouldGetKeyboardEvents();
     }
     isActive(t) {
-      return this.#P === t;
+      return this._private_field__P === t;
     }
     getActive() {
-      return this.#P;
+      return this._private_field__P;
     }
     getMode() {
-      return this.#dt;
+      return this._private_field__dt;
     }
     isEditingMode() {
-      return this.#dt !== A.NONE;
+      return this._private_field__dt !== A.NONE;
     }
     get imageManager() {
       return J(this, "imageManager", new ee());
@@ -2266,43 +2266,42 @@
       return 0 === o.length ? null : o;
     }
     addChangedExistingAnnotation({annotationElementId: t, id: e}) {
-      (this.#N ||= new Map()).set(t, e);
+      (this._private_field__N ||= new Map()).set(t, e);
     }
     removeChangedExistingAnnotation({annotationElementId: t}) {
-      this.#N?.delete(t);
+      this._private_field__N?.delete(t);
     }
     renderAnnotationElement(t) {
-      const e = this.#N?.get(t.data.id);
+      const e = this._private_field__N?.get(t.data.id);
       if (!e) return;
-      const i = this.#B.getRawValue(e);
-      i && (this.#dt !== A.NONE || i.hasBeenModified) && i.renderAnnotationElement(t);
+      const i = this._private_field__B.getRawValue(e);
+      i && (this._private_field__dt !== A.NONE || i.hasBeenModified) && i.renderAnnotationElement(t);
     }
     setMissingCanvas(t, e, i) {
-      const s = this.#ht?.get(t);
-      s && (s.setCanvas(e, i), this.#ht.delete(t));
+      const s = this._private_field__ht?.get(t);
+      s && (s.setCanvas(e, i), this._private_field__ht.delete(t));
     }
     addMissingCanvas(t, e) {
-      (this.#ht ||= new Map()).set(t, e);
+      (this._private_field__ht ||= new Map()).set(t, e);
     }
   }
   re.TRANSLATE_SMALL = 1;
   re.TRANSLATE_BIG = 10;
   class ae {
-    #o = null;
-    #Wt = !1;
-    #qt = null;
-    #Xt = null;
-    #Kt = null;
-    #Yt = null;
-    #Qt = !1;
-    #Jt = null;
-    #r = null;
-    #Zt = null;
-    #te = null;
-    #ee = !1;
-    static #ie = null;
+    _private_field__o = null;
+    _private_field__Wt = !1;
+    _private_field__qt = null;
+    _private_field__Xt = null;
+    _private_field__Kt = null;
+    _private_field__Yt = null;
+    _private_field__Qt = !1;
+    _private_field__Jt = null;
+    _private_field__r = null;
+    _private_field__Zt = null;
+    _private_field__te = null;
+    _private_field__ee = !1;
     constructor(t) {
-      (this.#r = t, this.#ee = t._uiManager.useNewAltTextFlow, ae.#ie ||= Object.freeze({
+      (this._private_field__r = t, this._private_field__ee = t._uiManager.useNewAltTextFlow, ae._private_field__ie ||= Object.freeze({
         added: "pdfjs-editor-new-alt-text-added-button",
         "added-label": "pdfjs-editor-new-alt-text-added-button-label",
         missing: "pdfjs-editor-new-alt-text-missing-button",
@@ -2315,21 +2314,21 @@
       ae._l10n ??= t;
     }
     async render() {
-      const t = this.#qt = document.createElement("button");
+      const t = this._private_field__qt = document.createElement("button");
       (t.className = "altText", t.tabIndex = "0");
-      const e = this.#Xt = document.createElement("span");
-      (t.append(e), this.#ee ? (t.classList.add("new"), t.setAttribute("data-l10n-id", ae.#ie.missing), e.setAttribute("data-l10n-id", ae.#ie["missing-label"])) : (t.setAttribute("data-l10n-id", "pdfjs-editor-alt-text-button"), e.setAttribute("data-l10n-id", "pdfjs-editor-alt-text-button-label")));
-      const i = this.#r._uiManager._signal;
+      const e = this._private_field__Xt = document.createElement("span");
+      (t.append(e), this._private_field__ee ? (t.classList.add("new"), t.setAttribute("data-l10n-id", ae._private_field__ie.missing), e.setAttribute("data-l10n-id", ae._private_field__ie["missing-label"])) : (t.setAttribute("data-l10n-id", "pdfjs-editor-alt-text-button"), e.setAttribute("data-l10n-id", "pdfjs-editor-alt-text-button-label")));
+      const i = this._private_field__r._uiManager._signal;
       (t.addEventListener("contextmenu", Pt, {
         signal: i
       }), t.addEventListener("pointerdown", t => t.stopPropagation(), {
         signal: i
       }));
       const s = t => {
-        (t.preventDefault(), this.#r._uiManager.editAltText(this.#r), this.#ee && this.#r._reportTelemetry({
+        (t.preventDefault(), this._private_field__r._uiManager.editAltText(this._private_field__r), this._private_field__ee && this._private_field__r._reportTelemetry({
           action: "pdfjs.image.alt_text.image_status_label_clicked",
           data: {
-            label: this.#se
+            label: this._private_field__se
           }
         }));
       };
@@ -2337,188 +2336,189 @@
         capture: !0,
         signal: i
       }), t.addEventListener("keydown", e => {
-        e.target === t && "Enter" === e.key && (this.#Qt = !0, s(e));
+        e.target === t && "Enter" === e.key && (this._private_field__Qt = !0, s(e));
       }, {
         signal: i
-      }), await this.#ne(), t);
+      }), await this._private_field__ne(), t);
     }
-    get #se() {
-      return (this.#o ? "added" : null === this.#o && this.guessedText && "review") || "missing";
+    get _private_field__se() {
+      return (this._private_field__o ? "added" : null === this._private_field__o && this.guessedText && "review") || "missing";
     }
     finish() {
-      this.#qt && (this.#qt.focus({
-        focusVisible: this.#Qt
-      }), this.#Qt = !1);
+      this._private_field__qt && (this._private_field__qt.focus({
+        focusVisible: this._private_field__Qt
+      }), this._private_field__Qt = !1);
     }
     isEmpty() {
-      return this.#ee ? null === this.#o : !this.#o && !this.#Wt;
+      return this._private_field__ee ? null === this._private_field__o : !this._private_field__o && !this._private_field__Wt;
     }
     hasData() {
-      return this.#ee ? null !== this.#o || !!this.#Zt : this.isEmpty();
+      return this._private_field__ee ? null !== this._private_field__o || !!this._private_field__Zt : this.isEmpty();
     }
     get guessedText() {
-      return this.#Zt;
+      return this._private_field__Zt;
     }
     async setGuessedText(t) {
-      null === this.#o && (this.#Zt = t, this.#te = await ae._l10n.get("pdfjs-editor-new-alt-text-generated-alt-text-with-disclaimer", {
+      null === this._private_field__o && (this._private_field__Zt = t, this._private_field__te = await ae._l10n.get("pdfjs-editor-new-alt-text-generated-alt-text-with-disclaimer", {
         generatedAltText: t
-      }), this.#ne());
+      }), this._private_field__ne());
     }
     toggleAltTextBadge(t = !1) {
-      if (!this.#ee || this.#o) return (this.#Jt?.remove(), void (this.#Jt = null));
-      if (!this.#Jt) {
-        const t = this.#Jt = document.createElement("div");
-        (t.className = "noAltTextBadge", this.#r.div.append(t));
+      if (!this._private_field__ee || this._private_field__o) return (this._private_field__Jt?.remove(), void (this._private_field__Jt = null));
+      if (!this._private_field__Jt) {
+        const t = this._private_field__Jt = document.createElement("div");
+        (t.className = "noAltTextBadge", this._private_field__r.div.append(t));
       }
-      this.#Jt.classList.toggle("hidden", !t);
+      this._private_field__Jt.classList.toggle("hidden", !t);
     }
     serialize(t) {
-      let e = this.#o;
-      return (t || this.#Zt !== e || (e = this.#te), {
+      let e = this._private_field__o;
+      return (t || this._private_field__Zt !== e || (e = this._private_field__te), {
         altText: e,
-        decorative: this.#Wt,
-        guessedText: this.#Zt,
-        textWithDisclaimer: this.#te
+        decorative: this._private_field__Wt,
+        guessedText: this._private_field__Zt,
+        textWithDisclaimer: this._private_field__te
       });
     }
     get data() {
       return {
-        altText: this.#o,
-        decorative: this.#Wt
+        altText: this._private_field__o,
+        decorative: this._private_field__Wt
       };
     }
     set data({altText: t, decorative: e, guessedText: i, textWithDisclaimer: s, cancel: n = !1}) {
-      (i && (this.#Zt = i, this.#te = s), this.#o === t && this.#Wt === e || (n || (this.#o = t, this.#Wt = e), this.#ne()));
+      (i && (this._private_field__Zt = i, this._private_field__te = s), this._private_field__o === t && this._private_field__Wt === e || (n || (this._private_field__o = t, this._private_field__Wt = e), this._private_field__ne()));
     }
     toggle(t = !1) {
-      this.#qt && (!t && this.#Yt && (clearTimeout(this.#Yt), this.#Yt = null), this.#qt.disabled = !t);
+      this._private_field__qt && (!t && this._private_field__Yt && (clearTimeout(this._private_field__Yt), this._private_field__Yt = null), this._private_field__qt.disabled = !t);
     }
     shown() {
-      this.#r._reportTelemetry({
+      this._private_field__r._reportTelemetry({
         action: "pdfjs.image.alt_text.image_status_label_displayed",
         data: {
-          label: this.#se
+          label: this._private_field__se
         }
       });
     }
     destroy() {
-      (this.#qt?.remove(), this.#qt = null, this.#Xt = null, this.#Kt = null, this.#Jt?.remove(), this.#Jt = null);
+      (this._private_field__qt?.remove(), this._private_field__qt = null, this._private_field__Xt = null, this._private_field__Kt = null, this._private_field__Jt?.remove(), this._private_field__Jt = null);
     }
-    async #ne() {
-      const t = this.#qt;
+    async _private_field__ne() {
+      const t = this._private_field__qt;
       if (!t) return;
-      if (this.#ee) {
-        if ((t.classList.toggle("done", !!this.#o), t.setAttribute("data-l10n-id", ae.#ie[this.#se]), this.#Xt?.setAttribute("data-l10n-id", ae.#ie[`${this.#se}-label`]), !this.#o)) return void this.#Kt?.remove();
+      if (this._private_field__ee) {
+        if ((t.classList.toggle("done", !!this._private_field__o), t.setAttribute("data-l10n-id", ae._private_field__ie[this._private_field__se]), this._private_field__Xt?.setAttribute("data-l10n-id", ae._private_field__ie[`${this._private_field__se}-label`]), !this._private_field__o)) return void this._private_field__Kt?.remove();
       } else {
-        if (!this.#o && !this.#Wt) return (t.classList.remove("done"), void this.#Kt?.remove());
+        if (!this._private_field__o && !this._private_field__Wt) return (t.classList.remove("done"), void this._private_field__Kt?.remove());
         (t.classList.add("done"), t.setAttribute("data-l10n-id", "pdfjs-editor-alt-text-edit-button"));
       }
-      let e = this.#Kt;
+      let e = this._private_field__Kt;
       if (!e) {
-        (this.#Kt = e = document.createElement("span"), e.className = "tooltip", e.setAttribute("role", "tooltip"), e.id = `alt-text-tooltip-${this.#r.id}`);
-        const i = 100, s = this.#r._uiManager._signal;
+        (this._private_field__Kt = e = document.createElement("span"), e.className = "tooltip", e.setAttribute("role", "tooltip"), e.id = `alt-text-tooltip-${this._private_field__r.id}`);
+        const i = 100, s = this._private_field__r._uiManager._signal;
         (s.addEventListener("abort", () => {
-          (clearTimeout(this.#Yt), this.#Yt = null);
+          (clearTimeout(this._private_field__Yt), this._private_field__Yt = null);
         }, {
           once: !0
         }), t.addEventListener("mouseenter", () => {
-          this.#Yt = setTimeout(() => {
-            (this.#Yt = null, this.#Kt.classList.add("show"), this.#r._reportTelemetry({
+          this._private_field__Yt = setTimeout(() => {
+            (this._private_field__Yt = null, this._private_field__Kt.classList.add("show"), this._private_field__r._reportTelemetry({
               action: "alt_text_tooltip"
             }));
           }, i);
         }, {
           signal: s
         }), t.addEventListener("mouseleave", () => {
-          (this.#Yt && (clearTimeout(this.#Yt), this.#Yt = null), this.#Kt?.classList.remove("show"));
+          (this._private_field__Yt && (clearTimeout(this._private_field__Yt), this._private_field__Yt = null), this._private_field__Kt?.classList.remove("show"));
         }, {
           signal: s
         }));
       }
-      (this.#Wt ? e.setAttribute("data-l10n-id", "pdfjs-editor-alt-text-decorative-tooltip") : (e.removeAttribute("data-l10n-id"), e.textContent = this.#o), e.parentNode || t.append(e));
-      const i = this.#r.getElementForAltText();
+      (this._private_field__Wt ? e.setAttribute("data-l10n-id", "pdfjs-editor-alt-text-decorative-tooltip") : (e.removeAttribute("data-l10n-id"), e.textContent = this._private_field__o), e.parentNode || t.append(e));
+      const i = this._private_field__r.getElementForAltText();
       i?.setAttribute("aria-describedby", e.id);
     }
   }
+  ae._private_field__ie = null;
   ae._l10n = null;
   class oe {
-    #re = null;
-    #ae = null;
-    #oe = !1;
-    #r = null;
-    #le = null;
-    #he = null;
-    #ce = null;
-    #de = null;
-    #ue = !1;
-    #pe = null;
+    _private_field__re = null;
+    _private_field__ae = null;
+    _private_field__oe = !1;
+    _private_field__r = null;
+    _private_field__le = null;
+    _private_field__he = null;
+    _private_field__ce = null;
+    _private_field__de = null;
+    _private_field__ue = !1;
+    _private_field__pe = null;
     constructor(t) {
-      this.#r = t;
+      this._private_field__r = t;
     }
     renderForToolbar() {
-      const t = this.#ae = document.createElement("button");
-      return (t.className = "comment", this.#v(t, !1));
+      const t = this._private_field__ae = document.createElement("button");
+      return (t.className = "comment", this._private_field__v(t, !1));
     }
     renderForStandalone() {
-      const t = this.#re = document.createElement("button");
+      const t = this._private_field__re = document.createElement("button");
       t.className = "annotationCommentButton";
-      const e = this.#r.commentButtonPosition;
+      const e = this._private_field__r.commentButtonPosition;
       if (e) {
         const {style: i} = t;
-        (i.insetInlineEnd = `calc(${100 * ("ltr" === this.#r._uiManager.direction ? 1 - e[0] : e[0])}% - var(--comment-button-dim))`, i.top = `calc(${100 * e[1]}% - var(--comment-button-dim))`);
-        const s = this.#r.commentButtonColor;
+        (i.insetInlineEnd = `calc(${100 * ("ltr" === this._private_field__r._uiManager.direction ? 1 - e[0] : e[0])}% - var(--comment-button-dim))`, i.top = `calc(${100 * e[1]}% - var(--comment-button-dim))`);
+        const s = this._private_field__r.commentButtonColor;
         s && (i.backgroundColor = s);
       }
-      return this.#v(t, !0);
+      return this._private_field__v(t, !0);
     }
     focusButton() {
       setTimeout(() => {
-        (this.#re ?? this.#ae)?.focus();
+        (this._private_field__re ?? this._private_field__ae)?.focus();
       }, 0);
     }
     onUpdatedColor() {
-      if (!this.#re) return;
-      const t = this.#r.commentButtonColor;
-      (t && (this.#re.style.backgroundColor = t), this.#r._uiManager.updatePopupColor(this.#r));
+      if (!this._private_field__re) return;
+      const t = this._private_field__r.commentButtonColor;
+      (t && (this._private_field__re.style.backgroundColor = t), this._private_field__r._uiManager.updatePopupColor(this._private_field__r));
     }
     get commentButtonWidth() {
-      return (this.#re?.getBoundingClientRect().width ?? 0) / this.#r.parent.boundingClientRect.width;
+      return (this._private_field__re?.getBoundingClientRect().width ?? 0) / this._private_field__r.parent.boundingClientRect.width;
     }
     get commentPopupPositionInLayer() {
-      if (this.#pe) return this.#pe;
-      if (!this.#re) return null;
-      const {x: t, y: e, height: i} = this.#re.getBoundingClientRect(), {x: s, y: n, width: r, height: a} = this.#r.parent.boundingClientRect;
+      if (this._private_field__pe) return this._private_field__pe;
+      if (!this._private_field__re) return null;
+      const {x: t, y: e, height: i} = this._private_field__re.getBoundingClientRect(), {x: s, y: n, width: r, height: a} = this._private_field__r.parent.boundingClientRect;
       return [(t - s) / r, (e + i - n) / a];
     }
     set commentPopupPositionInLayer(t) {
-      this.#pe = t;
+      this._private_field__pe = t;
     }
     hasDefaultPopupPosition() {
-      return null === this.#pe;
+      return null === this._private_field__pe;
     }
     removeStandaloneCommentButton() {
-      (this.#re?.remove(), this.#re = null);
+      (this._private_field__re?.remove(), this._private_field__re = null);
     }
     removeToolbarCommentButton() {
-      (this.#ae?.remove(), this.#ae = null);
+      (this._private_field__ae?.remove(), this._private_field__ae = null);
     }
     setCommentButtonStates({selected: t, hasPopup: e}) {
-      this.#re && (this.#re.classList.toggle("selected", t), this.#re.ariaExpanded = e);
+      this._private_field__re && (this._private_field__re.classList.toggle("selected", t), this._private_field__re.ariaExpanded = e);
     }
-    #v(t, e) {
-      if (!this.#r._uiManager.hasCommentManager()) return null;
-      (t.tabIndex = "0", t.ariaHasPopup = "dialog", e ? (t.ariaControls = "commentPopup", t.setAttribute("data-l10n-id", "pdfjs-show-comment-button")) : (t.ariaControlsElements = [this.#r._uiManager.getCommentDialogElement()], t.setAttribute("data-l10n-id", "pdfjs-editor-edit-comment-button")));
-      const i = this.#r._uiManager._signal;
+    _private_field__v(t, e) {
+      if (!this._private_field__r._uiManager.hasCommentManager()) return null;
+      (t.tabIndex = "0", t.ariaHasPopup = "dialog", e ? (t.ariaControls = "commentPopup", t.setAttribute("data-l10n-id", "pdfjs-show-comment-button")) : (t.ariaControlsElements = [this._private_field__r._uiManager.getCommentDialogElement()], t.setAttribute("data-l10n-id", "pdfjs-editor-edit-comment-button")));
+      const i = this._private_field__r._uiManager._signal;
       if (!(i instanceof AbortSignal) || i.aborted) return t;
       (t.addEventListener("contextmenu", Pt, {
         signal: i
       }), e && (t.addEventListener("focusin", t => {
-        (this.#r._focusEventsAllowed = !1, It(t));
+        (this._private_field__r._focusEventsAllowed = !1, It(t));
       }, {
         capture: !0,
         signal: i
       }), t.addEventListener("focusout", t => {
-        (this.#r._focusEventsAllowed = !0, It(t));
+        (this._private_field__r._focusEventsAllowed = !0, It(t));
       }, {
         capture: !0,
         signal: i
@@ -2526,21 +2526,21 @@
         signal: i
       }));
       const s = e => {
-        (e.preventDefault(), t === this.#ae ? this.edit() : this.#r.toggleComment(!0));
+        (e.preventDefault(), t === this._private_field__ae ? this.edit() : this._private_field__r.toggleComment(!0));
       };
       return (t.addEventListener("click", s, {
         capture: !0,
         signal: i
       }), t.addEventListener("keydown", e => {
-        e.target === t && "Enter" === e.key && (this.#oe = !0, s(e));
+        e.target === t && "Enter" === e.key && (this._private_field__oe = !0, s(e));
       }, {
         signal: i
       }), t.addEventListener("pointerenter", () => {
-        this.#r.toggleComment(!1, !0);
+        this._private_field__r.toggleComment(!1, !0);
       }, {
         signal: i
       }), t.addEventListener("pointerleave", () => {
-        this.#r.toggleComment(!1, !1);
+        this._private_field__r.toggleComment(!1, !1);
       }, {
         signal: i
       }), t);
@@ -2549,153 +2549,153 @@
       const e = this.commentPopupPositionInLayer;
       let i, s;
       if (e) [i, s] = e; else {
-        [i, s] = this.#r.commentButtonPosition;
-        const {width: t, height: e, x: n, y: r} = this.#r;
+        [i, s] = this._private_field__r.commentButtonPosition;
+        const {width: t, height: e, x: n, y: r} = this._private_field__r;
         (i = n + i * t, s = r + s * e);
       }
-      const n = this.#r.parent.boundingClientRect, {x: r, y: a, width: o, height: l} = n;
-      this.#r._uiManager.editComment(this.#r, r + i * o, a + s * l, {
+      const n = this._private_field__r.parent.boundingClientRect, {x: r, y: a, width: o, height: l} = n;
+      this._private_field__r._uiManager.editComment(this._private_field__r, r + i * o, a + s * l, {
         ...t,
         parentDimensions: n
       });
     }
     finish() {
-      this.#ae && (this.#ae.focus({
-        focusVisible: this.#oe
-      }), this.#oe = !1);
+      this._private_field__ae && (this._private_field__ae.focus({
+        focusVisible: this._private_field__oe
+      }), this._private_field__oe = !1);
     }
     isDeleted() {
-      return this.#ue || "" === this.#ce;
+      return this._private_field__ue || "" === this._private_field__ce;
     }
     isEmpty() {
-      return null === this.#ce;
+      return null === this._private_field__ce;
     }
     hasBeenEdited() {
-      return this.isDeleted() || this.#ce !== this.#le;
+      return this.isDeleted() || this._private_field__ce !== this._private_field__le;
     }
     serialize() {
       return this.data;
     }
     get data() {
       return {
-        text: this.#ce,
-        richText: this.#he,
-        date: this.#de,
+        text: this._private_field__ce,
+        richText: this._private_field__he,
+        date: this._private_field__de,
         deleted: this.isDeleted()
       };
     }
     set data(t) {
-      if ((t !== this.#ce && (this.#he = null), null === t)) return (this.#ce = "", void (this.#ue = !0));
-      (this.#ce = t, this.#de = new Date(), this.#ue = !1);
+      if ((t !== this._private_field__ce && (this._private_field__he = null), null === t)) return (this._private_field__ce = "", void (this._private_field__ue = !0));
+      (this._private_field__ce = t, this._private_field__de = new Date(), this._private_field__ue = !1);
     }
     setInitialText(t, e = null) {
-      (this.#le = t, this.data = t, this.#de = null, this.#he = e);
+      (this._private_field__le = t, this.data = t, this._private_field__de = null, this._private_field__he = e);
     }
     shown() {}
     destroy() {
-      (this.#ae?.remove(), this.#ae = null, this.#re?.remove(), this.#re = null, this.#ce = "", this.#he = null, this.#de = null, this.#r = null, this.#oe = !1, this.#ue = !1);
+      (this._private_field__ae?.remove(), this._private_field__ae = null, this._private_field__re?.remove(), this._private_field__re = null, this._private_field__ce = "", this._private_field__he = null, this._private_field__de = null, this._private_field__r = null, this._private_field__oe = !1, this._private_field__ue = !1);
     }
   }
   class le {
-    #At;
-    #ge = !1;
-    #me = null;
-    #fe;
-    #be;
-    #ve;
-    #ye;
-    #we = null;
-    #Ae;
-    #xe = null;
-    #_e;
-    #Se = null;
+    _private_field__At;
+    _private_field__ge = !1;
+    _private_field__me = null;
+    _private_field__fe;
+    _private_field__be;
+    _private_field__ve;
+    _private_field__ye;
+    _private_field__we = null;
+    _private_field__Ae;
+    _private_field__xe = null;
+    _private_field___e;
+    _private_field__Se = null;
     constructor({container: t, isPinchingDisabled: e = null, isPinchingStopped: i = null, onPinchStart: s = null, onPinching: n = null, onPinchEnd: r = null, signal: a}) {
-      (this.#At = t, this.#me = i, this.#fe = e, this.#be = s, this.#ve = n, this.#ye = r, this.#_e = new AbortController(), this.#Ae = AbortSignal.any([a, this.#_e.signal]), t.addEventListener("touchstart", this.#Ce.bind(this), {
+      (this._private_field__At = t, this._private_field__me = i, this._private_field__fe = e, this._private_field__be = s, this._private_field__ve = n, this._private_field__ye = r, this._private_field___e = new AbortController(), this._private_field__Ae = AbortSignal.any([a, this._private_field___e.signal]), t.addEventListener("touchstart", this._private_field__Ce.bind(this), {
         passive: !1,
-        signal: this.#Ae
+        signal: this._private_field__Ae
       }));
     }
     get MIN_TOUCH_DISTANCE_TO_PINCH() {
       return 35 / Ut.pixelRatio;
     }
-    #Ce(t) {
-      if (this.#fe?.()) return;
+    _private_field__Ce(t) {
+      if (this._private_field__fe?.()) return;
       if (1 === t.touches.length) {
-        if (this.#we) return;
-        const t = this.#we = new AbortController(), e = AbortSignal.any([this.#Ae, t.signal]), i = this.#At, s = {
+        if (this._private_field__we) return;
+        const t = this._private_field__we = new AbortController(), e = AbortSignal.any([this._private_field__Ae, t.signal]), i = this._private_field__At, s = {
           capture: !0,
           signal: e,
           passive: !1
         }, n = t => {
-          "touch" === t.pointerType && (this.#we?.abort(), this.#we = null);
+          "touch" === t.pointerType && (this._private_field__we?.abort(), this._private_field__we = null);
         };
         return (i.addEventListener("pointerdown", t => {
           "touch" === t.pointerType && (It(t), n(t));
         }, s), i.addEventListener("pointerup", n, s), void i.addEventListener("pointercancel", n, s));
       }
-      if (!this.#Se) {
-        this.#Se = new AbortController();
-        const t = AbortSignal.any([this.#Ae, this.#Se.signal]), e = this.#At, i = {
+      if (!this._private_field__Se) {
+        this._private_field__Se = new AbortController();
+        const t = AbortSignal.any([this._private_field__Ae, this._private_field__Se.signal]), e = this._private_field__At, i = {
           signal: t,
           capture: !1,
           passive: !1
         };
-        e.addEventListener("touchmove", this.#Ee.bind(this), i);
-        const s = this.#Te.bind(this);
-        (e.addEventListener("touchend", s, i), e.addEventListener("touchcancel", s, i), i.capture = !0, e.addEventListener("pointerdown", It, i), e.addEventListener("pointermove", It, i), e.addEventListener("pointercancel", It, i), e.addEventListener("pointerup", It, i), this.#be?.());
+        e.addEventListener("touchmove", this._private_field__Ee.bind(this), i);
+        const s = this._private_field__Te.bind(this);
+        (e.addEventListener("touchend", s, i), e.addEventListener("touchcancel", s, i), i.capture = !0, e.addEventListener("pointerdown", It, i), e.addEventListener("pointermove", It, i), e.addEventListener("pointercancel", It, i), e.addEventListener("pointerup", It, i), this._private_field__be?.());
       }
-      if ((It(t), 2 !== t.touches.length || this.#me?.())) return void (this.#xe = null);
+      if ((It(t), 2 !== t.touches.length || this._private_field__me?.())) return void (this._private_field__xe = null);
       let [e, i] = t.touches;
-      (e.identifier > i.identifier && ([e, i] = [i, e]), this.#xe = {
+      (e.identifier > i.identifier && ([e, i] = [i, e]), this._private_field__xe = {
         touch0X: e.screenX,
         touch0Y: e.screenY,
         touch1X: i.screenX,
         touch1Y: i.screenY
       });
     }
-    #Ee(t) {
-      if (!this.#xe || 2 !== t.touches.length) return;
+    _private_field__Ee(t) {
+      if (!this._private_field__xe || 2 !== t.touches.length) return;
       It(t);
       let [e, i] = t.touches;
       e.identifier > i.identifier && ([e, i] = [i, e]);
-      const {screenX: s, screenY: n} = e, {screenX: r, screenY: a} = i, o = this.#xe, {touch0X: l, touch0Y: h, touch1X: c, touch1Y: d} = o, u = c - l, p = d - h, g = r - s, m = a - n, f = Math.hypot(g, m) || 1, b = Math.hypot(u, p) || 1;
-      if (!this.#ge && Math.abs(b - f) <= le.MIN_TOUCH_DISTANCE_TO_PINCH) return;
-      if ((o.touch0X = s, o.touch0Y = n, o.touch1X = r, o.touch1Y = a, !this.#ge)) return void (this.#ge = !0);
+      const {screenX: s, screenY: n} = e, {screenX: r, screenY: a} = i, o = this._private_field__xe, {touch0X: l, touch0Y: h, touch1X: c, touch1Y: d} = o, u = c - l, p = d - h, g = r - s, m = a - n, f = Math.hypot(g, m) || 1, b = Math.hypot(u, p) || 1;
+      if (!this._private_field__ge && Math.abs(b - f) <= le.MIN_TOUCH_DISTANCE_TO_PINCH) return;
+      if ((o.touch0X = s, o.touch0Y = n, o.touch1X = r, o.touch1Y = a, !this._private_field__ge)) return void (this._private_field__ge = !0);
       const v = [(s + r) / 2, (n + a) / 2];
-      this.#ve?.(v, b, f);
+      this._private_field__ve?.(v, b, f);
     }
-    #Te(t) {
-      t.touches.length >= 2 || (this.#Se && (this.#Se.abort(), this.#Se = null, this.#ye?.()), this.#xe && (It(t), this.#xe = null, this.#ge = !1));
+    _private_field__Te(t) {
+      t.touches.length >= 2 || (this._private_field__Se && (this._private_field__Se.abort(), this._private_field__Se = null, this._private_field__ye?.()), this._private_field__xe && (It(t), this._private_field__xe = null, this._private_field__ge = !1));
     }
     destroy() {
-      (this.#_e?.abort(), this.#_e = null, this.#we?.abort(), this.#we = null);
+      (this._private_field___e?.abort(), this._private_field___e = null, this._private_field__we?.abort(), this._private_field__we = null);
     }
   }
   class he {
-    #Me = null;
-    #ke = null;
-    #o = null;
-    #l = null;
-    #re = null;
-    #De = !1;
-    #Pe = null;
-    #Ie = "";
-    #Re = null;
-    #Le = null;
-    #Fe = null;
-    #Be = null;
-    #Ne = null;
-    #Oe = "";
-    #Ue = !1;
-    #ze = null;
-    #He = !1;
-    #je = !1;
-    #$e = !1;
-    #Ve = null;
-    #Ge = 0;
-    #We = 0;
-    #qe = null;
-    #Xe = null;
+    _private_field__Me = null;
+    _private_field__ke = null;
+    _private_field__o = null;
+    _private_field__l = null;
+    _private_field__re = null;
+    _private_field__De = !1;
+    _private_field__Pe = null;
+    _private_field__Ie = "";
+    _private_field__Re = null;
+    _private_field__Le = null;
+    _private_field__Fe = null;
+    _private_field__Be = null;
+    _private_field__Ne = null;
+    _private_field__Oe = "";
+    _private_field__Ue = !1;
+    _private_field__ze = null;
+    _private_field__He = !1;
+    _private_field__je = !1;
+    _private_field__$e = !1;
+    _private_field__Ve = null;
+    _private_field__Ge = 0;
+    _private_field__We = 0;
+    _private_field__qe = null;
+    _private_field__Xe = null;
     isSelected = !1;
     _isCopy = !1;
     _editToolbar = null;
@@ -2704,8 +2704,8 @@
     _isVisible = !0;
     _uiManager = null;
     _focusEventsAllowed = !0;
-    #Ke = !1;
-    #Ye = he._zIndex++;
+    _private_field__Ke = !1;
+    _private_field__Ye = he._zIndex++;
     static get _resizerKeyboardManager() {
       const t = he.prototype._resizeWithKeyboard, e = re.TRANSLATE_SMALL, i = re.TRANSLATE_BIG;
       return J(this, "_resizerKeyboardManager", new se([[["ArrowLeft", "mac+ArrowLeft"], t, {
@@ -2781,10 +2781,10 @@
       return [];
     }
     get _isDraggable() {
-      return this.#Ke;
+      return this._private_field__Ke;
     }
     set _isDraggable(t) {
-      (this.#Ke = t, this.div?.classList.toggle("draggable", t));
+      (this._private_field__Ke = t, this.div?.classList.toggle("draggable", t));
     }
     get uid() {
       return this.annotationElementId || this.id;
@@ -2819,13 +2819,13 @@
       this.div.style.zIndex = 0;
     }
     setInForeground() {
-      this.div.style.zIndex = this.#Ye;
+      this.div.style.zIndex = this._private_field__Ye;
     }
     setParent(t) {
-      (null !== t ? (this.pageIndex = t.pageIndex, this.pageDimensions = t.pageDimensions) : (this.#Qe(), this.#Be?.remove(), this.#Be = null), this.parent = t);
+      (null !== t ? (this.pageIndex = t.pageIndex, this.pageDimensions = t.pageDimensions) : (this._private_field__Qe(), this._private_field__Be?.remove(), this._private_field__Be = null), this.parent = t);
     }
     focusin(t) {
-      this._focusEventsAllowed && (this.#Ue ? this.#Ue = !1 : this.parent.setSelected(this));
+      this._focusEventsAllowed && (this._private_field__Ue ? this._private_field__Ue = !1 : this.parent.setSelected(this));
     }
     focusout(t) {
       if (!this._focusEventsAllowed) return;
@@ -2850,14 +2850,14 @@
       const [i, s] = this.parentDimensions;
       (this.setAt(t * i, e * s, this.width * i, this.height * s), this._onTranslated());
     }
-    #Je([t, e], i, s) {
+    _private_field__Je([t, e], i, s) {
       ([i, s] = this.screenToPageTranslation(i, s), this.x += i / t, this.y += s / e, this._onTranslating(this.x, this.y), this.fixAndSetPosition());
     }
     translate(t, e) {
-      this.#Je(this.parentDimensions, t, e);
+      this._private_field__Je(this.parentDimensions, t, e);
     }
     translateInPage(t, e) {
-      (this.#ze ||= [this.x, this.y, this.width, this.height], this.#Je(this.pageDimensions, t, e), this.div.scrollIntoView({
+      (this._private_field__ze ||= [this.x, this.y, this.width, this.height], this._private_field__Je(this.pageDimensions, t, e), this.div.scrollIntoView({
         block: "nearest"
       }));
     }
@@ -2865,7 +2865,7 @@
       this._onTranslated(this.x, this.y);
     }
     drag(t, e) {
-      this.#ze ||= [this.x, this.y, this.width, this.height];
+      this._private_field__ze ||= [this.x, this.y, this.width, this.height];
       const {div: i, parentDimensions: [s, n]} = this;
       if ((this.x += t / s, this.y += e / n, this.parent && (this.x < 0 || this.x > 1 || this.y < 0 || this.y > 1))) {
         const {x: t, y: e} = this.div.getBoundingClientRect();
@@ -2882,10 +2882,10 @@
     _onTranslating(t, e) {}
     _onTranslated(t, e) {}
     get _hasBeenMoved() {
-      return !!this.#ze && (this.#ze[0] !== this.x || this.#ze[1] !== this.y);
+      return !!this._private_field__ze && (this._private_field__ze[0] !== this.x || this._private_field__ze[1] !== this.y);
     }
     get _hasBeenResized() {
-      return !!this.#ze && (this.#ze[2] !== this.width || this.#ze[3] !== this.height);
+      return !!this._private_field__ze && (this._private_field__ze[2] !== this.width || this._private_field__ze[3] !== this.height);
     }
     getBaseTranslation() {
       const [t, e] = this.parentDimensions, {_borderLineWidth: i} = he, s = i / t, n = i / e;
@@ -2923,7 +2923,7 @@
       const [l, h] = this.getBaseTranslation();
       (n += l, r += h, e.left = `${(100 * n).toFixed(2)}%`, e.top = `${(100 * r).toFixed(2)}%`, this.moveInDOM());
     }
-    static #Ze(t, e, i) {
+    static _private_field__Ze(t, e, i) {
       switch (i) {
         case 90:
           return [e, -t];
@@ -2936,12 +2936,12 @@
       }
     }
     screenToPageTranslation(t, e) {
-      return he.#Ze(t, e, this.parentRotation);
+      return he._private_field__Ze(t, e, this.parentRotation);
     }
     pageTranslationToScreen(t, e) {
-      return he.#Ze(t, e, 360 - this.parentRotation);
+      return he._private_field__Ze(t, e, 360 - this.parentRotation);
     }
-    #ti(t) {
+    _private_field__ti(t) {
       switch (t) {
         case 90:
           {
@@ -2976,29 +2976,29 @@
     getInitialTranslation() {
       return [0, 0];
     }
-    #ei() {
-      if (this.#Re) return;
-      (this.#Re = document.createElement("div"), this.#Re.classList.add("resizers"));
+    _private_field__ei() {
+      if (this._private_field__Re) return;
+      (this._private_field__Re = document.createElement("div"), this._private_field__Re.classList.add("resizers"));
       const t = this._willKeepAspectRatio ? ["topLeft", "topRight", "bottomRight", "bottomLeft"] : ["topLeft", "topMiddle", "topRight", "middleRight", "bottomRight", "bottomMiddle", "bottomLeft", "middleLeft"], e = this._uiManager._signal;
       for (const i of t) {
         const t = document.createElement("div");
-        (this.#Re.append(t), t.classList.add("resizer", i), t.setAttribute("data-resizer-name", i), t.addEventListener("pointerdown", this.#ii.bind(this, i), {
+        (this._private_field__Re.append(t), t.classList.add("resizer", i), t.setAttribute("data-resizer-name", i), t.addEventListener("pointerdown", this._private_field__ii.bind(this, i), {
           signal: e
         }), t.addEventListener("contextmenu", Pt, {
           signal: e
         }), t.tabIndex = -1);
       }
-      this.div.prepend(this.#Re);
+      this.div.prepend(this._private_field__Re);
     }
-    #ii(t, e) {
+    _private_field__ii(t, e) {
       e.preventDefault();
       const {isMac: i} = lt.platform;
       if (0 !== e.button || e.ctrlKey && i) return;
-      this.#o?.toggle(!1);
+      this._private_field__o?.toggle(!1);
       const s = this._isDraggable;
-      (this._isDraggable = !1, this.#Le = [e.screenX, e.screenY]);
+      (this._isDraggable = !1, this._private_field__Le = [e.screenX, e.screenY]);
       const n = new AbortController(), r = this._uiManager.combinedSignal(n);
-      (this.parent.togglePointerEvents(!1), window.addEventListener("pointermove", this.#si.bind(this, t), {
+      (this.parent.togglePointerEvents(!1), window.addEventListener("pointermove", this._private_field__si.bind(this, t), {
         passive: !0,
         capture: !0,
         signal: r
@@ -3007,7 +3007,7 @@
         signal: r
       }), window.addEventListener("contextmenu", Pt, {
         signal: r
-      }), this.#Fe = {
+      }), this._private_field__Fe = {
         savedX: this.x,
         savedY: this.y,
         savedWidth: this.width,
@@ -3016,7 +3016,7 @@
       const a = this.parent.div.style.cursor, o = this.div.style.cursor;
       this.div.style.cursor = this.parent.div.style.cursor = window.getComputedStyle(e.target).cursor;
       const l = () => {
-        (n.abort(), this.parent.togglePointerEvents(!0), this.#o?.toggle(!0), this._isDraggable = s, this.parent.div.style.cursor = a, this.div.style.cursor = o, this.#ni());
+        (n.abort(), this.parent.togglePointerEvents(!0), this._private_field__o?.toggle(!0), this._isDraggable = s, this.parent.div.style.cursor = a, this.div.style.cursor = o, this._private_field__ni());
       };
       (window.addEventListener("pointerup", l, {
         signal: r
@@ -3024,26 +3024,26 @@
         signal: r
       }));
     }
-    #ri(t, e, i, s) {
+    _private_field__ri(t, e, i, s) {
       (this.width = i, this.height = s, this.x = t, this.y = e, this.setDims(), this.fixAndSetPosition(), this._onResized());
     }
     _onResized() {}
-    #ni() {
-      if (!this.#Fe) return;
-      const {savedX: t, savedY: e, savedWidth: i, savedHeight: s} = this.#Fe;
-      this.#Fe = null;
+    _private_field__ni() {
+      if (!this._private_field__Fe) return;
+      const {savedX: t, savedY: e, savedWidth: i, savedHeight: s} = this._private_field__Fe;
+      this._private_field__Fe = null;
       const n = this.x, r = this.y, a = this.width, o = this.height;
       n === t && r === e && a === i && o === s || this.addCommands({
-        cmd: this.#ri.bind(this, n, r, a, o),
-        undo: this.#ri.bind(this, t, e, i, s),
+        cmd: this._private_field__ri.bind(this, n, r, a, o),
+        undo: this._private_field__ri.bind(this, t, e, i, s),
         mustExec: !0
       });
     }
     static _round(t) {
       return Math.round(1e4 * t) / 1e4;
     }
-    #si(t, e) {
-      const [i, s] = this.parentDimensions, n = this.x, r = this.y, a = this.width, o = this.height, l = he.MIN_SIZE / i, h = he.MIN_SIZE / s, c = this.#ti(this.rotation), d = (t, e) => [c[0] * t + c[2] * e, c[1] * t + c[3] * e], u = this.#ti(360 - this.rotation);
+    _private_field__si(t, e) {
+      const [i, s] = this.parentDimensions, n = this.x, r = this.y, a = this.width, o = this.height, l = he.MIN_SIZE / i, h = he.MIN_SIZE / s, c = this._private_field__ti(this.rotation), d = (t, e) => [c[0] * t + c[2] * e, c[1] * t + c[3] * e], u = this._private_field__ti(360 - this.rotation);
       let p, g, m = !1, f = !1;
       switch (t) {
         case "topLeft":
@@ -3075,8 +3075,8 @@
       const w = he._round(n + y[0]), A = he._round(r + y[1]);
       let x, _, S = 1, C = 1;
       if (e.fromKeyboard) ({deltaX: x, deltaY: _} = e); else {
-        const {screenX: t, screenY: i} = e, [s, n] = this.#Le;
-        ([x, _] = this.screenToPageTranslation(t - s, i - n), this.#Le[0] = t, this.#Le[1] = i);
+        const {screenX: t, screenY: i} = e, [s, n] = this._private_field__Le;
+        ([x, _] = this.screenToPageTranslation(t - s, i - n), this._private_field__Le[0] = t, this._private_field__Le[1] = i);
       }
       var E, T;
       if (([x, _] = (E = x / i, T = _ / s, [u[0] * E + u[2] * T, u[1] * E + u[3] * T]), m)) {
@@ -3086,17 +3086,17 @@
       const M = he._round(a * S), k = he._round(o * C);
       y = d(...g(M, k));
       const D = w - y[0], P = A - y[1];
-      (this.#ze ||= [this.x, this.y, this.width, this.height], this.width = M, this.height = k, this.x = D, this.y = P, this.setDims(), this.fixAndSetPosition(), this._onResizing());
+      (this._private_field__ze ||= [this.x, this.y, this.width, this.height], this.width = M, this.height = k, this.x = D, this.y = P, this.setDims(), this.fixAndSetPosition(), this._onResizing());
     }
     _onResizing() {}
     altTextFinish() {
-      this.#o?.finish();
+      this._private_field__o?.finish();
     }
     get toolbarButtons() {
       return null;
     }
     async addEditToolbar() {
-      if (this._editToolbar || this.#je) return this._editToolbar;
+      if (this._editToolbar || this._private_field__je) return this._editToolbar;
       (this._editToolbar = new Qt(this), this.div.append(this._editToolbar.render()));
       const {toolbarButtons: t} = this;
       if (t) for (const [e, i] of t) await this._editToolbar.addButton(e, i);
@@ -3109,7 +3109,7 @@
       this._editToolbar?.removeButton("comment");
     }
     removeEditToolbar() {
-      (this._editToolbar?.remove(), this._editToolbar = null, this.#o?.destroy());
+      (this._editToolbar?.remove(), this._editToolbar = null, this._private_field__o?.destroy());
     }
     addContainer(t) {
       const e = this._editToolbar?.div;
@@ -3119,46 +3119,46 @@
       return this.div.getBoundingClientRect();
     }
     createAltText() {
-      return (this.#o || (ae.initialize(he._l10n), this.#o = new ae(this), this.#Me && (this.#o.data = this.#Me, this.#Me = null)), this.#o);
+      return (this._private_field__o || (ae.initialize(he._l10n), this._private_field__o = new ae(this), this._private_field__Me && (this._private_field__o.data = this._private_field__Me, this._private_field__Me = null)), this._private_field__o);
     }
     get altTextData() {
-      return this.#o?.data;
+      return this._private_field__o?.data;
     }
     set altTextData(t) {
-      this.#o && (this.#o.data = t);
+      this._private_field__o && (this._private_field__o.data = t);
     }
     get guessedAltText() {
-      return this.#o?.guessedText;
+      return this._private_field__o?.guessedText;
     }
     async setGuessedAltText(t) {
-      await this.#o?.setGuessedText(t);
+      await this._private_field__o?.setGuessedText(t);
     }
     serializeAltText(t) {
-      return this.#o?.serialize(t);
+      return this._private_field__o?.serialize(t);
     }
     hasAltText() {
-      return !!this.#o && !this.#o.isEmpty();
+      return !!this._private_field__o && !this._private_field__o.isEmpty();
     }
     hasAltTextData() {
-      return this.#o?.hasData() ?? !1;
+      return this._private_field__o?.hasData() ?? !1;
     }
     focusCommentButton() {
-      this.#l?.focusButton();
+      this._private_field__l?.focusButton();
     }
     addCommentButton() {
-      return this.#l ||= new oe(this);
+      return this._private_field__l ||= new oe(this);
     }
     addStandaloneCommentButton() {
-      this.#re ? this._uiManager.isEditingMode() && this.#re.classList.remove("hidden") : this.hasComment && (this.#re = this.#l.renderForStandalone(), this.div.append(this.#re));
+      this._private_field__re ? this._uiManager.isEditingMode() && this._private_field__re.classList.remove("hidden") : this.hasComment && (this._private_field__re = this._private_field__l.renderForStandalone(), this.div.append(this._private_field__re));
     }
     removeStandaloneCommentButton() {
-      (this.#l.removeStandaloneCommentButton(), this.#re = null);
+      (this._private_field__l.removeStandaloneCommentButton(), this._private_field__re = null);
     }
     hideStandaloneCommentButton() {
-      this.#re?.classList.add("hidden");
+      this._private_field__re?.classList.add("hidden");
     }
     get comment() {
-      const {data: {richText: t, text: e, date: i, deleted: s}} = this.#l;
+      const {data: {richText: t, text: e, date: i, deleted: s}} = this._private_field__l;
       return {
         text: e,
         richText: t,
@@ -3169,31 +3169,31 @@
       };
     }
     set comment(t) {
-      (this.#l ||= new oe(this), this.#l.data = t, this.hasComment ? (this.removeCommentButtonFromToolbar(), this.addStandaloneCommentButton(), this._uiManager.updateComment(this)) : (this.addCommentButtonInToolbar(), this.removeStandaloneCommentButton(), this._uiManager.removeComment(this)));
+      (this._private_field__l ||= new oe(this), this._private_field__l.data = t, this.hasComment ? (this.removeCommentButtonFromToolbar(), this.addStandaloneCommentButton(), this._uiManager.updateComment(this)) : (this.addCommentButtonInToolbar(), this.removeStandaloneCommentButton(), this._uiManager.removeComment(this)));
     }
     setCommentData({comment: t, popupRef: e, richText: i}) {
       if (!e) return;
-      if ((this.#l ||= new oe(this), this.#l.setInitialText(t, i), !this.annotationElementId)) return;
+      if ((this._private_field__l ||= new oe(this), this._private_field__l.setInitialText(t, i), !this.annotationElementId)) return;
       const s = this._uiManager.getAndRemoveDataFromAnnotationStorage(this.annotationElementId);
       s && this.updateFromAnnotationLayer(s);
     }
     get hasEditedComment() {
-      return this.#l?.hasBeenEdited();
+      return this._private_field__l?.hasBeenEdited();
     }
     get hasDeletedComment() {
-      return this.#l?.isDeleted();
+      return this._private_field__l?.isDeleted();
     }
     get hasComment() {
-      return !!this.#l && !this.#l.isEmpty() && !this.#l.isDeleted();
+      return !!this._private_field__l && !this._private_field__l.isEmpty() && !this._private_field__l.isDeleted();
     }
     async editComment(t) {
-      (this.#l ||= new oe(this), this.#l.edit(t));
+      (this._private_field__l ||= new oe(this), this._private_field__l.edit(t));
     }
     toggleComment(t, e = void 0) {
       this.hasComment && this._uiManager.toggleComment(this, t, e);
     }
     setSelectedCommentButton(t) {
-      this.#l.setSelectedButton(t);
+      this._private_field__l.setSelectedButton(t);
     }
     addComment(t) {
       if (this.hasEditedComment) {
@@ -3206,57 +3206,57 @@
       }
     }
     updateFromAnnotationLayer({popup: {contents: t, deleted: e}}) {
-      this.#l.data = e ? null : t;
+      this._private_field__l.data = e ? null : t;
     }
     get parentBoundingClientRect() {
       return this.parent.boundingClientRect;
     }
     render() {
       const t = this.div = document.createElement("div");
-      (t.setAttribute("data-editor-rotation", (360 - this.rotation) % 360), t.className = this.name, t.setAttribute("id", this.id), t.tabIndex = this.#De ? -1 : 0, t.setAttribute("role", "application"), this.defaultL10nId && t.setAttribute("data-l10n-id", this.defaultL10nId), this._isVisible || t.classList.add("hidden"), this.setInForeground(), this.#ai());
+      (t.setAttribute("data-editor-rotation", (360 - this.rotation) % 360), t.className = this.name, t.setAttribute("id", this.id), t.tabIndex = this._private_field__De ? -1 : 0, t.setAttribute("role", "application"), this.defaultL10nId && t.setAttribute("data-l10n-id", this.defaultL10nId), this._isVisible || t.classList.add("hidden"), this.setInForeground(), this._private_field__ai());
       const [e, i] = this.parentDimensions;
       this.parentRotation % 180 != 0 && (t.style.maxWidth = `${(100 * i / e).toFixed(2)}%`, t.style.maxHeight = `${(100 * e / i).toFixed(2)}%`);
       const [s, n] = this.getInitialTranslation();
-      return (this.translate(s, n), Zt(this, t, ["keydown", "pointerdown", "dblclick"]), this.isResizable && this._uiManager._supportsPinchToZoom && (this.#Xe ||= new le({
+      return (this.translate(s, n), Zt(this, t, ["keydown", "pointerdown", "dblclick"]), this.isResizable && this._uiManager._supportsPinchToZoom && (this._private_field__Xe ||= new le({
         container: t,
         isPinchingDisabled: () => !this.isSelected,
-        onPinchStart: this.#oi.bind(this),
-        onPinching: this.#li.bind(this),
-        onPinchEnd: this.#hi.bind(this),
+        onPinchStart: this._private_field__oi.bind(this),
+        onPinching: this._private_field__li.bind(this),
+        onPinchEnd: this._private_field__hi.bind(this),
         signal: this._uiManager._signal
       })), this.addStandaloneCommentButton(), this._uiManager._editorUndoBar?.hide(), t);
     }
-    #oi() {
-      (this.#Fe = {
+    _private_field__oi() {
+      (this._private_field__Fe = {
         savedX: this.x,
         savedY: this.y,
         savedWidth: this.width,
         savedHeight: this.height
-      }, this.#o?.toggle(!1), this.parent.togglePointerEvents(!1));
+      }, this._private_field__o?.toggle(!1), this.parent.togglePointerEvents(!1));
     }
-    #li(t, e, i) {
+    _private_field__li(t, e, i) {
       let s = i / e * .7 + 1 - .7;
       if (1 === s) return;
-      const n = this.#ti(this.rotation), r = (t, e) => [n[0] * t + n[2] * e, n[1] * t + n[3] * e], [a, o] = this.parentDimensions, l = this.x, h = this.y, c = this.width, d = this.height, u = he.MIN_SIZE / a, p = he.MIN_SIZE / o;
+      const n = this._private_field__ti(this.rotation), r = (t, e) => [n[0] * t + n[2] * e, n[1] * t + n[3] * e], [a, o] = this.parentDimensions, l = this.x, h = this.y, c = this.width, d = this.height, u = he.MIN_SIZE / a, p = he.MIN_SIZE / o;
       s = Math.max(Math.min(s, 1 / c, 1 / d), u / c, p / d);
       const g = he._round(c * s), m = he._round(d * s);
       if (g === c && m === d) return;
-      this.#ze ||= [l, h, c, d];
+      this._private_field__ze ||= [l, h, c, d];
       const f = r(c / 2, d / 2), b = he._round(l + f[0]), v = he._round(h + f[1]), y = r(g / 2, m / 2);
       (this.x = b - y[0], this.y = v - y[1], this.width = g, this.height = m, this.setDims(), this.fixAndSetPosition(), this._onResizing());
     }
-    #hi() {
-      (this.#o?.toggle(!0), this.parent.togglePointerEvents(!0), this.#ni());
+    _private_field__hi() {
+      (this._private_field__o?.toggle(!0), this.parent.togglePointerEvents(!0), this._private_field__ni());
     }
     pointerdown(t) {
       const {isMac: e} = lt.platform;
-      0 !== t.button || t.ctrlKey && e ? t.preventDefault() : (this.#Ue = !0, this._isDraggable ? this.#ci(t) : this.#di(t));
+      0 !== t.button || t.ctrlKey && e ? t.preventDefault() : (this._private_field__Ue = !0, this._isDraggable ? this._private_field__ci(t) : this._private_field__di(t));
     }
-    #di(t) {
+    _private_field__di(t) {
       const {isMac: e} = lt.platform;
       t.ctrlKey && !e || t.shiftKey || t.metaKey && e ? this.parent.toggleSelected(this) : this.parent.setSelected(this);
     }
-    #ci(t) {
+    _private_field__ci(t) {
       const {isSelected: e} = this;
       this._uiManager.setUpDragSession();
       let i = !1;
@@ -3265,19 +3265,19 @@
         passive: !1,
         signal: n
       }, a = t => {
-        (s.abort(), this.#Pe = null, this.#Ue = !1, this._uiManager.endDragSession() || this.#di(t), i && this._onStopDragging());
+        (s.abort(), this._private_field__Pe = null, this._private_field__Ue = !1, this._uiManager.endDragSession() || this._private_field__di(t), i && this._onStopDragging());
       };
-      e && (this.#Ge = t.clientX, this.#We = t.clientY, this.#Pe = t.pointerId, this.#Ie = t.pointerType, window.addEventListener("pointermove", t => {
+      e && (this._private_field__Ge = t.clientX, this._private_field__We = t.clientY, this._private_field__Pe = t.pointerId, this._private_field__Ie = t.pointerType, window.addEventListener("pointermove", t => {
         i || (i = !0, this._uiManager.toggleComment(this, !0, !1), this._onStartDragging());
         const {clientX: e, clientY: s, pointerId: n} = t;
-        if (n !== this.#Pe) return void It(t);
-        const [r, a] = this.screenToPageTranslation(e - this.#Ge, s - this.#We);
-        (this.#Ge = e, this.#We = s, this._uiManager.dragSelectedEditors(r, a));
+        if (n !== this._private_field__Pe) return void It(t);
+        const [r, a] = this.screenToPageTranslation(e - this._private_field__Ge, s - this._private_field__We);
+        (this._private_field__Ge = e, this._private_field__We = s, this._uiManager.dragSelectedEditors(r, a));
       }, r), window.addEventListener("touchmove", It, r), window.addEventListener("pointerdown", t => {
-        (t.pointerType === this.#Ie && (this.#Xe || t.isPrimary) && a(t), It(t));
+        (t.pointerType === this._private_field__Ie && (this._private_field__Xe || t.isPrimary) && a(t), It(t));
       }, r));
       const o = t => {
-        this.#Pe && this.#Pe !== t.pointerId ? It(t) : a(t);
+        this._private_field__Pe && this._private_field__Pe !== t.pointerId ? It(t) : a(t);
       };
       (window.addEventListener("pointerup", o, {
         signal: n
@@ -3288,8 +3288,8 @@
     _onStartDragging() {}
     _onStopDragging() {}
     moveInDOM() {
-      (this.#Ve && clearTimeout(this.#Ve), this.#Ve = setTimeout(() => {
-        (this.#Ve = null, this.parent?.moveEditorInDOM(this));
+      (this._private_field__Ve && clearTimeout(this._private_field__Ve), this._private_field__Ve = setTimeout(() => {
+        (this._private_field__Ve = null, this.parent?.moveEditorInDOM(this));
       }, 0));
     }
     _setParentAndPosition(t, e, i) {
@@ -3332,7 +3332,7 @@
       return this.color && he._colorManager.convert(this._uiManager.getNonHCMColor(this.color));
     }
     onUpdatedColor() {
-      this.#l?.onUpdatedColor();
+      this._private_field__l?.onUpdatedColor();
     }
     getData() {
       const {comment: {text: t, color: e, date: i, opacity: s, deleted: n, richText: r}, uid: a, pageIndex: o, creationDate: l, modificationDate: h} = this;
@@ -3356,16 +3356,16 @@
       return !1;
     }
     enableEditMode() {
-      return !this.isInEditMode() && (this.parent.setEditingState(!1), this.#je = !0, !0);
+      return !this.isInEditMode() && (this.parent.setEditingState(!1), this._private_field__je = !0, !0);
     }
     disableEditMode() {
-      return !!this.isInEditMode() && (this.parent.setEditingState(!0), this.#je = !1, !0);
+      return !!this.isInEditMode() && (this.parent.setEditingState(!0), this._private_field__je = !1, !0);
     }
     isInEditMode() {
-      return this.#je;
+      return this._private_field__je;
     }
     shouldGetKeyboardEvents() {
-      return this.#$e;
+      return this._private_field__$e;
     }
     needsToBeRebuilt() {
       return this.div && !this.isAttachedToDOM;
@@ -3374,10 +3374,10 @@
       const {top: t, left: e, bottom: i, right: s} = this.getClientDimensions(), {innerHeight: n, innerWidth: r} = window;
       return e < r && s > 0 && t < n && i > 0;
     }
-    #ai() {
-      if (this.#Ne || !this.div) return;
-      this.#Ne = new AbortController();
-      const t = this._uiManager.combinedSignal(this.#Ne);
+    _private_field__ai() {
+      if (this._private_field__Ne || !this.div) return;
+      this._private_field__Ne = new AbortController();
+      const t = this._uiManager.combinedSignal(this._private_field__Ne);
       (this.div.addEventListener("focusin", this.focusin.bind(this), {
         signal: t
       }), this.div.addEventListener("focusout", this.focusout.bind(this), {
@@ -3385,7 +3385,7 @@
       }));
     }
     rebuild() {
-      this.#ai();
+      this._private_field__ai();
     }
     rotate(t) {}
     resize() {}
@@ -3416,7 +3416,7 @@
         creationDate: t.creationDate,
         modificationDate: t.modificationDate
       });
-      (s.rotation = t.rotation, s.#Me = t.accessibilityData, s._isCopy = t.isCopy || !1);
+      (s.rotation = t.rotation, s._private_field__Me = t.accessibilityData, s._isCopy = t.isCopy || !1);
       const [n, r] = s.pageDimensions, [a, o, l, h] = s.getRectInCurrentCoords(t.rect, r);
       return (s.x = a / n, s.y = o / r, s.width = l / n, s.height = h / r, s);
     }
@@ -3424,17 +3424,17 @@
       return !!this.annotationElementId && (this.deleted || null !== this.serialize());
     }
     remove() {
-      if ((this.#Ne?.abort(), this.#Ne = null, this.isEmpty() || this.commit(), this.parent ? this.parent.remove(this) : this._uiManager.removeEditor(this), this.#Ve && (clearTimeout(this.#Ve), this.#Ve = null), this.#Qe(), this.removeEditToolbar(), this.#qe)) {
-        for (const t of this.#qe.values()) clearTimeout(t);
-        this.#qe = null;
+      if ((this._private_field__Ne?.abort(), this._private_field__Ne = null, this.isEmpty() || this.commit(), this.parent ? this.parent.remove(this) : this._uiManager.removeEditor(this), this._private_field__Ve && (clearTimeout(this._private_field__Ve), this._private_field__Ve = null), this._private_field__Qe(), this.removeEditToolbar(), this._private_field__qe)) {
+        for (const t of this._private_field__qe.values()) clearTimeout(t);
+        this._private_field__qe = null;
       }
-      (this.parent = null, this.#Xe?.destroy(), this.#Xe = null);
+      (this.parent = null, this._private_field__Xe?.destroy(), this._private_field__Xe = null);
     }
     get isResizable() {
       return !1;
     }
     makeResizable() {
-      this.isResizable && (this.#ei(), this.#Re.classList.remove("hidden"));
+      this.isResizable && (this._private_field__ei(), this._private_field__Re.classList.remove("hidden"));
     }
     get toolbarPosition() {
       return null;
@@ -3450,92 +3450,92 @@
       return this._uiManager.makeCommentColor(this.getNonHCMColor(), this.opacity);
     }
     get commentPopupPosition() {
-      return this.#l.commentPopupPositionInLayer;
+      return this._private_field__l.commentPopupPositionInLayer;
     }
     set commentPopupPosition(t) {
-      this.#l.commentPopupPositionInLayer = t;
+      this._private_field__l.commentPopupPositionInLayer = t;
     }
     hasDefaultPopupPosition() {
-      return this.#l.hasDefaultPopupPosition();
+      return this._private_field__l.hasDefaultPopupPosition();
     }
     get commentButtonWidth() {
-      return this.#l.commentButtonWidth;
+      return this._private_field__l.commentButtonWidth;
     }
     get elementBeforePopup() {
       return this.div;
     }
     setCommentButtonStates(t) {
-      this.#l.setCommentButtonStates(t);
+      this._private_field__l.setCommentButtonStates(t);
     }
     keydown(t) {
       if (!this.isResizable || t.target !== this.div || "Enter" !== t.key) return;
-      (this._uiManager.setSelected(this), this.#Fe = {
+      (this._uiManager.setSelected(this), this._private_field__Fe = {
         savedX: this.x,
         savedY: this.y,
         savedWidth: this.width,
         savedHeight: this.height
       });
-      const e = this.#Re.children;
-      if (!this.#ke) {
-        this.#ke = Array.from(e);
-        const t = this.#ui.bind(this), i = this.#pi.bind(this), s = this._uiManager._signal;
-        for (const e of this.#ke) {
+      const e = this._private_field__Re.children;
+      if (!this._private_field__ke) {
+        this._private_field__ke = Array.from(e);
+        const t = this._private_field__ui.bind(this), i = this._private_field__pi.bind(this), s = this._uiManager._signal;
+        for (const e of this._private_field__ke) {
           const n = e.getAttribute("data-resizer-name");
           (e.setAttribute("role", "spinbutton"), e.addEventListener("keydown", t, {
             signal: s
           }), e.addEventListener("blur", i, {
             signal: s
-          }), e.addEventListener("focus", this.#gi.bind(this, n), {
+          }), e.addEventListener("focus", this._private_field__gi.bind(this, n), {
             signal: s
           }), e.setAttribute("data-l10n-id", he._l10nResizer[n]));
         }
       }
-      const i = this.#ke[0];
+      const i = this._private_field__ke[0];
       let s = 0;
       for (const r of e) {
         if (r === i) break;
         s++;
       }
-      const n = (360 - this.rotation + this.parentRotation) % 360 / 90 * (this.#ke.length / 4);
+      const n = (360 - this.rotation + this.parentRotation) % 360 / 90 * (this._private_field__ke.length / 4);
       if (n !== s) {
-        if (n < s) for (let e = 0; e < s - n; e++) this.#Re.append(this.#Re.firstChild); else if (n > s) for (let e = 0; e < n - s; e++) this.#Re.firstChild.before(this.#Re.lastChild);
+        if (n < s) for (let e = 0; e < s - n; e++) this._private_field__Re.append(this._private_field__Re.firstChild); else if (n > s) for (let e = 0; e < n - s; e++) this._private_field__Re.firstChild.before(this._private_field__Re.lastChild);
         let t = 0;
         for (const i of e) {
-          const e = this.#ke[t++].getAttribute("data-resizer-name");
+          const e = this._private_field__ke[t++].getAttribute("data-resizer-name");
           i.setAttribute("data-l10n-id", he._l10nResizer[e]);
         }
       }
-      (this.#mi(0), this.#$e = !0, this.#Re.firstChild.focus({
+      (this._private_field__mi(0), this._private_field__$e = !0, this._private_field__Re.firstChild.focus({
         focusVisible: !0
       }), t.preventDefault(), t.stopImmediatePropagation());
     }
-    #ui(t) {
+    _private_field__ui(t) {
       he._resizerKeyboardManager.exec(this, t);
     }
-    #pi(t) {
-      this.#$e && t.relatedTarget?.parentNode !== this.#Re && this.#Qe();
+    _private_field__pi(t) {
+      this._private_field__$e && t.relatedTarget?.parentNode !== this._private_field__Re && this._private_field__Qe();
     }
-    #gi(t) {
-      this.#Oe = this.#$e ? t : "";
+    _private_field__gi(t) {
+      this._private_field__Oe = this._private_field__$e ? t : "";
     }
-    #mi(t) {
-      if (this.#ke) for (const e of this.#ke) e.tabIndex = t;
+    _private_field__mi(t) {
+      if (this._private_field__ke) for (const e of this._private_field__ke) e.tabIndex = t;
     }
     _resizeWithKeyboard(t, e) {
-      this.#$e && this.#si(this.#Oe, {
+      this._private_field__$e && this._private_field__si(this._private_field__Oe, {
         deltaX: t,
         deltaY: e,
         fromKeyboard: !0
       });
     }
-    #Qe() {
-      (this.#$e = !1, this.#mi(-1), this.#ni());
+    _private_field__Qe() {
+      (this._private_field__$e = !1, this._private_field__mi(-1), this._private_field__ni());
     }
     _stopResizingWithKeyboard() {
-      (this.#Qe(), this.div.focus());
+      (this._private_field__Qe(), this.div.focus());
     }
     select() {
-      this.isSelected && this._editToolbar ? this._editToolbar.show() : (this.isSelected = !0, this.makeResizable(), this.div?.classList.add("selectedEditor"), this._editToolbar ? (this._editToolbar?.show(), this.#o?.toggleAltTextBadge(!1)) : this.addEditToolbar().then(() => {
+      this.isSelected && this._editToolbar ? this._editToolbar.show() : (this.isSelected = !0, this.makeResizable(), this.div?.classList.add("selectedEditor"), this._editToolbar ? (this._editToolbar?.show(), this._private_field__o?.toggleAltTextBadge(!1)) : this.addEditToolbar().then(() => {
         this.div?.classList.contains("selectedEditor") && this._editToolbar?.show();
       }));
     }
@@ -3545,9 +3545,9 @@
       }), 0);
     }
     unselect() {
-      this.isSelected && (this.isSelected = !1, this.#Re?.classList.add("hidden"), this.div?.classList.remove("selectedEditor"), this.div?.contains(document.activeElement) && this._uiManager.currentLayer.div.focus({
+      this.isSelected && (this.isSelected = !1, this._private_field__Re?.classList.add("hidden"), this.div?.classList.remove("selectedEditor"), this.div?.contains(document.activeElement) && this._uiManager.currentLayer.div.focus({
         preventScroll: !0
-      }), this._editToolbar?.hide(), this.#o?.toggleAltTextBadge(!0), this.hasComment && this._uiManager.toggleComment(this, !1, !1));
+      }), this._editToolbar?.hide(), this._private_field__o?.toggleAltTextBadge(!0), this.hasComment && this._uiManager.toggleComment(this, !1, !1));
     }
     updateParams(t, e) {}
     disableEditing() {}
@@ -3571,10 +3571,10 @@
       return this.div;
     }
     get isEditing() {
-      return this.#He;
+      return this._private_field__He;
     }
     set isEditing(t) {
-      (this.#He = t, this.parent && (t ? (this.parent.setSelected(this), this.parent.setActiveEditor(this)) : this.parent.setActiveEditor(null)));
+      (this._private_field__He = t, this.parent && (t ? (this.parent.setSelected(this), this.parent.setActiveEditor(this)) : this.parent.setActiveEditor(null)));
     }
     static get MIN_SIZE() {
       return 16;
@@ -3592,12 +3592,12 @@
     }
     _reportTelemetry(t, e = !1) {
       if (e) {
-        this.#qe ||= new Map();
+        this._private_field__qe ||= new Map();
         const {action: e} = t;
-        let i = this.#qe.get(e);
+        let i = this._private_field__qe.get(e);
         return (i && clearTimeout(i), i = setTimeout(() => {
-          (this._reportTelemetry(t), this.#qe.delete(e), 0 === this.#qe.size && (this.#qe = null));
-        }, he._telemetryTimeout), void this.#qe.set(e, i));
+          (this._reportTelemetry(t), this._private_field__qe.delete(e), 0 === this._private_field__qe.size && (this._private_field__qe = null));
+        }, he._telemetryTimeout), void this._private_field__qe.set(e, i));
       }
       (t.type ||= this.editorType, this._uiManager._eventBus.dispatch("reporttelemetry", {
         source: this,
@@ -3611,17 +3611,17 @@
       (this.div.classList.toggle("hidden", !t), this._isVisible = t);
     }
     enable() {
-      (this.div && (this.div.tabIndex = 0), this.#De = !1);
+      (this.div && (this.div.tabIndex = 0), this._private_field__De = !1);
     }
     disable() {
-      (this.div && (this.div.tabIndex = -1), this.#De = !0);
+      (this.div && (this.div.tabIndex = -1), this._private_field__De = !0);
     }
     updateFakeAnnotationElement(t) {
-      if (this.#Be || this.deleted) return this.deleted ? (this.#Be.remove(), void (this.#Be = null)) : void ((this.hasEditedComment || this._hasBeenMoved || this._hasBeenResized) && this.#Be.updateEdited({
+      if (this._private_field__Be || this.deleted) return this.deleted ? (this._private_field__Be.remove(), void (this._private_field__Be = null)) : void ((this.hasEditedComment || this._hasBeenMoved || this._hasBeenResized) && this._private_field__Be.updateEdited({
         rect: this.getPDFRect(),
         popup: this.comment
       }));
-      this.#Be = t.addFakeAnnotation(this);
+      this._private_field__Be = t.addFakeAnnotation(this);
     }
     renderAnnotationElement(t) {
       if (this.deleted) return (t.hide(), null);
@@ -3695,53 +3695,53 @@
     transfer: void 0
   });
   class fe {
-    #fi = !1;
-    #bi = null;
-    #vi = null;
-    #yi = new Map();
+    _private_field__fi = !1;
+    _private_field__bi = null;
+    _private_field__vi = null;
+    _private_field__yi = new Map();
     constructor() {
       (this.onSetModified = null, this.onResetModified = null, this.onAnnotationEditor = null);
     }
     getValue(t, e) {
-      const i = this.#yi.get(t);
+      const i = this._private_field__yi.get(t);
       return void 0 === i ? e : Object.assign(e, i);
     }
     getRawValue(t) {
-      return this.#yi.get(t);
+      return this._private_field__yi.get(t);
     }
     remove(t) {
-      const e = this.#yi.get(t);
-      if (void 0 !== e && (e instanceof he && this.#vi.delete(e.annotationElementId), this.#yi.delete(t), 0 === this.#yi.size && this.resetModified(), "function" == typeof this.onAnnotationEditor)) {
-        for (const t of this.#yi.values()) if (t instanceof he) return;
+      const e = this._private_field__yi.get(t);
+      if (void 0 !== e && (e instanceof he && this._private_field__vi.delete(e.annotationElementId), this._private_field__yi.delete(t), 0 === this._private_field__yi.size && this.resetModified(), "function" == typeof this.onAnnotationEditor)) {
+        for (const t of this._private_field__yi.values()) if (t instanceof he) return;
         this.onAnnotationEditor(null);
       }
     }
     setValue(t, e) {
-      const i = this.#yi.get(t);
+      const i = this._private_field__yi.get(t);
       let s = !1;
-      if (void 0 !== i) for (const [n, r] of Object.entries(e)) i[n] !== r && (s = !0, i[n] = r); else (s = !0, this.#yi.set(t, e));
-      (s && this.#wi(), e instanceof he && ((this.#vi ||= new Map()).set(e.annotationElementId, e), "function" == typeof this.onAnnotationEditor && this.onAnnotationEditor(e.constructor._type)));
+      if (void 0 !== i) for (const [n, r] of Object.entries(e)) i[n] !== r && (s = !0, i[n] = r); else (s = !0, this._private_field__yi.set(t, e));
+      (s && this._private_field__wi(), e instanceof he && ((this._private_field__vi ||= new Map()).set(e.annotationElementId, e), "function" == typeof this.onAnnotationEditor && this.onAnnotationEditor(e.constructor._type)));
     }
     has(t) {
-      return this.#yi.has(t);
+      return this._private_field__yi.has(t);
     }
     get size() {
-      return this.#yi.size;
+      return this._private_field__yi.size;
     }
-    #wi() {
-      this.#fi || (this.#fi = !0, "function" == typeof this.onSetModified && this.onSetModified());
+    _private_field__wi() {
+      this._private_field__fi || (this._private_field__fi = !0, "function" == typeof this.onSetModified && this.onSetModified());
     }
     resetModified() {
-      this.#fi && (this.#fi = !1, "function" == typeof this.onResetModified && this.onResetModified());
+      this._private_field__fi && (this._private_field__fi = !1, "function" == typeof this.onResetModified && this.onResetModified());
     }
     get print() {
       return new be(this);
     }
     get serializable() {
-      if (0 === this.#yi.size) return me;
+      if (0 === this._private_field__yi.size) return me;
       const t = new Map(), e = new ge(), i = [], s = Object.create(null);
       let n = !1;
-      for (const [r, a] of this.#yi) {
+      for (const [r, a] of this._private_field__yi) {
         const i = a instanceof he ? a.serialize(!1, s) : a;
         i && (t.set(r, i), e.update(`${r}:${JSON.stringify(i)}`), n ||= !!i.bitmap);
       }
@@ -3756,7 +3756,7 @@
       let t = null;
       const e = new Map();
       let i = 0, s = 0;
-      for (const n of this.#yi.values()) {
+      for (const n of this._private_field__yi.values()) {
         if (!(n instanceof he)) {
           n.popup && (n.popup.deleted ? s += 1 : i += 1);
           continue;
@@ -3783,36 +3783,36 @@
       return t;
     }
     resetModifiedIds() {
-      this.#bi = null;
+      this._private_field__bi = null;
     }
     updateEditor(t, e) {
-      const i = this.#vi?.get(t);
+      const i = this._private_field__vi?.get(t);
       return !!i && (i.updateFromAnnotationLayer(e), !0);
     }
     getEditor(t) {
-      return this.#vi?.get(t) || null;
+      return this._private_field__vi?.get(t) || null;
     }
     get modifiedIds() {
-      if (this.#bi) return this.#bi;
+      if (this._private_field__bi) return this._private_field__bi;
       const t = [];
-      if (this.#vi) for (const e of this.#vi.values()) e.serialize() && t.push(e.annotationElementId);
-      return this.#bi = {
+      if (this._private_field__vi) for (const e of this._private_field__vi.values()) e.serialize() && t.push(e.annotationElementId);
+      return this._private_field__bi = {
         ids: new Set(t),
         hash: t.join(",")
       };
     }
     [Symbol.iterator]() {
-      return this.#yi.entries();
+      return this._private_field__yi.entries();
     }
   }
   class be extends fe {
-    #Ai;
+    _private_field__Ai;
     constructor(t) {
       super();
       const {map: e, hash: i, transfer: s} = t.serializable, n = structuredClone(e, s ? {
         transfer: s
       } : null);
-      this.#Ai = {
+      this._private_field__Ai = {
         map: n,
         hash: i,
         transfer: s
@@ -3822,7 +3822,7 @@
       X("Should not call PrintAnnotationStorage.print");
     }
     get serializable() {
-      return this.#Ai;
+      return this._private_field__Ai;
     }
     get modifiedIds() {
       return J(this, "modifiedIds", {
@@ -3832,7 +3832,7 @@
     }
   }
   class ve {
-    #xi = new Set();
+    _private_field__xi = new Set();
     constructor({ownerDocument: t = globalThis.document, styleElement: e = null}) {
       (this._document = t, this.nativeFontFaces = new Set(), this.styleElement = null, this.loadingRequests = [], this.loadTestFontId = 0);
     }
@@ -3849,15 +3849,15 @@
     }
     clear() {
       for (const t of this.nativeFontFaces) this._document.fonts.delete(t);
-      (this.nativeFontFaces.clear(), this.#xi.clear(), this.styleElement && (this.styleElement.remove(), this.styleElement = null));
+      (this.nativeFontFaces.clear(), this._private_field__xi.clear(), this.styleElement && (this.styleElement.remove(), this.styleElement = null));
     }
     async loadSystemFont({systemFontInfo: t, disableFontFace: e, _inspectFont: i}) {
-      if (t && !this.#xi.has(t.loadedName)) {
+      if (t && !this._private_field__xi.has(t.loadedName)) {
         if ((K(!e, "loadSystemFont shouldn't be called when `disableFontFace` is set."), this.isFontLoadingAPISupported)) {
           const {loadedName: e, src: s, style: n} = t, r = new FontFace(e, s, n);
           this.addNativeFontFace(r);
           try {
-            (await r.load(), this.#xi.add(e), i?.(t));
+            (await r.load(), this._private_field__xi.add(e), i?.(t));
           } catch {
             (q(`Cannot load system font: ${t.baseFontName}, installing it could help to improve PDF rendering.`), this.removeNativeFontFace(r));
           }
@@ -3949,9 +3949,9 @@
     }
   }
   class ye {
-    #_i;
+    _private_field___i;
     constructor(t, e = null, i, s) {
-      (this.compiledGlyphs = Object.create(null), this.#_i = t, this._inspectFont = e, i && Object.assign(this, i), s && (this.charProcOperatorList = s));
+      (this.compiledGlyphs = Object.create(null), this._private_field___i = t, this._inspectFont = e, i && Object.assign(this, i), s && (this.charProcOperatorList = s));
     }
     createNativeFontFace() {
       if (!this.data || this.disableFontFace) return null;
@@ -3987,76 +3987,76 @@
       return (this.fontExtraProperties || t.delete(i), this.compiledGlyphs[e] = n);
     }
     get black() {
-      return this.#_i.black;
+      return this._private_field___i.black;
     }
     get bold() {
-      return this.#_i.bold;
+      return this._private_field___i.bold;
     }
     get disableFontFace() {
-      return this.#_i.disableFontFace ?? !1;
+      return this._private_field___i.disableFontFace ?? !1;
     }
     get fontExtraProperties() {
-      return this.#_i.fontExtraProperties ?? !1;
+      return this._private_field___i.fontExtraProperties ?? !1;
     }
     get isInvalidPDFjsFont() {
-      return this.#_i.isInvalidPDFjsFont;
+      return this._private_field___i.isInvalidPDFjsFont;
     }
     get isType3Font() {
-      return this.#_i.isType3Font;
+      return this._private_field___i.isType3Font;
     }
     get italic() {
-      return this.#_i.italic;
+      return this._private_field___i.italic;
     }
     get missingFile() {
-      return this.#_i.missingFile;
+      return this._private_field___i.missingFile;
     }
     get remeasure() {
-      return this.#_i.remeasure;
+      return this._private_field___i.remeasure;
     }
     get vertical() {
-      return this.#_i.vertical;
+      return this._private_field___i.vertical;
     }
     get ascent() {
-      return this.#_i.ascent;
+      return this._private_field___i.ascent;
     }
     get defaultWidth() {
-      return this.#_i.defaultWidth;
+      return this._private_field___i.defaultWidth;
     }
     get descent() {
-      return this.#_i.descent;
+      return this._private_field___i.descent;
     }
     get bbox() {
-      return this.#_i.bbox;
+      return this._private_field___i.bbox;
     }
     get fontMatrix() {
-      return this.#_i.fontMatrix;
+      return this._private_field___i.fontMatrix;
     }
     get fallbackName() {
-      return this.#_i.fallbackName;
+      return this._private_field___i.fallbackName;
     }
     get loadedName() {
-      return this.#_i.loadedName;
+      return this._private_field___i.loadedName;
     }
     get mimetype() {
-      return this.#_i.mimetype;
+      return this._private_field___i.mimetype;
     }
     get name() {
-      return this.#_i.name;
+      return this._private_field___i.name;
     }
     get data() {
-      return this.#_i.data;
+      return this._private_field___i.data;
     }
     clearData() {
-      this.#_i.clearData();
+      this._private_field___i.clearData();
     }
     get cssFontInfo() {
-      return this.#_i.cssFontInfo;
+      return this._private_field___i.cssFontInfo;
     }
     get systemFontInfo() {
-      return this.#_i.systemFontInfo;
+      return this._private_field___i.systemFontInfo;
     }
     get defaultVMetrics() {
-      return this.#_i.defaultVMetrics;
+      return this._private_field___i.defaultVMetrics;
     }
   }
   function we(t) {
@@ -4095,16 +4095,16 @@
     return !0;
   }).bind(null, Ae, t => "object" == typeof t && "string" == typeof t?.name);
   class _e {
-    #Si = new Map();
-    #Ci = Promise.resolve();
+    _private_field__Si = new Map();
+    _private_field__Ci = Promise.resolve();
     postMessage(t, e) {
       const i = {
         data: structuredClone(t, e ? {
           transfer: e
         } : null)
       };
-      this.#Ci.then(() => {
-        for (const [t] of this.#Si) t.call(this, i);
+      this._private_field__Ci.then(() => {
+        for (const [t] of this._private_field__Si) t.call(this, i);
       });
     }
     addEventListener(t, e, i = null) {
@@ -4115,15 +4115,15 @@
         const r = () => this.removeEventListener(t, e);
         (s = () => n.removeEventListener("abort", r), n.addEventListener("abort", r));
       }
-      this.#Si.set(e, s);
+      this._private_field__Si.set(e, s);
     }
     removeEventListener(t, e) {
-      const i = this.#Si.get(e);
-      (i?.(), this.#Si.delete(e));
+      const i = this._private_field__Si.get(e);
+      (i?.(), this._private_field__Si.delete(e));
     }
     terminate() {
-      for (const [, t] of this.#Si) t?.();
-      this.#Si.clear();
+      for (const [, t] of this._private_field__Si) t?.();
+      this._private_field__Si.clear();
     }
   }
   const Se = 1, Ce = 2, Ee = 1, Te = 2, Me = 3, ke = 4, De = 5, Pe = 6, Ie = 7, Re = 8;
@@ -4145,15 +4145,15 @@
     return new et(t.message, t.toString());
   }
   class Be {
-    #Ei = new AbortController();
+    _private_field__Ei = new AbortController();
     constructor(t, e, i) {
-      (this.sourceName = t, this.targetName = e, this.comObj = i, this.callbackId = 1, this.streamId = 1, this.streamSinks = Object.create(null), this.streamControllers = Object.create(null), this.callbackCapabilities = Object.create(null), this.actionHandler = Object.create(null), i.addEventListener("message", this.#Ti.bind(this), {
-        signal: this.#Ei.signal
+      (this.sourceName = t, this.targetName = e, this.comObj = i, this.callbackId = 1, this.streamId = 1, this.streamSinks = Object.create(null), this.streamControllers = Object.create(null), this.callbackCapabilities = Object.create(null), this.actionHandler = Object.create(null), i.addEventListener("message", this._private_field__Ti.bind(this), {
+        signal: this._private_field__Ei.signal
       }));
     }
-    #Ti({data: t}) {
+    _private_field__Ti({data: t}) {
       if (t.targetName !== this.sourceName) return;
-      if (t.stream) return void this.#Mi(t);
+      if (t.stream) return void this._private_field__Mi(t);
       if (t.callback) {
         const e = t.callbackId, i = this.callbackCapabilities[e];
         if (!i) throw new Error(`Cannot resolve callback ${e}`);
@@ -4185,7 +4185,7 @@
           });
         });
       }
-      t.streamId ? this.#ki(t) : e(t.data);
+      t.streamId ? this._private_field__ki(t) : e(t.data);
     }
     on(t, e) {
       const i = this.actionHandler;
@@ -4259,7 +4259,7 @@
         }
       }, i);
     }
-    #ki(t) {
+    _private_field__ki(t) {
       const e = t.streamId, i = this.sourceName, s = t.sourceName, n = this.comObj, r = this, a = this.actionHandler[t.action], o = {
         enqueue(t, r = 1, a) {
           if (this.isCancelled) return;
@@ -4314,7 +4314,7 @@
         });
       }));
     }
-    #Mi(t) {
+    _private_field__Mi(t) {
       const e = t.streamId, i = this.sourceName, s = t.sourceName, n = this.comObj, r = this.streamControllers[e], a = this.streamSinks[e];
       switch (t.stream) {
         case Re:
@@ -4358,13 +4358,13 @@
           break;
         case Me:
           if ((K(r, "close should have stream controller"), r.isClosed)) break;
-          (r.isClosed = !0, r.controller.close(), this.#Di(r, e));
+          (r.isClosed = !0, r.controller.close(), this._private_field__Di(r, e));
           break;
         case De:
-          (K(r, "error should have stream controller"), r.controller.error(Fe(t.reason)), this.#Di(r, e));
+          (K(r, "error should have stream controller"), r.controller.error(Fe(t.reason)), this._private_field__Di(r, e));
           break;
         case Te:
-          (t.success ? r.cancelCall.resolve() : r.cancelCall.reject(Fe(t.reason)), this.#Di(r, e));
+          (t.success ? r.cancelCall.resolve() : r.cancelCall.reject(Fe(t.reason)), this._private_field__Di(r, e));
           break;
         case Ee:
           if (!a) break;
@@ -4391,17 +4391,17 @@
           throw new Error("Unexpected stream case");
       }
     }
-    async #Di(t, e) {
+    async _private_field__Di(t, e) {
       (await Promise.allSettled([t.startCall?.promise, t.pullCall?.promise, t.cancelCall?.promise]), delete this.streamControllers[e]);
     }
     destroy() {
-      (this.#Ei?.abort(), this.#Ei = null);
+      (this._private_field__Ei?.abort(), this._private_field__Ei = null);
     }
   }
   class Ne {
-    #Pi = !1;
+    _private_field__Pi = !1;
     constructor({enableHWA: t = !1}) {
-      this.#Pi = t;
+      this._private_field__Pi = t;
     }
     create(t, e) {
       if (t <= 0 || e <= 0) throw new Error("Invalid canvas size");
@@ -4409,7 +4409,7 @@
       return {
         canvas: i,
         context: i.getContext("2d", {
-          willReadFrequently: !this.#Pi
+          willReadFrequently: !this._private_field__Pi
         })
       };
     }
@@ -4481,32 +4481,32 @@
     destroy(t = !1) {}
   }
   class je extends He {
-    #Ii;
-    #Ri;
-    #Li;
-    #Fi;
-    #Bi;
-    #Ni;
-    #A = 0;
+    _private_field__Ii;
+    _private_field__Ri;
+    _private_field__Li;
+    _private_field__Fi;
+    _private_field__Bi;
+    _private_field__Ni;
+    _private_field__A = 0;
     constructor({docId: t, ownerDocument: e = globalThis.document}) {
-      (super(), this.#Fi = t, this.#Bi = e);
+      (super(), this._private_field__Fi = t, this._private_field__Bi = e);
     }
-    get #_() {
-      return this.#Ri ||= new Map();
+    get _private_field___() {
+      return this._private_field__Ri ||= new Map();
     }
-    get #Oi() {
-      return this.#Ni ||= new Map();
+    get _private_field__Oi() {
+      return this._private_field__Ni ||= new Map();
     }
-    get #Ui() {
-      if (!this.#Li) {
-        const t = this.#Bi.createElement("div"), {style: e} = t;
+    get _private_field__Ui() {
+      if (!this._private_field__Li) {
+        const t = this._private_field__Bi.createElement("div"), {style: e} = t;
         (e.visibility = "hidden", e.contain = "strict", e.width = e.height = 0, e.position = "absolute", e.top = e.left = 0, e.zIndex = -1);
-        const i = this.#Bi.createElementNS(wt, "svg");
-        (i.setAttribute("width", 0), i.setAttribute("height", 0), this.#Li = this.#Bi.createElementNS(wt, "defs"), t.append(i), i.append(this.#Li), this.#Bi.body.append(t));
+        const i = this._private_field__Bi.createElementNS(wt, "svg");
+        (i.setAttribute("width", 0), i.setAttribute("height", 0), this._private_field__Li = this._private_field__Bi.createElementNS(wt, "defs"), t.append(i), i.append(this._private_field__Li), this._private_field__Bi.body.append(t));
       }
-      return this.#Li;
+      return this._private_field__Li;
     }
-    #zi(t) {
+    _private_field__zi(t) {
       if (1 === t.length) {
         const e = t[0], i = new Array(256);
         for (let t = 0; t < 256; t++) i[t] = e[t] / 255;
@@ -4517,83 +4517,83 @@
       for (let o = 0; o < 256; o++) (n[o] = e[o] / 255, r[o] = i[o] / 255, a[o] = s[o] / 255);
       return [n.join(","), r.join(","), a.join(",")];
     }
-    #Hi(t) {
-      if (void 0 === this.#Ii) {
-        this.#Ii = "";
-        const t = this.#Bi.URL;
-        t !== this.#Bi.baseURI && (Ct(t) ? q('#createUrl: ignore "data:"-URL for performance reasons.') : this.#Ii = Q(t, ""));
+    _private_field__Hi(t) {
+      if (void 0 === this._private_field__Ii) {
+        this._private_field__Ii = "";
+        const t = this._private_field__Bi.URL;
+        t !== this._private_field__Bi.baseURI && (Ct(t) ? q('#createUrl: ignore "data:"-URL for performance reasons.') : this._private_field__Ii = Q(t, ""));
       }
-      return `url(${this.#Ii}#${t})`;
+      return `url(${this._private_field__Ii}#${t})`;
     }
     addFilter(t) {
       if (!t) return "none";
-      let e = this.#_.get(t);
+      let e = this._private_field___.get(t);
       if (e) return e;
-      const [i, s, n] = this.#zi(t), r = 1 === t.length ? i : `${i}${s}${n}`;
-      if ((e = this.#_.get(r), e)) return (this.#_.set(t, e), e);
-      const a = `g_${this.#Fi}_transfer_map_${this.#A++}`, o = this.#Hi(a);
-      (this.#_.set(t, o), this.#_.set(r, o));
-      const l = this.#ji(a);
-      return (this.#$i(i, s, n, l), o);
+      const [i, s, n] = this._private_field__zi(t), r = 1 === t.length ? i : `${i}${s}${n}`;
+      if ((e = this._private_field___.get(r), e)) return (this._private_field___.set(t, e), e);
+      const a = `g_${this._private_field__Fi}_transfer_map_${this._private_field__A++}`, o = this._private_field__Hi(a);
+      (this._private_field___.set(t, o), this._private_field___.set(r, o));
+      const l = this._private_field__ji(a);
+      return (this._private_field__$i(i, s, n, l), o);
     }
     addHCMFilter(t, e) {
       const i = `${t}-${e}`, s = "base";
-      let n = this.#Oi.get(s);
+      let n = this._private_field__Oi.get(s);
       if (n?.key === i) return n.url;
       if ((n ? (n.filter?.remove(), n.key = i, n.url = "none", n.filter = null) : (n = {
         key: i,
         url: "none",
         filter: null
-      }, this.#Oi.set(s, n)), !t || !e)) return n.url;
-      const r = this.#Vi(t);
+      }, this._private_field__Oi.set(s, n)), !t || !e)) return n.url;
+      const r = this._private_field__Vi(t);
       t = ct.makeHexColor(...r);
-      const a = this.#Vi(e);
-      if ((e = ct.makeHexColor(...a), this.#Ui.style.color = "", "#000000" === t && "#ffffff" === e || t === e)) return n.url;
+      const a = this._private_field__Vi(e);
+      if ((e = ct.makeHexColor(...a), this._private_field__Ui.style.color = "", "#000000" === t && "#ffffff" === e || t === e)) return n.url;
       const o = new Array(256);
       for (let u = 0; u <= 255; u++) {
         const t = u / 255;
         o[u] = t <= .03928 ? t / 12.92 : ((t + .055) / 1.055) ** 2.4;
       }
-      const l = o.join(","), h = `g_${this.#Fi}_hcm_filter`, c = n.filter = this.#ji(h);
-      (this.#$i(l, l, l, c), this.#Gi(c));
+      const l = o.join(","), h = `g_${this._private_field__Fi}_hcm_filter`, c = n.filter = this._private_field__ji(h);
+      (this._private_field__$i(l, l, l, c), this._private_field__Gi(c));
       const d = (t, e) => {
         const i = r[t] / 255, s = a[t] / 255, n = new Array(e + 1);
         for (let r = 0; r <= e; r++) n[r] = i + r / e * (s - i);
         return n.join(",");
       };
-      return (this.#$i(d(0, 5), d(1, 5), d(2, 5), c), n.url = this.#Hi(h), n.url);
+      return (this._private_field__$i(d(0, 5), d(1, 5), d(2, 5), c), n.url = this._private_field__Hi(h), n.url);
     }
     addAlphaFilter(t) {
-      let e = this.#_.get(t);
+      let e = this._private_field___.get(t);
       if (e) return e;
-      const [i] = this.#zi([t]), s = `alpha_${i}`;
-      if ((e = this.#_.get(s), e)) return (this.#_.set(t, e), e);
-      const n = `g_${this.#Fi}_alpha_map_${this.#A++}`, r = this.#Hi(n);
-      (this.#_.set(t, r), this.#_.set(s, r));
-      const a = this.#ji(n);
-      return (this.#Wi(i, a), r);
+      const [i] = this._private_field__zi([t]), s = `alpha_${i}`;
+      if ((e = this._private_field___.get(s), e)) return (this._private_field___.set(t, e), e);
+      const n = `g_${this._private_field__Fi}_alpha_map_${this._private_field__A++}`, r = this._private_field__Hi(n);
+      (this._private_field___.set(t, r), this._private_field___.set(s, r));
+      const a = this._private_field__ji(n);
+      return (this._private_field__Wi(i, a), r);
     }
     addLuminosityFilter(t) {
-      let e, i, s = this.#_.get(t || "luminosity");
+      let e, i, s = this._private_field___.get(t || "luminosity");
       if (s) return s;
-      if ((t ? ([e] = this.#zi([t]), i = `luminosity_${e}`) : i = "luminosity", s = this.#_.get(i), s)) return (this.#_.set(t, s), s);
-      const n = `g_${this.#Fi}_luminosity_map_${this.#A++}`, r = this.#Hi(n);
-      (this.#_.set(t, r), this.#_.set(i, r));
-      const a = this.#ji(n);
-      return (this.#qi(a), t && this.#Wi(e, a), r);
+      if ((t ? ([e] = this._private_field__zi([t]), i = `luminosity_${e}`) : i = "luminosity", s = this._private_field___.get(i), s)) return (this._private_field___.set(t, s), s);
+      const n = `g_${this._private_field__Fi}_luminosity_map_${this._private_field__A++}`, r = this._private_field__Hi(n);
+      (this._private_field___.set(t, r), this._private_field___.set(i, r));
+      const a = this._private_field__ji(n);
+      return (this._private_field__qi(a), t && this._private_field__Wi(e, a), r);
     }
     addHighlightHCMFilter(t, e, i, s, n) {
       const r = `${e}-${i}-${s}-${n}`;
-      let a = this.#Oi.get(t);
+      let a = this._private_field__Oi.get(t);
       if (a?.key === r) return a.url;
       if ((a ? (a.filter?.remove(), a.key = r, a.url = "none", a.filter = null) : (a = {
         key: r,
         url: "none",
         filter: null
-      }, this.#Oi.set(t, a)), !e || !i)) return a.url;
-      const [o, l] = [e, i].map(this.#Vi.bind(this));
-      let h = Math.round(.2126 * o[0] + .7152 * o[1] + .0722 * o[2]), c = Math.round(.2126 * l[0] + .7152 * l[1] + .0722 * l[2]), [d, u] = [s, n].map(this.#Vi.bind(this));
-      (c < h && ([h, c, d, u] = [c, h, u, d]), this.#Ui.style.color = "");
+      }, this._private_field__Oi.set(t, a)), !e || !i)) return a.url;
+      const [o, l] = [e, i].map(this._private_field__Vi.bind(this));
+      let h = Math.round(.2126 * o[0] + .7152 * o[1] + .0722 * o[2]), c = Math.round(.2126 * l[0] + .7152 * l[1] + .0722 * l[2]), [d, u] = [s, n].map(this._private_field__Vi.bind(this));
+      (c < h && ([h, c, d, u] = [c, h, u, d]), this._private_field__Ui.style.color = "");
       const p = (t, e, i) => {
         const s = new Array(256), n = (c - h) / i, r = t / 255, a = (e - t) / (255 * i);
         let o = 0;
@@ -4604,38 +4604,38 @@
         }
         for (let l = o; l < 256; l++) s[l] = s[o - 1];
         return s.join(",");
-      }, g = `g_${this.#Fi}_hcm_${t}_filter`, m = a.filter = this.#ji(g);
-      return (this.#Gi(m), this.#$i(p(d[0], u[0], 5), p(d[1], u[1], 5), p(d[2], u[2], 5), m), a.url = this.#Hi(g), a.url);
+      }, g = `g_${this._private_field__Fi}_hcm_${t}_filter`, m = a.filter = this._private_field__ji(g);
+      return (this._private_field__Gi(m), this._private_field__$i(p(d[0], u[0], 5), p(d[1], u[1], 5), p(d[2], u[2], 5), m), a.url = this._private_field__Hi(g), a.url);
     }
     destroy(t = !1) {
-      t && this.#Ni?.size || (this.#Li?.parentNode.parentNode.remove(), this.#Li = null, this.#Ri?.clear(), this.#Ri = null, this.#Ni?.clear(), this.#Ni = null, this.#A = 0);
+      t && this._private_field__Ni?.size || (this._private_field__Li?.parentNode.parentNode.remove(), this._private_field__Li = null, this._private_field__Ri?.clear(), this._private_field__Ri = null, this._private_field__Ni?.clear(), this._private_field__Ni = null, this._private_field__A = 0);
     }
-    #qi(t) {
-      const e = this.#Bi.createElementNS(wt, "feColorMatrix");
+    _private_field__qi(t) {
+      const e = this._private_field__Bi.createElementNS(wt, "feColorMatrix");
       (e.setAttribute("type", "matrix"), e.setAttribute("values", "0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.3 0.59 0.11 0 0"), t.append(e));
     }
-    #Gi(t) {
-      const e = this.#Bi.createElementNS(wt, "feColorMatrix");
+    _private_field__Gi(t) {
+      const e = this._private_field__Bi.createElementNS(wt, "feColorMatrix");
       (e.setAttribute("type", "matrix"), e.setAttribute("values", "0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0 0 0 1 0"), t.append(e));
     }
-    #ji(t) {
-      const e = this.#Bi.createElementNS(wt, "filter");
-      return (e.setAttribute("color-interpolation-filters", "sRGB"), e.setAttribute("id", t), this.#Ui.append(e), e);
+    _private_field__ji(t) {
+      const e = this._private_field__Bi.createElementNS(wt, "filter");
+      return (e.setAttribute("color-interpolation-filters", "sRGB"), e.setAttribute("id", t), this._private_field__Ui.append(e), e);
     }
-    #Xi(t, e, i) {
-      const s = this.#Bi.createElementNS(wt, e);
+    _private_field__Xi(t, e, i) {
+      const s = this._private_field__Bi.createElementNS(wt, e);
       (s.setAttribute("type", "discrete"), s.setAttribute("tableValues", i), t.append(s));
     }
-    #$i(t, e, i, s) {
-      const n = this.#Bi.createElementNS(wt, "feComponentTransfer");
-      (s.append(n), this.#Xi(n, "feFuncR", t), this.#Xi(n, "feFuncG", e), this.#Xi(n, "feFuncB", i));
+    _private_field__$i(t, e, i, s) {
+      const n = this._private_field__Bi.createElementNS(wt, "feComponentTransfer");
+      (s.append(n), this._private_field__Xi(n, "feFuncR", t), this._private_field__Xi(n, "feFuncG", e), this._private_field__Xi(n, "feFuncB", i));
     }
-    #Wi(t, e) {
-      const i = this.#Bi.createElementNS(wt, "feComponentTransfer");
-      (e.append(i), this.#Xi(i, "feFuncA", t));
+    _private_field__Wi(t, e) {
+      const i = this._private_field__Bi.createElementNS(wt, "feComponentTransfer");
+      (e.append(i), this._private_field__Xi(i, "feFuncA", t));
     }
-    #Vi(t) {
-      return (this.#Ui.style.color = t, Ft(getComputedStyle(this.#Ui).getPropertyValue("color")));
+    _private_field__Vi(t) {
+      return (this._private_field__Ui.style.color = t, Ft(getComputedStyle(this._private_field__Ui).getPropertyValue("color")));
     }
   }
   class $e {
@@ -4714,28 +4714,28 @@
   }
   const si = new Uint32Array(new Uint8Array([255, 255, 0, 0]).buffer)[0];
   class ni {
-    #Ki;
-    #Yi;
+    _private_field__Ki;
+    _private_field__Yi;
     constructor(t, e) {
-      (this.#Ki = t, this.#Yi = e);
+      (this._private_field__Ki = t, this._private_field__Yi = e);
     }
     get length() {
-      return this.#Ki.length;
+      return this._private_field__Ki.length;
     }
     isEmpty(t) {
-      return this.#Ki[t] === si;
+      return this._private_field__Ki[t] === si;
     }
     minX(t) {
-      return this.#Yi[4 * t + 0] / 256;
+      return this._private_field__Yi[4 * t + 0] / 256;
     }
     minY(t) {
-      return this.#Yi[4 * t + 1] / 256;
+      return this._private_field__Yi[4 * t + 1] / 256;
     }
     maxX(t) {
-      return (this.#Yi[4 * t + 2] + 1) / 256;
+      return (this._private_field__Yi[4 * t + 2] + 1) / 256;
     }
     maxY(t) {
-      return (this.#Yi[4 * t + 3] + 1) / 256;
+      return (this._private_field__Yi[4 * t + 3] + 1) / 256;
     }
   }
   const ri = (t, e) => {
@@ -4747,226 +4747,226 @@
     }, t.set(e, i)), i);
   };
   class ai {
-    #Qi = {
+    _private_field__Qi = {
       __proto__: null
     };
-    #Ji = {
+    _private_field__Ji = {
       __proto__: null,
       transform: [],
       moveText: [],
       sameLineText: [],
       [Ze]: []
     };
-    #Zi = new Map();
-    #ts = [];
-    #es = [];
-    #is = [[1, 0, 0, 1, 0, 0]];
-    #ss = [-1 / 0, -1 / 0, 1 / 0, 1 / 0];
-    #ns = new Float64Array([1 / 0, 1 / 0, -1 / 0, -1 / 0]);
-    #rs = -1;
-    #as = new Set();
-    #os = new Map();
-    #ls = new Map();
-    #hs;
-    #cs;
-    #ds;
-    #Ki;
-    #us;
+    _private_field__Zi = new Map();
+    _private_field__ts = [];
+    _private_field__es = [];
+    _private_field__is = [[1, 0, 0, 1, 0, 0]];
+    _private_field__ss = [-1 / 0, -1 / 0, 1 / 0, 1 / 0];
+    _private_field__ns = new Float64Array([1 / 0, 1 / 0, -1 / 0, -1 / 0]);
+    _private_field__rs = -1;
+    _private_field__as = new Set();
+    _private_field__os = new Map();
+    _private_field__ls = new Map();
+    _private_field__hs;
+    _private_field__cs;
+    _private_field__ds;
+    _private_field__Ki;
+    _private_field__us;
     constructor(t, e, i = !1) {
-      (this.#hs = t.width, this.#cs = t.height, this.#ps(e), i && (this.#us = new Map()));
+      (this._private_field__hs = t.width, this._private_field__cs = t.height, this._private_field__ps(e), i && (this._private_field__us = new Map()));
     }
     growOperationsCount(t) {
-      t >= this.#Ki.length && this.#ps(t, this.#Ki);
+      t >= this._private_field__Ki.length && this._private_field__ps(t, this._private_field__Ki);
     }
-    #ps(t, e) {
+    _private_field__ps(t, e) {
       const i = new ArrayBuffer(4 * t);
-      (this.#ds = new Uint8ClampedArray(i), this.#Ki = new Uint32Array(i), e && e.length > 0 ? (this.#Ki.set(e), this.#Ki.fill(si, e.length)) : this.#Ki.fill(si));
+      (this._private_field__ds = new Uint8ClampedArray(i), this._private_field__Ki = new Uint32Array(i), e && e.length > 0 ? (this._private_field__Ki.set(e), this._private_field__Ki.fill(si, e.length)) : this._private_field__Ki.fill(si));
     }
     save(t) {
-      return (this.#Qi = {
-        __proto__: this.#Qi
-      }, this.#Ji = {
-        __proto__: this.#Ji,
+      return (this._private_field__Qi = {
+        __proto__: this._private_field__Qi
+      }, this._private_field__Ji = {
+        __proto__: this._private_field__Ji,
         transform: {
-          __proto__: this.#Ji.transform
+          __proto__: this._private_field__Ji.transform
         },
         moveText: {
-          __proto__: this.#Ji.moveText
+          __proto__: this._private_field__Ji.moveText
         },
         sameLineText: {
-          __proto__: this.#Ji.sameLineText
+          __proto__: this._private_field__Ji.sameLineText
         },
         [Ze]: {
-          __proto__: this.#Ji[Ze]
+          __proto__: this._private_field__Ji[Ze]
         }
-      }, this.#ss = {
-        __proto__: this.#ss
-      }, this.#ts.push(t), this);
+      }, this._private_field__ss = {
+        __proto__: this._private_field__ss
+      }, this._private_field__ts.push(t), this);
     }
     restore(t) {
-      const e = Object.getPrototypeOf(this.#Qi);
+      const e = Object.getPrototypeOf(this._private_field__Qi);
       if (null === e) return this;
-      (this.#Qi = e, this.#Ji = Object.getPrototypeOf(this.#Ji), this.#ss = Object.getPrototypeOf(this.#ss));
-      const i = this.#ts.pop();
-      return (void 0 !== i && (ri(this.#us, t)?.dependencies.add(i), this.#Ki[t] = this.#Ki[i]), this);
+      (this._private_field__Qi = e, this._private_field__Ji = Object.getPrototypeOf(this._private_field__Ji), this._private_field__ss = Object.getPrototypeOf(this._private_field__ss));
+      const i = this._private_field__ts.pop();
+      return (void 0 !== i && (ri(this._private_field__us, t)?.dependencies.add(i), this._private_field__Ki[t] = this._private_field__Ki[i]), this);
     }
     recordOpenMarker(t) {
-      return (this.#ts.push(t), this);
+      return (this._private_field__ts.push(t), this);
     }
     getOpenMarker() {
-      return 0 === this.#ts.length ? null : this.#ts.at(-1);
+      return 0 === this._private_field__ts.length ? null : this._private_field__ts.at(-1);
     }
     recordCloseMarker(t) {
-      const e = this.#ts.pop();
-      return (void 0 !== e && (ri(this.#us, t)?.dependencies.add(e), this.#Ki[t] = this.#Ki[e]), this);
+      const e = this._private_field__ts.pop();
+      return (void 0 !== e && (ri(this._private_field__us, t)?.dependencies.add(e), this._private_field__Ki[t] = this._private_field__Ki[e]), this);
     }
     beginMarkedContent(t) {
-      return (this.#es.push(t), this);
+      return (this._private_field__es.push(t), this);
     }
     endMarkedContent(t) {
-      const e = this.#es.pop();
-      return (void 0 !== e && (ri(this.#us, t)?.dependencies.add(e), this.#Ki[t] = this.#Ki[e]), this);
+      const e = this._private_field__es.pop();
+      return (void 0 !== e && (ri(this._private_field__us, t)?.dependencies.add(e), this._private_field__Ki[t] = this._private_field__Ki[e]), this);
     }
     pushBaseTransform(t) {
-      return (this.#is.push(ct.multiplyByDOMMatrix(this.#is.at(-1), t.getTransform())), this);
+      return (this._private_field__is.push(ct.multiplyByDOMMatrix(this._private_field__is.at(-1), t.getTransform())), this);
     }
     popBaseTransform() {
-      return (this.#is.length > 1 && this.#is.pop(), this);
+      return (this._private_field__is.length > 1 && this._private_field__is.pop(), this);
     }
     recordSimpleData(t, e) {
-      return (this.#Qi[t] = e, this);
+      return (this._private_field__Qi[t] = e, this);
     }
     recordIncrementalData(t, e) {
-      return (this.#Ji[t].push(e), this);
+      return (this._private_field__Ji[t].push(e), this);
     }
     resetIncrementalData(t, e) {
-      return (this.#Ji[t].length = 0, this);
+      return (this._private_field__Ji[t].length = 0, this);
     }
     recordNamedData(t, e) {
-      return (this.#Zi.set(t, e), this);
+      return (this._private_field__Zi.set(t, e), this);
     }
     recordSimpleDataFromNamed(t, e, i) {
-      this.#Qi[t] = this.#Zi.get(e) ?? i;
+      this._private_field__Qi[t] = this._private_field__Zi.get(e) ?? i;
     }
     recordFutureForcedDependency(t, e) {
       return (this.recordIncrementalData(Ze, e), this);
     }
     inheritSimpleDataAsFutureForcedDependencies(t) {
-      for (const e of t) (e in this.#Qi) && this.recordFutureForcedDependency(e, this.#Qi[e]);
+      for (const e of t) (e in this._private_field__Qi) && this.recordFutureForcedDependency(e, this._private_field__Qi[e]);
       return this;
     }
     inheritPendingDependenciesAsFutureForcedDependencies() {
-      for (const t of this.#as) this.recordFutureForcedDependency(Ze, t);
+      for (const t of this._private_field__as) this.recordFutureForcedDependency(Ze, t);
       return this;
     }
     resetBBox(t) {
-      return (this.#rs !== t && (this.#rs = t, this.#ns[0] = 1 / 0, this.#ns[1] = 1 / 0, this.#ns[2] = -1 / 0, this.#ns[3] = -1 / 0), this);
+      return (this._private_field__rs !== t && (this._private_field__rs = t, this._private_field__ns[0] = 1 / 0, this._private_field__ns[1] = 1 / 0, this._private_field__ns[2] = -1 / 0, this._private_field__ns[3] = -1 / 0), this);
     }
     recordClipBox(t, e, i, s, n, r) {
-      const a = ct.multiplyByDOMMatrix(this.#is.at(-1), e.getTransform()), o = [1 / 0, 1 / 0, -1 / 0, -1 / 0];
+      const a = ct.multiplyByDOMMatrix(this._private_field__is.at(-1), e.getTransform()), o = [1 / 0, 1 / 0, -1 / 0, -1 / 0];
       ct.axialAlignedBoundingBox([i, n, s, r], a, o);
-      const l = ct.intersect(this.#ss, o);
-      return (l ? (this.#ss[0] = l[0], this.#ss[1] = l[1], this.#ss[2] = l[2], this.#ss[3] = l[3]) : (this.#ss[0] = this.#ss[1] = 1 / 0, this.#ss[2] = this.#ss[3] = -1 / 0), this);
+      const l = ct.intersect(this._private_field__ss, o);
+      return (l ? (this._private_field__ss[0] = l[0], this._private_field__ss[1] = l[1], this._private_field__ss[2] = l[2], this._private_field__ss[3] = l[3]) : (this._private_field__ss[0] = this._private_field__ss[1] = 1 / 0, this._private_field__ss[2] = this._private_field__ss[3] = -1 / 0), this);
     }
     recordBBox(t, e, i, s, n, r) {
-      const a = this.#ss;
+      const a = this._private_field__ss;
       if (a[0] === 1 / 0) return this;
-      const o = ct.multiplyByDOMMatrix(this.#is.at(-1), e.getTransform());
-      if (a[0] === -1 / 0) return (ct.axialAlignedBoundingBox([i, n, s, r], o, this.#ns), this);
+      const o = ct.multiplyByDOMMatrix(this._private_field__is.at(-1), e.getTransform());
+      if (a[0] === -1 / 0) return (ct.axialAlignedBoundingBox([i, n, s, r], o, this._private_field__ns), this);
       const l = [1 / 0, 1 / 0, -1 / 0, -1 / 0];
-      return (ct.axialAlignedBoundingBox([i, n, s, r], o, l), this.#ns[0] = Math.min(this.#ns[0], Math.max(l[0], a[0])), this.#ns[1] = Math.min(this.#ns[1], Math.max(l[1], a[1])), this.#ns[2] = Math.max(this.#ns[2], Math.min(l[2], a[2])), this.#ns[3] = Math.max(this.#ns[3], Math.min(l[3], a[3])), this);
+      return (ct.axialAlignedBoundingBox([i, n, s, r], o, l), this._private_field__ns[0] = Math.min(this._private_field__ns[0], Math.max(l[0], a[0])), this._private_field__ns[1] = Math.min(this._private_field__ns[1], Math.max(l[1], a[1])), this._private_field__ns[2] = Math.max(this._private_field__ns[2], Math.min(l[2], a[2])), this._private_field__ns[3] = Math.max(this._private_field__ns[3], Math.min(l[3], a[3])), this);
     }
     recordCharacterBBox(t, e, i, s = 1, n = 0, r = 0, a) {
       const o = i.bbox;
       let l, h;
-      if (o && (l = o[2] !== o[0] && o[3] !== o[1] && this.#ls.get(i), !1 !== l && (h = [0, 0, 0, 0], ct.axialAlignedBoundingBox(o, i.fontMatrix, h), 1 === s && 0 === n && 0 === r || ct.scaleMinMax([s, 0, 0, -s, n, r], h), l))) return this.recordBBox(t, e, h[0], h[2], h[1], h[3]);
+      if (o && (l = o[2] !== o[0] && o[3] !== o[1] && this._private_field__ls.get(i), !1 !== l && (h = [0, 0, 0, 0], ct.axialAlignedBoundingBox(o, i.fontMatrix, h), 1 === s && 0 === n && 0 === r || ct.scaleMinMax([s, 0, 0, -s, n, r], h), l))) return this.recordBBox(t, e, h[0], h[2], h[1], h[3]);
       if (!a) return this.recordFullPageBBox(t);
       const c = a();
-      return o && h && void 0 === l && (l = h[0] <= n - c.actualBoundingBoxLeft && h[2] >= n + c.actualBoundingBoxRight && h[1] <= r - c.actualBoundingBoxAscent && h[3] >= r + c.actualBoundingBoxDescent, this.#ls.set(i, l), l) ? this.recordBBox(t, e, h[0], h[2], h[1], h[3]) : this.recordBBox(t, e, n - c.actualBoundingBoxLeft, n + c.actualBoundingBoxRight, r - c.actualBoundingBoxAscent, r + c.actualBoundingBoxDescent);
+      return o && h && void 0 === l && (l = h[0] <= n - c.actualBoundingBoxLeft && h[2] >= n + c.actualBoundingBoxRight && h[1] <= r - c.actualBoundingBoxAscent && h[3] >= r + c.actualBoundingBoxDescent, this._private_field__ls.set(i, l), l) ? this.recordBBox(t, e, h[0], h[2], h[1], h[3]) : this.recordBBox(t, e, n - c.actualBoundingBoxLeft, n + c.actualBoundingBoxRight, r - c.actualBoundingBoxAscent, r + c.actualBoundingBoxDescent);
     }
     recordFullPageBBox(t) {
-      return (this.#ns[0] = Math.max(0, this.#ss[0]), this.#ns[1] = Math.max(0, this.#ss[1]), this.#ns[2] = Math.min(this.#hs, this.#ss[2]), this.#ns[3] = Math.min(this.#cs, this.#ss[3]), this);
+      return (this._private_field__ns[0] = Math.max(0, this._private_field__ss[0]), this._private_field__ns[1] = Math.max(0, this._private_field__ss[1]), this._private_field__ns[2] = Math.min(this._private_field__hs, this._private_field__ss[2]), this._private_field__ns[3] = Math.min(this._private_field__cs, this._private_field__ss[3]), this);
     }
     getSimpleIndex(t) {
-      return this.#Qi[t];
+      return this._private_field__Qi[t];
     }
     recordDependencies(t, e) {
-      const i = this.#as, s = this.#Qi, n = this.#Ji;
-      for (const r of e) (r in this.#Qi) ? i.add(s[r]) : (r in n) && n[r].forEach(i.add, i);
+      const i = this._private_field__as, s = this._private_field__Qi, n = this._private_field__Ji;
+      for (const r of e) (r in this._private_field__Qi) ? i.add(s[r]) : (r in n) && n[r].forEach(i.add, i);
       return this;
     }
     recordNamedDependency(t, e) {
-      return (this.#Zi.has(e) && this.#as.add(this.#Zi.get(e)), this);
+      return (this._private_field__Zi.has(e) && this._private_field__as.add(this._private_field__Zi.get(e)), this);
     }
     recordOperation(t, e = !1) {
-      if ((this.recordDependencies(t, [Ze]), this.#us)) {
-        const e = ri(this.#us, t), {dependencies: i} = e;
-        (this.#as.forEach(i.add, i), this.#ts.forEach(i.add, i), this.#es.forEach(i.add, i), i.delete(t), e.isRenderingOperation = !0);
+      if ((this.recordDependencies(t, [Ze]), this._private_field__us)) {
+        const e = ri(this._private_field__us, t), {dependencies: i} = e;
+        (this._private_field__as.forEach(i.add, i), this._private_field__ts.forEach(i.add, i), this._private_field__es.forEach(i.add, i), i.delete(t), e.isRenderingOperation = !0);
       }
-      if (this.#rs === t) {
-        const i = ti(256 * this.#ns[0] / this.#hs), s = ti(256 * this.#ns[1] / this.#cs), n = ei(256 * this.#ns[2] / this.#hs), r = ei(256 * this.#ns[3] / this.#cs);
-        ii(this.#ds, t, i, s, n, r);
-        for (const e of this.#as) e !== t && ii(this.#ds, e, i, s, n, r);
-        for (const e of this.#ts) e !== t && ii(this.#ds, e, i, s, n, r);
-        for (const e of this.#es) e !== t && ii(this.#ds, e, i, s, n, r);
-        e || (this.#as.clear(), this.#rs = -1);
+      if (this._private_field__rs === t) {
+        const i = ti(256 * this._private_field__ns[0] / this._private_field__hs), s = ti(256 * this._private_field__ns[1] / this._private_field__cs), n = ei(256 * this._private_field__ns[2] / this._private_field__hs), r = ei(256 * this._private_field__ns[3] / this._private_field__cs);
+        ii(this._private_field__ds, t, i, s, n, r);
+        for (const e of this._private_field__as) e !== t && ii(this._private_field__ds, e, i, s, n, r);
+        for (const e of this._private_field__ts) e !== t && ii(this._private_field__ds, e, i, s, n, r);
+        for (const e of this._private_field__es) e !== t && ii(this._private_field__ds, e, i, s, n, r);
+        e || (this._private_field__as.clear(), this._private_field__rs = -1);
       }
       return this;
     }
     recordShowTextOperation(t, e = !1) {
-      const i = Array.from(this.#as);
+      const i = Array.from(this._private_field__as);
       (this.recordOperation(t, e), this.recordIncrementalData("sameLineText", t));
       for (const s of i) this.recordIncrementalData("sameLineText", s);
       return this;
     }
     bboxToClipBoxDropOperation(t, e = !1) {
-      return (this.#rs === t && (this.#rs = -1, this.#ss[0] = Math.max(this.#ss[0], this.#ns[0]), this.#ss[1] = Math.max(this.#ss[1], this.#ns[1]), this.#ss[2] = Math.min(this.#ss[2], this.#ns[2]), this.#ss[3] = Math.min(this.#ss[3], this.#ns[3]), e || this.#as.clear()), this);
+      return (this._private_field__rs === t && (this._private_field__rs = -1, this._private_field__ss[0] = Math.max(this._private_field__ss[0], this._private_field__ns[0]), this._private_field__ss[1] = Math.max(this._private_field__ss[1], this._private_field__ns[1]), this._private_field__ss[2] = Math.min(this._private_field__ss[2], this._private_field__ns[2]), this._private_field__ss[3] = Math.min(this._private_field__ss[3], this._private_field__ns[3]), e || this._private_field__as.clear()), this);
     }
     _takePendingDependencies() {
-      const t = this.#as;
-      return (this.#as = new Set(), t);
+      const t = this._private_field__as;
+      return (this._private_field__as = new Set(), t);
     }
     _extractOperation(t) {
-      const e = this.#os.get(t);
-      return (this.#os.delete(t), e);
+      const e = this._private_field__os.get(t);
+      return (this._private_field__os.delete(t), e);
     }
     _pushPendingDependencies(t) {
-      for (const e of t) this.#as.add(e);
+      for (const e of t) this._private_field__as.add(e);
     }
     take() {
-      return (this.#ls.clear(), new ni(this.#Ki, this.#ds));
+      return (this._private_field__ls.clear(), new ni(this._private_field__Ki, this._private_field__ds));
     }
     takeDebugMetadata() {
-      return this.#us;
+      return this._private_field__us;
     }
   }
   class oi {
-    #gs;
-    #ms;
-    #fs;
-    #bs = 0;
-    #vs = 0;
+    _private_field__gs;
+    _private_field__ms;
+    _private_field__fs;
+    _private_field__bs = 0;
+    _private_field__vs = 0;
     constructor(t, e, i) {
-      if (t instanceof oi && t.#fs === !!i) return t;
-      (this.#gs = t, this.#ms = e, this.#fs = !!i);
+      if (t instanceof oi && t._private_field__fs === !!i) return t;
+      (this._private_field__gs = t, this._private_field__ms = e, this._private_field__fs = !!i);
     }
     growOperationsCount() {
       throw new Error("Unreachable");
     }
     save(t) {
-      return (this.#vs++, this.#gs.save(this.#ms), this);
+      return (this._private_field__vs++, this._private_field__gs.save(this._private_field__ms), this);
     }
     restore(t) {
-      return (this.#vs > 0 && (this.#gs.restore(this.#ms), this.#vs--), this);
+      return (this._private_field__vs > 0 && (this._private_field__gs.restore(this._private_field__ms), this._private_field__vs--), this);
     }
     recordOpenMarker(t) {
-      return (this.#bs++, this);
+      return (this._private_field__bs++, this);
     }
     getOpenMarker() {
-      return this.#bs > 0 ? this.#ms : this.#gs.getOpenMarker();
+      return this._private_field__bs > 0 ? this._private_field__ms : this._private_field__gs.getOpenMarker();
     }
     recordCloseMarker(t) {
-      return (this.#bs--, this);
+      return (this._private_field__bs--, this);
     }
     beginMarkedContent(t) {
       return this;
@@ -4975,67 +4975,67 @@
       return this;
     }
     pushBaseTransform(t) {
-      return (this.#gs.pushBaseTransform(t), this);
+      return (this._private_field__gs.pushBaseTransform(t), this);
     }
     popBaseTransform() {
-      return (this.#gs.popBaseTransform(), this);
+      return (this._private_field__gs.popBaseTransform(), this);
     }
     recordSimpleData(t, e) {
-      return (this.#gs.recordSimpleData(t, this.#ms), this);
+      return (this._private_field__gs.recordSimpleData(t, this._private_field__ms), this);
     }
     recordIncrementalData(t, e) {
-      return (this.#gs.recordIncrementalData(t, this.#ms), this);
+      return (this._private_field__gs.recordIncrementalData(t, this._private_field__ms), this);
     }
     resetIncrementalData(t, e) {
-      return (this.#gs.resetIncrementalData(t, this.#ms), this);
+      return (this._private_field__gs.resetIncrementalData(t, this._private_field__ms), this);
     }
     recordNamedData(t, e) {
       return this;
     }
     recordSimpleDataFromNamed(t, e, i) {
-      return (this.#gs.recordSimpleDataFromNamed(t, e, this.#ms), this);
+      return (this._private_field__gs.recordSimpleDataFromNamed(t, e, this._private_field__ms), this);
     }
     recordFutureForcedDependency(t, e) {
-      return (this.#gs.recordFutureForcedDependency(t, this.#ms), this);
+      return (this._private_field__gs.recordFutureForcedDependency(t, this._private_field__ms), this);
     }
     inheritSimpleDataAsFutureForcedDependencies(t) {
-      return (this.#gs.inheritSimpleDataAsFutureForcedDependencies(t), this);
+      return (this._private_field__gs.inheritSimpleDataAsFutureForcedDependencies(t), this);
     }
     inheritPendingDependenciesAsFutureForcedDependencies() {
-      return (this.#gs.inheritPendingDependenciesAsFutureForcedDependencies(), this);
+      return (this._private_field__gs.inheritPendingDependenciesAsFutureForcedDependencies(), this);
     }
     resetBBox(t) {
-      return (this.#fs || this.#gs.resetBBox(this.#ms), this);
+      return (this._private_field__fs || this._private_field__gs.resetBBox(this._private_field__ms), this);
     }
     recordClipBox(t, e, i, s, n, r) {
-      return (this.#fs || this.#gs.recordClipBox(this.#ms, e, i, s, n, r), this);
+      return (this._private_field__fs || this._private_field__gs.recordClipBox(this._private_field__ms, e, i, s, n, r), this);
     }
     recordBBox(t, e, i, s, n, r) {
-      return (this.#fs || this.#gs.recordBBox(this.#ms, e, i, s, n, r), this);
+      return (this._private_field__fs || this._private_field__gs.recordBBox(this._private_field__ms, e, i, s, n, r), this);
     }
     recordCharacterBBox(t, e, i, s, n, r, a) {
-      return (this.#fs || this.#gs.recordCharacterBBox(this.#ms, e, i, s, n, r, a), this);
+      return (this._private_field__fs || this._private_field__gs.recordCharacterBBox(this._private_field__ms, e, i, s, n, r, a), this);
     }
     recordFullPageBBox(t) {
-      return (this.#fs || this.#gs.recordFullPageBBox(this.#ms), this);
+      return (this._private_field__fs || this._private_field__gs.recordFullPageBBox(this._private_field__ms), this);
     }
     getSimpleIndex(t) {
-      return this.#gs.getSimpleIndex(t);
+      return this._private_field__gs.getSimpleIndex(t);
     }
     recordDependencies(t, e) {
-      return (this.#gs.recordDependencies(this.#ms, e), this);
+      return (this._private_field__gs.recordDependencies(this._private_field__ms, e), this);
     }
     recordNamedDependency(t, e) {
-      return (this.#gs.recordNamedDependency(this.#ms, e), this);
+      return (this._private_field__gs.recordNamedDependency(this._private_field__ms, e), this);
     }
     recordOperation(t) {
-      return (this.#gs.recordOperation(this.#ms, !0), this);
+      return (this._private_field__gs.recordOperation(this._private_field__ms, !0), this);
     }
     recordShowTextOperation(t) {
-      return (this.#gs.recordShowTextOperation(this.#ms, !0), this);
+      return (this._private_field__gs.recordShowTextOperation(this._private_field__ms, !0), this);
     }
     bboxToClipBoxDropOperation(t) {
-      return (this.#fs || this.#gs.bboxToClipBoxDropOperation(this.#ms, !0), this);
+      return (this._private_field__fs || this._private_field__gs.bboxToClipBoxDropOperation(this._private_field__ms, !0), this);
     }
     take() {
       throw new Error("Unreachable");
@@ -5455,19 +5455,19 @@
         }
       }
     }
-    #ys() {
+    _private_field__ys() {
       for (; this.stateStack.length || this.inSMaskMode; ) this.restore();
       (this.current.activeSMask = null, this.ctx.restore(), this.transparentCanvas && (this.ctx = this.compositeCtx, this.ctx.save(), this.ctx.setTransform(1, 0, 0, 1, 0, 0), this.ctx.drawImage(this.transparentCanvas, 0, 0), this.ctx.restore(), this.transparentCanvas = null));
     }
     endDrawing() {
-      (this.#ys(), this.cachedCanvases.clear(), this.cachedPatterns.clear());
+      (this._private_field__ys(), this.cachedCanvases.clear(), this.cachedPatterns.clear());
       for (const t of this._cachedBitmapsMap.values()) {
         for (const e of t.values()) "undefined" != typeof HTMLCanvasElement && e instanceof HTMLCanvasElement && (e.width = e.height = 0);
         t.clear();
       }
-      (this._cachedBitmapsMap.clear(), this.#ws());
+      (this._cachedBitmapsMap.clear(), this._private_field__ws());
     }
-    #ws() {
+    _private_field__ws() {
       if (this.pageColors) {
         const t = this.filterFactory.addHCMFilter(this.pageColors.foreground, this.pageColors.background);
         if ("none" !== t) {
@@ -5817,7 +5817,7 @@
     nextLine(t) {
       (this.moveText(t, 0, this.current.leading), this.dependencyTracker?.recordIncrementalData("moveText", this.dependencyTracker.getSimpleIndex("leading") ?? t));
     }
-    #As(t, e, i) {
+    _private_field__As(t, e, i) {
       const s = new Path2D();
       return (s.addPath(t, new DOMMatrix(i).invertSelf().multiplySelf(e)), s);
     }
@@ -5828,13 +5828,13 @@
         let e;
         if ((a.save(), a.translate(i, s), a.scale(c, -c), this.dependencyTracker?.recordCharacterBBox(t, a, l), d === S || d === E)) if (n) {
           (e = a.getTransform(), a.setTransform(...n));
-          const t = this.#As(m, e, n);
+          const t = this._private_field__As(m, e, n);
           a.fill(t);
         } else a.fill(m);
         if (d === C || d === E) if (r) {
           (e ||= a.getTransform(), a.setTransform(...r));
           const {a: t, b: i, c: s, d: n} = e, o = ct.inverseTransform(r), l = ct.transform([t, i, s, n, 0, 0], o);
-          (ct.singularValueDecompose2dScale(l, Pi), a.lineWidth *= Math.max(Pi[0], Pi[1]) / c, a.stroke(this.#As(m, e, r)));
+          (ct.singularValueDecompose2dScale(l, Pi), a.lineWidth *= Math.max(Pi[0], Pi[1]) / c, a.stroke(this._private_field__As(m, e, r)));
         } else (a.lineWidth /= c, a.stroke(m));
         a.restore();
       } else (d !== S && d !== E || (a.fillText(e, i, s), this.dependencyTracker?.recordCharacterBBox(t, a, l, c, i, s, () => a.measureText(e))), d !== C && d !== E || (this.dependencyTracker && this.dependencyTracker?.recordCharacterBBox(t, a, l, c, i, s, () => a.measureText(e)).recordDependencies(t, li), a.strokeText(e, i, s)));
@@ -6072,7 +6072,7 @@
       }
     }
     beginAnnotation(t, e, i, s, n, r) {
-      if ((this.#ys(), Ui(this.ctx), this.ctx.save(), this.save(t), this.baseTransform && this.ctx.setTransform(...this.baseTransform), i)) {
+      if ((this._private_field__ys(), Ui(this.ctx), this.ctx.save(), this.save(t), this.baseTransform && this.ctx.setTransform(...this.baseTransform), i)) {
         const n = i[2] - i[0], a = i[3] - i[1];
         if (r && this.annotationCanvasMap) {
           ((s = s.slice())[4] -= i[0], s[5] -= i[1], (i = i.slice())[0] = i[1] = 0, i[2] = n, i[3] = a, ct.singularValueDecompose2dScale(Bt(this.ctx), Pi));
@@ -6089,7 +6089,7 @@
       (this.current = new Fi(this.ctx.canvas.width, this.ctx.canvas.height), this.transform(t, ...s), this.transform(t, ...n));
     }
     endAnnotation(t) {
-      this.annotationCanvas && (this.ctx.restore(), this.#ws(), this.ctx = this.annotationCanvas.savedCtx, delete this.annotationCanvas.savedCtx, delete this.annotationCanvas);
+      this.annotationCanvas && (this.ctx.restore(), this._private_field__ws(), this.ctx = this.annotationCanvas.savedCtx, delete this.annotationCanvas.savedCtx, delete this.annotationCanvas);
     }
     paintImageMaskXObject(t, e) {
       if (!this.contentVisible) return;
@@ -6257,9 +6257,9 @@
   }
   for (const Vr in O) void 0 !== Gi.prototype[Vr] && (Gi.prototype[O[Vr]] = Gi.prototype[Vr]);
   class Wi {
-    #xs;
-    #_s;
-    #Ss;
+    _private_field__xs;
+    _private_field___s;
+    _private_field__Ss;
     static write(t) {
       const e = new TextEncoder(), i = {};
       let s = 0;
@@ -6276,30 +6276,30 @@
       return (K(o === n.byteLength, "CssFontInfo.write: Buffer overflow"), n);
     }
     constructor(t) {
-      (this.#xs = t, this.#_s = new DataView(this.#xs), this.#Ss = new TextDecoder());
+      (this._private_field__xs = t, this._private_field___s = new DataView(this._private_field__xs), this._private_field__Ss = new TextDecoder());
     }
-    #Cs(t) {
+    _private_field__Cs(t) {
       K(t < Wi.strings.length, "Invalid string index");
       let e = 0;
-      for (let s = 0; s < t; s++) e += this.#_s.getUint32(e) + 4;
-      const i = this.#_s.getUint32(e);
-      return this.#Ss.decode(new Uint8Array(this.#xs, e + 4, i));
+      for (let s = 0; s < t; s++) e += this._private_field___s.getUint32(e) + 4;
+      const i = this._private_field___s.getUint32(e);
+      return this._private_field__Ss.decode(new Uint8Array(this._private_field__xs, e + 4, i));
     }
     get fontFamily() {
-      return this.#Cs(0);
+      return this._private_field__Cs(0);
     }
     get fontWeight() {
-      return this.#Cs(1);
+      return this._private_field__Cs(1);
     }
     get italicAngle() {
-      return this.#Cs(2);
+      return this._private_field__Cs(2);
     }
   }
   Wi.strings = ["fontFamily", "fontWeight", "italicAngle"];
   class qi {
-    #xs;
-    #_s;
-    #Ss;
+    _private_field__xs;
+    _private_field___s;
+    _private_field__Ss;
     static write(t) {
       const e = new TextEncoder(), i = {};
       let s = 0;
@@ -6320,183 +6320,178 @@
       return (h.setUint32(c - s - 4, s), t.style && (h.setUint32(c, n.length), l.set(n, c + 4), c += 4 + n.length, h.setUint32(c, r.length), l.set(r, c + 4), c += 4 + r.length), K(c <= o.byteLength, "SubstitionInfo.write: Buffer overflow"), o.transferToFixedLength(c));
     }
     constructor(t) {
-      (this.#xs = t, this.#_s = new DataView(this.#xs), this.#Ss = new TextDecoder());
+      (this._private_field__xs = t, this._private_field___s = new DataView(this._private_field__xs), this._private_field__Ss = new TextDecoder());
     }
     get guessFallback() {
-      return 0 !== this.#_s.getUint8(0);
+      return 0 !== this._private_field___s.getUint8(0);
     }
-    #Cs(t) {
+    _private_field__Cs(t) {
       K(t < qi.strings.length, "Invalid string index");
       let e = 5;
-      for (let s = 0; s < t; s++) e += this.#_s.getUint32(e) + 4;
-      const i = this.#_s.getUint32(e);
-      return this.#Ss.decode(new Uint8Array(this.#xs, e + 4, i));
+      for (let s = 0; s < t; s++) e += this._private_field___s.getUint32(e) + 4;
+      const i = this._private_field___s.getUint32(e);
+      return this._private_field__Ss.decode(new Uint8Array(this._private_field__xs, e + 4, i));
     }
     get css() {
-      return this.#Cs(0);
+      return this._private_field__Cs(0);
     }
     get loadedName() {
-      return this.#Cs(1);
+      return this._private_field__Cs(1);
     }
     get baseFontName() {
-      return this.#Cs(2);
+      return this._private_field__Cs(2);
     }
     get src() {
-      return this.#Cs(3);
+      return this._private_field__Cs(3);
     }
     get style() {
       let t = 1;
-      t += 4 + this.#_s.getUint32(t);
-      const e = this.#_s.getUint32(t), i = this.#Ss.decode(new Uint8Array(this.#xs, t + 4, e));
+      t += 4 + this._private_field___s.getUint32(t);
+      const e = this._private_field___s.getUint32(t), i = this._private_field__Ss.decode(new Uint8Array(this._private_field__xs, t + 4, e));
       t += 4 + e;
-      const s = this.#_s.getUint32(t);
+      const s = this._private_field___s.getUint32(t);
       return {
         style: i,
-        weight: this.#Ss.decode(new Uint8Array(this.#xs, t + 4, s))
+        weight: this._private_field__Ss.decode(new Uint8Array(this._private_field__xs, t + 4, s))
       };
     }
   }
   qi.strings = ["css", "loadedName", "baseFontName", "src"];
   class Xi {
-    static #Es = Math.ceil(2 * this.bools.length / 8);
-    static #Ts = this.#Es + 8 * this.numbers.length;
-    static #Ms = this.#Ts + 1 + 8;
-    static #ks = this.#Ms + 1 + 48;
-    static #Ds = this.#ks + 1 + 6;
-    #xs;
-    #Ss;
-    #_s;
+    _private_field__xs;
+    _private_field__Ss;
+    _private_field___s;
     constructor({data: t, extra: e}) {
-      (this.#xs = t, this.#Ss = new TextDecoder(), this.#_s = new DataView(this.#xs), e && Object.assign(this, e));
+      (this._private_field__xs = t, this._private_field__Ss = new TextDecoder(), this._private_field___s = new DataView(this._private_field__xs), e && Object.assign(this, e));
     }
-    #Ps(t) {
+    _private_field__Ps(t) {
       K(t < Xi.bools.length, "Invalid boolean index");
-      const e = Math.floor(t / 4), i = 2 * t % 8, s = this.#_s.getUint8(e) >> i & 3;
+      const e = Math.floor(t / 4), i = 2 * t % 8, s = this._private_field___s.getUint8(e) >> i & 3;
       return 0 === s ? void 0 : 2 === s;
     }
     get black() {
-      return this.#Ps(0);
+      return this._private_field__Ps(0);
     }
     get bold() {
-      return this.#Ps(1);
+      return this._private_field__Ps(1);
     }
     get disableFontFace() {
-      return this.#Ps(2);
+      return this._private_field__Ps(2);
     }
     get fontExtraProperties() {
-      return this.#Ps(3);
+      return this._private_field__Ps(3);
     }
     get isInvalidPDFjsFont() {
-      return this.#Ps(4);
+      return this._private_field__Ps(4);
     }
     get isType3Font() {
-      return this.#Ps(5);
+      return this._private_field__Ps(5);
     }
     get italic() {
-      return this.#Ps(6);
+      return this._private_field__Ps(6);
     }
     get missingFile() {
-      return this.#Ps(7);
+      return this._private_field__Ps(7);
     }
     get remeasure() {
-      return this.#Ps(8);
+      return this._private_field__Ps(8);
     }
     get vertical() {
-      return this.#Ps(9);
+      return this._private_field__Ps(9);
     }
-    #Is(t) {
-      return (K(t < Xi.numbers.length, "Invalid number index"), this.#_s.getFloat64(Xi.#Es + 8 * t));
+    _private_field__Is(t) {
+      return (K(t < Xi.numbers.length, "Invalid number index"), this._private_field___s.getFloat64(Xi._private_field__Es + 8 * t));
     }
     get ascent() {
-      return this.#Is(0);
+      return this._private_field__Is(0);
     }
     get defaultWidth() {
-      return this.#Is(1);
+      return this._private_field__Is(1);
     }
     get descent() {
-      return this.#Is(2);
+      return this._private_field__Is(2);
     }
     get bbox() {
-      let t = Xi.#Ts;
-      if (0 === this.#_s.getUint8(t)) return;
+      let t = Xi._private_field__Ts;
+      if (0 === this._private_field___s.getUint8(t)) return;
       t += 1;
       const e = [];
-      for (let i = 0; i < 4; i++) (e.push(this.#_s.getInt16(t, !0)), t += 2);
+      for (let i = 0; i < 4; i++) (e.push(this._private_field___s.getInt16(t, !0)), t += 2);
       return e;
     }
     get fontMatrix() {
-      let t = Xi.#Ms;
-      if (0 === this.#_s.getUint8(t)) return;
+      let t = Xi._private_field__Ms;
+      if (0 === this._private_field___s.getUint8(t)) return;
       t += 1;
       const e = [];
-      for (let i = 0; i < 6; i++) (e.push(this.#_s.getFloat64(t, !0)), t += 8);
+      for (let i = 0; i < 6; i++) (e.push(this._private_field___s.getFloat64(t, !0)), t += 8);
       return e;
     }
     get defaultVMetrics() {
-      let t = Xi.#ks;
-      if (0 === this.#_s.getUint8(t)) return;
+      let t = Xi._private_field__ks;
+      if (0 === this._private_field___s.getUint8(t)) return;
       t += 1;
       const e = [];
-      for (let i = 0; i < 3; i++) (e.push(this.#_s.getInt16(t, !0)), t += 2);
+      for (let i = 0; i < 3; i++) (e.push(this._private_field___s.getInt16(t, !0)), t += 2);
       return e;
     }
-    #Cs(t) {
+    _private_field__Cs(t) {
       K(t < Xi.strings.length, "Invalid string index");
-      let e = Xi.#Ds + 4;
-      for (let n = 0; n < t; n++) e += this.#_s.getUint32(e) + 4;
-      const i = this.#_s.getUint32(e), s = new Uint8Array(i);
-      return (s.set(new Uint8Array(this.#xs, e + 4, i)), this.#Ss.decode(s));
+      let e = Xi._private_field__Ds + 4;
+      for (let n = 0; n < t; n++) e += this._private_field___s.getUint32(e) + 4;
+      const i = this._private_field___s.getUint32(e), s = new Uint8Array(i);
+      return (s.set(new Uint8Array(this._private_field__xs, e + 4, i)), this._private_field__Ss.decode(s));
     }
     get fallbackName() {
-      return this.#Cs(0);
+      return this._private_field__Cs(0);
     }
     get loadedName() {
-      return this.#Cs(1);
+      return this._private_field__Cs(1);
     }
     get mimetype() {
-      return this.#Cs(2);
+      return this._private_field__Cs(2);
     }
     get name() {
-      return this.#Cs(3);
+      return this._private_field__Cs(3);
     }
     get data() {
-      let t = Xi.#Ds;
-      t += 4 + this.#_s.getUint32(t);
-      t += 4 + this.#_s.getUint32(t);
-      t += 4 + this.#_s.getUint32(t);
-      const e = this.#_s.getUint32(t);
-      if (0 !== e) return new Uint8Array(this.#xs, t + 4, e);
+      let t = Xi._private_field__Ds;
+      t += 4 + this._private_field___s.getUint32(t);
+      t += 4 + this._private_field___s.getUint32(t);
+      t += 4 + this._private_field___s.getUint32(t);
+      const e = this._private_field___s.getUint32(t);
+      if (0 !== e) return new Uint8Array(this._private_field__xs, t + 4, e);
     }
     clearData() {
-      let t = Xi.#Ds;
-      t += 4 + this.#_s.getUint32(t);
-      t += 4 + this.#_s.getUint32(t);
-      t += 4 + this.#_s.getUint32(t);
-      const e = this.#_s.getUint32(t);
-      (new Uint8Array(this.#xs, t + 4, e).fill(0), this.#_s.setUint32(t, 0));
+      let t = Xi._private_field__Ds;
+      t += 4 + this._private_field___s.getUint32(t);
+      t += 4 + this._private_field___s.getUint32(t);
+      t += 4 + this._private_field___s.getUint32(t);
+      const e = this._private_field___s.getUint32(t);
+      (new Uint8Array(this._private_field__xs, t + 4, e).fill(0), this._private_field___s.setUint32(t, 0));
     }
     get cssFontInfo() {
-      let t = Xi.#Ds;
-      t += 4 + this.#_s.getUint32(t);
-      t += 4 + this.#_s.getUint32(t);
-      const e = this.#_s.getUint32(t);
+      let t = Xi._private_field__Ds;
+      t += 4 + this._private_field___s.getUint32(t);
+      t += 4 + this._private_field___s.getUint32(t);
+      const e = this._private_field___s.getUint32(t);
       if (0 === e) return null;
       const i = new Uint8Array(e);
-      return (i.set(new Uint8Array(this.#xs, t + 4, e)), new Wi(i.buffer));
+      return (i.set(new Uint8Array(this._private_field__xs, t + 4, e)), new Wi(i.buffer));
     }
     get systemFontInfo() {
-      let t = Xi.#Ds;
-      t += 4 + this.#_s.getUint32(t);
-      const e = this.#_s.getUint32(t);
+      let t = Xi._private_field__Ds;
+      t += 4 + this._private_field___s.getUint32(t);
+      const e = this._private_field___s.getUint32(t);
       if (0 === e) return null;
       const i = new Uint8Array(e);
-      return (i.set(new Uint8Array(this.#xs, t + 4, e)), new qi(i.buffer));
+      return (i.set(new Uint8Array(this._private_field__xs, t + 4, e)), new qi(i.buffer));
     }
     static write(t) {
       const e = t.systemFontInfo ? qi.write(t.systemFontInfo) : null, i = t.cssFontInfo ? Wi.write(t.cssFontInfo) : null, s = new TextEncoder(), n = {};
       let r = 0;
       for (const g of Xi.strings) (n[g] = s.encode(t[g]), r += 4 + n[g].length);
-      const a = Xi.#Ds + 4 + r + 4 + (e ? e.byteLength : 0) + 4 + (i ? i.byteLength : 0) + 4 + (t.data ? t.data.length : 0), o = new ArrayBuffer(a), l = new Uint8Array(o), h = new DataView(o);
+      const a = Xi._private_field__Ds + 4 + r + 4 + (e ? e.byteLength : 0) + 4 + (i ? i.byteLength : 0) + 4 + (t.data ? t.data.length : 0), o = new ArrayBuffer(a), l = new Uint8Array(o), h = new DataView(o);
       let c = 0;
       const d = Xi.bools.length;
       let u = 0, p = 0;
@@ -6504,26 +6499,26 @@
         const e = t[Xi.bools[g]];
         (u |= (void 0 === e ? 0 : e ? 2 : 1) << p, p += 2, 8 !== p && g !== d - 1 || (h.setUint8(c++, u), u = 0, p = 0));
       }
-      K(c === Xi.#Es, "FontInfo.write: Boolean properties offset mismatch");
+      K(c === Xi._private_field__Es, "FontInfo.write: Boolean properties offset mismatch");
       for (const g of Xi.numbers) (h.setFloat64(c, t[g]), c += 8);
-      if ((K(c === Xi.#Ts, "FontInfo.write: Number properties offset mismatch"), t.bbox)) {
+      if ((K(c === Xi._private_field__Ts, "FontInfo.write: Number properties offset mismatch"), t.bbox)) {
         h.setUint8(c++, 4);
         for (const e of t.bbox) (h.setInt16(c, e, !0), c += 2);
       } else (h.setUint8(c++, 0), c += 8);
-      if ((K(c === Xi.#Ms, "FontInfo.write: BBox properties offset mismatch"), t.fontMatrix)) {
+      if ((K(c === Xi._private_field__Ms, "FontInfo.write: BBox properties offset mismatch"), t.fontMatrix)) {
         h.setUint8(c++, 6);
         for (const e of t.fontMatrix) (h.setFloat64(c, e, !0), c += 8);
       } else (h.setUint8(c++, 0), c += 48);
-      if ((K(c === Xi.#ks, "FontInfo.write: FontMatrix properties offset mismatch"), t.defaultVMetrics)) {
+      if ((K(c === Xi._private_field__ks, "FontInfo.write: FontMatrix properties offset mismatch"), t.defaultVMetrics)) {
         h.setUint8(c++, 1);
         for (const e of t.defaultVMetrics) (h.setInt16(c, e, !0), c += 2);
       } else (h.setUint8(c++, 0), c += 6);
-      (K(c === Xi.#Ds, "FontInfo.write: DefaultVMetrics properties offset mismatch"), h.setUint32(Xi.#Ds, 0), c += 4);
+      (K(c === Xi._private_field__Ds, "FontInfo.write: DefaultVMetrics properties offset mismatch"), h.setUint32(Xi._private_field__Ds, 0), c += 4);
       for (const g of Xi.strings) {
         const t = n[g], e = t.length;
         (h.setUint32(c, e), l.set(t, c + 4), c += 4 + e);
       }
-      if ((h.setUint32(Xi.#Ds, c - Xi.#Ds - 4), e)) {
+      if ((h.setUint32(Xi._private_field__Ds, c - Xi._private_field__Ds - 4), e)) {
         const t = e.byteLength;
         (h.setUint32(c, t), K(c + 4 + t <= o.byteLength, "FontInfo.write: Buffer overflow at systemFontInfo"), l.set(new Uint8Array(e), c + 4), c += 4 + t);
       } else (h.setUint32(c, 0), c += 4);
@@ -6537,84 +6532,89 @@
   Xi.bools = ["black", "bold", "disableFontFace", "fontExtraProperties", "isInvalidPDFjsFont", "isType3Font", "italic", "missingFile", "remeasure", "vertical"];
   Xi.numbers = ["ascent", "defaultWidth", "descent"];
   Xi.strings = ["fallbackName", "loadedName", "mimetype", "name"];
+  Xi._private_field__Es = Math.ceil(2 * this.bools.length / 8);
+  Xi._private_field__Ts = this._private_field__Es + 8 * this.numbers.length;
+  Xi._private_field__Ms = this._private_field__Ts + 1 + 8;
+  Xi._private_field__ks = this._private_field__Ms + 1 + 48;
+  Xi._private_field__Ds = this._private_field__ks + 1 + 6;
   class Ki {
-    static #Rs = null;
-    static #Ls = "";
     static get workerPort() {
-      return this.#Rs;
+      return this._private_field__Rs;
     }
     static set workerPort(t) {
       if (!("undefined" != typeof Worker && t instanceof Worker) && null !== t) throw new Error("Invalid `workerPort` type.");
-      this.#Rs = t;
+      this._private_field__Rs = t;
     }
     static get workerSrc() {
-      return this.#Ls;
+      return this._private_field__Ls;
     }
     static set workerSrc(t) {
       if ("string" != typeof t) throw new Error("Invalid `workerSrc` type.");
-      this.#Ls = t;
+      this._private_field__Ls = t;
     }
   }
+  Ki._private_field__Rs = null;
+  Ki._private_field__Ls = "";
   class Yi {
-    #Fs;
-    #Bs;
+    _private_field__Fs;
+    _private_field__Bs;
     constructor({parsedData: t, rawData: e}) {
-      (this.#Fs = t, this.#Bs = e);
+      (this._private_field__Fs = t, this._private_field__Bs = e);
     }
     getRaw() {
-      return this.#Bs;
+      return this._private_field__Bs;
     }
     get(t) {
-      return this.#Fs.get(t) ?? null;
+      return this._private_field__Fs.get(t) ?? null;
     }
     [Symbol.iterator]() {
-      return this.#Fs.entries();
+      return this._private_field__Fs.entries();
     }
   }
   const Qi = Symbol("INTERNAL");
   class Ji {
-    #Ns = !1;
-    #Os = !1;
-    #Us = !1;
-    #zs = !0;
+    _private_field__Ns = !1;
+    _private_field__Os = !1;
+    _private_field__Us = !1;
+    _private_field__zs = !0;
     constructor(t, {name: e, intent: i, usage: s, rbGroups: n}) {
-      (this.#Ns = !!(t & u), this.#Os = !!(t & p), this.name = e, this.intent = i, this.usage = s, this.rbGroups = n);
+      (this._private_field__Ns = !!(t & u), this._private_field__Os = !!(t & p), this.name = e, this.intent = i, this.usage = s, this.rbGroups = n);
     }
     get visible() {
-      if (this.#Us) return this.#zs;
-      if (!this.#zs) return !1;
+      if (this._private_field__Us) return this._private_field__zs;
+      if (!this._private_field__zs) return !1;
       const {print: t, view: e} = this.usage;
-      return this.#Ns ? "OFF" !== e?.viewState : !this.#Os || "OFF" !== t?.printState;
+      return this._private_field__Ns ? "OFF" !== e?.viewState : !this._private_field__Os || "OFF" !== t?.printState;
     }
     _setVisible(t, e, i = !1) {
-      (t !== Qi && X("Internal method `_setVisible` called."), this.#Us = i, this.#zs = e);
+      (t !== Qi && X("Internal method `_setVisible` called."), this._private_field__Us = i, this._private_field__zs = e);
     }
   }
   class Zi {
-    #Hs = null;
-    #js = new Map();
-    #$s = null;
-    #Vs = null;
+    _private_field__Hs = null;
+    _private_field__js = new Map();
+    _private_field__$s = null;
+    _private_field__Vs = null;
     constructor(t, e = u) {
       if ((this.renderingIntent = e, this.name = null, this.creator = null, null !== t)) {
-        (this.name = t.name, this.creator = t.creator, this.#Vs = t.order);
-        for (const i of t.groups) this.#js.set(i.id, new Ji(e, i));
-        if ("OFF" === t.baseState) for (const t of this.#js.values()) t._setVisible(Qi, !1);
-        for (const e of t.on) this.#js.get(e)._setVisible(Qi, !0);
-        for (const e of t.off) this.#js.get(e)._setVisible(Qi, !1);
-        this.#$s = this.getHash();
+        (this.name = t.name, this.creator = t.creator, this._private_field__Vs = t.order);
+        for (const i of t.groups) this._private_field__js.set(i.id, new Ji(e, i));
+        if ("OFF" === t.baseState) for (const t of this._private_field__js.values()) t._setVisible(Qi, !1);
+        for (const e of t.on) this._private_field__js.get(e)._setVisible(Qi, !0);
+        for (const e of t.off) this._private_field__js.get(e)._setVisible(Qi, !1);
+        this._private_field__$s = this.getHash();
       }
     }
-    #Gs(t) {
+    _private_field__Gs(t) {
       const e = t.length;
       if (e < 2) return !0;
       const i = t[0];
       for (let s = 1; s < e; s++) {
         const e = t[s];
         let n;
-        if (Array.isArray(e)) n = this.#Gs(e); else {
-          if (!this.#js.has(e)) return (q(`Optional content group not found: ${e}`), !0);
-          n = this.#js.get(e).visible;
+        if (Array.isArray(e)) n = this._private_field__Gs(e); else {
+          if (!this._private_field__js.has(e)) return (q(`Optional content group not found: ${e}`), !0);
+          n = this._private_field__js.get(e).visible;
         }
         switch (i) {
           case "And":
@@ -6632,36 +6632,36 @@
       return "And" === i;
     }
     isVisible(t) {
-      if (0 === this.#js.size) return !0;
+      if (0 === this._private_field__js.size) return !0;
       if (!t) return (W("Optional content group not defined."), !0);
-      if ("OCG" === t.type) return this.#js.has(t.id) ? this.#js.get(t.id).visible : (q(`Optional content group not found: ${t.id}`), !0);
+      if ("OCG" === t.type) return this._private_field__js.has(t.id) ? this._private_field__js.get(t.id).visible : (q(`Optional content group not found: ${t.id}`), !0);
       if ("OCMD" === t.type) {
-        if (t.expression) return this.#Gs(t.expression);
+        if (t.expression) return this._private_field__Gs(t.expression);
         if (!t.policy || "AnyOn" === t.policy) {
           for (const e of t.ids) {
-            if (!this.#js.has(e)) return (q(`Optional content group not found: ${e}`), !0);
-            if (this.#js.get(e).visible) return !0;
+            if (!this._private_field__js.has(e)) return (q(`Optional content group not found: ${e}`), !0);
+            if (this._private_field__js.get(e).visible) return !0;
           }
           return !1;
         }
         if ("AllOn" === t.policy) {
           for (const e of t.ids) {
-            if (!this.#js.has(e)) return (q(`Optional content group not found: ${e}`), !0);
-            if (!this.#js.get(e).visible) return !1;
+            if (!this._private_field__js.has(e)) return (q(`Optional content group not found: ${e}`), !0);
+            if (!this._private_field__js.get(e).visible) return !1;
           }
           return !0;
         }
         if ("AnyOff" === t.policy) {
           for (const e of t.ids) {
-            if (!this.#js.has(e)) return (q(`Optional content group not found: ${e}`), !0);
-            if (!this.#js.get(e).visible) return !0;
+            if (!this._private_field__js.has(e)) return (q(`Optional content group not found: ${e}`), !0);
+            if (!this._private_field__js.get(e).visible) return !0;
           }
           return !1;
         }
         if ("AllOff" === t.policy) {
           for (const e of t.ids) {
-            if (!this.#js.has(e)) return (q(`Optional content group not found: ${e}`), !0);
-            if (this.#js.get(e).visible) return !1;
+            if (!this._private_field__js.has(e)) return (q(`Optional content group not found: ${e}`), !0);
+            if (this._private_field__js.get(e).visible) return !1;
           }
           return !0;
         }
@@ -6670,10 +6670,10 @@
       return (q(`Unknown group type ${t.type}.`), !0);
     }
     setVisibility(t, e = !0, i = !0) {
-      const s = this.#js.get(t);
+      const s = this._private_field__js.get(t);
       if (s) {
-        if (i && e && s.rbGroups.length) for (const e of s.rbGroups) for (const i of e) i !== t && this.#js.get(i)?._setVisible(Qi, !1, !0);
-        (s._setVisible(Qi, !!e, !0), this.#Hs = null);
+        if (i && e && s.rbGroups.length) for (const e of s.rbGroups) for (const i of e) i !== t && this._private_field__js.get(i)?._setVisible(Qi, !1, !0);
+        (s._setVisible(Qi, !!e, !0), this._private_field__Hs = null);
       } else q(`Optional content group not found: ${t}`);
     }
     setOCGState({state: t, preserveRB: e}) {
@@ -6686,7 +6686,7 @@
             i = s;
             continue;
         }
-        const t = this.#js.get(s);
+        const t = this._private_field__js.get(s);
         if (t) switch (i) {
           case "ON":
             this.setVisibility(s, !0, e);
@@ -6698,25 +6698,25 @@
             this.setVisibility(s, !t.visible, e);
         }
       }
-      this.#Hs = null;
+      this._private_field__Hs = null;
     }
     get hasInitialVisibility() {
-      return null === this.#$s || this.getHash() === this.#$s;
+      return null === this._private_field__$s || this.getHash() === this._private_field__$s;
     }
     getOrder() {
-      return this.#js.size ? this.#Vs ? this.#Vs.slice() : [...this.#js.keys()] : null;
+      return this._private_field__js.size ? this._private_field__Vs ? this._private_field__Vs.slice() : [...this._private_field__js.keys()] : null;
     }
     getGroup(t) {
-      return this.#js.get(t) || null;
+      return this._private_field__js.get(t) || null;
     }
     getHash() {
-      if (null !== this.#Hs) return this.#Hs;
+      if (null !== this._private_field__Hs) return this._private_field__Hs;
       const t = new ge();
-      for (const [e, i] of this.#js) t.update(`${e}:${i.visible}`);
-      return this.#Hs = t.hexdigest();
+      for (const [e, i] of this._private_field__js) t.update(`${e}:${i.visible}`);
+      return this._private_field__Hs = t.hexdigest();
     }
     [Symbol.iterator]() {
-      return this.#js.entries();
+      return this._private_field__js.entries();
     }
   }
   class ts {
@@ -7492,89 +7492,84 @@
   }
   const xs = Symbol("INITIAL_DATA");
   class _s {
-    #Ws = Object.create(null);
-    #qs(t) {
-      return this.#Ws[t] ||= {
+    _private_field__Ws = Object.create(null);
+    _private_field__qs(t) {
+      return this._private_field__Ws[t] ||= {
         ...Promise.withResolvers(),
         data: xs
       };
     }
     get(t, e = null) {
       if (e) {
-        const i = this.#qs(t);
+        const i = this._private_field__qs(t);
         return (i.promise.then(() => e(i.data)), null);
       }
-      const i = this.#Ws[t];
+      const i = this._private_field__Ws[t];
       if (!i || i.data === xs) throw new Error(`Requesting object that isn't resolved yet ${t}.`);
       return i.data;
     }
     has(t) {
-      const e = this.#Ws[t];
+      const e = this._private_field__Ws[t];
       return !!e && e.data !== xs;
     }
     delete(t) {
-      const e = this.#Ws[t];
-      return !(!e || e.data === xs) && (delete this.#Ws[t], !0);
+      const e = this._private_field__Ws[t];
+      return !(!e || e.data === xs) && (delete this._private_field__Ws[t], !0);
     }
     resolve(t, e = null) {
-      const i = this.#qs(t);
+      const i = this._private_field__qs(t);
       (i.data = e, i.resolve());
     }
     clear() {
-      for (const t in this.#Ws) {
-        const {data: e} = this.#Ws[t];
+      for (const t in this._private_field__Ws) {
+        const {data: e} = this._private_field__Ws[t];
         e?.bitmap?.close();
       }
-      this.#Ws = Object.create(null);
+      this._private_field__Ws = Object.create(null);
     }
     *[Symbol.iterator]() {
-      for (const t in this.#Ws) {
-        const {data: e} = this.#Ws[t];
+      for (const t in this._private_field__Ws) {
+        const {data: e} = this._private_field__Ws[t];
         e !== xs && (yield [t, e]);
       }
     }
   }
   let Ss = class t {
-    #Xs = Promise.withResolvers();
-    #At = null;
-    #Ks = !1;
-    #Ys = !!globalThis.FontInspector?.enabled;
-    #Qs = null;
-    #Js = null;
-    #Zs = 0;
-    #tn = 0;
-    #en = null;
-    #in = null;
-    #sn = 0;
-    #nn = 0;
-    #rn = Object.create(null);
-    #an = [];
-    #on = null;
-    #ln = [];
-    #hn = new WeakMap();
-    #cn = null;
-    static #dn = new Map();
-    static #un = new Map();
-    static #pn = new WeakMap();
-    static #gn = null;
-    static #mn = new Set();
+    _private_field__Xs = Promise.withResolvers();
+    _private_field__At = null;
+    _private_field__Ks = !1;
+    _private_field__Ys = !!globalThis.FontInspector?.enabled;
+    _private_field__Qs = null;
+    _private_field__Js = null;
+    _private_field__Zs = 0;
+    _private_field__tn = 0;
+    _private_field__en = null;
+    _private_field__in = null;
+    _private_field__sn = 0;
+    _private_field__nn = 0;
+    _private_field__rn = Object.create(null);
+    _private_field__an = [];
+    _private_field__on = null;
+    _private_field__ln = [];
+    _private_field__hn = new WeakMap();
+    _private_field__cn = null;
     constructor({textContentSource: e, container: i, viewport: s}) {
-      if (e instanceof ReadableStream) this.#on = e; else {
+      if (e instanceof ReadableStream) this._private_field__on = e; else {
         if ("object" != typeof e) throw new Error('No "textContentSource" parameter specified.');
-        this.#on = new ReadableStream({
+        this._private_field__on = new ReadableStream({
           start(t) {
             (t.enqueue(e), t.close());
           }
         });
       }
-      (this.#At = this.#in = i, this.#nn = s.scale * Ut.pixelRatio, this.#sn = s.rotation, this.#Js = {
+      (this._private_field__At = this._private_field__in = i, this._private_field__nn = s.scale * Ut.pixelRatio, this._private_field__sn = s.rotation, this._private_field__Js = {
         div: null,
         properties: null,
         ctx: null
       });
       const {pageWidth: n, pageHeight: r, pageX: a, pageY: o} = s.rawDims;
-      (this.#cn = [1, 0, 0, -1, -a, o + r], this.#tn = n, this.#Zs = r, t.#fn(), Ot(i, s), this.#Xs.promise.finally(() => {
-        (t.#mn.delete(this), this.#Js = null, this.#rn = null);
+      (this._private_field__cn = [1, 0, 0, -1, -a, o + r], this._private_field__tn = n, this._private_field__Zs = r, t._private_field__fn(), Ot(i, s), this._private_field__Xs.promise.finally(() => {
+        (t._private_field__mn.delete(this), this._private_field__Js = null, this._private_field__rn = null);
       }).catch(() => {}));
     }
     static get fontFamilyMap() {
@@ -7583,49 +7578,49 @@
     }
     render() {
       const e = () => {
-        this.#en.read().then(({value: t, done: i}) => {
-          i ? this.#Xs.resolve() : (this.#Qs ??= t.lang, Object.assign(this.#rn, t.styles), this.#bn(t.items), e());
-        }, this.#Xs.reject);
+        this._private_field__en.read().then(({value: t, done: i}) => {
+          i ? this._private_field__Xs.resolve() : (this._private_field__Qs ??= t.lang, Object.assign(this._private_field__rn, t.styles), this._private_field__bn(t.items), e());
+        }, this._private_field__Xs.reject);
       };
-      return (this.#en = this.#on.getReader(), t.#mn.add(this), e(), this.#Xs.promise);
+      return (this._private_field__en = this._private_field__on.getReader(), t._private_field__mn.add(this), e(), this._private_field__Xs.promise);
     }
     update({viewport: e, onBefore: i = null}) {
       const s = e.scale * Ut.pixelRatio, n = e.rotation;
-      if ((n !== this.#sn && (i?.(), this.#sn = n, Ot(this.#in, {
+      if ((n !== this._private_field__sn && (i?.(), this._private_field__sn = n, Ot(this._private_field__in, {
         rotation: n
-      })), s !== this.#nn)) {
-        (i?.(), this.#nn = s);
+      })), s !== this._private_field__nn)) {
+        (i?.(), this._private_field__nn = s);
         const e = {
           div: null,
           properties: null,
-          ctx: t.#vn(this.#Qs)
+          ctx: t._private_field__vn(this._private_field__Qs)
         };
-        for (const t of this.#ln) (e.properties = this.#hn.get(t), e.div = t, this.#yn(e));
+        for (const t of this._private_field__ln) (e.properties = this._private_field__hn.get(t), e.div = t, this._private_field__yn(e));
       }
     }
     cancel() {
       const t = new rt("TextLayer task cancelled.");
-      (this.#en?.cancel(t).catch(() => {}), this.#en = null, this.#Xs.reject(t));
+      (this._private_field__en?.cancel(t).catch(() => {}), this._private_field__en = null, this._private_field__Xs.reject(t));
     }
     get textDivs() {
-      return this.#ln;
+      return this._private_field__ln;
     }
     get textContentItemsStr() {
-      return this.#an;
+      return this._private_field__an;
     }
-    #bn(e) {
-      if (this.#Ks) return;
-      this.#Js.ctx ??= t.#vn(this.#Qs);
-      const i = this.#ln, s = this.#an;
+    _private_field__bn(e) {
+      if (this._private_field__Ks) return;
+      this._private_field__Js.ctx ??= t._private_field__vn(this._private_field__Qs);
+      const i = this._private_field__ln, s = this._private_field__an;
       for (const t of e) {
-        if (i.length > 1e5) return (q("Ignoring additional textDivs for performance reasons."), void (this.#Ks = !0));
-        if (void 0 !== t.str) (s.push(t.str), this.#wn(t)); else if ("beginMarkedContentProps" === t.type || "beginMarkedContent" === t.type) {
-          const e = this.#At;
-          (this.#At = document.createElement("span"), this.#At.classList.add("markedContent"), t.id && this.#At.setAttribute("id", `${t.id}`), e.append(this.#At));
-        } else "endMarkedContent" === t.type && (this.#At = this.#At.parentNode);
+        if (i.length > 1e5) return (q("Ignoring additional textDivs for performance reasons."), void (this._private_field__Ks = !0));
+        if (void 0 !== t.str) (s.push(t.str), this._private_field__wn(t)); else if ("beginMarkedContentProps" === t.type || "beginMarkedContent" === t.type) {
+          const e = this._private_field__At;
+          (this._private_field__At = document.createElement("span"), this._private_field__At.classList.add("markedContent"), t.id && this._private_field__At.setAttribute("id", `${t.id}`), e.append(this._private_field__At));
+        } else "endMarkedContent" === t.type && (this._private_field__At = this._private_field__At.parentNode);
       }
     }
-    #wn(e) {
+    _private_field__wn(e) {
       const i = document.createElement("span"), s = {
         angle: 0,
         canvasWidth: 0,
@@ -7633,80 +7628,85 @@
         hasEOL: e.hasEOL,
         fontSize: 0
       };
-      this.#ln.push(i);
-      const n = ct.transform(this.#cn, e.transform);
+      this._private_field__ln.push(i);
+      const n = ct.transform(this._private_field__cn, e.transform);
       let r = Math.atan2(n[1], n[0]);
-      const a = this.#rn[e.fontName];
+      const a = this._private_field__rn[e.fontName];
       a.vertical && (r += Math.PI / 2);
-      let o = this.#Ys && a.fontSubstitution || a.fontFamily;
+      let o = this._private_field__Ys && a.fontSubstitution || a.fontFamily;
       o = t.fontFamilyMap.get(o) || o;
-      const l = Math.hypot(n[2], n[3]), h = l * t.#An(o, a, this.#Qs);
+      const l = Math.hypot(n[2], n[3]), h = l * t._private_field__An(o, a, this._private_field__Qs);
       let c, d;
       0 === r ? (c = n[4], d = n[5] - h) : (c = n[4] + h * Math.sin(r), d = n[5] - h * Math.cos(r));
       const u = "calc(var(--total-scale-factor) *", p = i.style;
-      (this.#At === this.#in ? (p.left = `${(100 * c / this.#tn).toFixed(2)}%`, p.top = `${(100 * d / this.#Zs).toFixed(2)}%`) : (p.left = `${u}${c.toFixed(2)}px)`, p.top = `${u}${d.toFixed(2)}px)`), p.fontSize = `${u}${(t.#gn * l).toFixed(2)}px)`, p.fontFamily = o, s.fontSize = l, i.setAttribute("role", "presentation"), i.textContent = e.str, i.dir = e.dir, this.#Ys && (i.dataset.fontName = a.fontSubstitutionLoadedName || e.fontName), 0 !== r && (s.angle = r * (180 / Math.PI)));
+      (this._private_field__At === this._private_field__in ? (p.left = `${(100 * c / this._private_field__tn).toFixed(2)}%`, p.top = `${(100 * d / this._private_field__Zs).toFixed(2)}%`) : (p.left = `${u}${c.toFixed(2)}px)`, p.top = `${u}${d.toFixed(2)}px)`), p.fontSize = `${u}${(t._private_field__gn * l).toFixed(2)}px)`, p.fontFamily = o, s.fontSize = l, i.setAttribute("role", "presentation"), i.textContent = e.str, i.dir = e.dir, this._private_field__Ys && (i.dataset.fontName = a.fontSubstitutionLoadedName || e.fontName), 0 !== r && (s.angle = r * (180 / Math.PI)));
       let g = !1;
       if (e.str.length > 1) g = !0; else if (" " !== e.str && e.transform[0] !== e.transform[3]) {
         const t = Math.abs(e.transform[0]), i = Math.abs(e.transform[3]);
         t !== i && Math.max(t, i) / Math.min(t, i) > 1.5 && (g = !0);
       }
-      if ((g && (s.canvasWidth = a.vertical ? e.height : e.width), this.#hn.set(i, s), this.#Js.div = i, this.#Js.properties = s, this.#yn(this.#Js), s.hasText && this.#At.append(i), s.hasEOL)) {
+      if ((g && (s.canvasWidth = a.vertical ? e.height : e.width), this._private_field__hn.set(i, s), this._private_field__Js.div = i, this._private_field__Js.properties = s, this._private_field__yn(this._private_field__Js), s.hasText && this._private_field__At.append(i), s.hasEOL)) {
         const t = document.createElement("br");
-        (t.setAttribute("role", "presentation"), this.#At.append(t));
+        (t.setAttribute("role", "presentation"), this._private_field__At.append(t));
       }
     }
-    #yn(e) {
+    _private_field__yn(e) {
       const {div: i, properties: s, ctx: n} = e, {style: r} = i;
       let a = "";
-      if ((t.#gn > 1 && (a = `scale(${1 / t.#gn})`), 0 !== s.canvasWidth && s.hasText)) {
+      if ((t._private_field__gn > 1 && (a = `scale(${1 / t._private_field__gn})`), 0 !== s.canvasWidth && s.hasText)) {
         const {fontFamily: e} = r, {canvasWidth: o, fontSize: l} = s;
-        t.#xn(n, l * this.#nn, e);
+        t._private_field__xn(n, l * this._private_field__nn, e);
         const {width: h} = n.measureText(i.textContent);
-        h > 0 && (a = `scaleX(${o * this.#nn / h}) ${a}`);
+        h > 0 && (a = `scaleX(${o * this._private_field__nn / h}) ${a}`);
       }
       (0 !== s.angle && (a = `rotate(${s.angle}deg) ${a}`), a.length > 0 && (r.transform = a));
     }
     static cleanup() {
-      if (!(this.#mn.size > 0)) {
-        this.#dn.clear();
-        for (const {canvas: t} of this.#un.values()) t.remove();
-        this.#un.clear();
+      if (!(this._private_field__mn.size > 0)) {
+        this._private_field__dn.clear();
+        for (const {canvas: t} of this._private_field__un.values()) t.remove();
+        this._private_field__un.clear();
       }
     }
-    static #vn(t = null) {
-      let e = this.#un.get(t ||= "");
+    static _private_field__vn(t = null) {
+      let e = this._private_field__un.get(t ||= "");
       if (!e) {
         const i = document.createElement("canvas");
         (i.className = "hiddenCanvasElement", i.lang = t, document.body.append(i), e = i.getContext("2d", {
           alpha: !1,
           willReadFrequently: !0
-        }), this.#un.set(t, e), this.#pn.set(e, {
+        }), this._private_field__un.set(t, e), this._private_field__pn.set(e, {
           size: 0,
           family: ""
         }));
       }
       return e;
     }
-    static #xn(t, e, i) {
-      const s = this.#pn.get(t);
+    static _private_field__xn(t, e, i) {
+      const s = this._private_field__pn.get(t);
       e === s.size && i === s.family || (t.font = `${e}px ${i}`, s.size = e, s.family = i);
     }
-    static #fn() {
-      if (null !== this.#gn) return;
+    static _private_field__fn() {
+      if (null !== this._private_field__gn) return;
       const t = document.createElement("div");
-      (t.style.opacity = 0, t.style.lineHeight = 1, t.style.fontSize = "1px", t.style.position = "absolute", t.textContent = "X", document.body.append(t), this.#gn = t.getBoundingClientRect().height, t.remove());
+      (t.style.opacity = 0, t.style.lineHeight = 1, t.style.fontSize = "1px", t.style.position = "absolute", t.textContent = "X", document.body.append(t), this._private_field__gn = t.getBoundingClientRect().height, t.remove());
     }
-    static #An(t, e, i) {
-      const s = this.#dn.get(t);
+    static _private_field__An(t, e, i) {
+      const s = this._private_field__dn.get(t);
       if (s) return s;
-      const n = this.#vn(i);
-      (n.canvas.width = n.canvas.height = 30, this.#xn(n, 30, t));
+      const n = this._private_field__vn(i);
+      (n.canvas.width = n.canvas.height = 30, this._private_field__xn(n, 30, t));
       const r = n.measureText(""), a = r.fontBoundingBoxAscent, o = Math.abs(r.fontBoundingBoxDescent);
       n.canvas.width = n.canvas.height = 0;
       let l = .8;
-      return (a ? l = a / (a + o) : (lt.platform.isFirefox && q("Enable the `dom.textMetrics.fontBoundingBox.enabled` preference in `about:config` to improve TextLayer rendering."), e.ascent ? l = e.ascent : e.descent && (l = 1 + e.descent)), this.#dn.set(t, l), l);
+      return (a ? l = a / (a + o) : (lt.platform.isFirefox && q("Enable the `dom.textMetrics.fontBoundingBox.enabled` preference in `about:config` to improve TextLayer rendering."), e.ascent ? l = e.ascent : e.descent && (l = 1 + e.descent)), this._private_field__dn.set(t, l), l);
     }
   };
+  Ss._private_field__dn = new Map();
+  Ss._private_field__un = new Map();
+  Ss._private_field__pn = new WeakMap();
+  Ss._private_field__gn = null;
+  Ss._private_field__mn = new Set();
   function Cs(t = {}) {
     "string" == typeof t || t instanceof URL ? t = {
       url: t
@@ -7822,11 +7822,10 @@
     }).catch(e._capability.reject), e);
   }
   class Es {
-    static #Fi = 0;
     _capability = Promise.withResolvers();
     _transport = null;
     _worker = null;
-    docId = "d" + Es.#Fi++;
+    docId = "d" + Es._private_field__Fi++;
     destroyed = !1;
     onPassword = null;
     onProgress = null;
@@ -7846,47 +7845,48 @@
       return this._transport.getData();
     }
   }
+  Es._private_field__Fi = 0;
   let Ts = class {
-    #Xs = Promise.withResolvers();
-    #_n = [];
-    #Sn = [];
-    #Cn = [];
-    #En = [];
+    _private_field__Xs = Promise.withResolvers();
+    _private_field___n = [];
+    _private_field__Sn = [];
+    _private_field__Cn = [];
+    _private_field__En = [];
     constructor(t, e, i = !1, s = null) {
       (this.length = t, this.initialData = e, this.progressiveDone = i, this.contentDispositionFilename = s);
     }
     addRangeListener(t) {
-      this.#En.push(t);
+      this._private_field__En.push(t);
     }
     addProgressListener(t) {
-      this.#Cn.push(t);
+      this._private_field__Cn.push(t);
     }
     addProgressiveReadListener(t) {
-      this.#Sn.push(t);
+      this._private_field__Sn.push(t);
     }
     addProgressiveDoneListener(t) {
-      this.#_n.push(t);
+      this._private_field___n.push(t);
     }
     onDataRange(t, e) {
-      for (const i of this.#En) i(t, e);
+      for (const i of this._private_field__En) i(t, e);
     }
     onDataProgress(t, e) {
-      this.#Xs.promise.then(() => {
-        for (const i of this.#Cn) i(t, e);
+      this._private_field__Xs.promise.then(() => {
+        for (const i of this._private_field__Cn) i(t, e);
       });
     }
     onDataProgressiveRead(t) {
-      this.#Xs.promise.then(() => {
-        for (const e of this.#Sn) e(t);
+      this._private_field__Xs.promise.then(() => {
+        for (const e of this._private_field__Sn) e(t);
       });
     }
     onDataProgressiveDone() {
-      this.#Xs.promise.then(() => {
-        for (const t of this.#_n) t();
+      this._private_field__Xs.promise.then(() => {
+        for (const t of this._private_field___n) t();
       });
     }
     transportReady() {
-      this.#Xs.resolve();
+      this._private_field__Xs.resolve();
     }
     requestDataRange(t, e) {
       X("Abstract method PDFDataRangeTransport.requestDataRange");
@@ -8005,7 +8005,7 @@
     }
   }
   class ks {
-    #Tn = !1;
+    _private_field__Tn = !1;
     constructor(t, e, i, s = !1) {
       (this._pageIndex = t, this._pageInfo = e, this._transport = i, this._stats = s ? new kt() : null, this._pdfBug = s, this.commonObjs = i.commonObjs, this.objs = new _s(), this._intentStates = new Map(), this.destroyed = !1, this.recordedBBoxes = null);
     }
@@ -8054,7 +8054,7 @@
     render({canvasContext: t, canvas: e = t.canvas, viewport: i, intent: s = "display", annotationMode: n = y.ENABLE, transform: r = null, background: a = null, optionalContentConfigPromise: o = null, annotationCanvasMap: l = null, pageColors: h = null, printAnnotationStorage: c = null, isEditing: d = !1, recordOperations: u = !1, operationsFilter: g = null}) {
       this._stats?.time("Overall");
       const m = this._transport.getRenderingIntent(s, n, c, d), {renderingIntent: f, cacheKey: b} = m;
-      (this.#Tn = !1, o ||= this._transport.getOptionalContentConfig(f));
+      (this._private_field__Tn = !1, o ||= this._transport.getOptionalContentConfig(f));
       let v = this._intentStates.get(b);
       (v || (v = Object.create(null), this._intentStates.set(b, v)), v.streamReaderCancelTimeout && (clearTimeout(v.streamReaderCancelTimeout), v.streamReaderCancelTimeout = null));
       const w = !!(f & p);
@@ -8069,7 +8069,7 @@
           const t = S.gfx?.dependencyTracker.take();
           t && (S.stepper && S.stepper.setOperatorBBoxes(t, S.gfx.dependencyTracker.takeDebugMetadata()), u && (this.recordedBBoxes = t));
         }
-        (w && (this.#Tn = !0), this.#Mn(), t ? (S.capability.reject(t), this._abortOperatorList({
+        (w && (this._private_field__Tn = !0), this._private_field__Mn(), t ? (S.capability.reject(t), this._abortOperatorList({
           intentState: v,
           reason: t instanceof Error ? t : new Error(t)
         })) : S.capability.resolve(), this._stats && (this._stats.timeEnd("Rendering"), this._stats.timeEnd("Overall"), globalThis.Stats?.enabled && globalThis.Stats.add(this.pageNumber, this._stats)));
@@ -8157,17 +8157,17 @@
         reason: new Error("Page was destroyed."),
         force: !0
       }), !e.opListReadCapability)) for (const i of e.renderTasks) (t.push(i.completed), i.cancel());
-      return (this.objs.clear(), this.#Tn = !1, Promise.all(t));
+      return (this.objs.clear(), this._private_field__Tn = !1, Promise.all(t));
     }
     cleanup(t = !1) {
-      this.#Tn = !0;
-      const e = this.#Mn();
+      this._private_field__Tn = !0;
+      const e = this._private_field__Mn();
       return (t && e && (this._stats &&= new kt()), e);
     }
-    #Mn() {
-      if (!this.#Tn || this.destroyed) return !1;
+    _private_field__Mn() {
+      if (!this._private_field__Tn || this.destroyed) return !1;
       for (const {renderTasks: t, operatorList: e} of this._intentStates.values()) if (t.size > 0 || !e.lastChunk) return !1;
-      return (this._intentStates.clear(), this.objs.clear(), this.#Tn = !1, !0);
+      return (this._intentStates.clear(), this.objs.clear(), this._private_field__Tn = !1, !0);
     }
     _startRenderPage(t, e) {
       const i = this._intentStates.get(e);
@@ -8177,7 +8177,7 @@
       for (let i = 0, s = t.length; i < s; i++) (e.operatorList.fnArray.push(t.fnArray[i]), e.operatorList.argsArray.push(t.argsArray[i]));
       (e.operatorList.lastChunk = t.lastChunk, e.operatorList.separateAnnots = t.separateAnnots);
       for (const i of e.renderTasks) i.operatorListChanged();
-      t.lastChunk && this.#Mn();
+      t.lastChunk && this._private_field__Mn();
     }
     _pumpOperatorList({renderingIntent: t, cacheKey: e, annotationStorageSerializable: i, modifiedIds: s}) {
       const {map: n, transfer: r} = i, a = this._transport.messageHandler.sendWithStream("GetOperatorList", {
@@ -8196,7 +8196,7 @@
             if (o.operatorList) {
               o.operatorList.lastChunk = !0;
               for (const t of o.renderTasks) t.operatorListChanged();
-              this.#Mn();
+              this._private_field__Mn();
             }
             if (o.displayReadyCapability) o.displayReadyCapability.reject(t); else {
               if (!o.opListReadCapability) throw t;
@@ -8236,15 +8236,12 @@
     }
   }
   class Ds {
-    #Xs = Promise.withResolvers();
-    #kn = null;
-    #Rs = null;
-    #Dn = null;
-    static #Pn = 0;
-    static #In = !1;
-    static #Rn = new WeakMap();
+    _private_field__Xs = Promise.withResolvers();
+    _private_field__kn = null;
+    _private_field__Rs = null;
+    _private_field__Dn = null;
     static #_0 = (() => {
-      (l && (this.#In = !0, Ki.workerSrc ||= "./pdf.worker.mjs"), this._isSameOrigin = (t, e) => {
+      (l && (this._private_field__In = !0, Ki.workerSrc ||= "./pdf.worker.mjs"), this._isSameOrigin = (t, e) => {
         const i = URL.parse(t);
         if (!i?.origin || "null" === i.origin) return !1;
         const s = new URL(e, i);
@@ -8262,48 +8259,48 @@
     })();
     constructor({name: t = null, port: e = null, verbosity: i = G()} = {}) {
       if ((this.name = t, this.destroyed = !1, this.verbosity = i, e)) {
-        if (Ds.#Rn.has(e)) throw new Error("Cannot use more than one PDFWorker per port.");
-        (Ds.#Rn.set(e, this), this.#Ln(e));
-      } else this.#Fn();
+        if (Ds._private_field__Rn.has(e)) throw new Error("Cannot use more than one PDFWorker per port.");
+        (Ds._private_field__Rn.set(e, this), this._private_field__Ln(e));
+      } else this._private_field__Fn();
     }
     get promise() {
-      return this.#Xs.promise;
+      return this._private_field__Xs.promise;
     }
-    #Bn() {
-      (this.#Xs.resolve(), this.#kn.send("configure", {
+    _private_field__Bn() {
+      (this._private_field__Xs.resolve(), this._private_field__kn.send("configure", {
         verbosity: this.verbosity
       }));
     }
     get port() {
-      return this.#Rs;
+      return this._private_field__Rs;
     }
     get messageHandler() {
-      return this.#kn;
+      return this._private_field__kn;
     }
-    #Ln(t) {
-      (this.#Rs = t, this.#kn = new Be("main", "worker", t), this.#kn.on("ready", () => {}), this.#Bn());
+    _private_field__Ln(t) {
+      (this._private_field__Rs = t, this._private_field__kn = new Be("main", "worker", t), this._private_field__kn.on("ready", () => {}), this._private_field__Bn());
     }
-    #Fn() {
-      if (Ds.#In || Ds.#Nn) return void this.#On();
+    _private_field__Fn() {
+      if (Ds._private_field__In || Ds._private_field__Nn) return void this._private_field__On();
       let {workerSrc: t} = Ds;
       try {
         Ds._isSameOrigin(window.location, t) || (t = Ds._createCDNWrapper(new URL(t, window.location).href));
         const e = new Worker(t, {
           type: "module"
         }), i = new Be("main", "worker", e), s = () => {
-          (n.abort(), i.destroy(), e.terminate(), this.destroyed ? this.#Xs.reject(new Error("Worker was destroyed")) : this.#On());
+          (n.abort(), i.destroy(), e.terminate(), this.destroyed ? this._private_field__Xs.reject(new Error("Worker was destroyed")) : this._private_field__On());
         }, n = new AbortController();
         (e.addEventListener("error", () => {
-          this.#Dn || s();
+          this._private_field__Dn || s();
         }, {
           signal: n.signal
         }), i.on("test", t => {
-          (n.abort(), !this.destroyed && t ? (this.#kn = i, this.#Rs = e, this.#Dn = e, this.#Bn()) : s());
+          (n.abort(), !this.destroyed && t ? (this._private_field__kn = i, this._private_field__Rs = e, this._private_field__Dn = e, this._private_field__Bn()) : s());
         }), i.on("ready", t => {
           if ((n.abort(), this.destroyed)) s(); else try {
             r();
           } catch {
-            this.#On();
+            this._private_field__On();
           }
         }));
         const r = () => {
@@ -8314,24 +8311,24 @@
       } catch {
         W("The worker has been disabled.");
       }
-      this.#On();
+      this._private_field__On();
     }
-    #On() {
-      (Ds.#In || (q("Setting up fake worker."), Ds.#In = !0), Ds._setupFakeWorkerGlobal.then(t => {
-        if (this.destroyed) return void this.#Xs.reject(new Error("Worker was destroyed"));
+    _private_field__On() {
+      (Ds._private_field__In || (q("Setting up fake worker."), Ds._private_field__In = !0), Ds._setupFakeWorkerGlobal.then(t => {
+        if (this.destroyed) return void this._private_field__Xs.reject(new Error("Worker was destroyed"));
         const e = new _e();
-        this.#Rs = e;
-        const i = "fake" + Ds.#Pn++, s = new Be(i + "_worker", i, e);
-        (t.setup(s, e), this.#kn = new Be(i, i + "_worker", e), this.#Bn());
+        this._private_field__Rs = e;
+        const i = "fake" + Ds._private_field__Pn++, s = new Be(i + "_worker", i, e);
+        (t.setup(s, e), this._private_field__kn = new Be(i, i + "_worker", e), this._private_field__Bn());
       }).catch(t => {
-        this.#Xs.reject(new Error(`Setting up fake worker failed: "${t.message}".`));
+        this._private_field__Xs.reject(new Error(`Setting up fake worker failed: "${t.message}".`));
       }));
     }
     destroy() {
-      (this.destroyed = !0, this.#Dn?.terminate(), this.#Dn = null, Ds.#Rn.delete(this.#Rs), this.#Rs = null, this.#kn?.destroy(), this.#kn = null);
+      (this.destroyed = !0, this._private_field__Dn?.terminate(), this._private_field__Dn = null, Ds._private_field__Rn.delete(this._private_field__Rs), this._private_field__Rs = null, this._private_field__kn?.destroy(), this._private_field__kn = null);
     }
     static create(t) {
-      const e = this.#Rn.get(t?.port);
+      const e = this._private_field__Rn.get(t?.port);
       if (e) {
         if (e._pendingDestroy) throw new Error("PDFWorker.create - the worker is being destroyed.\nPlease remember to await `PDFDocumentLoadingTask.destroy()`-calls.");
         return e;
@@ -8342,7 +8339,7 @@
       if (Ki.workerSrc) return Ki.workerSrc;
       throw new Error('No "GlobalWorkerOptions.workerSrc" specified.');
     }
-    static get #Nn() {
+    static get _private_field__Nn() {
       try {
         return globalThis.pdfjsWorker?.WorkerMessageHandler || null;
       } catch {
@@ -8351,28 +8348,31 @@
     }
     static get _setupFakeWorkerGlobal() {
       return J(this, "_setupFakeWorkerGlobal", (async () => {
-        if (this.#Nn) return this.#Nn;
+        if (this._private_field__Nn) return this._private_field__Nn;
         return (await window.LegacyTranspiler.importModule(this.workerSrc)).WorkerMessageHandler;
       })());
     }
   }
+  Ds._private_field__Pn = 0;
+  Ds._private_field__In = !1;
+  Ds._private_field__Rn = new WeakMap();
   class Ps {
-    #Un = new Map();
-    #zn = new Map();
-    #Hn = new Map();
-    #jn = new Map();
-    #$n = null;
+    _private_field__Un = new Map();
+    _private_field__zn = new Map();
+    _private_field__Hn = new Map();
+    _private_field__jn = new Map();
+    _private_field__$n = null;
     constructor(t, e, i, s, n, r) {
       (this.messageHandler = t, this.loadingTask = e, this.commonObjs = new _s(), this.fontLoader = new ve({
         ownerDocument: s.ownerDocument,
         styleElement: s.styleElement
       }), this.loadingParams = s.loadingParams, this._params = s, this.canvasFactory = n.canvasFactory, this.filterFactory = n.filterFactory, this.cMapReaderFactory = n.cMapReaderFactory, this.standardFontDataFactory = n.standardFontDataFactory, this.wasmFactory = n.wasmFactory, this.destroyed = !1, this.destroyCapability = null, this._networkStream = i, this._fullReader = null, this._lastProgress = null, this.downloadInfoCapability = Promise.withResolvers(), this.enableHWA = r, this.setupMessageHandler());
     }
-    #Vn(t, e = null) {
-      const i = this.#Un.get(t);
+    _private_field__Vn(t, e = null) {
+      const i = this._private_field__Un.get(t);
       if (i) return i;
       const s = this.messageHandler.sendWithPromise(t, e);
-      return (this.#Un.set(t, s), s);
+      return (this._private_field__Un.set(t, s), s);
     }
     get annotationStorage() {
       return J(this, "annotationStorage", new fe());
@@ -8418,13 +8418,13 @@
     }
     destroy() {
       if (this.destroyCapability) return this.destroyCapability.promise;
-      (this.destroyed = !0, this.destroyCapability = Promise.withResolvers(), this.#$n?.reject(new Error("Worker was destroyed during onPassword callback")));
+      (this.destroyed = !0, this.destroyCapability = Promise.withResolvers(), this._private_field__$n?.reject(new Error("Worker was destroyed during onPassword callback")));
       const t = [];
-      for (const i of this.#zn.values()) t.push(i._destroy());
-      (this.#zn.clear(), this.#Hn.clear(), this.#jn.clear(), this.hasOwnProperty("annotationStorage") && this.annotationStorage.resetModified());
+      for (const i of this._private_field__zn.values()) t.push(i._destroy());
+      (this._private_field__zn.clear(), this._private_field__Hn.clear(), this._private_field__jn.clear(), this.hasOwnProperty("annotationStorage") && this.annotationStorage.resetModified());
       const e = this.messageHandler.sendWithPromise("Terminate", null);
       return (t.push(e), Promise.all(t).then(() => {
-        (this.commonObjs.clear(), this.fontLoader.clear(), this.#Un.clear(), this.filterFactory.destroy(), Ss.cleanup(), this._networkStream?.cancelAllRequests(new rt("Worker was terminated.")), this.messageHandler?.destroy(), this.messageHandler = null, this.destroyCapability.resolve());
+        (this.commonObjs.clear(), this.fontLoader.clear(), this._private_field__Un.clear(), this.filterFactory.destroy(), Ss.cleanup(), this._networkStream?.cancelAllRequests(new rt("Worker was terminated.")), this.messageHandler?.destroy(), this.messageHandler = null, this.destroyCapability.resolve());
       }, this.destroyCapability.reject), this.destroyCapability.promise);
     }
     setupMessageHandler() {
@@ -8478,19 +8478,19 @@
       }), t.on("DocException", t => {
         e._capability.reject(Fe(t));
       }), t.on("PasswordRequest", t => {
-        this.#$n = Promise.withResolvers();
+        this._private_field__$n = Promise.withResolvers();
         try {
           if (!e.onPassword) throw Fe(t);
           const i = t => {
-            t instanceof Error ? this.#$n.reject(t) : this.#$n.resolve({
+            t instanceof Error ? this._private_field__$n.reject(t) : this._private_field__$n.resolve({
               password: t
             });
           };
           e.onPassword(i, t.code);
         } catch (i) {
-          this.#$n.reject(i);
+          this._private_field__$n.reject(i);
         }
-        return this.#$n.promise;
+        return this._private_field__$n.promise;
       }), t.on("DataLoaded", t => {
         (e.onProgress?.({
           loaded: t.length,
@@ -8498,7 +8498,7 @@
         }), this.downloadInfoCapability.resolve(t));
       }), t.on("StartRenderPage", t => {
         if (this.destroyed) return;
-        this.#zn.get(t.pageIndex)._startRenderPage(t.transparency, t.cacheKey);
+        this._private_field__zn.get(t.pageIndex)._startRenderPage(t.transparency, t.cacheKey);
       }), t.on("commonobj", ([e, i, s]) => {
         if (this.destroyed) return null;
         if (this.commonObjs.has(e)) return null;
@@ -8519,7 +8519,7 @@
           case "CopyLocalImage":
             const {imageRef: o} = s;
             K(o, "The imageRef must be defined.");
-            for (const t of this.#zn.values()) for (const [, i] of t.objs) if (i?.ref === o) return i.dataLen ? (this.commonObjs.resolve(e, structuredClone(i)), i.dataLen) : null;
+            for (const t of this._private_field__zn.values()) for (const [, i] of t.objs) if (i?.ref === o) return i.dataLen ? (this.commonObjs.resolve(e, structuredClone(i)), i.dataLen) : null;
             break;
           case "FontPath":
           case "Image":
@@ -8532,7 +8532,7 @@
         return null;
       }), t.on("obj", ([t, e, i, s]) => {
         if (this.destroyed) return;
-        const n = this.#zn.get(e);
+        const n = this._private_field__zn.get(e);
         if (!n.objs.has(t)) if (0 !== n._intentStates.size) switch (i) {
           case "Image":
           case "Pattern":
@@ -8570,17 +8570,17 @@
     }
     getPage(t) {
       if (!Number.isInteger(t) || t <= 0 || t > this._numPages) return Promise.reject(new Error("Invalid page request."));
-      const e = t - 1, i = this.#Hn.get(e);
+      const e = t - 1, i = this._private_field__Hn.get(e);
       if (i) return i;
       const s = this.messageHandler.sendWithPromise("GetPage", {
         pageIndex: e
       }).then(i => {
         if (this.destroyed) throw new Error("Transport destroyed");
-        i.refStr && this.#jn.set(i.refStr, t);
+        i.refStr && this._private_field__jn.set(i.refStr, t);
         const s = new ks(e, i, this, this._params.pdfBug);
-        return (this.#zn.set(e, s), s);
+        return (this._private_field__zn.set(e, s), s);
       });
-      return (this.#Hn.set(e, s), s);
+      return (this._private_field__Hn.set(e, s), s);
     }
     getPageIndex(t) {
       return Ae(t) ? this.messageHandler.sendWithPromise("GetPageIndex", {
@@ -8595,10 +8595,10 @@
       });
     }
     getFieldObjects() {
-      return this.#Vn("GetFieldObjects");
+      return this._private_field__Vn("GetFieldObjects");
     }
     hasJSActions() {
-      return this.#Vn("HasJSActions");
+      return this._private_field__Vn("HasJSActions");
     }
     getCalculationOrderIds() {
       return this.messageHandler.sendWithPromise("GetCalculationOrderIds", null);
@@ -8636,7 +8636,7 @@
       });
     }
     getDocJSActions() {
-      return this.#Vn("GetDocJSActions");
+      return this._private_field__Vn("GetDocJSActions");
     }
     getPageJSActions(t) {
       return this.messageHandler.sendWithPromise("GetPageJSActions", {
@@ -8652,13 +8652,13 @@
       return this.messageHandler.sendWithPromise("GetOutline", null);
     }
     getOptionalContentConfig(t) {
-      return this.#Vn("GetOptionalContentConfig").then(e => new Zi(e, t));
+      return this._private_field__Vn("GetOptionalContentConfig").then(e => new Zi(e, t));
     }
     getPermissions() {
       return this.messageHandler.sendWithPromise("GetPermissions", null);
     }
     getMetadata() {
-      const t = "GetMetadata", e = this.#Un.get(t);
+      const t = "GetMetadata", e = this._private_field__Un.get(t);
       if (e) return e;
       const i = this.messageHandler.sendWithPromise(t, null).then(t => ({
         info: t[0],
@@ -8666,7 +8666,7 @@
         contentDispositionFilename: this._fullReader?.filename ?? null,
         contentLength: this._fullReader?.contentLength ?? null
       }));
-      return (this.#Un.set(t, i), i);
+      return (this._private_field__Un.set(t, i), i);
     }
     getMarkInfo() {
       return this.messageHandler.sendWithPromise("GetMarkInfo", null);
@@ -8674,41 +8674,40 @@
     async startCleanup(t = !1) {
       if (!this.destroyed) {
         await this.messageHandler.sendWithPromise("Cleanup", null);
-        for (const t of this.#zn.values()) {
+        for (const t of this._private_field__zn.values()) {
           if (!t.cleanup()) throw new Error(`startCleanup: Page ${t.pageNumber} is currently rendering.`);
         }
-        (this.commonObjs.clear(), t || this.fontLoader.clear(), this.#Un.clear(), this.filterFactory.destroy(!0), Ss.cleanup());
+        (this.commonObjs.clear(), t || this.fontLoader.clear(), this._private_field__Un.clear(), this.filterFactory.destroy(!0), Ss.cleanup());
       }
     }
     cachedPageNumber(t) {
       if (!Ae(t)) return null;
       const e = 0 === t.gen ? `${t.num}R` : `${t.num}R${t.gen}`;
-      return this.#jn.get(e) ?? null;
+      return this._private_field__jn.get(e) ?? null;
     }
   }
   class Is {
-    #Gn = null;
+    _private_field__Gn = null;
     onContinue = null;
     onError = null;
     constructor(t) {
-      this.#Gn = t;
+      this._private_field__Gn = t;
     }
     get promise() {
-      return this.#Gn.capability.promise;
+      return this._private_field__Gn.capability.promise;
     }
     cancel(t = 0) {
-      this.#Gn.cancel(null, t);
+      this._private_field__Gn.cancel(null, t);
     }
     get separateAnnots() {
-      const {separateAnnots: t} = this.#Gn.operatorList;
+      const {separateAnnots: t} = this._private_field__Gn.operatorList;
       if (!t) return !1;
-      const {annotationCanvasMap: e} = this.#Gn;
+      const {annotationCanvasMap: e} = this._private_field__Gn;
       return t.form || t.canvas && e?.size > 0;
     }
   }
   class Rs {
-    #Wn = null;
-    static #qn = new WeakSet();
+    _private_field__Wn = null;
     constructor({callback: t, params: e, objs: i, commonObjs: s, annotationCanvasMap: n, operatorList: r, pageIndex: a, canvasFactory: o, filterFactory: l, useRequestAnimationFrame: h = !1, pdfBug: c = !1, pageColors: d = null, enableHWA: u = !1, operationsFilter: p = null}) {
       (this.callback = t, this.params = e, this.objs = i, this.commonObjs = s, this.annotationCanvasMap = n, this.operatorListIdx = null, this.operatorList = r, this._pageIndex = a, this.canvasFactory = o, this.filterFactory = l, this._pdfBug = c, this.pageColors = d, this.running = !1, this.graphicsReadyCallback = null, this.graphicsReady = !1, this._useRequestAnimationFrame = !0 === h && "undefined" != typeof window, this.cancelled = !1, this.capability = Promise.withResolvers(), this.task = new Is(this), this._cancelBound = this.cancel.bind(this), this._continueBound = this._continue.bind(this), this._scheduleNextBound = this._scheduleNext.bind(this), this._nextBound = this._next.bind(this), this._canvas = e.canvas, this._canvasContext = e.canvas ? null : e.canvasContext, this._enableHWA = u, this._dependencyTracker = e.dependencyTracker, this._operationsFilter = p);
     }
@@ -8718,8 +8717,8 @@
     initializeGraphics({transparency: t = !1, optionalContentConfig: e}) {
       if (this.cancelled) return;
       if (this._canvas) {
-        if (Rs.#qn.has(this._canvas)) throw new Error("Cannot use the same canvas during multiple render() operations. Use different canvas or ensure previous operations were cancelled or completed.");
-        Rs.#qn.add(this._canvas);
+        if (Rs._private_field__qn.has(this._canvas)) throw new Error("Cannot use the same canvas during multiple render() operations. Use different canvas or ensure previous operations were cancelled or completed.");
+        Rs._private_field__qn.add(this._canvas);
       }
       this._pdfBug && globalThis.StepperManager?.enabled && (this.stepper = globalThis.StepperManager.create(this._pageIndex), this.stepper.init(this.operatorList), this.stepper.nextBreakPoint = this.stepper.getNextBreakPoint());
       const {viewport: i, transform: s, background: n, dependencyTracker: r} = this.params, a = this._canvasContext || this._canvas.getContext("2d", {
@@ -8736,7 +8735,7 @@
       }), this.operatorListIdx = 0, this.graphicsReady = !0, this.graphicsReadyCallback?.());
     }
     cancel(t = null, e = 0) {
-      (this.running = !1, this.cancelled = !0, this.gfx?.endDrawing(), this.#Wn && (window.cancelAnimationFrame(this.#Wn), this.#Wn = null), Rs.#qn.delete(this._canvas), t ||= new St(`Rendering cancelled, page ${this._pageIndex + 1}`, e), this.callback(t), this.task.onError?.(t));
+      (this.running = !1, this.cancelled = !0, this.gfx?.endDrawing(), this._private_field__Wn && (window.cancelAnimationFrame(this._private_field__Wn), this._private_field__Wn = null), Rs._private_field__qn.delete(this._canvas), t ||= new St(`Rendering cancelled, page ${this._pageIndex + 1}`, e), this.callback(t), this.task.onError?.(t));
     }
     operatorListChanged() {
       this.graphicsReady ? (this.gfx.dependencyTracker?.growOperationsCount(this.operatorList.fnArray.length), this.stepper?.updateOperatorList(this.operatorList), this.running || this._continue()) : this.graphicsReadyCallback ||= this._continueBound;
@@ -8745,32 +8744,32 @@
       (this.running = !0, this.cancelled || (this.task.onContinue ? this.task.onContinue(this._scheduleNextBound) : this._scheduleNext()));
     }
     _scheduleNext() {
-      this._useRequestAnimationFrame ? this.#Wn = window.requestAnimationFrame(() => {
-        (this.#Wn = null, this._nextBound().catch(this._cancelBound));
+      this._useRequestAnimationFrame ? this._private_field__Wn = window.requestAnimationFrame(() => {
+        (this._private_field__Wn = null, this._nextBound().catch(this._cancelBound));
       }) : Promise.resolve().then(this._nextBound).catch(this._cancelBound);
     }
     async _next() {
-      this.cancelled || (this.operatorListIdx = this.gfx.executeOperatorList(this.operatorList, this.operatorListIdx, this._continueBound, this.stepper, this._operationsFilter), this.operatorListIdx === this.operatorList.argsArray.length && (this.running = !1, this.operatorList.lastChunk && (this.gfx.endDrawing(), Rs.#qn.delete(this._canvas), this.callback())));
+      this.cancelled || (this.operatorListIdx = this.gfx.executeOperatorList(this.operatorList, this.operatorListIdx, this._continueBound, this.stepper, this._operationsFilter), this.operatorListIdx === this.operatorList.argsArray.length && (this.running = !1, this.operatorList.lastChunk && (this.gfx.endDrawing(), Rs._private_field__qn.delete(this._canvas), this.callback())));
     }
   }
+  Rs._private_field__qn = new WeakSet();
   const Ls = "5.4.296", Fs = "f56dc8601";
   class Bs {
-    #Xn = null;
-    #Kn = null;
-    #Yn;
-    #Qn = null;
-    #Jn = !1;
-    #Zn = !1;
-    #r = null;
-    #tr;
-    #er = null;
-    #b = null;
-    static #ir = null;
+    _private_field__Xn = null;
+    _private_field__Kn = null;
+    _private_field__Yn;
+    _private_field__Qn = null;
+    _private_field__Jn = !1;
+    _private_field__Zn = !1;
+    _private_field__r = null;
+    _private_field__tr;
+    _private_field__er = null;
+    _private_field__b = null;
     static get _keyboardManager() {
       return J(this, "_keyboardManager", new se([[["Escape", "mac+Escape"], Bs.prototype._hideDropdownFromKeyboard], [[" ", "mac+ "], Bs.prototype._colorSelectFromKeyboard], [["ArrowDown", "ArrowRight", "mac+ArrowDown", "mac+ArrowRight"], Bs.prototype._moveToNext], [["ArrowUp", "ArrowLeft", "mac+ArrowUp", "mac+ArrowLeft"], Bs.prototype._moveToPrevious], [["Home", "mac+Home"], Bs.prototype._moveToBeginning], [["End", "mac+End"], Bs.prototype._moveToEnd]]));
     }
     constructor({editor: t = null, uiManager: e = null}) {
-      (t ? (this.#Zn = !1, this.#r = t) : this.#Zn = !0, this.#b = t?._uiManager || e, this.#tr = this.#b._eventBus, this.#Yn = t?.color?.toUpperCase() || this.#b?.highlightColors.values().next().value || "#FFFF98", Bs.#ir ||= Object.freeze({
+      (t ? (this._private_field__Zn = !1, this._private_field__r = t) : this._private_field__Zn = !0, this._private_field__b = t?._uiManager || e, this._private_field__tr = this._private_field__b._eventBus, this._private_field__Yn = t?.color?.toUpperCase() || this._private_field__b?.highlightColors.values().next().value || "#FFFF98", Bs._private_field__ir ||= Object.freeze({
         blue: "pdfjs-editor-colorpicker-blue",
         green: "pdfjs-editor-colorpicker-green",
         pink: "pdfjs-editor-colorpicker-pink",
@@ -8779,125 +8778,126 @@
       }));
     }
     renderButton() {
-      const t = this.#Xn = document.createElement("button");
-      (t.className = "colorPicker", t.tabIndex = "0", t.setAttribute("data-l10n-id", "pdfjs-editor-colorpicker-button"), t.ariaHasPopup = "true", this.#r && (t.ariaControls = `${this.#r.id}_colorpicker_dropdown`));
-      const e = this.#b._signal;
-      (t.addEventListener("click", this.#sr.bind(this), {
+      const t = this._private_field__Xn = document.createElement("button");
+      (t.className = "colorPicker", t.tabIndex = "0", t.setAttribute("data-l10n-id", "pdfjs-editor-colorpicker-button"), t.ariaHasPopup = "true", this._private_field__r && (t.ariaControls = `${this._private_field__r.id}_colorpicker_dropdown`));
+      const e = this._private_field__b._signal;
+      (t.addEventListener("click", this._private_field__sr.bind(this), {
         signal: e
-      }), t.addEventListener("keydown", this.#nr.bind(this), {
+      }), t.addEventListener("keydown", this._private_field__nr.bind(this), {
         signal: e
       }));
-      const i = this.#Kn = document.createElement("span");
-      return (i.className = "swatch", i.ariaHidden = "true", i.style.backgroundColor = this.#Yn, t.append(i), t);
+      const i = this._private_field__Kn = document.createElement("span");
+      return (i.className = "swatch", i.ariaHidden = "true", i.style.backgroundColor = this._private_field__Yn, t.append(i), t);
     }
     renderMainDropdown() {
-      const t = this.#Qn = this.#rr();
+      const t = this._private_field__Qn = this._private_field__rr();
       return (t.ariaOrientation = "horizontal", t.ariaLabelledBy = "highlightColorPickerLabel", t);
     }
-    #rr() {
-      const t = document.createElement("div"), e = this.#b._signal;
+    _private_field__rr() {
+      const t = document.createElement("div"), e = this._private_field__b._signal;
       (t.addEventListener("contextmenu", Pt, {
         signal: e
-      }), t.className = "dropdown", t.role = "listbox", t.ariaMultiSelectable = "false", t.ariaOrientation = "vertical", t.setAttribute("data-l10n-id", "pdfjs-editor-colorpicker-dropdown"), this.#r && (t.id = `${this.#r.id}_colorpicker_dropdown`));
-      for (const [i, s] of this.#b.highlightColors) {
+      }), t.className = "dropdown", t.role = "listbox", t.ariaMultiSelectable = "false", t.ariaOrientation = "vertical", t.setAttribute("data-l10n-id", "pdfjs-editor-colorpicker-dropdown"), this._private_field__r && (t.id = `${this._private_field__r.id}_colorpicker_dropdown`));
+      for (const [i, s] of this._private_field__b.highlightColors) {
         const n = document.createElement("button");
-        (n.tabIndex = "0", n.role = "option", n.setAttribute("data-color", s), n.title = i, n.setAttribute("data-l10n-id", Bs.#ir[i]));
+        (n.tabIndex = "0", n.role = "option", n.setAttribute("data-color", s), n.title = i, n.setAttribute("data-l10n-id", Bs._private_field__ir[i]));
         const r = document.createElement("span");
-        (n.append(r), r.className = "swatch", r.style.backgroundColor = s, n.ariaSelected = s === this.#Yn, n.addEventListener("click", this.#ar.bind(this, s), {
+        (n.append(r), r.className = "swatch", r.style.backgroundColor = s, n.ariaSelected = s === this._private_field__Yn, n.addEventListener("click", this._private_field__ar.bind(this, s), {
           signal: e
         }), t.append(n));
       }
-      return (t.addEventListener("keydown", this.#nr.bind(this), {
+      return (t.addEventListener("keydown", this._private_field__nr.bind(this), {
         signal: e
       }), t);
     }
-    #ar(t, e) {
-      (e.stopPropagation(), this.#tr.dispatch("switchannotationeditorparams", {
+    _private_field__ar(t, e) {
+      (e.stopPropagation(), this._private_field__tr.dispatch("switchannotationeditorparams", {
         source: this,
         type: x.HIGHLIGHT_COLOR,
         value: t
       }), this.updateColor(t));
     }
     _colorSelectFromKeyboard(t) {
-      if (t.target === this.#Xn) return void this.#sr(t);
+      if (t.target === this._private_field__Xn) return void this._private_field__sr(t);
       const e = t.target.getAttribute("data-color");
-      e && this.#ar(e, t);
+      e && this._private_field__ar(e, t);
     }
     _moveToNext(t) {
-      this.#or ? t.target !== this.#Xn ? t.target.nextSibling?.focus() : this.#Qn.firstChild?.focus() : this.#sr(t);
+      this._private_field__or ? t.target !== this._private_field__Xn ? t.target.nextSibling?.focus() : this._private_field__Qn.firstChild?.focus() : this._private_field__sr(t);
     }
     _moveToPrevious(t) {
-      t.target !== this.#Qn?.firstChild && t.target !== this.#Xn ? (this.#or || this.#sr(t), t.target.previousSibling?.focus()) : this.#or && this._hideDropdownFromKeyboard();
+      t.target !== this._private_field__Qn?.firstChild && t.target !== this._private_field__Xn ? (this._private_field__or || this._private_field__sr(t), t.target.previousSibling?.focus()) : this._private_field__or && this._hideDropdownFromKeyboard();
     }
     _moveToBeginning(t) {
-      this.#or ? this.#Qn.firstChild?.focus() : this.#sr(t);
+      this._private_field__or ? this._private_field__Qn.firstChild?.focus() : this._private_field__sr(t);
     }
     _moveToEnd(t) {
-      this.#or ? this.#Qn.lastChild?.focus() : this.#sr(t);
+      this._private_field__or ? this._private_field__Qn.lastChild?.focus() : this._private_field__sr(t);
     }
-    #nr(t) {
+    _private_field__nr(t) {
       Bs._keyboardManager.exec(this, t);
     }
-    #sr(t) {
-      if (this.#or) return void this.hideDropdown();
-      if ((this.#Jn = 0 === t.detail, this.#er || (this.#er = new AbortController(), window.addEventListener("pointerdown", this.#u.bind(this), {
-        signal: this.#b.combinedSignal(this.#er)
-      })), this.#Xn.ariaExpanded = "true", this.#Qn)) return void this.#Qn.classList.remove("hidden");
-      const e = this.#Qn = this.#rr();
-      this.#Xn.append(e);
+    _private_field__sr(t) {
+      if (this._private_field__or) return void this.hideDropdown();
+      if ((this._private_field__Jn = 0 === t.detail, this._private_field__er || (this._private_field__er = new AbortController(), window.addEventListener("pointerdown", this._private_field__u.bind(this), {
+        signal: this._private_field__b.combinedSignal(this._private_field__er)
+      })), this._private_field__Xn.ariaExpanded = "true", this._private_field__Qn)) return void this._private_field__Qn.classList.remove("hidden");
+      const e = this._private_field__Qn = this._private_field__rr();
+      this._private_field__Xn.append(e);
     }
-    #u(t) {
-      this.#Qn?.contains(t.target) || this.hideDropdown();
+    _private_field__u(t) {
+      this._private_field__Qn?.contains(t.target) || this.hideDropdown();
     }
     hideDropdown() {
-      (this.#Qn?.classList.add("hidden"), this.#Xn.ariaExpanded = "false", this.#er?.abort(), this.#er = null);
+      (this._private_field__Qn?.classList.add("hidden"), this._private_field__Xn.ariaExpanded = "false", this._private_field__er?.abort(), this._private_field__er = null);
     }
-    get #or() {
-      return this.#Qn && !this.#Qn.classList.contains("hidden");
+    get _private_field__or() {
+      return this._private_field__Qn && !this._private_field__Qn.classList.contains("hidden");
     }
     _hideDropdownFromKeyboard() {
-      this.#Zn || (this.#or ? (this.hideDropdown(), this.#Xn.focus({
+      this._private_field__Zn || (this._private_field__or ? (this.hideDropdown(), this._private_field__Xn.focus({
         preventScroll: !0,
-        focusVisible: this.#Jn
-      })) : this.#r?.unselect());
+        focusVisible: this._private_field__Jn
+      })) : this._private_field__r?.unselect());
     }
     updateColor(t) {
-      if ((this.#Kn && (this.#Kn.style.backgroundColor = t), !this.#Qn)) return;
-      const e = this.#b.highlightColors.values();
-      for (const i of this.#Qn.children) i.ariaSelected = e.next().value === t.toUpperCase();
+      if ((this._private_field__Kn && (this._private_field__Kn.style.backgroundColor = t), !this._private_field__Qn)) return;
+      const e = this._private_field__b.highlightColors.values();
+      for (const i of this._private_field__Qn.children) i.ariaSelected = e.next().value === t.toUpperCase();
     }
     destroy() {
-      (this.#Xn?.remove(), this.#Xn = null, this.#Kn = null, this.#Qn?.remove(), this.#Qn = null);
+      (this._private_field__Xn?.remove(), this._private_field__Xn = null, this._private_field__Kn = null, this._private_field__Qn?.remove(), this._private_field__Qn = null);
     }
   }
+  Bs._private_field__ir = null;
   class Ns {
-    #lr = null;
-    #r = null;
-    #b = null;
-    static #ir = null;
+    _private_field__lr = null;
+    _private_field__r = null;
+    _private_field__b = null;
     constructor(t) {
-      (this.#r = t, this.#b = t._uiManager, Ns.#ir ||= Object.freeze({
+      (this._private_field__r = t, this._private_field__b = t._uiManager, Ns._private_field__ir ||= Object.freeze({
         freetext: "pdfjs-editor-color-picker-free-text-input",
         ink: "pdfjs-editor-color-picker-ink-input"
       }));
     }
     renderButton() {
-      if (this.#lr) return this.#lr;
-      const {editorType: t, colorType: e, colorValue: i} = this.#r, s = this.#lr = document.createElement("input");
-      return (s.type = "color", s.value = i || "#000000", s.className = "basicColorPicker", s.tabIndex = 0, s.setAttribute("data-l10n-id", Ns.#ir[t]), s.addEventListener("input", () => {
-        this.#b.updateParams(e, s.value);
+      if (this._private_field__lr) return this._private_field__lr;
+      const {editorType: t, colorType: e, colorValue: i} = this._private_field__r, s = this._private_field__lr = document.createElement("input");
+      return (s.type = "color", s.value = i || "#000000", s.className = "basicColorPicker", s.tabIndex = 0, s.setAttribute("data-l10n-id", Ns._private_field__ir[t]), s.addEventListener("input", () => {
+        this._private_field__b.updateParams(e, s.value);
       }, {
-        signal: this.#b._signal
+        signal: this._private_field__b._signal
       }), s);
     }
     update(t) {
-      this.#lr && (this.#lr.value = t);
+      this._private_field__lr && (this._private_field__lr.value = t);
     }
     destroy() {
-      (this.#lr?.remove(), this.#lr = null);
+      (this._private_field__lr?.remove(), this._private_field__lr = null);
     }
     hideDropdown() {}
   }
+  Ns._private_field__ir = null;
   function Os(t) {
     return Math.floor(255 * Math.max(0, Math.min(1, t))).toString(16).padStart(2, "0");
   }
@@ -9026,9 +9026,9 @@
     }
   }
   class Ws {
-    #hr = null;
-    #cr = !1;
-    #dr = null;
+    _private_field__hr = null;
+    _private_field__cr = !1;
+    _private_field__dr = null;
     constructor(t, {isRenderable: e = !1, ignoreBorder: i = !1, createQuadrilaterals: s = !1} = {}) {
       (this.isRenderable = e, this.data = t.data, this.layer = t.layer, this.linkService = t.linkService, this.downloadManager = t.downloadManager, this.imageResourcesPath = t.imageResourcesPath, this.renderForms = t.renderForms, this.svgFactory = t.svgFactory, this.annotationStorage = t.annotationStorage, this.enableComment = t.enableComment, this.enableScripting = t.enableScripting, this.hasJSActions = t.hasJSActions, this._fieldObjects = t.fieldObjects, this.parent = t.parent, e && (this.container = this._createContainer(i)), s && this._createQuadrilaterals());
     }
@@ -9088,22 +9088,22 @@
       }), t || this.removePopup());
     }
     removePopup() {
-      ((this.#dr?.popup || this.popup)?.remove(), this.#dr = this.popup = null);
+      ((this._private_field__dr?.popup || this.popup)?.remove(), this._private_field__dr = this.popup = null);
     }
     updateEdited(t) {
       if (!this.container) return;
-      t.rect && (this.#hr ||= {
+      t.rect && (this._private_field__hr ||= {
         rect: this.data.rect.slice(0)
       });
       const {rect: e, popup: i} = t;
-      e && this.#ur(e);
-      let s = this.#dr?.popup || this.popup;
-      (!s && i?.text && (this._createPopup(i), s = this.#dr.popup), s && (s.updateEdited(t), i?.deleted && (s.remove(), this.#dr = null, this.popup = null)));
+      e && this._private_field__ur(e);
+      let s = this._private_field__dr?.popup || this.popup;
+      (!s && i?.text && (this._createPopup(i), s = this._private_field__dr.popup), s && (s.updateEdited(t), i?.deleted && (s.remove(), this._private_field__dr = null, this.popup = null)));
     }
     resetEdited() {
-      this.#hr && (this.#ur(this.#hr.rect), this.#dr?.popup.resetEdited(), this.#hr = null);
+      this._private_field__hr && (this._private_field__ur(this._private_field__hr.rect), this._private_field__dr?.popup.resetEdited(), this._private_field__hr = null);
     }
-    #ur(t) {
+    _private_field__ur(t) {
       const {container: {style: e}, data: {rect: i, rotation: s}, parent: {viewport: {rawDims: {pageWidth: n, pageHeight: r, pageX: a, pageY: o}}}} = this;
       (i?.splice(0, 4, ...t), e.left = 100 * (t[0] - a) / n + "%", e.top = 100 * (r - t[3] + o) / r + "%", 0 === s ? (e.width = 100 * (t[2] - t[0]) / n + "%", e.height = 100 * (t[3] - t[1]) / r + "%") : this.setRotation(s));
     }
@@ -9143,7 +9143,7 @@
             r.borderBottomStyle = "solid";
         }
         const s = e.borderColor || null;
-        s ? (this.#cr = !0, r.borderColor = ct.makeHexColor(0 | s[0], 0 | s[1], 0 | s[2])) : r.borderWidth = 0;
+        s ? (this._private_field__cr = !0, r.borderColor = ct.makeHexColor(0 | s[0], 0 | s[1], 0 | s[2])) : r.borderWidth = 0;
       }
       const l = ct.normalizeRect([e.rect[0], i.view[3] - e.rect[1] + i.view[1], e.rect[2], i.view[3] - e.rect[3] + i.view[1]]), {pageWidth: h, pageHeight: c, pageX: d, pageY: u} = s.rawDims;
       (r.left = 100 * (l[0] - d) / h + "%", r.top = 100 * (l[1] - u) / c + "%");
@@ -9258,7 +9258,7 @@
       }
       const {style: r} = this.container;
       let a;
-      if (this.#cr) {
+      if (this._private_field__cr) {
         const {borderColor: t, borderWidth: e} = r;
         (r.borderWidth = 0, a = ["url('data:image/svg+xml;utf8,", '<svg xmlns="http://www.w3.org/2000/svg"', ' preserveAspectRatio="none" viewBox="0 0 1 1">', `<g fill="transparent" stroke="${t}" stroke-width="${e}">`], this.container.classList.add("hasBorder"));
       }
@@ -9272,7 +9272,7 @@
         const i = t[g], s = t[g + 1], r = t[g + 2], c = t[g + 3], d = h.createElement("rect"), p = (r - e) / o, m = (n - s) / l, f = (i - r) / o, b = (s - c) / l;
         (d.setAttribute("x", p), d.setAttribute("y", m), d.setAttribute("width", f), d.setAttribute("height", b), u.append(d), a?.push(`<rect vector-effect="non-scaling-stroke" x="${p}" y="${m}" width="${f}" height="${b}"/>`));
       }
-      (this.#cr && (a.push("</g></svg>')"), r.backgroundImage = a.join("")), this.container.append(c), this.container.style.clipPath = `url(#${p})`);
+      (this._private_field__cr && (a.push("</g></svg>')"), r.backgroundImage = a.join("")), this.container.append(c), this.container.style.clipPath = `url(#${p})`);
     }
     _createPopup(t = null) {
       const {data: e} = this;
@@ -9280,7 +9280,7 @@
       t ? (i = {
         str: t.text
       }, s = t.date) : (i = e.contentsObj, s = e.modificationDate);
-      const n = this.#dr = new nn({
+      const n = this._private_field__dr = new nn({
         data: {
           color: e.color,
           titleObj: e.titleObj,
@@ -9300,10 +9300,10 @@
       this.parent._commentManager || this.parent.div.append(n.render());
     }
     get hasPopupElement() {
-      return !!(this.#dr || this.popup || this.data.popupRef);
+      return !!(this._private_field__dr || this.popup || this.data.popupRef);
     }
     get extraPopupElement() {
-      return this.#dr;
+      return this._private_field__dr;
     }
     render() {
       X("Abstract method `AnnotationElement.render` called");
@@ -9411,22 +9411,22 @@
       const {data: t, linkService: e} = this, i = document.createElement("a");
       i.setAttribute("data-element-id", t.id);
       let s = !1;
-      return (t.url ? (e.addLinkAttributes(i, t.url, t.newWindow), s = !0) : t.action ? (this._bindNamedAction(i, t.action, t.overlaidText), s = !0) : t.attachment ? (this.#pr(i, t.attachment, t.overlaidText, t.attachmentDest), s = !0) : t.setOCGState ? (this.#gr(i, t.setOCGState, t.overlaidText), s = !0) : t.dest ? (this._bindLink(i, t.dest, t.overlaidText), s = !0) : (t.actions && (t.actions.Action || t.actions["Mouse Up"] || t.actions["Mouse Down"]) && this.enableScripting && this.hasJSActions && (this._bindJSAction(i, t), s = !0), t.resetForm ? (this._bindResetFormAction(i, t.resetForm), s = !0) : this.isTooltipOnly && !s && (this._bindLink(i, ""), s = !0)), this.container.classList.add("linkAnnotation"), s && this.container.append(i), this.container);
+      return (t.url ? (e.addLinkAttributes(i, t.url, t.newWindow), s = !0) : t.action ? (this._bindNamedAction(i, t.action, t.overlaidText), s = !0) : t.attachment ? (this._private_field__pr(i, t.attachment, t.overlaidText, t.attachmentDest), s = !0) : t.setOCGState ? (this._private_field__gr(i, t.setOCGState, t.overlaidText), s = !0) : t.dest ? (this._bindLink(i, t.dest, t.overlaidText), s = !0) : (t.actions && (t.actions.Action || t.actions["Mouse Up"] || t.actions["Mouse Down"]) && this.enableScripting && this.hasJSActions && (this._bindJSAction(i, t), s = !0), t.resetForm ? (this._bindResetFormAction(i, t.resetForm), s = !0) : this.isTooltipOnly && !s && (this._bindLink(i, ""), s = !0)), this.container.classList.add("linkAnnotation"), s && this.container.append(i), this.container);
     }
-    #mr() {
+    _private_field__mr() {
       this.container.setAttribute("data-internal-link", "");
     }
     _bindLink(t, e, i = "") {
-      (t.href = this.linkService.getDestinationHash(e), t.onclick = () => (e && this.linkService.goToDestination(e), !1), (e || "" === e) && this.#mr(), i && (t.title = i));
+      (t.href = this.linkService.getDestinationHash(e), t.onclick = () => (e && this.linkService.goToDestination(e), !1), (e || "" === e) && this._private_field__mr(), i && (t.title = i));
     }
     _bindNamedAction(t, e, i = "") {
-      (t.href = this.linkService.getAnchorUrl(""), t.onclick = () => (this.linkService.executeNamedAction(e), !1), i && (t.title = i), this.#mr());
+      (t.href = this.linkService.getAnchorUrl(""), t.onclick = () => (this.linkService.executeNamedAction(e), !1), i && (t.title = i), this._private_field__mr());
     }
-    #pr(t, e, i = "", s = null) {
-      (t.href = this.linkService.getAnchorUrl(""), e.description ? t.title = e.description : i && (t.title = i), t.onclick = () => (this.downloadManager?.openOrDownloadData(e.content, e.filename, s), !1), this.#mr());
+    _private_field__pr(t, e, i = "", s = null) {
+      (t.href = this.linkService.getAnchorUrl(""), e.description ? t.title = e.description : i && (t.title = i), t.onclick = () => (this.downloadManager?.openOrDownloadData(e.content, e.filename, s), !1), this._private_field__mr());
     }
-    #gr(t, e, i = "") {
-      (t.href = this.linkService.getAnchorUrl(""), t.onclick = () => (this.linkService.executeSetOCGState(e), !1), i && (t.title = i), this.#mr());
+    _private_field__gr(t, e, i = "") {
+      (t.href = this.linkService.getAnchorUrl(""), t.onclick = () => (this.linkService.executeSetOCGState(e), !1), i && (t.title = i), this._private_field__mr());
     }
     _bindJSAction(t, e) {
       t.href = this.linkService.getAnchorUrl("");
@@ -9441,11 +9441,11 @@
           }
         }), !1));
       }
-      (e.overlaidText && (t.title = e.overlaidText), t.onclick || (t.onclick = () => !1), this.#mr());
+      (e.overlaidText && (t.title = e.overlaidText), t.onclick || (t.onclick = () => !1), this._private_field__mr());
     }
     _bindResetFormAction(t, e) {
       const i = t.onclick;
-      if ((i || (t.href = this.linkService.getAnchorUrl("")), this.#mr(), !this._fieldObjects)) return (q('_bindResetFormAction - "resetForm" action not supported, ensure that the `fieldObjects` parameter is provided.'), void (i || (t.onclick = () => !1)));
+      if ((i || (t.href = this.linkService.getAnchorUrl("")), this._private_field__mr(), !this._fieldObjects)) return (q('_bindResetFormAction - "resetForm" action not supported, ensure that the `fieldObjects` parameter is provided.'), void (i || (t.onclick = () => !1)));
       t.onclick = () => {
         i?.();
         const {fields: t, refs: s, include: n} = e, r = [];
@@ -10016,11 +10016,11 @@
       if ((super(t, {
         isRenderable: !n && Ws._hasPopupData(e)
       }), this.elements = i, n && Ws._hasPopupData(e))) {
-        const t = this.popup = this.#fr();
+        const t = this.popup = this._private_field__fr();
         for (const e of i) e.popup = t;
       } else this.popup = null;
     }
-    #fr() {
+    _private_field__fr() {
       return new rn({
         container: this.container,
         color: this.data.color,
@@ -10039,73 +10039,73 @@
     render() {
       const {container: t} = this;
       (t.classList.add("popupAnnotation"), t.role = "comment");
-      const e = this.popup = this.#fr(), i = [];
+      const e = this.popup = this._private_field__fr(), i = [];
       for (const s of this.elements) (s.popup = e, s.container.ariaHasPopup = "dialog", i.push(s.data.id), s.addHighlightArea());
       return (this.container.setAttribute("aria-controls", i.map(t => `${mt}${t}`).join(",")), this.container);
     }
   }
   class rn {
-    #U = null;
-    #br = this.#nr.bind(this);
-    #vr = this.#yr.bind(this);
-    #wr = this.#Ar.bind(this);
-    #xr = this.#_r.bind(this);
-    #Sr = null;
-    #At = null;
-    #Cr = null;
-    #Er = null;
-    #Tr = null;
-    #Mr = null;
-    #kr = null;
-    #Dr = !1;
-    #Pr = null;
-    #Ir = null;
-    #M = null;
-    #Rr = null;
-    #Lr = null;
-    #pe = null;
-    #Fr = null;
-    #he = null;
-    #Br = null;
-    #hr = null;
-    #Nr = !1;
-    #Or = null;
-    #Ur = null;
+    _private_field__U = null;
+    _private_field__br = this._private_field__nr.bind(this);
+    _private_field__vr = this._private_field__yr.bind(this);
+    _private_field__wr = this._private_field__Ar.bind(this);
+    _private_field__xr = this._private_field___r.bind(this);
+    _private_field__Sr = null;
+    _private_field__At = null;
+    _private_field__Cr = null;
+    _private_field__Er = null;
+    _private_field__Tr = null;
+    _private_field__Mr = null;
+    _private_field__kr = null;
+    _private_field__Dr = !1;
+    _private_field__Pr = null;
+    _private_field__Ir = null;
+    _private_field__M = null;
+    _private_field__Rr = null;
+    _private_field__Lr = null;
+    _private_field__pe = null;
+    _private_field__Fr = null;
+    _private_field__he = null;
+    _private_field__Br = null;
+    _private_field__hr = null;
+    _private_field__Nr = !1;
+    _private_field__Or = null;
+    _private_field__Ur = null;
     constructor({container: t, color: e, elements: i, titleObj: s, modificationDate: n, contentsObj: r, richText: a, parent: o, rect: l, parentRect: h, open: c, commentManager: d = null}) {
-      (this.#At = t, this.#Br = s, this.#Cr = r, this.#he = a, this.#Mr = o, this.#Sr = e, this.#Fr = l, this.#kr = h, this.#Tr = i, this.#U = d, this.#Or = i[0], this.#Er = Rt.toDateObject(n), this.trigger = i.flatMap(t => t.getElementsToTriggerPopup()), d ? this.renderCommentButton() : (this.#zr(), this.#At.hidden = !0, c && this.#_r()));
+      (this._private_field__At = t, this._private_field__Br = s, this._private_field__Cr = r, this._private_field__he = a, this._private_field__Mr = o, this._private_field__Sr = e, this._private_field__Fr = l, this._private_field__kr = h, this._private_field__Tr = i, this._private_field__U = d, this._private_field__Or = i[0], this._private_field__Er = Rt.toDateObject(n), this.trigger = i.flatMap(t => t.getElementsToTriggerPopup()), d ? this.renderCommentButton() : (this._private_field__zr(), this._private_field__At.hidden = !0, c && this._private_field___r()));
     }
-    #zr() {
-      if (this.#Ir) return;
-      this.#Ir = new AbortController();
-      const {signal: t} = this.#Ir;
-      for (const e of this.trigger) (e.addEventListener("click", this.#xr, {
+    _private_field__zr() {
+      if (this._private_field__Ir) return;
+      this._private_field__Ir = new AbortController();
+      const {signal: t} = this._private_field__Ir;
+      for (const e of this.trigger) (e.addEventListener("click", this._private_field__xr, {
         signal: t
-      }), e.addEventListener("pointerenter", this.#wr, {
+      }), e.addEventListener("pointerenter", this._private_field__wr, {
         signal: t
-      }), e.addEventListener("pointerleave", this.#vr, {
+      }), e.addEventListener("pointerleave", this._private_field__vr, {
         signal: t
       }), e.classList.add("popupTriggerArea"));
-      for (const e of this.#Tr) e.container?.addEventListener("keydown", this.#br, {
+      for (const e of this._private_field__Tr) e.container?.addEventListener("keydown", this._private_field__br, {
         signal: t
       });
     }
-    #Hr() {
-      const t = this.#Tr.find(t => t.hasCommentButton);
-      t && (this.#Lr = t._normalizePoint(t.commentButtonPosition));
+    _private_field__Hr() {
+      const t = this._private_field__Tr.find(t => t.hasCommentButton);
+      t && (this._private_field__Lr = t._normalizePoint(t.commentButtonPosition));
     }
     renderCommentButton() {
-      if (this.#Rr) return;
-      if ((this.#Lr || this.#Hr(), !this.#Lr)) return;
-      const {signal: t} = this.#Ir = new AbortController(), e = !!this.#Or.extraPopupElement, i = () => {
-        this.#U.toggleCommentPopup(this, !0, void 0, !e);
+      if (this._private_field__Rr) return;
+      if ((this._private_field__Lr || this._private_field__Hr(), !this._private_field__Lr)) return;
+      const {signal: t} = this._private_field__Ir = new AbortController(), e = !!this._private_field__Or.extraPopupElement, i = () => {
+        this._private_field__U.toggleCommentPopup(this, !0, void 0, !e);
       }, s = () => {
-        this.#U.toggleCommentPopup(this, !1, !0, !e);
+        this._private_field__U.toggleCommentPopup(this, !1, !0, !e);
       }, n = () => {
-        this.#U.toggleCommentPopup(this, !1, !1);
+        this._private_field__U.toggleCommentPopup(this, !1, !1);
       };
       if (e) {
-        this.#Rr = this.#Or.container;
-        for (const e of this.trigger) (e.ariaHasPopup = "dialog", e.ariaControls = "commentPopup", e.addEventListener("keydown", this.#br, {
+        this._private_field__Rr = this._private_field__Or.container;
+        for (const e of this.trigger) (e.ariaHasPopup = "dialog", e.ariaControls = "commentPopup", e.addEventListener("keydown", this._private_field__br, {
           signal: t
         }), e.addEventListener("click", i, {
           signal: t
@@ -10115,10 +10115,10 @@
           signal: t
         }), e.classList.add("popupTriggerArea"));
       } else {
-        const e = this.#Rr = document.createElement("button");
+        const e = this._private_field__Rr = document.createElement("button");
         e.className = "annotationCommentButton";
-        const r = this.#Or.container;
-        (e.style.zIndex = r.style.zIndex + 1, e.tabIndex = 0, e.ariaHasPopup = "dialog", e.ariaControls = "commentPopup", e.setAttribute("data-l10n-id", "pdfjs-show-comment-button"), this.#jr(), this.#$r(), e.addEventListener("keydown", this.#br, {
+        const r = this._private_field__Or.container;
+        (e.style.zIndex = r.style.zIndex + 1, e.tabIndex = 0, e.ariaHasPopup = "dialog", e.ariaControls = "commentPopup", e.setAttribute("data-l10n-id", "pdfjs-show-comment-button"), this._private_field__jr(), this._private_field__$r(), e.addEventListener("keydown", this._private_field__br, {
           signal: t
         }), e.addEventListener("click", i, {
           signal: t
@@ -10129,26 +10129,26 @@
         }), r.after(e));
       }
     }
-    #$r() {
-      if (this.#Or.extraPopupElement && !this.#Or.editor) return;
+    _private_field__$r() {
+      if (this._private_field__Or.extraPopupElement && !this._private_field__Or.editor) return;
       this.renderCommentButton();
-      const [t, e] = this.#Lr, {style: i} = this.#Rr;
+      const [t, e] = this._private_field__Lr, {style: i} = this._private_field__Rr;
       (i.left = `calc(${t}%)`, i.top = `calc(${e}% - var(--comment-button-dim))`);
     }
-    #jr() {
-      this.#Or.extraPopupElement || (this.renderCommentButton(), this.#Rr.style.backgroundColor = this.commentButtonColor || "");
+    _private_field__jr() {
+      this._private_field__Or.extraPopupElement || (this.renderCommentButton(), this._private_field__Rr.style.backgroundColor = this.commentButtonColor || "");
     }
     get commentButtonColor() {
-      const {color: t, opacity: e} = this.#Or.commentData;
-      return t ? this.#Mr._commentManager.makeCommentColor(t, e) : null;
+      const {color: t, opacity: e} = this._private_field__Or.commentData;
+      return t ? this._private_field__Mr._commentManager.makeCommentColor(t, e) : null;
     }
     focusCommentButton() {
       setTimeout(() => {
-        this.#Rr?.focus();
+        this._private_field__Rr?.focus();
       }, 0);
     }
     getData() {
-      const {richText: t, color: e, opacity: i, creationDate: s, modificationDate: n} = this.#Or.commentData;
+      const {richText: t, color: e, opacity: i, creationDate: s, modificationDate: n} = this._private_field__Or.commentData;
       return {
         contentsObj: {
           str: this.comment
@@ -10161,82 +10161,82 @@
       };
     }
     get elementBeforePopup() {
-      return this.#Rr;
+      return this._private_field__Rr;
     }
     get comment() {
-      return (this.#Ur ||= this.#Or.commentText, this.#Ur);
+      return (this._private_field__Ur ||= this._private_field__Or.commentText, this._private_field__Ur);
     }
     set comment(t) {
-      t !== this.comment && (this.#Or.commentText = this.#Ur = t);
+      t !== this.comment && (this._private_field__Or.commentText = this._private_field__Ur = t);
     }
     get parentBoundingClientRect() {
-      return this.#Or.layer.getBoundingClientRect();
+      return this._private_field__Or.layer.getBoundingClientRect();
     }
     setCommentButtonStates({selected: t, hasPopup: e}) {
-      this.#Rr && (this.#Rr.classList.toggle("selected", t), this.#Rr.ariaExpanded = e);
+      this._private_field__Rr && (this._private_field__Rr.classList.toggle("selected", t), this._private_field__Rr.ariaExpanded = e);
     }
     setSelectedCommentButton(t) {
-      this.#Rr.classList.toggle("selected", t);
+      this._private_field__Rr.classList.toggle("selected", t);
     }
     get commentPopupPosition() {
-      if (this.#pe) return this.#pe;
-      const {x: t, y: e, height: i} = this.#Rr.getBoundingClientRect(), {x: s, y: n, width: r, height: a} = this.#Or.layer.getBoundingClientRect();
+      if (this._private_field__pe) return this._private_field__pe;
+      const {x: t, y: e, height: i} = this._private_field__Rr.getBoundingClientRect(), {x: s, y: n, width: r, height: a} = this._private_field__Or.layer.getBoundingClientRect();
       return [(t - s) / r, (e + i - n) / a];
     }
     set commentPopupPosition(t) {
-      this.#pe = t;
+      this._private_field__pe = t;
     }
     hasDefaultPopupPosition() {
-      return null === this.#pe;
+      return null === this._private_field__pe;
     }
     get commentButtonPosition() {
-      return this.#Lr;
+      return this._private_field__Lr;
     }
     get commentButtonWidth() {
-      return this.#Rr.getBoundingClientRect().width / this.parentBoundingClientRect.width;
+      return this._private_field__Rr.getBoundingClientRect().width / this.parentBoundingClientRect.width;
     }
     editComment(t) {
-      const [e, i] = this.#pe || this.commentButtonPosition.map(t => t / 100), s = this.parentBoundingClientRect, {x: n, y: r, width: a, height: o} = s;
-      this.#U.showDialog(null, this, n + e * a, r + i * o, {
+      const [e, i] = this._private_field__pe || this.commentButtonPosition.map(t => t / 100), s = this.parentBoundingClientRect, {x: n, y: r, width: a, height: o} = s;
+      this._private_field__U.showDialog(null, this, n + e * a, r + i * o, {
         ...t,
         parentDimensions: s
       });
     }
     render() {
-      if (this.#Pr) return;
-      const t = this.#Pr = document.createElement("div");
-      if ((t.className = "popup", this.#Sr)) {
-        const e = t.style.outlineColor = ct.makeHexColor(...this.#Sr);
+      if (this._private_field__Pr) return;
+      const t = this._private_field__Pr = document.createElement("div");
+      if ((t.className = "popup", this._private_field__Sr)) {
+        const e = t.style.outlineColor = ct.makeHexColor(...this._private_field__Sr);
         t.style.backgroundColor = `color-mix(in srgb, ${e} 30%, white)`;
       }
       const e = document.createElement("span");
-      if ((e.className = "header", this.#Br?.str)) {
+      if ((e.className = "header", this._private_field__Br?.str)) {
         const t = document.createElement("span");
-        (t.className = "title", e.append(t), {dir: t.dir, str: t.textContent} = this.#Br);
+        (t.className = "title", e.append(t), {dir: t.dir, str: t.textContent} = this._private_field__Br);
       }
-      if ((t.append(e), this.#Er)) {
+      if ((t.append(e), this._private_field__Er)) {
         const t = document.createElement("time");
         (t.className = "popupDate", t.setAttribute("data-l10n-id", "pdfjs-annotation-date-time-string"), t.setAttribute("data-l10n-args", JSON.stringify({
-          dateObj: this.#Er.valueOf()
-        })), t.dateTime = this.#Er.toISOString(), e.append(t));
+          dateObj: this._private_field__Er.valueOf()
+        })), t.dateTime = this._private_field__Er.toISOString(), e.append(t));
       }
       (Yt({
-        html: this.#Vr || this.#Cr.str,
-        dir: this.#Cr?.dir,
+        html: this._private_field__Vr || this._private_field__Cr.str,
+        dir: this._private_field__Cr?.dir,
         className: "popupContent"
-      }, t), this.#At.append(t));
+      }, t), this._private_field__At.append(t));
     }
-    get #Vr() {
-      const t = this.#he, e = this.#Cr;
-      return !t?.str || e?.str && e.str !== t.str ? null : this.#he.html || null;
+    get _private_field__Vr() {
+      const t = this._private_field__he, e = this._private_field__Cr;
+      return !t?.str || e?.str && e.str !== t.str ? null : this._private_field__he.html || null;
     }
-    get #Gr() {
-      return this.#Vr?.attributes?.style?.fontSize || 0;
+    get _private_field__Gr() {
+      return this._private_field__Vr?.attributes?.style?.fontSize || 0;
     }
-    get #Wr() {
-      return this.#Vr?.attributes?.style?.color || null;
+    get _private_field__Wr() {
+      return this._private_field__Vr?.attributes?.style?.color || null;
     }
-    #qr(t) {
+    _private_field__qr(t) {
       const e = [], i = {
         str: t,
         html: {
@@ -10251,8 +10251,8 @@
         }
       }, s = {
         style: {
-          color: this.#Wr,
-          fontSize: this.#Gr ? `calc(${this.#Gr}px * var(--total-scale-factor))` : ""
+          color: this._private_field__Wr,
+          fontSize: this._private_field__Gr ? `calc(${this._private_field__Gr}px * var(--total-scale-factor))` : ""
         }
       };
       for (const n of t.split("\n")) e.push({
@@ -10262,52 +10262,52 @@
       });
       return i;
     }
-    #nr(t) {
-      t.altKey || t.shiftKey || t.ctrlKey || t.metaKey || ("Enter" === t.key || "Escape" === t.key && this.#Dr) && this.#_r();
+    _private_field__nr(t) {
+      t.altKey || t.shiftKey || t.ctrlKey || t.metaKey || ("Enter" === t.key || "Escape" === t.key && this._private_field__Dr) && this._private_field___r();
     }
     updateEdited({rect: t, popup: e, deleted: i}) {
-      if (this.#U) return (i ? (this.remove(), this.#Ur = null) : e && (e.deleted ? this.remove() : (this.#jr(), this.#Ur = e.text)), void (t && (this.#Lr = null, this.#Hr(), this.#$r())));
-      i || e?.deleted ? this.remove() : (this.#zr(), this.#hr ||= {
-        contentsObj: this.#Cr,
-        richText: this.#he
-      }, t && (this.#M = null), e && e.text && (this.#he = this.#qr(e.text), this.#Er = Rt.toDateObject(e.date), this.#Cr = null), this.#Pr?.remove(), this.#Pr = null);
+      if (this._private_field__U) return (i ? (this.remove(), this._private_field__Ur = null) : e && (e.deleted ? this.remove() : (this._private_field__jr(), this._private_field__Ur = e.text)), void (t && (this._private_field__Lr = null, this._private_field__Hr(), this._private_field__$r())));
+      i || e?.deleted ? this.remove() : (this._private_field__zr(), this._private_field__hr ||= {
+        contentsObj: this._private_field__Cr,
+        richText: this._private_field__he
+      }, t && (this._private_field__M = null), e && e.text && (this._private_field__he = this._private_field__qr(e.text), this._private_field__Er = Rt.toDateObject(e.date), this._private_field__Cr = null), this._private_field__Pr?.remove(), this._private_field__Pr = null);
     }
     resetEdited() {
-      this.#hr && ({contentsObj: this.#Cr, richText: this.#he} = this.#hr, this.#hr = null, this.#Pr?.remove(), this.#Pr = null, this.#M = null);
+      this._private_field__hr && ({contentsObj: this._private_field__Cr, richText: this._private_field__he} = this._private_field__hr, this._private_field__hr = null, this._private_field__Pr?.remove(), this._private_field__Pr = null, this._private_field__M = null);
     }
     remove() {
-      if ((this.#Ir?.abort(), this.#Ir = null, this.#Pr?.remove(), this.#Pr = null, this.#Nr = !1, this.#Dr = !1, this.#Rr?.remove(), this.#Rr = null, this.trigger)) for (const t of this.trigger) t.classList.remove("popupTriggerArea");
+      if ((this._private_field__Ir?.abort(), this._private_field__Ir = null, this._private_field__Pr?.remove(), this._private_field__Pr = null, this._private_field__Nr = !1, this._private_field__Dr = !1, this._private_field__Rr?.remove(), this._private_field__Rr = null, this.trigger)) for (const t of this.trigger) t.classList.remove("popupTriggerArea");
     }
-    #Xr() {
-      if (null !== this.#M) return;
-      const {page: {view: t}, viewport: {rawDims: {pageWidth: e, pageHeight: i, pageX: s, pageY: n}}} = this.#Mr;
-      let r = !!this.#kr, a = r ? this.#kr : this.#Fr;
-      for (const u of this.#Tr) if (!a || null !== ct.intersect(u.data.rect, a)) {
+    _private_field__Xr() {
+      if (null !== this._private_field__M) return;
+      const {page: {view: t}, viewport: {rawDims: {pageWidth: e, pageHeight: i, pageX: s, pageY: n}}} = this._private_field__Mr;
+      let r = !!this._private_field__kr, a = r ? this._private_field__kr : this._private_field__Fr;
+      for (const u of this._private_field__Tr) if (!a || null !== ct.intersect(u.data.rect, a)) {
         (a = u.data.rect, r = !0);
         break;
       }
       const o = ct.normalizeRect([a[0], t[3] - a[1] + t[1], a[2], t[3] - a[3] + t[1]]), l = r ? a[2] - a[0] + 5 : 0, h = o[0] + l, c = o[1];
-      this.#M = [100 * (h - s) / e, 100 * (c - n) / i];
-      const {style: d} = this.#At;
-      (d.left = `${this.#M[0]}%`, d.top = `${this.#M[1]}%`);
+      this._private_field__M = [100 * (h - s) / e, 100 * (c - n) / i];
+      const {style: d} = this._private_field__At;
+      (d.left = `${this._private_field__M[0]}%`, d.top = `${this._private_field__M[1]}%`);
     }
-    #_r() {
-      this.#U ? this.#U.toggleCommentPopup(this, !1) : (this.#Dr = !this.#Dr, this.#Dr ? (this.#Ar(), this.#At.addEventListener("click", this.#xr), this.#At.addEventListener("keydown", this.#br)) : (this.#yr(), this.#At.removeEventListener("click", this.#xr), this.#At.removeEventListener("keydown", this.#br)));
+    _private_field___r() {
+      this._private_field__U ? this._private_field__U.toggleCommentPopup(this, !1) : (this._private_field__Dr = !this._private_field__Dr, this._private_field__Dr ? (this._private_field__Ar(), this._private_field__At.addEventListener("click", this._private_field__xr), this._private_field__At.addEventListener("keydown", this._private_field__br)) : (this._private_field__yr(), this._private_field__At.removeEventListener("click", this._private_field__xr), this._private_field__At.removeEventListener("keydown", this._private_field__br)));
     }
-    #Ar() {
-      (this.#Pr || this.render(), this.isVisible ? this.#Dr && this.#At.classList.add("focused") : (this.#Xr(), this.#At.hidden = !1, this.#At.style.zIndex = parseInt(this.#At.style.zIndex) + 1e3));
+    _private_field__Ar() {
+      (this._private_field__Pr || this.render(), this.isVisible ? this._private_field__Dr && this._private_field__At.classList.add("focused") : (this._private_field__Xr(), this._private_field__At.hidden = !1, this._private_field__At.style.zIndex = parseInt(this._private_field__At.style.zIndex) + 1e3));
     }
-    #yr() {
-      (this.#At.classList.remove("focused"), !this.#Dr && this.isVisible && (this.#At.hidden = !0, this.#At.style.zIndex = parseInt(this.#At.style.zIndex) - 1e3));
+    _private_field__yr() {
+      (this._private_field__At.classList.remove("focused"), !this._private_field__Dr && this.isVisible && (this._private_field__At.hidden = !0, this._private_field__At.style.zIndex = parseInt(this._private_field__At.style.zIndex) - 1e3));
     }
     forceHide() {
-      (this.#Nr = this.isVisible, this.#Nr && (this.#At.hidden = !0));
+      (this._private_field__Nr = this.isVisible, this._private_field__Nr && (this._private_field__At.hidden = !0));
     }
     maybeShow() {
-      this.#U || (this.#zr(), this.#Nr && (this.#Pr || this.#Ar(), this.#Nr = !1, this.#At.hidden = !1));
+      this._private_field__U || (this._private_field__zr(), this._private_field__Nr && (this._private_field__Pr || this._private_field__Ar(), this._private_field__Nr = !1, this._private_field__At.hidden = !1));
     }
     get isVisible() {
-      return !this.#U && !1 === this.#At.hidden;
+      return !this._private_field__U && !1 === this._private_field__At.hidden;
     }
   }
   class an extends Ws {
@@ -10331,7 +10331,7 @@
     }
   }
   class on extends Ws {
-    #Kr = null;
+    _private_field__Kr = null;
     constructor(t) {
       super(t, {
         isRenderable: !0,
@@ -10340,18 +10340,18 @@
     }
     render() {
       this.container.classList.add("lineAnnotation");
-      const {data: t, width: e, height: i} = this, s = this.svgFactory.create(e, i, !0), n = this.#Kr = this.svgFactory.createElement("svg:line");
+      const {data: t, width: e, height: i} = this, s = this.svgFactory.create(e, i, !0), n = this._private_field__Kr = this.svgFactory.createElement("svg:line");
       return (n.setAttribute("x1", t.rect[2] - t.lineCoordinates[0]), n.setAttribute("y1", t.rect[3] - t.lineCoordinates[1]), n.setAttribute("x2", t.rect[2] - t.lineCoordinates[2]), n.setAttribute("y2", t.rect[3] - t.lineCoordinates[3]), n.setAttribute("stroke-width", t.borderStyle.width || 1), n.setAttribute("stroke", "transparent"), n.setAttribute("fill", "transparent"), s.append(n), this.container.append(s), !t.popupRef && this.hasPopupData && this._createPopup(), this.container);
     }
     getElementsToTriggerPopup() {
-      return this.#Kr;
+      return this._private_field__Kr;
     }
     addHighlightArea() {
       this.container.classList.add("highlightArea");
     }
   }
   class ln extends Ws {
-    #Yr = null;
+    _private_field__Yr = null;
     constructor(t) {
       super(t, {
         isRenderable: !0,
@@ -10360,18 +10360,18 @@
     }
     render() {
       this.container.classList.add("squareAnnotation");
-      const {data: t, width: e, height: i} = this, s = this.svgFactory.create(e, i, !0), n = t.borderStyle.width, r = this.#Yr = this.svgFactory.createElement("svg:rect");
+      const {data: t, width: e, height: i} = this, s = this.svgFactory.create(e, i, !0), n = t.borderStyle.width, r = this._private_field__Yr = this.svgFactory.createElement("svg:rect");
       return (r.setAttribute("x", n / 2), r.setAttribute("y", n / 2), r.setAttribute("width", e - n), r.setAttribute("height", i - n), r.setAttribute("stroke-width", n || 1), r.setAttribute("stroke", "transparent"), r.setAttribute("fill", "transparent"), s.append(r), this.container.append(s), !t.popupRef && this.hasPopupData && this._createPopup(), this.container);
     }
     getElementsToTriggerPopup() {
-      return this.#Yr;
+      return this._private_field__Yr;
     }
     addHighlightArea() {
       this.container.classList.add("highlightArea");
     }
   }
   class hn extends Ws {
-    #Qr = null;
+    _private_field__Qr = null;
     constructor(t) {
       super(t, {
         isRenderable: !0,
@@ -10380,18 +10380,18 @@
     }
     render() {
       this.container.classList.add("circleAnnotation");
-      const {data: t, width: e, height: i} = this, s = this.svgFactory.create(e, i, !0), n = t.borderStyle.width, r = this.#Qr = this.svgFactory.createElement("svg:ellipse");
+      const {data: t, width: e, height: i} = this, s = this.svgFactory.create(e, i, !0), n = t.borderStyle.width, r = this._private_field__Qr = this.svgFactory.createElement("svg:ellipse");
       return (r.setAttribute("cx", e / 2), r.setAttribute("cy", i / 2), r.setAttribute("rx", e / 2 - n / 2), r.setAttribute("ry", i / 2 - n / 2), r.setAttribute("stroke-width", n || 1), r.setAttribute("stroke", "transparent"), r.setAttribute("fill", "transparent"), s.append(r), this.container.append(s), !t.popupRef && this.hasPopupData && this._createPopup(), this.container);
     }
     getElementsToTriggerPopup() {
-      return this.#Qr;
+      return this._private_field__Qr;
     }
     addHighlightArea() {
       this.container.classList.add("highlightArea");
     }
   }
   class cn extends Ws {
-    #Jr = null;
+    _private_field__Jr = null;
     constructor(t) {
       (super(t, {
         isRenderable: !0,
@@ -10409,11 +10409,11 @@
         o.push(`${i},${s}`);
       }
       o = o.join(" ");
-      const l = this.#Jr = this.svgFactory.createElement(this.svgElementName);
+      const l = this._private_field__Jr = this.svgFactory.createElement(this.svgElementName);
       return (l.setAttribute("points", o), l.setAttribute("stroke-width", i.width || 1), l.setAttribute("stroke", "transparent"), l.setAttribute("fill", "transparent"), a.append(l), this.container.append(a), !s && this.hasPopupData && this._createPopup(), this.container);
     }
     getElementsToTriggerPopup() {
-      return this.#Jr;
+      return this._private_field__Jr;
     }
     addHighlightArea() {
       this.container.classList.add("highlightArea");
@@ -10436,15 +10436,15 @@
     }
   }
   class pn extends Ws {
-    #Zr = null;
-    #ta = [];
+    _private_field__Zr = null;
+    _private_field__ta = [];
     constructor(t) {
       (super(t, {
         isRenderable: !0,
         ignoreBorder: !0
       }), this.containerClassName = "inkAnnotation", this.svgElementName = "svg:polyline", this.annotationEditorType = "InkHighlight" === this.data.it ? A.HIGHLIGHT : A.INK);
     }
-    #ea(t, e) {
+    _private_field__ea(t, e) {
       switch (t) {
         case 90:
           return {
@@ -10474,25 +10474,25 @@
     }
     render() {
       this.container.classList.add(this.containerClassName);
-      const {data: {rect: t, rotation: e, inkLists: i, borderStyle: s, popupRef: n}} = this, {transform: r, width: a, height: o} = this.#ea(e, t), l = this.svgFactory.create(a, o, !0), h = this.#Zr = this.svgFactory.createElement("svg:g");
+      const {data: {rect: t, rotation: e, inkLists: i, borderStyle: s, popupRef: n}} = this, {transform: r, width: a, height: o} = this._private_field__ea(e, t), l = this.svgFactory.create(a, o, !0), h = this._private_field__Zr = this.svgFactory.createElement("svg:g");
       (l.append(h), h.setAttribute("stroke-width", s.width || 1), h.setAttribute("stroke-linecap", "round"), h.setAttribute("stroke-linejoin", "round"), h.setAttribute("stroke-miterlimit", 10), h.setAttribute("stroke", "transparent"), h.setAttribute("fill", "transparent"), h.setAttribute("transform", r));
       for (let c = 0, d = i.length; c < d; c++) {
         const t = this.svgFactory.createElement(this.svgElementName);
-        (this.#ta.push(t), t.setAttribute("points", i[c].join(",")), h.append(t));
+        (this._private_field__ta.push(t), t.setAttribute("points", i[c].join(",")), h.append(t));
       }
       return (!n && this.hasPopupData && this._createPopup(), this.container.append(l), this._editOnDoubleClick(), this.container);
     }
     updateEdited(t) {
       super.updateEdited(t);
-      const {thickness: e, points: i, rect: s} = t, n = this.#Zr;
-      if ((e >= 0 && n.setAttribute("stroke-width", e || 1), i)) for (let r = 0, a = this.#ta.length; r < a; r++) this.#ta[r].setAttribute("points", i[r].join(","));
+      const {thickness: e, points: i, rect: s} = t, n = this._private_field__Zr;
+      if ((e >= 0 && n.setAttribute("stroke-width", e || 1), i)) for (let r = 0, a = this._private_field__ta.length; r < a; r++) this._private_field__ta[r].setAttribute("points", i[r].join(","));
       if (s) {
-        const {transform: t, width: e, height: i} = this.#ea(this.data.rotation, s);
+        const {transform: t, width: e, height: i} = this._private_field__ea(this.data.rotation, s);
         (n.parentElement.setAttribute("viewBox", `0 0 ${e} ${i}`), n.setAttribute("transform", t));
       }
     }
     getElementsToTriggerPopup() {
-      return this.#ta;
+      return this._private_field__ta;
     }
     addHighlightArea() {
       this.container.classList.add("highlightArea");
@@ -10578,7 +10578,7 @@
     }
   }
   class yn extends Ws {
-    #ia = null;
+    _private_field__ia = null;
     constructor(t) {
       super(t, {
         isRenderable: !0
@@ -10593,39 +10593,39 @@
       this.container.classList.add("fileAttachmentAnnotation");
       const {container: t, data: e} = this;
       let i;
-      (e.hasAppearance || 0 === e.fillAlpha ? i = document.createElement("div") : (i = document.createElement("img"), i.src = `${this.imageResourcesPath}annotation-${(/paperclip/i).test(e.name) ? "paperclip" : "pushpin"}.svg`, e.fillAlpha && e.fillAlpha < 1 && (i.style = `filter: opacity(${Math.round(100 * e.fillAlpha)}%);`)), i.addEventListener("dblclick", this.#sa.bind(this)), this.#ia = i);
+      (e.hasAppearance || 0 === e.fillAlpha ? i = document.createElement("div") : (i = document.createElement("img"), i.src = `${this.imageResourcesPath}annotation-${(/paperclip/i).test(e.name) ? "paperclip" : "pushpin"}.svg`, e.fillAlpha && e.fillAlpha < 1 && (i.style = `filter: opacity(${Math.round(100 * e.fillAlpha)}%);`)), i.addEventListener("dblclick", this._private_field__sa.bind(this)), this._private_field__ia = i);
       const {isMac: s} = lt.platform;
       return (t.addEventListener("keydown", t => {
-        "Enter" === t.key && (s ? t.metaKey : t.ctrlKey) && this.#sa();
+        "Enter" === t.key && (s ? t.metaKey : t.ctrlKey) && this._private_field__sa();
       }), !e.popupRef && this.hasPopupData ? this._createPopup() : i.classList.add("popupTriggerArea"), t.append(i), t);
     }
     getElementsToTriggerPopup() {
-      return this.#ia;
+      return this._private_field__ia;
     }
     addHighlightArea() {
       this.container.classList.add("highlightArea");
     }
-    #sa() {
+    _private_field__sa() {
       this.downloadManager?.openOrDownloadData(this.content, this.filename);
     }
   }
   let wn = class t {
-    #na = null;
-    #ra = null;
-    #B = null;
-    #aa = new Map();
-    #oa = null;
-    #la = null;
+    _private_field__na = null;
+    _private_field__ra = null;
+    _private_field__B = null;
+    _private_field__aa = new Map();
+    _private_field__oa = null;
+    _private_field__la = null;
     constructor({div: t, accessibilityManager: e, annotationCanvasMap: i, annotationEditorUIManager: s, page: n, viewport: r, structTreeLayer: a, commentManager: o, linkService: l, annotationStorage: h}) {
-      (this.div = t, this.#na = e, this.#ra = i, this.#oa = a || null, this.#la = l || null, this.#B = h || new fe(), this.page = n, this.viewport = r, this.zIndex = 0, this._annotationEditorUIManager = s, this._commentManager = o || null);
+      (this.div = t, this._private_field__na = e, this._private_field__ra = i, this._private_field__oa = a || null, this._private_field__la = l || null, this._private_field__B = h || new fe(), this.page = n, this.viewport = r, this.zIndex = 0, this._annotationEditorUIManager = s, this._commentManager = o || null);
     }
     hasEditableAnnotations() {
-      return this.#aa.size > 0;
+      return this._private_field__aa.size > 0;
     }
-    async #ha(t, e, i) {
-      const s = t.firstChild || t, n = s.id = `${mt}${e}`, r = await this.#oa?.getAriaAttributes(n);
+    async _private_field__ha(t, e, i) {
+      const s = t.firstChild || t, n = s.id = `${mt}${e}`, r = await this._private_field__oa?.getAriaAttributes(n);
       if (r) for (const [a, o] of r) s.setAttribute(a, o);
-      i ? i.at(-1).container.after(t) : (this.div.append(t), this.#na?.moveElementInDOM(this.div, t, s, !1));
+      i ? i.at(-1).container.after(t) : (this.div.append(t), this._private_field__na?.moveElementInDOM(this.div, t, s, !1));
     }
     async render(t) {
       const {annotations: e} = t, i = this.div;
@@ -10633,12 +10633,12 @@
       const s = new Map(), n = {
         data: null,
         layer: i,
-        linkService: this.#la,
+        linkService: this._private_field__la,
         downloadManager: t.downloadManager,
         imageResourcesPath: t.imageResourcesPath || "",
         renderForms: !1 !== t.renderForms,
         svgFactory: new js(),
-        annotationStorage: this.#B,
+        annotationStorage: this._private_field__B,
         enableComment: !0 === t.enableComment,
         enableScripting: !0 === t.enableScripting,
         hasJSActions: t.hasJSActions,
@@ -10662,15 +10662,15 @@
           t ? t.push(e) : s.set(r.popupRef, [e]);
         }
         const i = e.render();
-        (r.hidden && (i.style.visibility = "hidden"), await this.#ha(i, r.id, n.elements), e.extraPopupElement?.popup?.renderCommentButton(), e._isEditable && (this.#aa.set(e.data.id, e), this._annotationEditorUIManager?.renderAnnotationElement(e)));
+        (r.hidden && (i.style.visibility = "hidden"), await this._private_field__ha(i, r.id, n.elements), e.extraPopupElement?.popup?.renderCommentButton(), e._isEditable && (this._private_field__aa.set(e.data.id, e), this._annotationEditorUIManager?.renderAnnotationElement(e)));
       }
-      this.#ca();
+      this._private_field__ca();
     }
     async addLinkAnnotations(e) {
       const i = {
         data: null,
         layer: this.div,
-        linkService: this.#la,
+        linkService: this._private_field__la,
         svgFactory: new js(),
         parent: this
       };
@@ -10679,34 +10679,34 @@
         const e = Gs.create(i);
         if (!e.isRenderable) continue;
         const n = e.render();
-        await this.#ha(n, s.id, null);
+        await this._private_field__ha(n, s.id, null);
       }
     }
     update({viewport: t}) {
       const e = this.div;
       (this.viewport = t, Ot(e, {
         rotation: t.rotation
-      }), this.#ca(), e.hidden = !1);
+      }), this._private_field__ca(), e.hidden = !1);
     }
-    #ca() {
-      if (!this.#ra) return;
+    _private_field__ca() {
+      if (!this._private_field__ra) return;
       const t = this.div;
-      for (const [e, i] of this.#ra) {
+      for (const [e, i] of this._private_field__ra) {
         const s = t.querySelector(`[data-annotation-id="${e}"]`);
         if (!s) continue;
         i.className = "annotationContent";
         const {firstChild: n} = s;
         n ? "CANVAS" === n.nodeName ? n.replaceWith(i) : n.classList.contains("annotationContent") ? n.after(i) : n.before(i) : s.append(i);
-        const r = this.#aa.get(e);
+        const r = this._private_field__aa.get(e);
         r && (r._hasNoCanvas ? (this._annotationEditorUIManager?.setMissingCanvas(e, s.id, i), r._hasNoCanvas = !1) : r.canvas = i);
       }
-      this.#ra.clear();
+      this._private_field__ra.clear();
     }
     getEditableAnnotations() {
-      return Array.from(this.#aa.values());
+      return Array.from(this._private_field__aa.values());
     }
     getEditableAnnotation(t) {
-      return this.#aa.get(t);
+      return this._private_field__aa.get(t);
     }
     addFakeAnnotation(t) {
       const {div: e} = this, {id: i, rotation: s} = t, n = new qs({
@@ -10719,10 +10719,10 @@
         layer: e,
         parent: this,
         enableComment: !!this._commentManager,
-        linkService: this.#la,
-        annotationStorage: this.#B
+        linkService: this._private_field__la,
+        annotationStorage: this._private_field__B
       }), r = n.render();
-      return (e.append(r), this.#na?.moveElementInDOM(e, r, r, !1), n.createOrUpdatePopup(), n);
+      return (e.append(r), this._private_field__na?.moveElementInDOM(e, r, r, !1), n.createOrUpdatePopup(), n);
     }
     static get _defaultBorderStyle() {
       return J(this, "_defaultBorderStyle", Object.freeze({
@@ -10737,10 +10737,10 @@
   };
   const An = /\r\n?|\n/g;
   class xn extends he {
-    #da = "";
-    #ua = `${this.id}-editor`;
-    #pa = null;
-    #Gr;
+    _private_field__da = "";
+    _private_field__ua = `${this.id}-editor`;
+    _private_field__pa = null;
+    _private_field__Gr;
     _colorPicker = null;
     static get _keyboardManager() {
       const t = xn.prototype, e = t => t.isEmpty(), i = re.TRANSLATE_SMALL, s = re.TRANSLATE_BIG;
@@ -10776,7 +10776,7 @@
       (super({
         ...t,
         name: "freeTextEditor"
-      }), this.color = t.color || xn._defaultColor || he._defaultLineColor, this.#Gr = t.fontSize || xn._defaultFontSize, this.annotationElementId || this._uiManager.a11yAlert("pdfjs-editor-freetext-added-alert"));
+      }), this.color = t.color || xn._defaultColor || he._defaultLineColor, this._private_field__Gr = t.fontSize || xn._defaultFontSize, this.annotationElementId || this._uiManager.a11yAlert("pdfjs-editor-freetext-added-alert"));
     }
     static initialize(t, e) {
       he.initialize(t, e);
@@ -10795,17 +10795,17 @@
     updateParams(t, e) {
       switch (t) {
         case x.FREETEXT_SIZE:
-          this.#ga(e);
+          this._private_field__ga(e);
           break;
         case x.FREETEXT_COLOR:
-          this.#jr(e);
+          this._private_field__jr(e);
       }
     }
     static get defaultPropertiesToUpdate() {
       return [[x.FREETEXT_SIZE, xn._defaultFontSize], [x.FREETEXT_COLOR, xn._defaultColor || he._defaultLineColor]];
     }
     get propertiesToUpdate() {
-      return [[x.FREETEXT_SIZE, this.#Gr], [x.FREETEXT_COLOR, this.color]];
+      return [[x.FREETEXT_SIZE, this._private_field__Gr], [x.FREETEXT_COLOR, this.color]];
     }
     get toolbarButtons() {
       return (this._colorPicker ||= new Ns(this), [["colorPicker", this._colorPicker]]);
@@ -10813,10 +10813,10 @@
     get colorType() {
       return x.FREETEXT_COLOR;
     }
-    #ga(t) {
+    _private_field__ga(t) {
       const e = t => {
-        (this.editorDiv.style.fontSize = `calc(${t}px * var(--total-scale-factor))`, this.translate(0, -(t - this.#Gr) * this.parentScale), this.#Gr = t, this.#ma());
-      }, i = this.#Gr;
+        (this.editorDiv.style.fontSize = `calc(${t}px * var(--total-scale-factor))`, this.translate(0, -(t - this._private_field__Gr) * this.parentScale), this._private_field__Gr = t, this._private_field__ma());
+      }, i = this._private_field__Gr;
       this.addCommands({
         cmd: e.bind(this, t),
         undo: e.bind(this, i),
@@ -10830,7 +10830,7 @@
     onUpdatedColor() {
       (this.editorDiv.style.color = this.color, this._colorPicker?.update(this.color), super.onUpdatedColor());
     }
-    #jr(t) {
+    _private_field__jr(t) {
       const e = t => {
         (this.color = t, this.onUpdatedColor());
       }, i = this.color;
@@ -10849,15 +10849,15 @@
     }
     getInitialTranslation() {
       const t = this.parentScale;
-      return [-xn._internalPadding * t, -(xn._internalPadding + this.#Gr) * t];
+      return [-xn._internalPadding * t, -(xn._internalPadding + this._private_field__Gr) * t];
     }
     rebuild() {
       this.parent && (super.rebuild(), null !== this.div && (this.isAttachedToDOM || this.parent.add(this)));
     }
     enableEditMode() {
       if (!super.enableEditMode()) return !1;
-      (this.overlayDiv.classList.remove("enabled"), this.editorDiv.contentEditable = !0, this._isDraggable = !1, this.div.removeAttribute("aria-activedescendant"), this.#pa = new AbortController());
-      const t = this._uiManager.combinedSignal(this.#pa);
+      (this.overlayDiv.classList.remove("enabled"), this.editorDiv.contentEditable = !0, this._isDraggable = !1, this.div.removeAttribute("aria-activedescendant"), this._private_field__pa = new AbortController());
+      const t = this._uiManager.combinedSignal(this._private_field__pa);
       return (this.editorDiv.addEventListener("keydown", this.editorDivKeydown.bind(this), {
         signal: t
       }), this.editorDiv.addEventListener("focus", this.editorDivFocus.bind(this), {
@@ -10871,7 +10871,7 @@
       }), !0);
     }
     disableEditMode() {
-      return !!super.disableEditMode() && (this.overlayDiv.classList.add("enabled"), this.editorDiv.contentEditable = !1, this.div.setAttribute("aria-activedescendant", this.#ua), this._isDraggable = !0, this.#pa?.abort(), this.#pa = null, this.div.focus({
+      return !!super.disableEditMode() && (this.overlayDiv.classList.add("enabled"), this.editorDiv.contentEditable = !1, this.div.setAttribute("aria-activedescendant", this._private_field__ua), this._isDraggable = !0, this._private_field__pa?.abort(), this._private_field__pa = null, this.div.focus({
         preventScroll: !0
       }), this.isEditing = !1, this.parent.div.classList.add("freetextEditing"), !0);
     }
@@ -10887,14 +10887,14 @@
     remove() {
       (this.isEditing = !1, this.parent && (this.parent.setEditingState(!0), this.parent.div.classList.add("freetextEditing")), super.remove());
     }
-    #fa() {
+    _private_field__fa() {
       const t = [];
       this.editorDiv.normalize();
       let e = null;
-      for (const i of this.editorDiv.childNodes) e?.nodeType === Node.TEXT_NODE && "BR" === i.nodeName || (t.push(xn.#ba(i)), e = i);
+      for (const i of this.editorDiv.childNodes) e?.nodeType === Node.TEXT_NODE && "BR" === i.nodeName || (t.push(xn._private_field__ba(i)), e = i);
       return t.join("\n");
     }
-    #ma() {
+    _private_field__ma() {
       const [t, e] = this.parentDimensions;
       let i;
       if (this.isAttachedToDOM) i = this.div.getBoundingClientRect(); else {
@@ -10906,10 +10906,10 @@
     commit() {
       if (!this.isInEditMode()) return;
       (super.commit(), this.disableEditMode());
-      const t = this.#da, e = this.#da = this.#fa().trimEnd();
+      const t = this._private_field__da, e = this._private_field__da = this._private_field__fa().trimEnd();
       if (t === e) return;
       const i = t => {
-        (this.#da = t, t ? (this.#va(), this._uiManager.rebuild(this), this.#ma()) : this.remove());
+        (this._private_field__da = t, t ? (this._private_field__va(), this._uiManager.rebuild(this), this._private_field__ma()) : this.remove());
       };
       (this.addCommands({
         cmd: () => {
@@ -10919,7 +10919,7 @@
           i(t);
         },
         mustExec: !1
-      }), this.#ma());
+      }), this._private_field__ma());
     }
     shouldGetKeyboardEvents() {
       return this.isInEditMode();
@@ -10954,9 +10954,9 @@
     render() {
       if (this.div) return this.div;
       let t, e;
-      ((this._isCopy || this.annotationElementId) && (t = this.x, e = this.y), super.render(), this.editorDiv = document.createElement("div"), this.editorDiv.className = "internal", this.editorDiv.setAttribute("id", this.#ua), this.editorDiv.setAttribute("data-l10n-id", "pdfjs-free-text2"), this.editorDiv.setAttribute("data-l10n-attrs", "default-content"), this.enableEditing(), this.editorDiv.contentEditable = !0);
+      ((this._isCopy || this.annotationElementId) && (t = this.x, e = this.y), super.render(), this.editorDiv = document.createElement("div"), this.editorDiv.className = "internal", this.editorDiv.setAttribute("id", this._private_field__ua), this.editorDiv.setAttribute("data-l10n-id", "pdfjs-free-text2"), this.editorDiv.setAttribute("data-l10n-attrs", "default-content"), this.enableEditing(), this.editorDiv.contentEditable = !0);
       const {style: i} = this.editorDiv;
-      if ((i.fontSize = `calc(${this.#Gr}px * var(--total-scale-factor))`, i.color = this.color, this.div.append(this.editorDiv), this.overlayDiv = document.createElement("div"), this.overlayDiv.classList.add("overlay", "enabled"), this.div.append(this.overlayDiv), this._isCopy || this.annotationElementId)) {
+      if ((i.fontSize = `calc(${this._private_field__Gr}px * var(--total-scale-factor))`, i.color = this.color, this.div.append(this.editorDiv), this.overlayDiv = document.createElement("div"), this.overlayDiv.classList.add("overlay", "enabled"), this.div.append(this.overlayDiv), this._isCopy || this.annotationElementId)) {
         const [i, s] = this.parentDimensions;
         if (this.annotationElementId) {
           const {position: n} = this._initialData;
@@ -10979,18 +10979,18 @@
           }
           this.setAt(d * i, u * s, r, a);
         } else this._moveAfterPaste(t, e);
-        (this.#va(), this._isDraggable = !0, this.editorDiv.contentEditable = !1);
+        (this._private_field__va(), this._isDraggable = !0, this.editorDiv.contentEditable = !1);
       } else (this._isDraggable = !1, this.editorDiv.contentEditable = !0);
       return this.div;
     }
-    static #ba(t) {
+    static _private_field__ba(t) {
       return (t.nodeType === Node.TEXT_NODE ? t.nodeValue : t.innerText).replaceAll(An, "");
     }
     editorDivPaste(t) {
       const e = t.clipboardData || window.clipboardData, {types: i} = e;
       if (1 === i.length && "text/plain" === i[0]) return;
       t.preventDefault();
-      const s = xn.#ya(e.getData("text") || "").replaceAll(An, "\n");
+      const s = xn._private_field__ya(e.getData("text") || "").replaceAll(An, "\n");
       if (!s) return;
       const n = window.getSelection();
       if (!n.rangeCount) return;
@@ -11002,14 +11002,14 @@
         const t = a.parentElement;
         if ((h.push(a.nodeValue.slice(o).replaceAll(An, "")), t !== this.editorDiv)) {
           let e = l;
-          for (const i of this.editorDiv.childNodes) i !== t ? e.push(xn.#ba(i)) : e = h;
+          for (const i of this.editorDiv.childNodes) i !== t ? e.push(xn._private_field__ba(i)) : e = h;
         }
         l.push(a.nodeValue.slice(0, o).replaceAll(An, ""));
       } else if (a === this.editorDiv) {
         let t = l, e = 0;
-        for (const i of this.editorDiv.childNodes) (e++ === o && (t = h), t.push(xn.#ba(i)));
+        for (const i of this.editorDiv.childNodes) (e++ === o && (t = h), t.push(xn._private_field__ba(i)));
       }
-      (this.#da = `${l.join("\n")}${s}${h.join("\n")}`, this.#va());
+      (this._private_field__da = `${l.join("\n")}${s}${h.join("\n")}`, this._private_field__va());
       const c = new Range();
       let d = Math.sumPrecise(l.map(t => t.length));
       for (const {firstChild: u} of this.editorDiv.childNodes) if (u.nodeType === Node.TEXT_NODE) {
@@ -11022,16 +11022,16 @@
       }
       (n.removeAllRanges(), n.addRange(c));
     }
-    #va() {
-      if ((this.editorDiv.replaceChildren(), this.#da)) for (const t of this.#da.split("\n")) {
+    _private_field__va() {
+      if ((this.editorDiv.replaceChildren(), this._private_field__da)) for (const t of this._private_field__da.split("\n")) {
         const e = document.createElement("div");
         (e.append(t ? document.createTextNode(t) : document.createElement("br")), this.editorDiv.append(e));
       }
     }
-    #wa() {
-      return this.#da.replaceAll(" ", " ");
+    _private_field__wa() {
+      return this._private_field__da.replaceAll(" ", " ");
     }
-    static #ya(t) {
+    static _private_field__ya(t) {
       return t.replaceAll(" ", " ");
     }
     get contentDiv() {
@@ -11066,19 +11066,19 @@
         };
       }
       const n = await super.deserialize(t, e, i);
-      return (n.#Gr = t.fontSize, n.color = ct.makeHexColor(...t.color), n.#da = xn.#ya(t.value), n._initialData = s, t.comment && n.setCommentData(t), n);
+      return (n._private_field__Gr = t.fontSize, n.color = ct.makeHexColor(...t.color), n._private_field__da = xn._private_field__ya(t.value), n._initialData = s, t.comment && n.setCommentData(t), n);
     }
     serialize(t = !1) {
       if (this.isEmpty()) return null;
       if (this.deleted) return this.serializeDeleted();
       const e = he._colorManager.convert(this.isAttachedToDOM ? getComputedStyle(this.editorDiv).color : this.color), i = Object.assign(super.serialize(t), {
         color: e,
-        fontSize: this.#Gr,
-        value: this.#wa()
+        fontSize: this._private_field__Gr,
+        value: this._private_field__wa()
       });
-      return (this.addComment(i), t ? (i.isCopy = !0, i) : this.annotationElementId && !this.#Aa(i) ? null : (i.id = this.annotationElementId, i));
+      return (this.addComment(i), t ? (i.isCopy = !0, i) : this.annotationElementId && !this._private_field__Aa(i) ? null : (i.id = this.annotationElementId, i));
     }
-    #Aa(t) {
+    _private_field__Aa(t) {
       const {value: e, fontSize: i, color: s, pageIndex: n} = this._initialData;
       return this.hasEditedComment || this._hasBeenMoved || t.value !== e || t.fontSize !== i || t.color.some((t, e) => t !== s[e]) || t.pageIndex !== n;
     }
@@ -11086,15 +11086,15 @@
       const e = super.renderAnnotationElement(t);
       if (!e) return null;
       const {style: i} = e;
-      (i.fontSize = `calc(${this.#Gr}px * var(--total-scale-factor))`, i.color = this.color, e.replaceChildren());
-      for (const s of this.#da.split("\n")) {
+      (i.fontSize = `calc(${this._private_field__Gr}px * var(--total-scale-factor))`, i.color = this.color, e.replaceChildren());
+      for (const s of this._private_field__da.split("\n")) {
         const t = document.createElement("div");
         (t.append(s ? document.createTextNode(s) : document.createElement("br")), e.append(t));
       }
       return (t.updateEdited({
         rect: this.getPDFRect(),
         popup: this._uiManager.hasCommentManager() || this.hasEditedComment ? this.comment : {
-          text: this.#da
+          text: this._private_field__da
         }
       }), e);
     }
@@ -11166,113 +11166,113 @@
   }
   _n.PRECISION = 1e-4;
   class Sn {
-    #xa;
-    #_a = [];
-    #Sa;
-    #Ca;
-    #Ea = [];
-    #Ta = new Float32Array(18);
-    #Ma;
-    #ka;
-    #Da;
-    #Pa;
-    #Ia;
-    #Ra;
-    #La = [];
-    static #Fa = 8;
-    static #Ba = 2;
-    static #Na = Sn.#Fa + Sn.#Ba;
+    _private_field__xa;
+    _private_field___a = [];
+    _private_field__Sa;
+    _private_field__Ca;
+    _private_field__Ea = [];
+    _private_field__Ta = new Float32Array(18);
+    _private_field__Ma;
+    _private_field__ka;
+    _private_field__Da;
+    _private_field__Pa;
+    _private_field__Ia;
+    _private_field__Ra;
+    _private_field__La = [];
     constructor({x: t, y: e}, i, s, n, r, a = 0) {
-      (this.#xa = i, this.#Ra = n * s, this.#Ca = r, this.#Ta.set([NaN, NaN, NaN, NaN, t, e], 6), this.#Sa = a, this.#Pa = Sn.#Fa * s, this.#Da = Sn.#Na * s, this.#Ia = s, this.#La.push(t, e));
+      (this._private_field__xa = i, this._private_field__Ra = n * s, this._private_field__Ca = r, this._private_field__Ta.set([NaN, NaN, NaN, NaN, t, e], 6), this._private_field__Sa = a, this._private_field__Pa = Sn._private_field__Fa * s, this._private_field__Da = Sn._private_field__Na * s, this._private_field__Ia = s, this._private_field__La.push(t, e));
     }
     isEmpty() {
-      return isNaN(this.#Ta[8]);
+      return isNaN(this._private_field__Ta[8]);
     }
-    #Oa() {
-      const t = this.#Ta.subarray(4, 6), e = this.#Ta.subarray(16, 18), [i, s, n, r] = this.#xa;
-      return [(this.#Ma + (t[0] - e[0]) / 2 - i) / n, (this.#ka + (t[1] - e[1]) / 2 - s) / r, (this.#Ma + (e[0] - t[0]) / 2 - i) / n, (this.#ka + (e[1] - t[1]) / 2 - s) / r];
+    _private_field__Oa() {
+      const t = this._private_field__Ta.subarray(4, 6), e = this._private_field__Ta.subarray(16, 18), [i, s, n, r] = this._private_field__xa;
+      return [(this._private_field__Ma + (t[0] - e[0]) / 2 - i) / n, (this._private_field__ka + (t[1] - e[1]) / 2 - s) / r, (this._private_field__Ma + (e[0] - t[0]) / 2 - i) / n, (this._private_field__ka + (e[1] - t[1]) / 2 - s) / r];
     }
     add({x: t, y: e}) {
-      (this.#Ma = t, this.#ka = e);
-      const [i, s, n, r] = this.#xa;
-      let [a, o, l, h] = this.#Ta.subarray(8, 12);
+      (this._private_field__Ma = t, this._private_field__ka = e);
+      const [i, s, n, r] = this._private_field__xa;
+      let [a, o, l, h] = this._private_field__Ta.subarray(8, 12);
       const c = t - l, d = e - h, u = Math.hypot(c, d);
-      if (u < this.#Da) return !1;
-      const p = u - this.#Pa, g = p / u, m = g * c, f = g * d;
+      if (u < this._private_field__Da) return !1;
+      const p = u - this._private_field__Pa, g = p / u, m = g * c, f = g * d;
       let b = a, v = o;
-      (a = l, o = h, l += m, h += f, this.#La?.push(t, e));
-      const y = m / p, w = -f / p * this.#Ra, A = y * this.#Ra;
-      if ((this.#Ta.set(this.#Ta.subarray(2, 8), 0), this.#Ta.set([l + w, h + A], 4), this.#Ta.set(this.#Ta.subarray(14, 18), 12), this.#Ta.set([l - w, h - A], 16), isNaN(this.#Ta[6]))) return (0 === this.#Ea.length && (this.#Ta.set([a + w, o + A], 2), this.#Ea.push(NaN, NaN, NaN, NaN, (a + w - i) / n, (o + A - s) / r), this.#Ta.set([a - w, o - A], 14), this.#_a.push(NaN, NaN, NaN, NaN, (a - w - i) / n, (o - A - s) / r)), this.#Ta.set([b, v, a, o, l, h], 6), !this.isEmpty());
-      this.#Ta.set([b, v, a, o, l, h], 6);
-      return Math.abs(Math.atan2(v - o, b - a) - Math.atan2(f, m)) < Math.PI / 2 ? ([a, o, l, h] = this.#Ta.subarray(2, 6), this.#Ea.push(NaN, NaN, NaN, NaN, ((a + l) / 2 - i) / n, ((o + h) / 2 - s) / r), [a, o, b, v] = this.#Ta.subarray(14, 18), this.#_a.push(NaN, NaN, NaN, NaN, ((b + a) / 2 - i) / n, ((v + o) / 2 - s) / r), !0) : ([b, v, a, o, l, h] = this.#Ta.subarray(0, 6), this.#Ea.push(((b + 5 * a) / 6 - i) / n, ((v + 5 * o) / 6 - s) / r, ((5 * a + l) / 6 - i) / n, ((5 * o + h) / 6 - s) / r, ((a + l) / 2 - i) / n, ((o + h) / 2 - s) / r), [l, h, a, o, b, v] = this.#Ta.subarray(12, 18), this.#_a.push(((b + 5 * a) / 6 - i) / n, ((v + 5 * o) / 6 - s) / r, ((5 * a + l) / 6 - i) / n, ((5 * o + h) / 6 - s) / r, ((a + l) / 2 - i) / n, ((o + h) / 2 - s) / r), !0);
+      (a = l, o = h, l += m, h += f, this._private_field__La?.push(t, e));
+      const y = m / p, w = -f / p * this._private_field__Ra, A = y * this._private_field__Ra;
+      if ((this._private_field__Ta.set(this._private_field__Ta.subarray(2, 8), 0), this._private_field__Ta.set([l + w, h + A], 4), this._private_field__Ta.set(this._private_field__Ta.subarray(14, 18), 12), this._private_field__Ta.set([l - w, h - A], 16), isNaN(this._private_field__Ta[6]))) return (0 === this._private_field__Ea.length && (this._private_field__Ta.set([a + w, o + A], 2), this._private_field__Ea.push(NaN, NaN, NaN, NaN, (a + w - i) / n, (o + A - s) / r), this._private_field__Ta.set([a - w, o - A], 14), this._private_field___a.push(NaN, NaN, NaN, NaN, (a - w - i) / n, (o - A - s) / r)), this._private_field__Ta.set([b, v, a, o, l, h], 6), !this.isEmpty());
+      this._private_field__Ta.set([b, v, a, o, l, h], 6);
+      return Math.abs(Math.atan2(v - o, b - a) - Math.atan2(f, m)) < Math.PI / 2 ? ([a, o, l, h] = this._private_field__Ta.subarray(2, 6), this._private_field__Ea.push(NaN, NaN, NaN, NaN, ((a + l) / 2 - i) / n, ((o + h) / 2 - s) / r), [a, o, b, v] = this._private_field__Ta.subarray(14, 18), this._private_field___a.push(NaN, NaN, NaN, NaN, ((b + a) / 2 - i) / n, ((v + o) / 2 - s) / r), !0) : ([b, v, a, o, l, h] = this._private_field__Ta.subarray(0, 6), this._private_field__Ea.push(((b + 5 * a) / 6 - i) / n, ((v + 5 * o) / 6 - s) / r, ((5 * a + l) / 6 - i) / n, ((5 * o + h) / 6 - s) / r, ((a + l) / 2 - i) / n, ((o + h) / 2 - s) / r), [l, h, a, o, b, v] = this._private_field__Ta.subarray(12, 18), this._private_field___a.push(((b + 5 * a) / 6 - i) / n, ((v + 5 * o) / 6 - s) / r, ((5 * a + l) / 6 - i) / n, ((5 * o + h) / 6 - s) / r, ((a + l) / 2 - i) / n, ((o + h) / 2 - s) / r), !0);
     }
     toSVGPath() {
       if (this.isEmpty()) return "";
-      const t = this.#Ea, e = this.#_a;
-      if (isNaN(this.#Ta[6]) && !this.isEmpty()) return this.#Ua();
+      const t = this._private_field__Ea, e = this._private_field___a;
+      if (isNaN(this._private_field__Ta[6]) && !this.isEmpty()) return this._private_field__Ua();
       const i = [];
       i.push(`M${t[4]} ${t[5]}`);
       for (let s = 6; s < t.length; s += 6) isNaN(t[s]) ? i.push(`L${t[s + 4]} ${t[s + 5]}`) : i.push(`C${t[s]} ${t[s + 1]} ${t[s + 2]} ${t[s + 3]} ${t[s + 4]} ${t[s + 5]}`);
-      this.#za(i);
+      this._private_field__za(i);
       for (let s = e.length - 6; s >= 6; s -= 6) isNaN(e[s]) ? i.push(`L${e[s + 4]} ${e[s + 5]}`) : i.push(`C${e[s]} ${e[s + 1]} ${e[s + 2]} ${e[s + 3]} ${e[s + 4]} ${e[s + 5]}`);
-      return (this.#Ha(i), i.join(" "));
+      return (this._private_field__Ha(i), i.join(" "));
     }
-    #Ua() {
-      const [t, e, i, s] = this.#xa, [n, r, a, o] = this.#Oa();
-      return `M${(this.#Ta[2] - t) / i} ${(this.#Ta[3] - e) / s} L${(this.#Ta[4] - t) / i} ${(this.#Ta[5] - e) / s} L${n} ${r} L${a} ${o} L${(this.#Ta[16] - t) / i} ${(this.#Ta[17] - e) / s} L${(this.#Ta[14] - t) / i} ${(this.#Ta[15] - e) / s} Z`;
+    _private_field__Ua() {
+      const [t, e, i, s] = this._private_field__xa, [n, r, a, o] = this._private_field__Oa();
+      return `M${(this._private_field__Ta[2] - t) / i} ${(this._private_field__Ta[3] - e) / s} L${(this._private_field__Ta[4] - t) / i} ${(this._private_field__Ta[5] - e) / s} L${n} ${r} L${a} ${o} L${(this._private_field__Ta[16] - t) / i} ${(this._private_field__Ta[17] - e) / s} L${(this._private_field__Ta[14] - t) / i} ${(this._private_field__Ta[15] - e) / s} Z`;
     }
-    #Ha(t) {
-      const e = this.#_a;
+    _private_field__Ha(t) {
+      const e = this._private_field___a;
       t.push(`L${e[4]} ${e[5]} Z`);
     }
-    #za(t) {
-      const [e, i, s, n] = this.#xa, r = this.#Ta.subarray(4, 6), a = this.#Ta.subarray(16, 18), [o, l, h, c] = this.#Oa();
+    _private_field__za(t) {
+      const [e, i, s, n] = this._private_field__xa, r = this._private_field__Ta.subarray(4, 6), a = this._private_field__Ta.subarray(16, 18), [o, l, h, c] = this._private_field__Oa();
       t.push(`L${(r[0] - e) / s} ${(r[1] - i) / n} L${o} ${l} L${h} ${c} L${(a[0] - e) / s} ${(a[1] - i) / n}`);
     }
     newFreeDrawOutline(t, e, i, s, n, r) {
       return new Cn(t, e, i, s, n, r);
     }
     getOutlines() {
-      const t = this.#Ea, e = this.#_a, i = this.#Ta, [s, n, r, a] = this.#xa, o = new Float32Array((this.#La?.length ?? 0) + 2);
-      for (let c = 0, d = o.length - 2; c < d; c += 2) (o[c] = (this.#La[c] - s) / r, o[c + 1] = (this.#La[c + 1] - n) / a);
-      if ((o[o.length - 2] = (this.#Ma - s) / r, o[o.length - 1] = (this.#ka - n) / a, isNaN(i[6]) && !this.isEmpty())) return this.#ja(o);
-      const l = new Float32Array(this.#Ea.length + 24 + this.#_a.length);
+      const t = this._private_field__Ea, e = this._private_field___a, i = this._private_field__Ta, [s, n, r, a] = this._private_field__xa, o = new Float32Array((this._private_field__La?.length ?? 0) + 2);
+      for (let c = 0, d = o.length - 2; c < d; c += 2) (o[c] = (this._private_field__La[c] - s) / r, o[c + 1] = (this._private_field__La[c + 1] - n) / a);
+      if ((o[o.length - 2] = (this._private_field__Ma - s) / r, o[o.length - 1] = (this._private_field__ka - n) / a, isNaN(i[6]) && !this.isEmpty())) return this._private_field__ja(o);
+      const l = new Float32Array(this._private_field__Ea.length + 24 + this._private_field___a.length);
       let h = t.length;
       for (let c = 0; c < h; c += 2) isNaN(t[c]) ? l[c] = l[c + 1] = NaN : (l[c] = t[c], l[c + 1] = t[c + 1]);
-      h = this.#$a(l, h);
+      h = this._private_field__$a(l, h);
       for (let c = e.length - 6; c >= 6; c -= 6) for (let t = 0; t < 6; t += 2) isNaN(e[c + t]) ? (l[h] = l[h + 1] = NaN, h += 2) : (l[h] = e[c + t], l[h + 1] = e[c + t + 1], h += 2);
-      return (this.#Va(l, h), this.newFreeDrawOutline(l, o, this.#xa, this.#Ia, this.#Sa, this.#Ca));
+      return (this._private_field__Va(l, h), this.newFreeDrawOutline(l, o, this._private_field__xa, this._private_field__Ia, this._private_field__Sa, this._private_field__Ca));
     }
-    #ja(t) {
-      const e = this.#Ta, [i, s, n, r] = this.#xa, [a, o, l, h] = this.#Oa(), c = new Float32Array(36);
-      return (c.set([NaN, NaN, NaN, NaN, (e[2] - i) / n, (e[3] - s) / r, NaN, NaN, NaN, NaN, (e[4] - i) / n, (e[5] - s) / r, NaN, NaN, NaN, NaN, a, o, NaN, NaN, NaN, NaN, l, h, NaN, NaN, NaN, NaN, (e[16] - i) / n, (e[17] - s) / r, NaN, NaN, NaN, NaN, (e[14] - i) / n, (e[15] - s) / r], 0), this.newFreeDrawOutline(c, t, this.#xa, this.#Ia, this.#Sa, this.#Ca));
+    _private_field__ja(t) {
+      const e = this._private_field__Ta, [i, s, n, r] = this._private_field__xa, [a, o, l, h] = this._private_field__Oa(), c = new Float32Array(36);
+      return (c.set([NaN, NaN, NaN, NaN, (e[2] - i) / n, (e[3] - s) / r, NaN, NaN, NaN, NaN, (e[4] - i) / n, (e[5] - s) / r, NaN, NaN, NaN, NaN, a, o, NaN, NaN, NaN, NaN, l, h, NaN, NaN, NaN, NaN, (e[16] - i) / n, (e[17] - s) / r, NaN, NaN, NaN, NaN, (e[14] - i) / n, (e[15] - s) / r], 0), this.newFreeDrawOutline(c, t, this._private_field__xa, this._private_field__Ia, this._private_field__Sa, this._private_field__Ca));
     }
-    #Va(t, e) {
-      const i = this.#_a;
+    _private_field__Va(t, e) {
+      const i = this._private_field___a;
       return (t.set([NaN, NaN, NaN, NaN, i[4], i[5]], e), e + 6);
     }
-    #$a(t, e) {
-      const i = this.#Ta.subarray(4, 6), s = this.#Ta.subarray(16, 18), [n, r, a, o] = this.#xa, [l, h, c, d] = this.#Oa();
+    _private_field__$a(t, e) {
+      const i = this._private_field__Ta.subarray(4, 6), s = this._private_field__Ta.subarray(16, 18), [n, r, a, o] = this._private_field__xa, [l, h, c, d] = this._private_field__Oa();
       return (t.set([NaN, NaN, NaN, NaN, (i[0] - n) / a, (i[1] - r) / o, NaN, NaN, NaN, NaN, l, h, NaN, NaN, NaN, NaN, c, d, NaN, NaN, NaN, NaN, (s[0] - n) / a, (s[1] - r) / o], e), e + 24);
     }
   }
+  Sn._private_field__Fa = 8;
+  Sn._private_field__Ba = 2;
+  Sn._private_field__Na = Sn._private_field__Fa + Sn._private_field__Ba;
   class Cn extends _n {
-    #xa;
-    #Ga = new Float32Array(4);
-    #Sa;
-    #Ca;
-    #La;
-    #Ia;
-    #Wa;
+    _private_field__xa;
+    _private_field__Ga = new Float32Array(4);
+    _private_field__Sa;
+    _private_field__Ca;
+    _private_field__La;
+    _private_field__Ia;
+    _private_field__Wa;
     constructor(t, e, i, s, n, r) {
-      (super(), this.#Wa = t, this.#La = e, this.#xa = i, this.#Ia = s, this.#Sa = n, this.#Ca = r, this.firstPoint = [NaN, NaN], this.lastPoint = [NaN, NaN], this.#qa(r));
-      const [a, o, l, h] = this.#Ga;
+      (super(), this._private_field__Wa = t, this._private_field__La = e, this._private_field__xa = i, this._private_field__Ia = s, this._private_field__Sa = n, this._private_field__Ca = r, this.firstPoint = [NaN, NaN], this.lastPoint = [NaN, NaN], this._private_field__qa(r));
+      const [a, o, l, h] = this._private_field__Ga;
       for (let c = 0, d = t.length; c < d; c += 2) (t[c] = (t[c] - a) / l, t[c + 1] = (t[c + 1] - o) / h);
       for (let c = 0, d = e.length; c < d; c += 2) (e[c] = (e[c] - a) / l, e[c + 1] = (e[c + 1] - o) / h);
     }
     toSVGPath() {
-      const t = [`M${this.#Wa[4]} ${this.#Wa[5]}`];
-      for (let e = 6, i = this.#Wa.length; e < i; e += 6) isNaN(this.#Wa[e]) ? t.push(`L${this.#Wa[e + 4]} ${this.#Wa[e + 5]}`) : t.push(`C${this.#Wa[e]} ${this.#Wa[e + 1]} ${this.#Wa[e + 2]} ${this.#Wa[e + 3]} ${this.#Wa[e + 4]} ${this.#Wa[e + 5]}`);
+      const t = [`M${this._private_field__Wa[4]} ${this._private_field__Wa[5]}`];
+      for (let e = 6, i = this._private_field__Wa.length; e < i; e += 6) isNaN(this._private_field__Wa[e]) ? t.push(`L${this._private_field__Wa[e + 4]} ${this._private_field__Wa[e + 5]}`) : t.push(`C${this._private_field__Wa[e]} ${this._private_field__Wa[e + 1]} ${this._private_field__Wa[e + 2]} ${this._private_field__Wa[e + 3]} ${this._private_field__Wa[e + 4]} ${this._private_field__Wa[e + 5]}`);
       return (t.push("Z"), t.join(" "));
     }
     serialize([t, e, i, s], n) {
@@ -11280,24 +11280,24 @@
       let o, l;
       switch (n) {
         case 0:
-          (o = _n._rescale(this.#Wa, t, s, r, -a), l = _n._rescale(this.#La, t, s, r, -a));
+          (o = _n._rescale(this._private_field__Wa, t, s, r, -a), l = _n._rescale(this._private_field__La, t, s, r, -a));
           break;
         case 90:
-          (o = _n._rescaleAndSwap(this.#Wa, t, e, r, a), l = _n._rescaleAndSwap(this.#La, t, e, r, a));
+          (o = _n._rescaleAndSwap(this._private_field__Wa, t, e, r, a), l = _n._rescaleAndSwap(this._private_field__La, t, e, r, a));
           break;
         case 180:
-          (o = _n._rescale(this.#Wa, i, e, -r, a), l = _n._rescale(this.#La, i, e, -r, a));
+          (o = _n._rescale(this._private_field__Wa, i, e, -r, a), l = _n._rescale(this._private_field__La, i, e, -r, a));
           break;
         case 270:
-          (o = _n._rescaleAndSwap(this.#Wa, i, s, -r, -a), l = _n._rescaleAndSwap(this.#La, i, s, -r, -a));
+          (o = _n._rescaleAndSwap(this._private_field__Wa, i, s, -r, -a), l = _n._rescaleAndSwap(this._private_field__La, i, s, -r, -a));
       }
       return {
         outline: Array.from(o),
         points: [Array.from(l)]
       };
     }
-    #qa(t) {
-      const e = this.#Wa;
+    _private_field__qa(t) {
+      const e = this._private_field__Wa;
       let i = e[4], s = e[5];
       const n = [i, s, i, s];
       let r = i, a = s, o = i, l = s;
@@ -11306,55 +11306,55 @@
         const t = e[u + 4], d = e[u + 5];
         (isNaN(e[u]) ? (ct.pointBoundingBox(t, d, n), a > d ? (r = t, a = d) : a === d && (r = h(r, t)), l < d ? (o = t, l = d) : l === d && (o = h(o, t))) : (c[0] = c[1] = 1 / 0, c[2] = c[3] = -1 / 0, ct.bezierBoundingBox(i, s, ...e.slice(u, u + 6), c), ct.rectBoundingBox(c[0], c[1], c[2], c[3], n), a > c[1] ? (r = c[0], a = c[1]) : a === c[1] && (r = h(r, c[0])), l < c[3] ? (o = c[2], l = c[3]) : l === c[3] && (o = h(o, c[2]))), i = t, s = d);
       }
-      const d = this.#Ga;
-      (d[0] = n[0] - this.#Sa, d[1] = n[1] - this.#Sa, d[2] = n[2] - n[0] + 2 * this.#Sa, d[3] = n[3] - n[1] + 2 * this.#Sa, this.firstPoint = [r, a], this.lastPoint = [o, l]);
+      const d = this._private_field__Ga;
+      (d[0] = n[0] - this._private_field__Sa, d[1] = n[1] - this._private_field__Sa, d[2] = n[2] - n[0] + 2 * this._private_field__Sa, d[3] = n[3] - n[1] + 2 * this._private_field__Sa, this.firstPoint = [r, a], this.lastPoint = [o, l]);
     }
     get box() {
-      return this.#Ga;
+      return this._private_field__Ga;
     }
     newOutliner(t, e, i, s, n, r = 0) {
       return new Sn(t, e, i, s, n, r);
     }
     getNewOutline(t, e) {
-      const [i, s, n, r] = this.#Ga, [a, o, l, h] = this.#xa, c = n * l, d = r * h, u = i * l + a, p = s * h + o, g = this.newOutliner({
-        x: this.#La[0] * c + u,
-        y: this.#La[1] * d + p
-      }, this.#xa, this.#Ia, t, this.#Ca, e ?? this.#Sa);
-      for (let m = 2; m < this.#La.length; m += 2) g.add({
-        x: this.#La[m] * c + u,
-        y: this.#La[m + 1] * d + p
+      const [i, s, n, r] = this._private_field__Ga, [a, o, l, h] = this._private_field__xa, c = n * l, d = r * h, u = i * l + a, p = s * h + o, g = this.newOutliner({
+        x: this._private_field__La[0] * c + u,
+        y: this._private_field__La[1] * d + p
+      }, this._private_field__xa, this._private_field__Ia, t, this._private_field__Ca, e ?? this._private_field__Sa);
+      for (let m = 2; m < this._private_field__La.length; m += 2) g.add({
+        x: this._private_field__La[m] * c + u,
+        y: this._private_field__La[m + 1] * d + p
       });
       return g.getOutlines();
     }
   }
   class En {
-    #xa;
-    #Xa;
-    #Ka;
-    #Ya = [];
-    #Qa = [];
+    _private_field__xa;
+    _private_field__Xa;
+    _private_field__Ka;
+    _private_field__Ya = [];
+    _private_field__Qa = [];
     constructor(t, e = 0, i = 0, s = !0) {
       const n = [1 / 0, 1 / 0, -1 / 0, -1 / 0], r = 10 ** -4;
       for (const {x: g, y: m, width: f, height: b} of t) {
         const t = Math.floor((g - e) / r) * r, i = Math.ceil((g + f + e) / r) * r, s = Math.floor((m - e) / r) * r, a = Math.ceil((m + b + e) / r) * r, o = [t, s, a, !0], l = [i, s, a, !1];
-        (this.#Ya.push(o, l), ct.rectBoundingBox(t, s, i, a, n));
+        (this._private_field__Ya.push(o, l), ct.rectBoundingBox(t, s, i, a, n));
       }
       const a = n[2] - n[0] + 2 * i, o = n[3] - n[1] + 2 * i, l = n[0] - i, h = n[1] - i;
       let c = s ? -1 / 0 : 1 / 0, d = 1 / 0;
-      const u = this.#Ya.at(s ? -1 : -2), p = [u[0], u[2]];
-      for (const g of this.#Ya) {
+      const u = this._private_field__Ya.at(s ? -1 : -2), p = [u[0], u[2]];
+      for (const g of this._private_field__Ya) {
         const [t, e, i, n] = g;
         (!n && s ? e < d ? (d = e, c = t) : e === d && (c = Math.max(c, t)) : n && !s && (e < d ? (d = e, c = t) : e === d && (c = Math.min(c, t))), g[0] = (t - l) / a, g[1] = (e - h) / o, g[2] = (i - h) / o);
       }
-      (this.#xa = new Float32Array([l, h, a, o]), this.#Xa = [c, d], this.#Ka = p);
+      (this._private_field__xa = new Float32Array([l, h, a, o]), this._private_field__Xa = [c, d], this._private_field__Ka = p);
     }
     getOutlines() {
-      this.#Ya.sort((t, e) => t[0] - e[0] || t[1] - e[1] || t[2] - e[2]);
+      this._private_field__Ya.sort((t, e) => t[0] - e[0] || t[1] - e[1] || t[2] - e[2]);
       const t = [];
-      for (const e of this.#Ya) e[3] ? (t.push(...this.#Ja(e)), this.#Za(e)) : (this.#to(e), t.push(...this.#Ja(e)));
-      return this.#eo(t);
+      for (const e of this._private_field__Ya) e[3] ? (t.push(...this._private_field__Ja(e)), this._private_field__Za(e)) : (this._private_field__to(e), t.push(...this._private_field__Ja(e)));
+      return this._private_field__eo(t);
     }
-    #eo(t) {
+    _private_field__eo(t) {
       const e = [], i = new Set();
       for (const r of t) {
         const [t, i, s] = r;
@@ -11382,10 +11382,10 @@
         }
         n.push(h, c);
       }
-      return new Tn(s, this.#xa, this.#Xa, this.#Ka);
+      return new Tn(s, this._private_field__xa, this._private_field__Xa, this._private_field__Ka);
     }
-    #io(t) {
-      const e = this.#Qa;
+    _private_field__io(t) {
+      const e = this._private_field__Qa;
       let i = 0, s = e.length - 1;
       for (; i <= s; ) {
         const n = i + s >> 1, r = e[n][0];
@@ -11394,27 +11394,27 @@
       }
       return s + 1;
     }
-    #Za([, t, e]) {
-      const i = this.#io(t);
-      this.#Qa.splice(i, 0, [t, e]);
+    _private_field__Za([, t, e]) {
+      const i = this._private_field__io(t);
+      this._private_field__Qa.splice(i, 0, [t, e]);
     }
-    #to([, t, e]) {
-      const i = this.#io(t);
-      for (let s = i; s < this.#Qa.length; s++) {
-        const [i, n] = this.#Qa[s];
+    _private_field__to([, t, e]) {
+      const i = this._private_field__io(t);
+      for (let s = i; s < this._private_field__Qa.length; s++) {
+        const [i, n] = this._private_field__Qa[s];
         if (i !== t) break;
-        if (i === t && n === e) return void this.#Qa.splice(s, 1);
+        if (i === t && n === e) return void this._private_field__Qa.splice(s, 1);
       }
       for (let s = i - 1; s >= 0; s--) {
-        const [i, n] = this.#Qa[s];
+        const [i, n] = this._private_field__Qa[s];
         if (i !== t) break;
-        if (i === t && n === e) return void this.#Qa.splice(s, 1);
+        if (i === t && n === e) return void this._private_field__Qa.splice(s, 1);
       }
     }
-    #Ja(t) {
-      const [e, i, s] = t, n = [[e, i, s]], r = this.#io(s);
+    _private_field__Ja(t) {
+      const [e, i, s] = t, n = [[e, i, s]], r = this._private_field__io(s);
       for (let a = 0; a < r; a++) {
-        const [t, i] = this.#Qa[a];
+        const [t, i] = this._private_field__Qa[a];
         for (let s = 0, r = n.length; s < r; s++) {
           const [, a, o] = n[s];
           if (!(i <= a || o <= t)) if (a >= t) if (o > i) n[s][1] = i; else {
@@ -11427,14 +11427,14 @@
     }
   }
   class Tn extends _n {
-    #xa;
-    #so;
+    _private_field__xa;
+    _private_field__so;
     constructor(t, e, i, s) {
-      (super(), this.#so = t, this.#xa = e, this.firstPoint = i, this.lastPoint = s);
+      (super(), this._private_field__so = t, this._private_field__xa = e, this.firstPoint = i, this.lastPoint = s);
     }
     toSVGPath() {
       const t = [];
-      for (const e of this.#so) {
+      for (const e of this._private_field__so) {
         let [i, s] = e;
         t.push(`M${i} ${s}`);
         for (let n = 2; n < e.length; n += 2) {
@@ -11447,7 +11447,7 @@
     }
     serialize([t, e, i, s], n) {
       const r = [], a = i - t, o = s - e;
-      for (const l of this.#so) {
+      for (const l of this._private_field__so) {
         const e = new Array(l.length);
         for (let i = 0; i < l.length; i += 2) (e[i] = t + l[i] * a, e[i + 1] = s - l[i + 1] * o);
         r.push(e);
@@ -11455,7 +11455,7 @@
       return r;
     }
     get box() {
-      return this.#xa;
+      return this._private_field__xa;
     }
     get classNamesForOutlining() {
       return ["highlightOutline"];
@@ -11472,24 +11472,24 @@
     }
   }
   class Dn extends he {
-    #no = null;
-    #ro = 0;
-    #ao;
-    #oo = null;
-    #n = null;
-    #lo = null;
-    #ho = null;
-    #co = 0;
-    #do = null;
-    #uo = null;
-    #A = null;
-    #po = !1;
-    #Xa = null;
-    #Ka = null;
-    #go = null;
-    #ce = "";
-    #Ra;
-    #mo = "";
+    _private_field__no = null;
+    _private_field__ro = 0;
+    _private_field__ao;
+    _private_field__oo = null;
+    _private_field__n = null;
+    _private_field__lo = null;
+    _private_field__ho = null;
+    _private_field__co = 0;
+    _private_field__do = null;
+    _private_field__uo = null;
+    _private_field__A = null;
+    _private_field__po = !1;
+    _private_field__Xa = null;
+    _private_field__Ka = null;
+    _private_field__go = null;
+    _private_field__ce = "";
+    _private_field__Ra;
+    _private_field__mo = "";
     static get _keyboardManager() {
       const t = Dn.prototype;
       return J(this, "_keyboardManager", new se([[["ArrowLeft", "mac+ArrowLeft"], t._moveCaret, {
@@ -11506,15 +11506,15 @@
       (super({
         ...t,
         name: "highlightEditor"
-      }), this.color = t.color || Dn._defaultColor, this.#Ra = t.thickness || Dn._defaultThickness, this.opacity = t.opacity || Dn._defaultOpacity, this.#ao = t.boxes || null, this.#mo = t.methodOfCreation || "", this.#ce = t.text || "", this._isDraggable = !1, this.defaultL10nId = "pdfjs-editor-highlight-editor", t.highlightId > -1 ? (this.#po = !0, this.#fo(t), this.#bo()) : this.#ao && (this.#no = t.anchorNode, this.#ro = t.anchorOffset, this.#ho = t.focusNode, this.#co = t.focusOffset, this.#vo(), this.#bo(), this.rotate(this.rotation)), this.annotationElementId || this._uiManager.a11yAlert("pdfjs-editor-highlight-added-alert"));
+      }), this.color = t.color || Dn._defaultColor, this._private_field__Ra = t.thickness || Dn._defaultThickness, this.opacity = t.opacity || Dn._defaultOpacity, this._private_field__ao = t.boxes || null, this._private_field__mo = t.methodOfCreation || "", this._private_field__ce = t.text || "", this._isDraggable = !1, this.defaultL10nId = "pdfjs-editor-highlight-editor", t.highlightId > -1 ? (this._private_field__po = !0, this._private_field__fo(t), this._private_field__bo()) : this._private_field__ao && (this._private_field__no = t.anchorNode, this._private_field__ro = t.anchorOffset, this._private_field__ho = t.focusNode, this._private_field__co = t.focusOffset, this._private_field__vo(), this._private_field__bo(), this.rotate(this.rotation)), this.annotationElementId || this._uiManager.a11yAlert("pdfjs-editor-highlight-added-alert"));
     }
     get telemetryInitialData() {
       return {
         action: "added",
-        type: this.#po ? "free_highlight" : "highlight",
+        type: this._private_field__po ? "free_highlight" : "highlight",
         color: this._uiManager.getNonHCMColorName(this.color),
-        thickness: this.#Ra,
-        methodOfCreation: this.#mo
+        thickness: this._private_field__Ra,
+        methodOfCreation: this._private_field__mo
       };
     }
     get telemetryFinalData() {
@@ -11528,43 +11528,43 @@
         numberOfColors: t.get("color").size
       };
     }
-    #vo() {
-      const t = new En(this.#ao, .001);
-      (this.#uo = t.getOutlines(), [this.x, this.y, this.width, this.height] = this.#uo.box);
-      const e = new En(this.#ao, .0025, .001, "ltr" === this._uiManager.direction);
-      this.#lo = e.getOutlines();
-      const {firstPoint: i} = this.#uo;
-      this.#Xa = [(i[0] - this.x) / this.width, (i[1] - this.y) / this.height];
-      const {lastPoint: s} = this.#lo;
-      this.#Ka = [(s[0] - this.x) / this.width, (s[1] - this.y) / this.height];
+    _private_field__vo() {
+      const t = new En(this._private_field__ao, .001);
+      (this._private_field__uo = t.getOutlines(), [this.x, this.y, this.width, this.height] = this._private_field__uo.box);
+      const e = new En(this._private_field__ao, .0025, .001, "ltr" === this._uiManager.direction);
+      this._private_field__lo = e.getOutlines();
+      const {firstPoint: i} = this._private_field__uo;
+      this._private_field__Xa = [(i[0] - this.x) / this.width, (i[1] - this.y) / this.height];
+      const {lastPoint: s} = this._private_field__lo;
+      this._private_field__Ka = [(s[0] - this.x) / this.width, (s[1] - this.y) / this.height];
     }
-    #fo({highlightOutlines: t, highlightId: e, clipPathId: i}) {
-      this.#uo = t;
-      if ((this.#lo = t.getNewOutline(this.#Ra / 2 + 1.5, .0025), e >= 0)) (this.#A = e, this.#oo = i, this.parent.drawLayer.finalizeDraw(e, {
+    _private_field__fo({highlightOutlines: t, highlightId: e, clipPathId: i}) {
+      this._private_field__uo = t;
+      if ((this._private_field__lo = t.getNewOutline(this._private_field__Ra / 2 + 1.5, .0025), e >= 0)) (this._private_field__A = e, this._private_field__oo = i, this.parent.drawLayer.finalizeDraw(e, {
         bbox: t.box,
         path: {
           d: t.toSVGPath()
         }
-      }), this.#go = this.parent.drawLayer.drawOutline({
+      }), this._private_field__go = this.parent.drawLayer.drawOutline({
         rootClass: {
           highlightOutline: !0,
           free: !0
         },
-        bbox: this.#lo.box,
+        bbox: this._private_field__lo.box,
         path: {
-          d: this.#lo.toSVGPath()
+          d: this._private_field__lo.toSVGPath()
         }
       }, !0)); else if (this.parent) {
         const e = this.parent.viewport.rotation;
-        (this.parent.drawLayer.updateProperties(this.#A, {
-          bbox: Dn.#yo(this.#uo.box, (e - this.rotation + 360) % 360),
+        (this.parent.drawLayer.updateProperties(this._private_field__A, {
+          bbox: Dn._private_field__yo(this._private_field__uo.box, (e - this.rotation + 360) % 360),
           path: {
             d: t.toSVGPath()
           }
-        }), this.parent.drawLayer.updateProperties(this.#go, {
-          bbox: Dn.#yo(this.#lo.box, e),
+        }), this.parent.drawLayer.updateProperties(this._private_field__go, {
+          bbox: Dn._private_field__yo(this._private_field__lo.box, e),
           path: {
-            d: this.#lo.toSVGPath()
+            d: this._private_field__lo.toSVGPath()
           }
         }));
       }
@@ -11590,9 +11590,9 @@
           }
       }
       const {firstPoint: o} = t;
-      this.#Xa = [(o[0] - s) / r, (o[1] - n) / a];
-      const {lastPoint: l} = this.#lo;
-      this.#Ka = [(l[0] - s) / r, (l[1] - n) / a];
+      this._private_field__Xa = [(o[0] - s) / r, (o[1] - n) / a];
+      const {lastPoint: l} = this._private_field__lo;
+      this._private_field__Ka = [(l[0] - s) / r, (l[1] - n) / a];
     }
     static initialize(t, e) {
       (he.initialize(t, e), Dn._defaultColor ||= e.highlightColors?.values().next().value || "#fff066");
@@ -11608,35 +11608,35 @@
     }
     translateInPage(t, e) {}
     get toolbarPosition() {
-      return this.#Ka;
+      return this._private_field__Ka;
     }
     get commentButtonPosition() {
-      return this.#Xa;
+      return this._private_field__Xa;
     }
     updateParams(t, e) {
       switch (t) {
         case x.HIGHLIGHT_COLOR:
-          this.#jr(e);
+          this._private_field__jr(e);
           break;
         case x.HIGHLIGHT_THICKNESS:
-          this.#wo(e);
+          this._private_field__wo(e);
       }
     }
     static get defaultPropertiesToUpdate() {
       return [[x.HIGHLIGHT_COLOR, Dn._defaultColor], [x.HIGHLIGHT_THICKNESS, Dn._defaultThickness]];
     }
     get propertiesToUpdate() {
-      return [[x.HIGHLIGHT_COLOR, this.color || Dn._defaultColor], [x.HIGHLIGHT_THICKNESS, this.#Ra || Dn._defaultThickness], [x.HIGHLIGHT_FREE, this.#po]];
+      return [[x.HIGHLIGHT_COLOR, this.color || Dn._defaultColor], [x.HIGHLIGHT_THICKNESS, this._private_field__Ra || Dn._defaultThickness], [x.HIGHLIGHT_FREE, this._private_field__po]];
     }
     onUpdatedColor() {
-      (this.parent?.drawLayer.updateProperties(this.#A, {
+      (this.parent?.drawLayer.updateProperties(this._private_field__A, {
         root: {
           fill: this.color,
           "fill-opacity": this.opacity
         }
-      }), this.#n?.updateColor(this.color), super.onUpdatedColor());
+      }), this._private_field__n?.updateColor(this.color), super.onUpdatedColor());
     }
-    #jr(t) {
+    _private_field__jr(t) {
       const e = (t, e) => {
         (this.color = t, this.opacity = e, this.onUpdatedColor());
       }, i = this.color, s = this.opacity;
@@ -11653,9 +11653,9 @@
         color: this._uiManager.getNonHCMColorName(t)
       }, !0));
     }
-    #wo(t) {
-      const e = this.#Ra, i = t => {
-        (this.#Ra = t, this.#Ao(t));
+    _private_field__wo(t) {
+      const e = this._private_field__Ra, i = t => {
+        (this._private_field__Ra = t, this._private_field__Ao(t));
       };
       (this.addCommands({
         cmd: i.bind(this, t),
@@ -11672,7 +11672,7 @@
     }
     get toolbarButtons() {
       if (this._uiManager.highlightColors) {
-        return [["colorPicker", this.#n = new Bs({
+        return [["colorPicker", this._private_field__n = new Bs({
           editor: this
         })]];
       }
@@ -11685,40 +11685,40 @@
       (super.enableEditing(), this.div.classList.toggle("disabled", !1));
     }
     fixAndSetPosition() {
-      return super.fixAndSetPosition(this.#xo());
+      return super.fixAndSetPosition(this._private_field__xo());
     }
     getBaseTranslation() {
       return [0, 0];
     }
     getRect(t, e) {
-      return super.getRect(t, e, this.#xo());
+      return super.getRect(t, e, this._private_field__xo());
     }
     onceAdded(t) {
       (this.annotationElementId || this.parent.addUndoableEditor(this), t && this.div.focus());
     }
     remove() {
-      (this.#_o(), this._reportTelemetry({
+      (this._private_field___o(), this._reportTelemetry({
         action: "deleted"
       }), super.remove());
     }
     rebuild() {
-      this.parent && (super.rebuild(), null !== this.div && (this.#bo(), this.isAttachedToDOM || this.parent.add(this)));
+      this.parent && (super.rebuild(), null !== this.div && (this._private_field__bo(), this.isAttachedToDOM || this.parent.add(this)));
     }
     setParent(t) {
       let e = !1;
-      (this.parent && !t ? this.#_o() : t && (this.#bo(t), e = !this.parent && this.div?.classList.contains("selectedEditor")), super.setParent(t), this.show(this._isVisible), e && this.select());
+      (this.parent && !t ? this._private_field___o() : t && (this._private_field__bo(t), e = !this.parent && this.div?.classList.contains("selectedEditor")), super.setParent(t), this.show(this._isVisible), e && this.select());
     }
-    #Ao(t) {
-      this.#po && (this.#fo({
-        highlightOutlines: this.#uo.getNewOutline(t / 2)
+    _private_field__Ao(t) {
+      this._private_field__po && (this._private_field__fo({
+        highlightOutlines: this._private_field__uo.getNewOutline(t / 2)
       }), this.fixAndSetPosition(), this.setDims(this.width, this.height));
     }
-    #_o() {
-      null !== this.#A && this.parent && (this.parent.drawLayer.remove(this.#A), this.#A = null, this.parent.drawLayer.remove(this.#go), this.#go = null);
+    _private_field___o() {
+      null !== this._private_field__A && this.parent && (this.parent.drawLayer.remove(this._private_field__A), this._private_field__A = null, this.parent.drawLayer.remove(this._private_field__go), this._private_field__go = null);
     }
-    #bo(t = this.parent) {
-      null === this.#A && ({id: this.#A, clipPathId: this.#oo} = t.drawLayer.draw({
-        bbox: this.#uo.box,
+    _private_field__bo(t = this.parent) {
+      null === this._private_field__A && ({id: this._private_field__A, clipPathId: this._private_field__oo} = t.drawLayer.draw({
+        bbox: this._private_field__uo.box,
         root: {
           viewBox: "0 0 1 1",
           fill: this.color,
@@ -11726,23 +11726,23 @@
         },
         rootClass: {
           highlight: !0,
-          free: this.#po
+          free: this._private_field__po
         },
         path: {
-          d: this.#uo.toSVGPath()
+          d: this._private_field__uo.toSVGPath()
         }
-      }, !1, !0), this.#go = t.drawLayer.drawOutline({
+      }, !1, !0), this._private_field__go = t.drawLayer.drawOutline({
         rootClass: {
           highlightOutline: !0,
-          free: this.#po
+          free: this._private_field__po
         },
-        bbox: this.#lo.box,
+        bbox: this._private_field__lo.box,
         path: {
-          d: this.#lo.toSVGPath()
+          d: this._private_field__lo.toSVGPath()
         }
-      }, this.#po), this.#do && (this.#do.style.clipPath = this.#oo));
+      }, this._private_field__po), this._private_field__do && (this._private_field__do.style.clipPath = this._private_field__oo));
     }
-    static #yo([t, e, i, s], n) {
+    static _private_field__yo([t, e, i, s], n) {
       switch (n) {
         case 90:
           return [1 - e - s, t, s, i];
@@ -11756,13 +11756,13 @@
     rotate(t) {
       const {drawLayer: e} = this.parent;
       let i;
-      (this.#po ? (t = (t - this.rotation + 360) % 360, i = Dn.#yo(this.#uo.box, t)) : i = Dn.#yo([this.x, this.y, this.width, this.height], t), e.updateProperties(this.#A, {
+      (this._private_field__po ? (t = (t - this.rotation + 360) % 360, i = Dn._private_field__yo(this._private_field__uo.box, t)) : i = Dn._private_field__yo([this.x, this.y, this.width, this.height], t), e.updateProperties(this._private_field__A, {
         bbox: i,
         root: {
           "data-main-rotation": t
         }
-      }), e.updateProperties(this.#go, {
-        bbox: Dn.#yo(this.#lo.box, t),
+      }), e.updateProperties(this._private_field__go, {
+        bbox: Dn._private_field__yo(this._private_field__lo.box, t),
         root: {
           "data-main-rotation": t
         }
@@ -11771,47 +11771,47 @@
     render() {
       if (this.div) return this.div;
       const t = super.render();
-      (this.#ce && (t.setAttribute("aria-label", this.#ce), t.setAttribute("role", "mark")), this.#po ? t.classList.add("free") : this.div.addEventListener("keydown", this.#So.bind(this), {
+      (this._private_field__ce && (t.setAttribute("aria-label", this._private_field__ce), t.setAttribute("role", "mark")), this._private_field__po ? t.classList.add("free") : this.div.addEventListener("keydown", this._private_field__So.bind(this), {
         signal: this._uiManager._signal
       }));
-      const e = this.#do = document.createElement("div");
-      return (t.append(e), e.setAttribute("aria-hidden", "true"), e.className = "internal", e.style.clipPath = this.#oo, this.setDims(this.width, this.height), Zt(this, this.#do, ["pointerover", "pointerleave"]), this.enableEditing(), t);
+      const e = this._private_field__do = document.createElement("div");
+      return (t.append(e), e.setAttribute("aria-hidden", "true"), e.className = "internal", e.style.clipPath = this._private_field__oo, this.setDims(this.width, this.height), Zt(this, this._private_field__do, ["pointerover", "pointerleave"]), this.enableEditing(), t);
     }
     pointerover() {
-      this.isSelected || this.parent?.drawLayer.updateProperties(this.#go, {
+      this.isSelected || this.parent?.drawLayer.updateProperties(this._private_field__go, {
         rootClass: {
           hovered: !0
         }
       });
     }
     pointerleave() {
-      this.isSelected || this.parent?.drawLayer.updateProperties(this.#go, {
+      this.isSelected || this.parent?.drawLayer.updateProperties(this._private_field__go, {
         rootClass: {
           hovered: !1
         }
       });
     }
-    #So(t) {
+    _private_field__So(t) {
       Dn._keyboardManager.exec(this, t);
     }
     _moveCaret(t) {
       switch ((this.parent.unselect(this), t)) {
         case 0:
         case 2:
-          this.#Co(!0);
+          this._private_field__Co(!0);
           break;
         case 1:
         case 3:
-          this.#Co(!1);
+          this._private_field__Co(!1);
       }
     }
-    #Co(t) {
-      if (!this.#no) return;
+    _private_field__Co(t) {
+      if (!this._private_field__no) return;
       const e = window.getSelection();
-      t ? e.setPosition(this.#no, this.#ro) : e.setPosition(this.#ho, this.#co);
+      t ? e.setPosition(this._private_field__no, this._private_field__ro) : e.setPosition(this._private_field__ho, this._private_field__co);
     }
     select() {
-      (super.select(), this.#go && this.parent?.drawLayer.updateProperties(this.#go, {
+      (super.select(), this._private_field__go && this.parent?.drawLayer.updateProperties(this._private_field__go, {
         rootClass: {
           hovered: !1,
           selected: !0
@@ -11819,32 +11819,32 @@
       }));
     }
     unselect() {
-      (super.unselect(), this.#go && (this.parent?.drawLayer.updateProperties(this.#go, {
+      (super.unselect(), this._private_field__go && (this.parent?.drawLayer.updateProperties(this._private_field__go, {
         rootClass: {
           selected: !1
         }
-      }), this.#po || this.#Co(!1)));
+      }), this._private_field__po || this._private_field__Co(!1)));
     }
     get _mustFixPosition() {
-      return !this.#po;
+      return !this._private_field__po;
     }
     show(t = this._isVisible) {
-      (super.show(t), this.parent && (this.parent.drawLayer.updateProperties(this.#A, {
+      (super.show(t), this.parent && (this.parent.drawLayer.updateProperties(this._private_field__A, {
         rootClass: {
           hidden: !t
         }
-      }), this.parent.drawLayer.updateProperties(this.#go, {
+      }), this.parent.drawLayer.updateProperties(this._private_field__go, {
         rootClass: {
           hidden: !t
         }
       })));
     }
-    #xo() {
-      return this.#po ? this.rotation : 0;
+    _private_field__xo() {
+      return this._private_field__po ? this.rotation : 0;
     }
-    #Eo() {
-      if (this.#po) return null;
-      const [t, e] = this.pageDimensions, [i, s] = this.pageTranslation, n = this.#ao, r = new Float32Array(8 * n.length);
+    _private_field__Eo() {
+      if (this._private_field__po) return null;
+      const [t, e] = this.pageDimensions, [i, s] = this.pageTranslation, n = this._private_field__ao, r = new Float32Array(8 * n.length);
       let a = 0;
       for (const {x: o, y: l, width: h, height: c} of n) {
         const n = o * t + i, d = (1 - l) * e + s;
@@ -11852,12 +11852,12 @@
       }
       return r;
     }
-    #To(t) {
-      return this.#uo.serialize(t, this.#xo());
+    _private_field__To(t) {
+      return this._private_field__uo.serialize(t, this._private_field__xo());
     }
     static startHighlighting(t, e, {target: i, x: s, y: n}) {
       const {x: r, y: a, width: o, height: l} = i.getBoundingClientRect(), h = new AbortController(), c = t.combinedSignal(h), d = e => {
-        (h.abort(), this.#Mo(t, e));
+        (h.abort(), this._private_field__Mo(t, e));
       };
       (window.addEventListener("blur", d, {
         signal: c
@@ -11869,7 +11869,7 @@
         signal: c
       }), window.addEventListener("contextmenu", Pt, {
         signal: c
-      }), i.addEventListener("pointermove", this.#ko.bind(this, t), {
+      }), i.addEventListener("pointermove", this._private_field__ko.bind(this, t), {
         signal: c
       }), this._freeHighlight = new Mn({
         x: s,
@@ -11890,14 +11890,14 @@
         }
       }, !0, !0));
     }
-    static #ko(t, e) {
+    static _private_field__ko(t, e) {
       this._freeHighlight.add(e) && t.drawLayer.updateProperties(this._freeHighlightId, {
         path: {
           d: this._freeHighlight.toSVGPath()
         }
       });
     }
-    static #Mo(t, e) {
+    static _private_field__Mo(t, e) {
       (this._freeHighlight.isEmpty() ? t.drawLayer.remove(this._freeHighlightId) : t.createAndAddNewEditor(e, !1, {
         highlightId: this._freeHighlightId,
         highlightOutlines: this._freeHighlight.getOutlines(),
@@ -11949,23 +11949,23 @@
         };
       }
       const {color: n, quadPoints: r, inkLists: a, opacity: o} = t, l = await super.deserialize(t, e, i);
-      (l.color = ct.makeHexColor(...n), l.opacity = o || 1, a && (l.#Ra = t.thickness), l._initialData = s, t.comment && l.setCommentData(t));
+      (l.color = ct.makeHexColor(...n), l.opacity = o || 1, a && (l._private_field__Ra = t.thickness), l._initialData = s, t.comment && l.setCommentData(t));
       const [h, c] = l.pageDimensions, [d, u] = l.pageTranslation;
       if (r) {
-        const t = l.#ao = [];
+        const t = l._private_field__ao = [];
         for (let e = 0; e < r.length; e += 8) t.push({
           x: (r[e] - d) / h,
           y: 1 - (r[e + 1] - u) / c,
           width: (r[e + 2] - r[e]) / h,
           height: (r[e + 1] - r[e + 5]) / c
         });
-        (l.#vo(), l.#bo(), l.rotate(l.rotation));
+        (l._private_field__vo(), l._private_field__bo(), l.rotate(l.rotation));
       } else if (a) {
-        l.#po = !0;
+        l._private_field__po = !0;
         const t = a[0], i = {
           x: t[0] - d,
           y: c - (t[1] - u)
-        }, s = new Mn(i, [0, 0, h, c], 1, l.#Ra / 2, !0, .001);
+        }, s = new Mn(i, [0, 0, h, c], 1, l._private_field__Ra / 2, !0, .001);
         for (let e = 0, a = t.length; e < a; e += 2) (i.x = t[e] - d, i.y = c - (t[e + 1] - u), s.add(i));
         const {id: n, clipPathId: r} = e.drawLayer.draw({
           bbox: [0, 0, 1, 1],
@@ -11982,11 +11982,11 @@
             d: s.toSVGPath()
           }
         }, !0, !0);
-        (l.#fo({
+        (l._private_field__fo({
           highlightOutlines: s.getOutlines(),
           highlightId: n,
           clipPathId: r
-        }), l.#bo(), l.rotate(l.parentRotation));
+        }), l._private_field__bo(), l.rotate(l.parentRotation));
       }
       return l;
     }
@@ -11997,12 +11997,12 @@
       return (Object.assign(i, {
         color: e,
         opacity: this.opacity,
-        thickness: this.#Ra,
-        quadPoints: this.#Eo(),
-        outlines: this.#To(i.rect)
-      }), this.addComment(i), this.annotationElementId && !this.#Aa(i) ? null : (i.id = this.annotationElementId, i));
+        thickness: this._private_field__Ra,
+        quadPoints: this._private_field__Eo(),
+        outlines: this._private_field__To(i.rect)
+      }), this.addComment(i), this.annotationElementId && !this._private_field__Aa(i) ? null : (i.id = this.annotationElementId, i));
     }
-    #Aa(t) {
+    _private_field__Aa(t) {
       const {color: e} = this._initialData;
       return this.hasEditedComment || t.color.some((t, i) => t !== e[i]);
     }
@@ -12025,7 +12025,7 @@
   Dn._freeHighlight = null;
   Dn._freeHighlightClipId = "";
   class Pn {
-    #Do = Object.create(null);
+    _private_field__Do = Object.create(null);
     updateProperty(t, e) {
       (this[t] = e, this.updateSVGProperty(t, e));
     }
@@ -12033,16 +12033,16 @@
       if (t) for (const [e, i] of Object.entries(t)) e.startsWith("_") || this.updateProperty(e, i);
     }
     updateSVGProperty(t, e) {
-      this.#Do[t] = e;
+      this._private_field__Do[t] = e;
     }
     toSVGProperties() {
-      const t = this.#Do;
-      return (this.#Do = Object.create(null), {
+      const t = this._private_field__Do;
+      return (this._private_field__Do = Object.create(null), {
         root: t
       });
     }
     reset() {
-      this.#Do = Object.create(null);
+      this._private_field__Do = Object.create(null);
     }
     updateAll(t = this) {
       this.updateProperties(t);
@@ -12052,30 +12052,23 @@
     }
   }
   class In extends he {
-    #Po = null;
-    #Io;
+    _private_field__Po = null;
+    _private_field__Io;
     _colorPicker = null;
     _drawId = null;
-    static #Ro = null;
-    static #Lo = null;
-    static #Fo = null;
-    static #Bo = NaN;
-    static #No = null;
-    static #Oo = null;
-    static #Uo = NaN;
     constructor(t) {
-      (super(t), this.#Io = t.mustBeCommitted || !1, this._addOutlines(t));
+      (super(t), this._private_field__Io = t.mustBeCommitted || !1, this._addOutlines(t));
     }
     onUpdatedColor() {
       (this._colorPicker?.update(this.color), super.onUpdatedColor());
     }
     _addOutlines(t) {
-      t.drawOutlines && (this.#zo(t), this.#bo());
+      t.drawOutlines && (this._private_field__zo(t), this._private_field__bo());
     }
-    #zo({drawOutlines: t, drawId: e, drawingOptions: i}) {
-      (this.#Po = t, this._drawingOptions ||= i, this.annotationElementId || this._uiManager.a11yAlert(`pdfjs-editor-${this.editorType}-added-alert`), e >= 0 ? (this._drawId = e, this.parent.drawLayer.finalizeDraw(e, t.defaultProperties)) : this._drawId = this.#Ho(t, this.parent), this.#jo(t.box));
+    _private_field__zo({drawOutlines: t, drawId: e, drawingOptions: i}) {
+      (this._private_field__Po = t, this._drawingOptions ||= i, this.annotationElementId || this._uiManager.a11yAlert(`pdfjs-editor-${this.editorType}-added-alert`), e >= 0 ? (this._drawId = e, this.parent.drawLayer.finalizeDraw(e, t.defaultProperties)) : this._drawId = this._private_field__Ho(t, this.parent), this._private_field__jo(t.box));
     }
-    #Ho(t, e) {
+    _private_field__Ho(t, e) {
       const {id: i} = e.drawLayer.draw(In._mergeSVGProperties(this._drawingOptions.toSVGProperties(), t.defaultSVGProperties), !1, !1);
       return i;
     }
@@ -12098,7 +12091,7 @@
     }
     static updateDefaultParams(t, e) {
       const i = this.typesMap.get(t);
-      (i && this._defaultDrawingOptions.updateProperty(i, e), this._currentParent && (In.#Ro.updateProperty(i, e), this._currentParent.drawLayer.updateProperties(this._currentDrawId, this._defaultDrawingOptions.toSVGProperties())));
+      (i && this._defaultDrawingOptions.updateProperty(i, e), this._currentParent && (In._private_field__Ro.updateProperty(i, e), this._currentParent.drawLayer.updateProperties(this._currentDrawId, this._defaultDrawingOptions.toSVGProperties())));
     }
     updateParams(t, e) {
       const i = this.constructor.typesMap.get(t);
@@ -12117,8 +12110,8 @@
     _updateProperty(t, e, i) {
       const s = this._drawingOptions, n = s[e], r = i => {
         s.updateProperty(e, i);
-        const n = this.#Po.updateProperty(e, i);
-        (n && this.#jo(n), this.parent?.drawLayer.updateProperties(this._drawId, s.toSVGProperties()), t === this.colorType && this.onUpdatedColor());
+        const n = this._private_field__Po.updateProperty(e, i);
+        (n && this._private_field__jo(n), this.parent?.drawLayer.updateProperties(this._drawId, s.toSVGProperties()), t === this.colorType && this.onUpdatedColor());
       };
       this.addCommands({
         cmd: r.bind(this, i),
@@ -12131,23 +12124,23 @@
       });
     }
     _onResizing() {
-      this.parent?.drawLayer.updateProperties(this._drawId, In._mergeSVGProperties(this.#Po.getPathResizingSVGProperties(this.#$o()), {
-        bbox: this.#Vo()
+      this.parent?.drawLayer.updateProperties(this._drawId, In._mergeSVGProperties(this._private_field__Po.getPathResizingSVGProperties(this._private_field__$o()), {
+        bbox: this._private_field__Vo()
       }));
     }
     _onResized() {
-      this.parent?.drawLayer.updateProperties(this._drawId, In._mergeSVGProperties(this.#Po.getPathResizedSVGProperties(this.#$o()), {
-        bbox: this.#Vo()
+      this.parent?.drawLayer.updateProperties(this._drawId, In._mergeSVGProperties(this._private_field__Po.getPathResizedSVGProperties(this._private_field__$o()), {
+        bbox: this._private_field__Vo()
       }));
     }
     _onTranslating(t, e) {
       this.parent?.drawLayer.updateProperties(this._drawId, {
-        bbox: this.#Vo()
+        bbox: this._private_field__Vo()
       });
     }
     _onTranslated() {
-      this.parent?.drawLayer.updateProperties(this._drawId, In._mergeSVGProperties(this.#Po.getPathTranslatedSVGProperties(this.#$o(), this.parentDimensions), {
-        bbox: this.#Vo()
+      this.parent?.drawLayer.updateProperties(this._drawId, In._mergeSVGProperties(this._private_field__Po.getPathTranslatedSVGProperties(this._private_field__$o(), this.parentDimensions), {
+        bbox: this._private_field__Vo()
       }));
     }
     _onStartDragging() {
@@ -12180,25 +12173,25 @@
       return !0;
     }
     onceAdded(t) {
-      (this.annotationElementId || this.parent.addUndoableEditor(this), this._isDraggable = !0, this.#Io && (this.#Io = !1, this.commit(), this.parent.setSelected(this), t && this.isOnScreen && this.div.focus()));
+      (this.annotationElementId || this.parent.addUndoableEditor(this), this._isDraggable = !0, this._private_field__Io && (this._private_field__Io = !1, this.commit(), this.parent.setSelected(this), t && this.isOnScreen && this.div.focus()));
     }
     remove() {
-      (this.#_o(), super.remove());
+      (this._private_field___o(), super.remove());
     }
     rebuild() {
-      this.parent && (super.rebuild(), null !== this.div && (this.#bo(), this.#jo(this.#Po.box), this.isAttachedToDOM || this.parent.add(this)));
+      this.parent && (super.rebuild(), null !== this.div && (this._private_field__bo(), this._private_field__jo(this._private_field__Po.box), this.isAttachedToDOM || this.parent.add(this)));
     }
     setParent(t) {
       let e = !1;
-      (this.parent && !t ? (this._uiManager.removeShouldRescale(this), this.#_o()) : t && (this._uiManager.addShouldRescale(this), this.#bo(t), e = !this.parent && this.div?.classList.contains("selectedEditor")), super.setParent(t), e && this.select());
+      (this.parent && !t ? (this._uiManager.removeShouldRescale(this), this._private_field___o()) : t && (this._uiManager.addShouldRescale(this), this._private_field__bo(t), e = !this.parent && this.div?.classList.contains("selectedEditor")), super.setParent(t), e && this.select());
     }
-    #_o() {
+    _private_field___o() {
       null !== this._drawId && this.parent && (this.parent.drawLayer.remove(this._drawId), this._drawId = null, this._drawingOptions.reset());
     }
-    #bo(t = this.parent) {
-      null !== this._drawId && this.parent === t || (null === this._drawId ? (this._drawingOptions.updateAll(), this._drawId = this.#Ho(this.#Po, t)) : this.parent.drawLayer.updateParent(this._drawId, t.drawLayer));
+    _private_field__bo(t = this.parent) {
+      null !== this._drawId && this.parent === t || (null === this._drawId ? (this._drawingOptions.updateAll(), this._drawId = this._private_field__Ho(this._private_field__Po, t)) : this.parent.drawLayer.updateParent(this._drawId, t.drawLayer));
     }
-    #Go([t, e, i, s]) {
+    _private_field__Go([t, e, i, s]) {
       const {parentDimensions: [n, r], rotation: a} = this;
       switch (a) {
         case 90:
@@ -12211,7 +12204,7 @@
           return [t, e, i, s];
       }
     }
-    #$o() {
+    _private_field__$o() {
       const {x: t, y: e, width: i, height: s, parentDimensions: [n, r], rotation: a} = this;
       switch (a) {
         case 90:
@@ -12224,10 +12217,10 @@
           return [t, e, i, s];
       }
     }
-    #jo(t) {
-      ([this.x, this.y, this.width, this.height] = this.#Go(t), this.div && (this.fixAndSetPosition(), this.setDims()), this._onResized());
+    _private_field__jo(t) {
+      ([this.x, this.y, this.width, this.height] = this._private_field__Go(t), this.div && (this.fixAndSetPosition(), this.setDims()), this._onResized());
     }
-    #Vo() {
+    _private_field__Vo() {
       const {x: t, y: e, width: i, height: s, rotation: n, parentRotation: r, parentDimensions: [a, o]} = this;
       switch ((4 * n + r) / 90) {
         case 1:
@@ -12266,11 +12259,11 @@
     }
     rotate() {
       this.parent && this.parent.drawLayer.updateProperties(this._drawId, In._mergeSVGProperties({
-        bbox: this.#Vo()
-      }, this.#Po.updateRotation((this.parentRotation - this.rotation + 360) % 360)));
+        bbox: this._private_field__Vo()
+      }, this._private_field__Po.updateRotation((this.parentRotation - this.rotation + 360) % 360)));
     }
     onScaleChanging() {
-      this.parent && this.#jo(this.#Po.updateParentDimensions(this.parentDimensions, this.parent.scale));
+      this.parent && this._private_field__jo(this._private_field__Po.updateParentDimensions(this.parentDimensions, this.parent.scale));
     }
     static onScaleChangingWhenDrawing() {}
     render() {
@@ -12287,18 +12280,18 @@
     }
     static startDrawing(t, e, i, s) {
       const {target: n, offsetX: r, offsetY: a, pointerId: o, pointerType: l} = s;
-      if (In.#No && In.#No !== l) return;
-      const {viewport: {rotation: h}} = t, {width: c, height: d} = n.getBoundingClientRect(), u = In.#Lo = new AbortController(), p = t.combinedSignal(u);
-      (In.#Bo ||= o, In.#No ??= l, window.addEventListener("pointerup", t => {
-        In.#Bo === t.pointerId ? this._endDraw(t) : In.#Oo?.delete(t.pointerId);
+      if (In._private_field__No && In._private_field__No !== l) return;
+      const {viewport: {rotation: h}} = t, {width: c, height: d} = n.getBoundingClientRect(), u = In._private_field__Lo = new AbortController(), p = t.combinedSignal(u);
+      (In._private_field__Bo ||= o, In._private_field__No ??= l, window.addEventListener("pointerup", t => {
+        In._private_field__Bo === t.pointerId ? this._endDraw(t) : In._private_field__Oo?.delete(t.pointerId);
       }, {
         signal: p
       }), window.addEventListener("pointercancel", t => {
-        In.#Bo === t.pointerId ? this._currentParent.endDrawingSession() : In.#Oo?.delete(t.pointerId);
+        In._private_field__Bo === t.pointerId ? this._currentParent.endDrawingSession() : In._private_field__Oo?.delete(t.pointerId);
       }, {
         signal: p
       }), window.addEventListener("pointerdown", t => {
-        In.#No === t.pointerType && ((In.#Oo ||= new Set()).add(t.pointerId), In.#Ro.isCancellable() && (In.#Ro.removeLastElement(), In.#Ro.isEmpty() ? this._currentParent.endDrawingSession(!0) : this._endDraw(null)));
+        In._private_field__No === t.pointerType && ((In._private_field__Oo ||= new Set()).add(t.pointerId), In._private_field__Ro.isCancellable() && (In._private_field__Ro.removeLastElement(), In._private_field__Ro.isEmpty() ? this._currentParent.endDrawingSession(!0) : this._endDraw(null)));
       }, {
         capture: !0,
         passive: !1,
@@ -12308,24 +12301,24 @@
       }), n.addEventListener("pointermove", this._drawMove.bind(this), {
         signal: p
       }), n.addEventListener("touchmove", t => {
-        t.timeStamp === In.#Uo && It(t);
+        t.timeStamp === In._private_field__Uo && It(t);
       }, {
         signal: p
-      }), t.toggleDrawing(), e._editorUndoBar?.hide(), In.#Ro ? t.drawLayer.updateProperties(this._currentDrawId, In.#Ro.startNew(r, a, c, d, h)) : (e.updateUIForDefaultProperties(this), In.#Ro = this.createDrawerInstance(r, a, c, d, h), In.#Fo = this.getDefaultDrawingOptions(), this._currentParent = t, {id: this._currentDrawId} = t.drawLayer.draw(this._mergeSVGProperties(In.#Fo.toSVGProperties(), In.#Ro.defaultSVGProperties), !0, !1)));
+      }), t.toggleDrawing(), e._editorUndoBar?.hide(), In._private_field__Ro ? t.drawLayer.updateProperties(this._currentDrawId, In._private_field__Ro.startNew(r, a, c, d, h)) : (e.updateUIForDefaultProperties(this), In._private_field__Ro = this.createDrawerInstance(r, a, c, d, h), In._private_field__Fo = this.getDefaultDrawingOptions(), this._currentParent = t, {id: this._currentDrawId} = t.drawLayer.draw(this._mergeSVGProperties(In._private_field__Fo.toSVGProperties(), In._private_field__Ro.defaultSVGProperties), !0, !1)));
     }
     static _drawMove(t) {
-      if ((In.#Uo = -1, !In.#Ro)) return;
+      if ((In._private_field__Uo = -1, !In._private_field__Ro)) return;
       const {offsetX: e, offsetY: i, pointerId: s} = t;
-      In.#Bo === s && (In.#Oo?.size >= 1 ? this._endDraw(t) : (this._currentParent.drawLayer.updateProperties(this._currentDrawId, In.#Ro.add(e, i)), In.#Uo = t.timeStamp, It(t)));
+      In._private_field__Bo === s && (In._private_field__Oo?.size >= 1 ? this._endDraw(t) : (this._currentParent.drawLayer.updateProperties(this._currentDrawId, In._private_field__Ro.add(e, i)), In._private_field__Uo = t.timeStamp, It(t)));
     }
     static _cleanup(t) {
-      (t && (this._currentDrawId = -1, this._currentParent = null, In.#Ro = null, In.#Fo = null, In.#No = null, In.#Uo = NaN), In.#Lo && (In.#Lo.abort(), In.#Lo = null, In.#Bo = NaN, In.#Oo = null));
+      (t && (this._currentDrawId = -1, this._currentParent = null, In._private_field__Ro = null, In._private_field__Fo = null, In._private_field__No = null, In._private_field__Uo = NaN), In._private_field__Lo && (In._private_field__Lo.abort(), In._private_field__Lo = null, In._private_field__Bo = NaN, In._private_field__Oo = null));
     }
     static _endDraw(t) {
       const e = this._currentParent;
       if (e) {
-        if ((e.toggleDrawing(!0), this._cleanup(!1), t?.target === e.div && e.drawLayer.updateProperties(this._currentDrawId, In.#Ro.end(t.offsetX, t.offsetY)), this.supportMultipleDrawings)) {
-          const t = In.#Ro, i = this._currentDrawId, s = t.getLastElement();
+        if ((e.toggleDrawing(!0), this._cleanup(!1), t?.target === e.div && e.drawLayer.updateProperties(this._currentDrawId, In._private_field__Ro.end(t.offsetX, t.offsetY)), this.supportMultipleDrawings)) {
+          const t = In._private_field__Ro, i = this._currentDrawId, s = t.getLastElement();
           return void e.addCommands({
             cmd: () => {
               e.drawLayer.updateProperties(i, t.setLastElement(s));
@@ -12343,14 +12336,14 @@
     static endDrawing(t) {
       const e = this._currentParent;
       if (!e) return null;
-      if ((e.toggleDrawing(!0), e.cleanUndoStack(x.DRAW_STEP), !In.#Ro.isEmpty())) {
+      if ((e.toggleDrawing(!0), e.cleanUndoStack(x.DRAW_STEP), !In._private_field__Ro.isEmpty())) {
         const {pageDimensions: [i, s], scale: n} = e, r = e.createAndAddNewEditor({
           offsetX: 0,
           offsetY: 0
         }, !1, {
           drawId: this._currentDrawId,
-          drawOutlines: In.#Ro.getOutlines(i * n, s * n, n, this._INNER_MARGIN),
-          drawingOptions: In.#Fo,
+          drawOutlines: In._private_field__Ro.getOutlines(i * n, s * n, n, this._INNER_MARGIN),
+          drawingOptions: In._private_field__Fo,
           mustBeCommitted: !t
         });
         return (this._cleanup(!0), r);
@@ -12363,13 +12356,13 @@
     }
     static async deserialize(t, e, i) {
       const {rawDims: {pageWidth: s, pageHeight: n, pageX: r, pageY: a}} = e.viewport, o = this.deserializeDraw(r, a, s, n, this._INNER_MARGIN, t), l = await super.deserialize(t, e, i);
-      return (l.createDrawingOptions(t), l.#zo({
+      return (l.createDrawingOptions(t), l._private_field__zo({
         drawOutlines: o
-      }), l.#bo(), l.onScaleChanging(), l.rotate(), l);
+      }), l._private_field__bo(), l.onScaleChanging(), l.rotate(), l);
     }
     serializeDraw(t) {
       const [e, i] = this.pageTranslation, [s, n] = this.pageDimensions;
-      return this.#Po.serialize([e, i, s, n], t);
+      return this._private_field__Po.serialize([e, i, s, n], t);
     }
     renderAnnotationElement(t) {
       return (t.updateEdited({
@@ -12382,47 +12375,54 @@
   }
   In._currentDrawId = -1;
   In._currentParent = null;
+  In._private_field__Ro = null;
+  In._private_field__Lo = null;
+  In._private_field__Fo = null;
+  In._private_field__Bo = NaN;
+  In._private_field__No = null;
+  In._private_field__Oo = null;
+  In._private_field__Uo = NaN;
   In._INNER_MARGIN = 3;
   class Rn {
-    #Ta = new Float64Array(6);
-    #Kr;
-    #Wo;
-    #sn;
-    #Ra;
-    #La;
-    #qo = "";
-    #Xo = 0;
-    #so = new Ln();
-    #Ko;
-    #Yo;
+    _private_field__Ta = new Float64Array(6);
+    _private_field__Kr;
+    _private_field__Wo;
+    _private_field__sn;
+    _private_field__Ra;
+    _private_field__La;
+    _private_field__qo = "";
+    _private_field__Xo = 0;
+    _private_field__so = new Ln();
+    _private_field__Ko;
+    _private_field__Yo;
     constructor(t, e, i, s, n, r) {
-      (this.#Ko = i, this.#Yo = s, this.#sn = n, this.#Ra = r, [t, e] = this.#Qo(t, e));
-      const a = this.#Kr = [NaN, NaN, NaN, NaN, t, e];
-      (this.#La = [t, e], this.#Wo = [{
+      (this._private_field__Ko = i, this._private_field__Yo = s, this._private_field__sn = n, this._private_field__Ra = r, [t, e] = this._private_field__Qo(t, e));
+      const a = this._private_field__Kr = [NaN, NaN, NaN, NaN, t, e];
+      (this._private_field__La = [t, e], this._private_field__Wo = [{
         line: a,
-        points: this.#La
-      }], this.#Ta.set(a, 0));
+        points: this._private_field__La
+      }], this._private_field__Ta.set(a, 0));
     }
     updateProperty(t, e) {
-      "stroke-width" === t && (this.#Ra = e);
+      "stroke-width" === t && (this._private_field__Ra = e);
     }
-    #Qo(t, e) {
-      return _n._normalizePoint(t, e, this.#Ko, this.#Yo, this.#sn);
+    _private_field__Qo(t, e) {
+      return _n._normalizePoint(t, e, this._private_field__Ko, this._private_field__Yo, this._private_field__sn);
     }
     isEmpty() {
-      return !this.#Wo || 0 === this.#Wo.length;
+      return !this._private_field__Wo || 0 === this._private_field__Wo.length;
     }
     isCancellable() {
-      return this.#La.length <= 10;
+      return this._private_field__La.length <= 10;
     }
     add(t, e) {
-      [t, e] = this.#Qo(t, e);
-      const [i, s, n, r] = this.#Ta.subarray(2, 6), a = t - n, o = e - r;
-      return Math.hypot(this.#Ko * a, this.#Yo * o) <= 2 ? null : (this.#La.push(t, e), isNaN(i) ? (this.#Ta.set([n, r, t, e], 2), this.#Kr.push(NaN, NaN, NaN, NaN, t, e), {
+      [t, e] = this._private_field__Qo(t, e);
+      const [i, s, n, r] = this._private_field__Ta.subarray(2, 6), a = t - n, o = e - r;
+      return Math.hypot(this._private_field__Ko * a, this._private_field__Yo * o) <= 2 ? null : (this._private_field__La.push(t, e), isNaN(i) ? (this._private_field__Ta.set([n, r, t, e], 2), this._private_field__Kr.push(NaN, NaN, NaN, NaN, t, e), {
         path: {
           d: this.toSVGPath()
         }
-      }) : (isNaN(this.#Ta[0]) && this.#Kr.splice(6, 6), this.#Ta.set([i, s, n, r, t, e], 0), this.#Kr.push(..._n.createBezierPoints(i, s, n, r, t, e)), {
+      }) : (isNaN(this._private_field__Ta[0]) && this._private_field__Kr.splice(6, 6), this._private_field__Ta.set([i, s, n, r, t, e], 0), this._private_field__Kr.push(..._n.createBezierPoints(i, s, n, r, t, e)), {
         path: {
           d: this.toSVGPath()
         }
@@ -12430,67 +12430,67 @@
     }
     end(t, e) {
       const i = this.add(t, e);
-      return i || (2 === this.#La.length ? {
+      return i || (2 === this._private_field__La.length ? {
         path: {
           d: this.toSVGPath()
         }
       } : null);
     }
     startNew(t, e, i, s, n) {
-      (this.#Ko = i, this.#Yo = s, this.#sn = n, [t, e] = this.#Qo(t, e));
-      const r = this.#Kr = [NaN, NaN, NaN, NaN, t, e];
-      this.#La = [t, e];
-      const a = this.#Wo.at(-1);
-      return (a && (a.line = new Float32Array(a.line), a.points = new Float32Array(a.points)), this.#Wo.push({
+      (this._private_field__Ko = i, this._private_field__Yo = s, this._private_field__sn = n, [t, e] = this._private_field__Qo(t, e));
+      const r = this._private_field__Kr = [NaN, NaN, NaN, NaN, t, e];
+      this._private_field__La = [t, e];
+      const a = this._private_field__Wo.at(-1);
+      return (a && (a.line = new Float32Array(a.line), a.points = new Float32Array(a.points)), this._private_field__Wo.push({
         line: r,
-        points: this.#La
-      }), this.#Ta.set(r, 0), this.#Xo = 0, this.toSVGPath(), null);
+        points: this._private_field__La
+      }), this._private_field__Ta.set(r, 0), this._private_field__Xo = 0, this.toSVGPath(), null);
     }
     getLastElement() {
-      return this.#Wo.at(-1);
+      return this._private_field__Wo.at(-1);
     }
     setLastElement(t) {
-      return this.#Wo ? (this.#Wo.push(t), this.#Kr = t.line, this.#La = t.points, this.#Xo = 0, {
+      return this._private_field__Wo ? (this._private_field__Wo.push(t), this._private_field__Kr = t.line, this._private_field__La = t.points, this._private_field__Xo = 0, {
         path: {
           d: this.toSVGPath()
         }
-      }) : this.#so.setLastElement(t);
+      }) : this._private_field__so.setLastElement(t);
     }
     removeLastElement() {
-      if (!this.#Wo) return this.#so.removeLastElement();
-      (this.#Wo.pop(), this.#qo = "");
-      for (let t = 0, e = this.#Wo.length; t < e; t++) {
-        const {line: e, points: i} = this.#Wo[t];
-        (this.#Kr = e, this.#La = i, this.#Xo = 0, this.toSVGPath());
+      if (!this._private_field__Wo) return this._private_field__so.removeLastElement();
+      (this._private_field__Wo.pop(), this._private_field__qo = "");
+      for (let t = 0, e = this._private_field__Wo.length; t < e; t++) {
+        const {line: e, points: i} = this._private_field__Wo[t];
+        (this._private_field__Kr = e, this._private_field__La = i, this._private_field__Xo = 0, this.toSVGPath());
       }
       return {
         path: {
-          d: this.#qo
+          d: this._private_field__qo
         }
       };
     }
     toSVGPath() {
-      const t = _n.svgRound(this.#Kr[4]), e = _n.svgRound(this.#Kr[5]);
-      if (2 === this.#La.length) return (this.#qo = `${this.#qo} M ${t} ${e} Z`, this.#qo);
-      if (this.#La.length <= 6) {
-        const i = this.#qo.lastIndexOf("M");
-        (this.#qo = `${this.#qo.slice(0, i)} M ${t} ${e}`, this.#Xo = 6);
+      const t = _n.svgRound(this._private_field__Kr[4]), e = _n.svgRound(this._private_field__Kr[5]);
+      if (2 === this._private_field__La.length) return (this._private_field__qo = `${this._private_field__qo} M ${t} ${e} Z`, this._private_field__qo);
+      if (this._private_field__La.length <= 6) {
+        const i = this._private_field__qo.lastIndexOf("M");
+        (this._private_field__qo = `${this._private_field__qo.slice(0, i)} M ${t} ${e}`, this._private_field__Xo = 6);
       }
-      if (4 === this.#La.length) {
-        const t = _n.svgRound(this.#Kr[10]), e = _n.svgRound(this.#Kr[11]);
-        return (this.#qo = `${this.#qo} L ${t} ${e}`, this.#Xo = 12, this.#qo);
+      if (4 === this._private_field__La.length) {
+        const t = _n.svgRound(this._private_field__Kr[10]), e = _n.svgRound(this._private_field__Kr[11]);
+        return (this._private_field__qo = `${this._private_field__qo} L ${t} ${e}`, this._private_field__Xo = 12, this._private_field__qo);
       }
       const i = [];
-      0 === this.#Xo && (i.push(`M ${t} ${e}`), this.#Xo = 6);
-      for (let s = this.#Xo, n = this.#Kr.length; s < n; s += 6) {
-        const [t, e, n, r, a, o] = this.#Kr.slice(s, s + 6).map(_n.svgRound);
+      0 === this._private_field__Xo && (i.push(`M ${t} ${e}`), this._private_field__Xo = 6);
+      for (let s = this._private_field__Xo, n = this._private_field__Kr.length; s < n; s += 6) {
+        const [t, e, n, r, a, o] = this._private_field__Kr.slice(s, s + 6).map(_n.svgRound);
         i.push(`C${t} ${e} ${n} ${r} ${a} ${o}`);
       }
-      return (this.#qo += i.join(" "), this.#Xo = this.#Kr.length, this.#qo);
+      return (this._private_field__qo += i.join(" "), this._private_field__Xo = this._private_field__Kr.length, this._private_field__qo);
     }
     getOutlines(t, e, i, s) {
-      const n = this.#Wo.at(-1);
-      return (n.line = new Float32Array(n.line), n.points = new Float32Array(n.points), this.#so.build(this.#Wo, t, e, i, this.#sn, this.#Ra, s), this.#Ta = null, this.#Kr = null, this.#Wo = null, this.#qo = null, this.#so);
+      const n = this._private_field__Wo.at(-1);
+      return (n.line = new Float32Array(n.line), n.points = new Float32Array(n.points), this._private_field__so.build(this._private_field__Wo, t, e, i, this._private_field__sn, this._private_field__Ra, s), this._private_field__Ta = null, this._private_field__Kr = null, this._private_field__Wo = null, this._private_field__qo = null, this._private_field__so);
     }
     get defaultSVGProperties() {
       return {
@@ -12505,30 +12505,30 @@
     }
   }
   class Ln extends _n {
-    #Ga;
-    #Jo = 0;
-    #Sa;
-    #Wo;
-    #Ko;
-    #Yo;
-    #Zo;
-    #sn;
-    #Ra;
+    _private_field__Ga;
+    _private_field__Jo = 0;
+    _private_field__Sa;
+    _private_field__Wo;
+    _private_field__Ko;
+    _private_field__Yo;
+    _private_field__Zo;
+    _private_field__sn;
+    _private_field__Ra;
     build(t, e, i, s, n, r, a) {
-      (this.#Ko = e, this.#Yo = i, this.#Zo = s, this.#sn = n, this.#Ra = r, this.#Sa = a ?? 0, this.#Wo = t, this.#tl());
+      (this._private_field__Ko = e, this._private_field__Yo = i, this._private_field__Zo = s, this._private_field__sn = n, this._private_field__Ra = r, this._private_field__Sa = a ?? 0, this._private_field__Wo = t, this._private_field__tl());
     }
     get thickness() {
-      return this.#Ra;
+      return this._private_field__Ra;
     }
     setLastElement(t) {
-      return (this.#Wo.push(t), {
+      return (this._private_field__Wo.push(t), {
         path: {
           d: this.toSVGPath()
         }
       });
     }
     removeLastElement() {
-      return (this.#Wo.pop(), {
+      return (this._private_field__Wo.pop(), {
         path: {
           d: this.toSVGPath()
         }
@@ -12536,16 +12536,16 @@
     }
     toSVGPath() {
       const t = [];
-      for (const {line: e} of this.#Wo) if ((t.push(`M${_n.svgRound(e[4])} ${_n.svgRound(e[5])}`), 6 !== e.length)) if (12 === e.length && isNaN(e[6])) t.push(`L${_n.svgRound(e[10])} ${_n.svgRound(e[11])}`); else for (let i = 6, s = e.length; i < s; i += 6) {
+      for (const {line: e} of this._private_field__Wo) if ((t.push(`M${_n.svgRound(e[4])} ${_n.svgRound(e[5])}`), 6 !== e.length)) if (12 === e.length && isNaN(e[6])) t.push(`L${_n.svgRound(e[10])} ${_n.svgRound(e[11])}`); else for (let i = 6, s = e.length; i < s; i += 6) {
         const [s, n, r, a, o, l] = e.subarray(i, i + 6).map(_n.svgRound);
         t.push(`C${s} ${n} ${r} ${a} ${o} ${l}`);
       } else t.push("Z");
       return t.join("");
     }
     serialize([t, e, i, s], n) {
-      const r = [], a = [], [o, l, h, c] = this.#el();
+      const r = [], a = [], [o, l, h, c] = this._private_field__el();
       let d, u, p, g, m, f, b, v, y;
-      switch (this.#sn) {
+      switch (this._private_field__sn) {
         case 0:
           (y = _n._rescale, d = t, u = e + s, p = i, g = -s, m = t + o * i, f = e + (1 - l - c) * s, b = t + (o + h) * i, v = e + (1 - l) * s);
           break;
@@ -12558,7 +12558,7 @@
         case 270:
           (y = _n._rescaleAndSwap, d = t + i, u = e + s, p = -i, g = -s, m = t + (1 - l - c) * i, f = e + (1 - o - h) * s, b = t + (1 - l) * i, v = e + (1 - o) * s);
       }
-      for (const {line: w, points: A} of this.#Wo) (r.push(y(w, d, u, p, g, n ? new Array(w.length) : null)), a.push(y(A, d, u, p, g, n ? new Array(A.length) : null)));
+      for (const {line: w, points: A} of this._private_field__Wo) (r.push(y(w, d, u, p, g, n ? new Array(w.length) : null)), a.push(y(A, d, u, p, g, n ? new Array(A.length) : null)));
       return {
         lines: r,
         points: a,
@@ -12610,17 +12610,17 @@
       const m = new this.prototype.constructor();
       return (m.build(h, i, s, 1, o, l, n), m);
     }
-    #il(t = this.#Ra) {
-      const e = this.#Sa + t / 2 * this.#Zo;
-      return this.#sn % 180 == 0 ? [e / this.#Ko, e / this.#Yo] : [e / this.#Yo, e / this.#Ko];
+    _private_field__il(t = this._private_field__Ra) {
+      const e = this._private_field__Sa + t / 2 * this._private_field__Zo;
+      return this._private_field__sn % 180 == 0 ? [e / this._private_field__Ko, e / this._private_field__Yo] : [e / this._private_field__Yo, e / this._private_field__Ko];
     }
-    #el() {
-      const [t, e, i, s] = this.#Ga, [n, r] = this.#il(0);
+    _private_field__el() {
+      const [t, e, i, s] = this._private_field__Ga, [n, r] = this._private_field__il(0);
       return [t + n, e + r, i - 2 * n, s - 2 * r];
     }
-    #tl() {
-      const t = this.#Ga = new Float32Array([1 / 0, 1 / 0, -1 / 0, -1 / 0]);
-      for (const {line: s} of this.#Wo) {
+    _private_field__tl() {
+      const t = this._private_field__Ga = new Float32Array([1 / 0, 1 / 0, -1 / 0, -1 / 0]);
+      for (const {line: s} of this._private_field__Wo) {
         if (s.length <= 12) {
           for (let e = 4, i = s.length; e < i; e += 6) ct.pointBoundingBox(s[e], s[e + 1], t);
           continue;
@@ -12631,39 +12631,39 @@
           (ct.bezierBoundingBox(e, i, r, a, o, l, h, c, t), e = h, i = c);
         }
       }
-      const [e, i] = this.#il();
+      const [e, i] = this._private_field__il();
       (t[0] = ft(t[0] - e, 0, 1), t[1] = ft(t[1] - i, 0, 1), t[2] = ft(t[2] + e, 0, 1), t[3] = ft(t[3] + i, 0, 1), t[2] -= t[0], t[3] -= t[1]);
     }
     get box() {
-      return this.#Ga;
+      return this._private_field__Ga;
     }
     updateProperty(t, e) {
-      return "stroke-width" === t ? this.#wo(e) : null;
+      return "stroke-width" === t ? this._private_field__wo(e) : null;
     }
-    #wo(t) {
-      const [e, i] = this.#il();
-      this.#Ra = t;
-      const [s, n] = this.#il(), [r, a] = [s - e, n - i], o = this.#Ga;
+    _private_field__wo(t) {
+      const [e, i] = this._private_field__il();
+      this._private_field__Ra = t;
+      const [s, n] = this._private_field__il(), [r, a] = [s - e, n - i], o = this._private_field__Ga;
       return (o[0] -= r, o[1] -= a, o[2] += 2 * r, o[3] += 2 * a, o);
     }
     updateParentDimensions([t, e], i) {
-      const [s, n] = this.#il();
-      (this.#Ko = t, this.#Yo = e, this.#Zo = i);
-      const [r, a] = this.#il(), o = r - s, l = a - n, h = this.#Ga;
+      const [s, n] = this._private_field__il();
+      (this._private_field__Ko = t, this._private_field__Yo = e, this._private_field__Zo = i);
+      const [r, a] = this._private_field__il(), o = r - s, l = a - n, h = this._private_field__Ga;
       return (h[0] -= o, h[1] -= l, h[2] += 2 * o, h[3] += 2 * l, h);
     }
     updateRotation(t) {
-      return (this.#Jo = t, {
+      return (this._private_field__Jo = t, {
         path: {
           transform: this.rotationTransform
         }
       });
     }
     get viewBox() {
-      return this.#Ga.map(_n.svgRound).join(" ");
+      return this._private_field__Ga.map(_n.svgRound).join(" ");
     }
     get defaultProperties() {
-      const [t, e] = this.#Ga;
+      const [t, e] = this._private_field__Ga;
       return {
         root: {
           viewBox: this.viewBox
@@ -12674,9 +12674,9 @@
       };
     }
     get rotationTransform() {
-      const [, , t, e] = this.#Ga;
+      const [, , t, e] = this._private_field__Ga;
       let i = 0, s = 0, n = 0, r = 0, a = 0, o = 0;
-      switch (this.#Jo) {
+      switch (this._private_field__Jo) {
         case 90:
           (s = e / t, n = -t / e, a = t);
           break;
@@ -12692,7 +12692,7 @@
       return `matrix(${i} ${s} ${n} ${r} ${_n.svgRound(a)} ${_n.svgRound(o)})`;
     }
     getPathResizingSVGProperties([t, e, i, s]) {
-      const [n, r] = this.#il(), [a, o, l, h] = this.#Ga;
+      const [n, r] = this._private_field__il(), [a, o, l, h] = this._private_field__Ga;
       if (Math.abs(l - n) <= _n.PRECISION || Math.abs(h - r) <= _n.PRECISION) {
         const n = t + i / 2 - (a + l / 2), r = e + s / 2 - (o + h / 2);
         return {
@@ -12711,10 +12711,10 @@
       };
     }
     getPathResizedSVGProperties([t, e, i, s]) {
-      const [n, r] = this.#il(), a = this.#Ga, [o, l, h, c] = a;
+      const [n, r] = this._private_field__il(), a = this._private_field__Ga, [o, l, h, c] = a;
       if ((a[0] = t, a[1] = e, a[2] = i, a[3] = s, Math.abs(h - n) <= _n.PRECISION || Math.abs(c - r) <= _n.PRECISION)) {
         const n = t + i / 2 - (o + h / 2), r = e + s / 2 - (l + c / 2);
-        for (const {line: t, points: e} of this.#Wo) (_n._translate(t, n, r, t), _n._translate(e, n, r, e));
+        for (const {line: t, points: e} of this._private_field__Wo) (_n._translate(t, n, r, t), _n._translate(e, n, r, e));
         return {
           root: {
             viewBox: this.viewBox
@@ -12727,7 +12727,7 @@
         };
       }
       const d = (i - 2 * n) / (h - 2 * n), u = (s - 2 * r) / (c - 2 * r), p = -d * (o + n) + t + n, g = -u * (l + r) + e + r;
-      if (1 !== d || 1 !== u || 0 !== p || 0 !== g) for (const {line: m, points: f} of this.#Wo) (_n._rescale(m, p, g, d, u, m), _n._rescale(f, p, g, d, u, f));
+      if (1 !== d || 1 !== u || 0 !== p || 0 !== g) for (const {line: m, points: f} of this._private_field__Wo) (_n._rescale(m, p, g, d, u, m), _n._rescale(f, p, g, d, u, f));
       return {
         root: {
           viewBox: this.viewBox
@@ -12740,11 +12740,11 @@
       };
     }
     getPathTranslatedSVGProperties([t, e], i) {
-      const [s, n] = i, r = this.#Ga, a = t - r[0], o = e - r[1];
-      if (this.#Ko === s && this.#Yo === n) for (const {line: l, points: h} of this.#Wo) (_n._translate(l, a, o, l), _n._translate(h, a, o, h)); else {
-        const t = this.#Ko / s, e = this.#Yo / n;
-        (this.#Ko = s, this.#Yo = n);
-        for (const {line: i, points: s} of this.#Wo) (_n._rescale(i, a, o, t, e, i), _n._rescale(s, a, o, t, e, s));
+      const [s, n] = i, r = this._private_field__Ga, a = t - r[0], o = e - r[1];
+      if (this._private_field__Ko === s && this._private_field__Yo === n) for (const {line: l, points: h} of this._private_field__Wo) (_n._translate(l, a, o, l), _n._translate(h, a, o, h)); else {
+        const t = this._private_field__Ko / s, e = this._private_field__Yo / n;
+        (this._private_field__Ko = s, this._private_field__Yo = n);
+        for (const {line: i, points: s} of this._private_field__Wo) (_n._rescale(i, a, o, t, e, i), _n._rescale(s, a, o, t, e, s));
         (r[2] *= t, r[3] *= e);
       }
       return (r[0] = t, r[1] = e, {
@@ -12758,7 +12758,7 @@
       });
     }
     get defaultSVGProperties() {
-      const t = this.#Ga;
+      const t = this._private_field__Ga;
       return {
         root: {
           viewBox: this.viewBox
@@ -12891,9 +12891,9 @@
           points: i
         }
       });
-      return (this.addComment(a), t ? (a.isCopy = !0, a) : this.annotationElementId && !this.#Aa(a) ? null : (a.id = this.annotationElementId, a));
+      return (this.addComment(a), t ? (a.isCopy = !0, a) : this.annotationElementId && !this._private_field__Aa(a) ? null : (a.id = this.annotationElementId, a));
     }
-    #Aa(t) {
+    _private_field__Aa(t) {
       const {color: e, thickness: i, opacity: s, pageIndex: n} = this._initialData;
       return this.hasEditedComment || this._hasBeenMoved || this._hasBeenResized || t.color.some((t, i) => t !== e[i]) || t.thickness !== i || t.opacity !== s || t.pageIndex !== n;
     }
@@ -12918,33 +12918,26 @@
     }
   }
   class On {
-    static #sl = {
-      maxDim: 512,
-      sigmaSFactor: .02,
-      sigmaR: 25,
-      kernelSize: 16
-    };
-    static #nl(t, e, i, s) {
+    static _private_field__nl(t, e, i, s) {
       return (s -= e, 0 === (i -= t) ? s > 0 ? 0 : 4 : 1 === i ? s + 6 : 2 - s);
     }
-    static #rl = new Int32Array([0, 1, -1, 1, -1, 0, -1, -1, 0, -1, 1, -1, 1, 0, 1, 1]);
-    static #al(t, e, i, s, n, r, a) {
-      const o = this.#nl(i, s, n, r);
+    static _private_field__al(t, e, i, s, n, r, a) {
+      const o = this._private_field__nl(i, s, n, r);
       for (let l = 0; l < 8; l++) {
         const n = (-l + o - a + 16) % 8;
-        if (0 !== t[(i + this.#rl[2 * n]) * e + (s + this.#rl[2 * n + 1])]) return n;
+        if (0 !== t[(i + this._private_field__rl[2 * n]) * e + (s + this._private_field__rl[2 * n + 1])]) return n;
       }
       return -1;
     }
-    static #ol(t, e, i, s, n, r, a) {
-      const o = this.#nl(i, s, n, r);
+    static _private_field__ol(t, e, i, s, n, r, a) {
+      const o = this._private_field__nl(i, s, n, r);
       for (let l = 0; l < 8; l++) {
         const n = (l + o + a + 16) % 8;
-        if (0 !== t[(i + this.#rl[2 * n]) * e + (s + this.#rl[2 * n + 1])]) return n;
+        if (0 !== t[(i + this._private_field__rl[2 * n]) * e + (s + this._private_field__rl[2 * n + 1])]) return n;
       }
       return -1;
     }
-    static #ll(t, e, i, s) {
+    static _private_field__ll(t, e, i, s) {
       const n = t.length, r = new Int32Array(n);
       for (let h = 0; h < n; h++) r[h] = t[h] <= s ? 1 : 0;
       for (let h = 1; h < i - 1; h++) r[h * e] = r[h * e + e - 1] = 0;
@@ -12977,18 +12970,18 @@
             break;
           }
           g ? g.isHole ? p.parent = u ? g.parent : a : p.parent = u ? a : g.parent : p.parent = u ? a : 0;
-          const m = this.#al(r, e, h, t, n, c, 0);
+          const m = this._private_field__al(r, e, h, t, n, c, 0);
           if (-1 === m) {
             (r[i] = -o, 1 !== r[i] && (a = Math.abs(r[i])));
             continue;
           }
-          let f = this.#rl[2 * m], b = this.#rl[2 * m + 1];
+          let f = this._private_field__rl[2 * m], b = this._private_field__rl[2 * m + 1];
           const v = h + f, y = t + b;
           (n = v, c = y);
           let w = h, A = t;
           for (; ; ) {
-            const s = this.#ol(r, e, w, A, n, c, 1);
-            (f = this.#rl[2 * s], b = this.#rl[2 * s + 1]);
+            const s = this._private_field__ol(r, e, w, A, n, c, 1);
+            (f = this._private_field__rl[2 * s], b = this._private_field__rl[2 * s + 1]);
             const l = w + f, u = A + b;
             d.push(u, l);
             const p = w * e + A;
@@ -13002,7 +12995,7 @@
       }
       return l;
     }
-    static #hl(t, e, i, s) {
+    static _private_field__hl(t, e, i, s) {
       if (i - e <= 4) {
         for (let n = e; n < i - 2; n += 2) s.push(t[n], t[n + 1]);
         return;
@@ -13013,13 +13006,13 @@
         const e = Math.abs(d - h * t[x + 1] + c * t[x]);
         e > w && (A = x, w = e);
       }
-      w > (l * y) ** 2 ? (this.#hl(t, e, A + 2, s), this.#hl(t, A, i, s)) : s.push(n, r);
+      w > (l * y) ** 2 ? (this._private_field__hl(t, e, A + 2, s), this._private_field__hl(t, A, i, s)) : s.push(n, r);
     }
-    static #cl(t) {
+    static _private_field__cl(t) {
       const e = [], i = t.length;
-      return (this.#hl(t, 0, i, e), e.push(t[i - 2], t[i - 1]), e.length <= 4 ? null : e);
+      return (this._private_field__hl(t, 0, i, e), e.push(t[i - 2], t[i - 1]), e.length <= 4 ? null : e);
     }
-    static #dl(t, e, i, s, n, r) {
+    static _private_field__dl(t, e, i, s, n, r) {
       const a = new Float32Array(r ** 2), o = -2 * s ** 2, l = r >> 1;
       for (let g = 0; g < r; g++) {
         const t = (g - l) ** 2;
@@ -13044,12 +13037,12 @@
       }
       return [u, p];
     }
-    static #ul(t) {
+    static _private_field__ul(t) {
       const e = new Uint32Array(256);
       for (const i of t) e[i]++;
       return e;
     }
-    static #pl(t) {
+    static _private_field__pl(t) {
       const e = t.length, i = new Uint8ClampedArray(e >> 2);
       let s = -1 / 0, n = 1 / 0;
       for (let a = 0, o = i.length; a < o; a++) {
@@ -13060,7 +13053,7 @@
       for (let a = 0, o = i.length; a < o; a++) i[a] = (i[a] - n) * r;
       return i;
     }
-    static #gl(t) {
+    static _private_field__gl(t) {
       let e, i = -1 / 0, s = -1 / 0;
       const n = t.findIndex(t => 0 !== t);
       let r = n, a = n;
@@ -13071,8 +13064,8 @@
       for (e = a - 1; e >= 0 && !(t[e] > t[e + 1]); e--) ;
       return e;
     }
-    static #ml(t) {
-      const e = t, {width: i, height: s} = t, {maxDim: n} = this.#sl;
+    static _private_field__ml(t) {
+      const e = t, {width: i, height: s} = t, {maxDim: n} = this._private_field__sl;
       let r = i, a = s;
       if (i > n || s > n) {
         let o = i, l = s, h = Math.log2(Math.max(i, s) / n);
@@ -13091,7 +13084,7 @@
       });
       (o.fillStyle = "white", o.fillRect(0, 0, r, a), o.filter = "grayscale(1)", o.drawImage(t, 0, 0, t.width, t.height, 0, 0, r, a));
       const l = o.getImageData(0, 0, r, a).data;
-      return [this.#pl(l), r, a];
+      return [this._private_field__pl(l), r, a];
     }
     static extractContoursFromText(t, {fontFamily: e, fontStyle: i, fontWeight: s}, n, r, a, o) {
       let l = new OffscreenCanvas(1, 1), h = l.getContext("2d", {
@@ -13102,7 +13095,7 @@
         alpha: !0,
         willReadFrequently: !0
       }), h.font = c, h.filter = "grayscale(1)", h.fillStyle = "white", h.fillRect(0, 0, y, w), h.fillStyle = "black", h.fillText(t, .5 * y / 2, 1.5 * w / 2));
-      const A = this.#pl(h.getImageData(0, 0, y, w).data), x = this.#ul(A), _ = this.#gl(x), S = this.#ll(A, y, w, _);
+      const A = this._private_field__pl(h.getImageData(0, 0, y, w).data), x = this._private_field__ul(A), _ = this._private_field__gl(x), S = this._private_field__ll(A, y, w, _);
       return this.processDrawnLines({
         lines: {
           curves: S,
@@ -13118,7 +13111,7 @@
       });
     }
     static process(t, e, i, s, n) {
-      const [r, a, o] = this.#ml(t), [l, h] = this.#dl(r, a, o, Math.hypot(a, o) * this.#sl.sigmaSFactor, this.#sl.sigmaR, this.#sl.kernelSize), c = this.#gl(h), d = this.#ll(l, a, o, c);
+      const [r, a, o] = this._private_field__ml(t), [l, h] = this._private_field__dl(r, a, o, Math.hypot(a, o) * this._private_field__sl.sigmaSFactor, this._private_field__sl.sigmaR, this._private_field__sl.kernelSize), c = this._private_field__gl(h), d = this._private_field__ll(l, a, o, c);
       return this.processDrawnLines({
         lines: {
           curves: d,
@@ -13137,7 +13130,7 @@
       s % 180 != 0 && ([e, i] = [i, e]);
       const {curves: o, width: l, height: h} = t, c = t.thickness ?? 0, d = [], u = Math.min(e / l, i / h), p = u / e, g = u / i, m = [];
       for (const {points: b} of o) {
-        const t = r ? this.#cl(b) : b;
+        const t = r ? this._private_field__cl(b) : b;
         if (!t) continue;
         m.push(t);
         const e = t.length, i = new Float32Array(e), s = new Float32Array(3 * (2 === e ? 2 : e - 2));
@@ -13234,6 +13227,13 @@
       var e;
     }
   }
+  On._private_field__sl = {
+    maxDim: 512,
+    sigmaSFactor: .02,
+    sigmaR: 25,
+    kernelSize: 16
+  };
+  On._private_field__rl = new Int32Array([0, 1, -1, 1, -1, 0, -1, -1, 0, -1, 1, -1, 1, 0, 1, 1]);
   class Un extends Pn {
     constructor() {
       (super(), super.updateProperties({
@@ -13259,16 +13259,16 @@
     }
   }
   class Hn extends In {
-    #fl = !1;
-    #bl = null;
-    #vl = null;
-    #yl = null;
+    _private_field__fl = !1;
+    _private_field__bl = null;
+    _private_field__vl = null;
+    _private_field__yl = null;
     constructor(t) {
       (super({
         ...t,
         mustBeCommitted: !0,
         name: "signatureEditor"
-      }), this._willKeepAspectRatio = !0, this.#vl = t.signatureData || null, this.#bl = null, this.defaultL10nId = "pdfjs-editor-signature-editor1");
+      }), this._willKeepAspectRatio = !0, this._private_field__vl = t.signatureData || null, this._private_field__bl = null, this.defaultL10nId = "pdfjs-editor-signature-editor1");
     }
     static initialize(t, e) {
       (he.initialize(t, e), this._defaultDrawingOptions = new Un(), this._defaultDrawnSignatureOptions = new zn(e.viewParameters));
@@ -13289,7 +13289,7 @@
     get telemetryFinalData() {
       return {
         type: "signature",
-        hasDescription: !!this.#bl
+        hasDescription: !!this._private_field__bl
       };
     }
     static computeTelemetryFinalData(t) {
@@ -13309,8 +13309,8 @@
       if (this.div) return this.div;
       let t, e;
       const {_isCopy: i} = this;
-      if ((i && (this._isCopy = !1, t = this.x, e = this.y), super.render(), null === this._drawId)) if (this.#vl) {
-        const {lines: t, mustSmooth: e, areContours: i, description: s, uuid: n, heightInPage: r} = this.#vl, {rawDims: {pageWidth: a, pageHeight: o}, rotation: l} = this.parent.viewport, h = On.processDrawnLines({
+      if ((i && (this._isCopy = !1, t = this.x, e = this.y), super.render(), null === this._drawId)) if (this._private_field__vl) {
+        const {lines: t, mustSmooth: e, areContours: i, description: s, uuid: n, heightInPage: r} = this._private_field__vl, {rawDims: {pageWidth: a, pageHeight: o}, rotation: l} = this.parent.viewport, h = On.processDrawnLines({
           lines: t,
           pageWidth: a,
           pageHeight: o,
@@ -13323,28 +13323,28 @@
       } else (this.div.setAttribute("data-l10n-args", JSON.stringify({
         description: ""
       })), this.div.hidden = !0, this._uiManager.getSignature(this)); else this.div.setAttribute("data-l10n-args", JSON.stringify({
-        description: this.#bl || ""
+        description: this._private_field__bl || ""
       }));
       return (i && (this._isCopy = !0, this._moveAfterPaste(t, e)), this.div);
     }
     setUuid(t) {
-      (this.#yl = t, this.addEditToolbar());
+      (this._private_field__yl = t, this.addEditToolbar());
     }
     getUuid() {
-      return this.#yl;
+      return this._private_field__yl;
     }
     get description() {
-      return this.#bl;
+      return this._private_field__bl;
     }
     set description(t) {
-      (this.#bl = t, this.div && (this.div.setAttribute("data-l10n-args", JSON.stringify({
+      (this._private_field__bl = t, this.div && (this.div.setAttribute("data-l10n-args", JSON.stringify({
         description: t
       })), super.addEditToolbar().then(e => {
         e?.updateEditSignatureButton(t);
       })));
     }
     getSignaturePreview() {
-      const {newCurves: t, areContours: e, thickness: i, width: s, height: n} = this.#vl, r = Math.max(s, n);
+      const {newCurves: t, areContours: e, thickness: i, width: s, height: n} = this._private_field__vl, r = Math.max(s, n);
       return {
         areContours: e,
         outline: On.processDrawnLines({
@@ -13369,9 +13369,9 @@
       return this._uiManager.signatureManager ? [["editSignature", this._uiManager.signatureManager]] : super.toolbarButtons;
     }
     addSignature(t, e, i, s) {
-      const {x: n, y: r} = this, {outline: a} = this.#vl = t;
+      const {x: n, y: r} = this, {outline: a} = this._private_field__vl = t;
       let o;
-      (this.#fl = a instanceof Nn, this.description = i, this.#fl ? o = Hn.getDefaultDrawingOptions() : (o = Hn._defaultDrawnSignatureOptions.clone(), o.updateProperties({
+      (this._private_field__fl = a instanceof Nn, this.description = i, this._private_field__fl ? o = Hn.getDefaultDrawingOptions() : (o = Hn._defaultDrawnSignatureOptions.clone(), o.updateProperties({
         "stroke-width": a.thickness
       })), this._addOutlines({
         drawOutlines: a,
@@ -13416,16 +13416,16 @@
       if (this.isEmpty()) return null;
       const {lines: e, points: i} = this.serializeDraw(t), {_drawingOptions: {"stroke-width": s}} = this, n = Object.assign(super.serialize(t), {
         isSignature: !0,
-        areContours: this.#fl,
+        areContours: this._private_field__fl,
         color: [0, 0, 0],
-        thickness: this.#fl ? 0 : s
+        thickness: this._private_field__fl ? 0 : s
       });
       return (this.addComment(n), t ? (n.paths = {
         lines: e,
         points: i
-      }, n.uuid = this.#yl, n.isCopy = !0) : n.lines = e, this.#bl && (n.accessibilityData = {
+      }, n.uuid = this._private_field__yl, n.isCopy = !0) : n.lines = e, this._private_field__bl && (n.accessibilityData = {
         type: "Figure",
-        alt: this.#bl
+        alt: this._private_field__bl
       }), n);
     }
     static deserializeDraw(t, e, i, s, n, r) {
@@ -13433,29 +13433,29 @@
     }
     static async deserialize(t, e, i) {
       const s = await super.deserialize(t, e, i);
-      return (s.#fl = t.areContours, s.description = t.accessibilityData?.alt || "", s.#yl = t.uuid, s);
+      return (s._private_field__fl = t.areContours, s.description = t.accessibilityData?.alt || "", s._private_field__yl = t.uuid, s);
     }
   }
   Hn._type = "signature";
   Hn._editorType = A.SIGNATURE;
   Hn._defaultDrawingOptions = null;
   class jn extends he {
-    #wl = null;
-    #Al = null;
-    #xl = null;
-    #_l = null;
-    #Sl = null;
-    #Cl = "";
-    #El = null;
-    #Tl = !1;
-    #Ml = null;
-    #kl = !1;
-    #Dl = !1;
+    _private_field__wl = null;
+    _private_field__Al = null;
+    _private_field__xl = null;
+    _private_field___l = null;
+    _private_field__Sl = null;
+    _private_field__Cl = "";
+    _private_field__El = null;
+    _private_field__Tl = !1;
+    _private_field__Ml = null;
+    _private_field__kl = !1;
+    _private_field__Dl = !1;
     constructor(t) {
       (super({
         ...t,
         name: "stampEditor"
-      }), this.#_l = t.bitmapUrl, this.#Sl = t.bitmapFile, this.defaultL10nId = "pdfjs-editor-stamp-editor");
+      }), this._private_field___l = t.bitmapUrl, this._private_field__Sl = t.bitmapFile, this.defaultL10nId = "pdfjs-editor-stamp-editor");
     }
     static initialize(t, e) {
       he.initialize(t, e);
@@ -13486,14 +13486,14 @@
         hasNoAltText: e.get(!1) ?? 0
       };
     }
-    #Pl(t, e = !1) {
-      t ? (this.#wl = t.bitmap, e || (this.#Al = t.id, this.#kl = t.isSvg), t.file && (this.#Cl = t.file.name), this.#Il()) : this.remove();
+    _private_field__Pl(t, e = !1) {
+      t ? (this._private_field__wl = t.bitmap, e || (this._private_field__Al = t.id, this._private_field__kl = t.isSvg), t.file && (this._private_field__Cl = t.file.name), this._private_field__Il()) : this.remove();
     }
-    #Rl() {
-      if ((this.#xl = null, this._uiManager.enableWaiting(!1), this.#El)) if (this._uiManager.useNewAltTextWhenAddingImage && this._uiManager.useNewAltTextFlow && this.#wl) this.addEditToolbar().then(() => {
+    _private_field__Rl() {
+      if ((this._private_field__xl = null, this._uiManager.enableWaiting(!1), this._private_field__El)) if (this._uiManager.useNewAltTextWhenAddingImage && this._uiManager.useNewAltTextFlow && this._private_field__wl) this.addEditToolbar().then(() => {
         (this._editToolbar.hide(), this._uiManager.editAltText(this, !0));
       }); else {
-        if (!this._uiManager.useNewAltTextWhenAddingImage && this._uiManager.useNewAltTextFlow && this.#wl) {
+        if (!this._uiManager.useNewAltTextWhenAddingImage && this._uiManager.useNewAltTextFlow && this._private_field__wl) {
           this._reportTelemetry({
             action: "pdfjs.image.image_added",
             data: {
@@ -13532,20 +13532,20 @@
         decorative: !1
       }), o);
     }
-    #Ll() {
-      if (this.#Al) return (this._uiManager.enableWaiting(!0), void this._uiManager.imageManager.getFromId(this.#Al).then(t => this.#Pl(t, !0)).finally(() => this.#Rl()));
-      if (this.#_l) {
-        const t = this.#_l;
-        return (this.#_l = null, this._uiManager.enableWaiting(!0), void (this.#xl = this._uiManager.imageManager.getFromUrl(t).then(t => this.#Pl(t)).finally(() => this.#Rl())));
+    _private_field__Ll() {
+      if (this._private_field__Al) return (this._uiManager.enableWaiting(!0), void this._uiManager.imageManager.getFromId(this._private_field__Al).then(t => this._private_field__Pl(t, !0)).finally(() => this._private_field__Rl()));
+      if (this._private_field___l) {
+        const t = this._private_field___l;
+        return (this._private_field___l = null, this._uiManager.enableWaiting(!0), void (this._private_field__xl = this._uiManager.imageManager.getFromUrl(t).then(t => this._private_field__Pl(t)).finally(() => this._private_field__Rl())));
       }
-      if (this.#Sl) {
-        const t = this.#Sl;
-        return (this.#Sl = null, this._uiManager.enableWaiting(!0), void (this.#xl = this._uiManager.imageManager.getFromFile(t).then(t => this.#Pl(t)).finally(() => this.#Rl())));
+      if (this._private_field__Sl) {
+        const t = this._private_field__Sl;
+        return (this._private_field__Sl = null, this._uiManager.enableWaiting(!0), void (this._private_field__xl = this._uiManager.imageManager.getFromFile(t).then(t => this._private_field__Pl(t)).finally(() => this._private_field__Rl())));
       }
       const t = document.createElement("input");
       (t.type = "file", t.accept = zt.join(","));
       const e = this._uiManager._signal;
-      (this.#xl = new Promise(i => {
+      (this._private_field__xl = new Promise(i => {
         (t.addEventListener("change", async () => {
           if (t.files && 0 !== t.files.length) {
             this._uiManager.enableWaiting(!0);
@@ -13555,7 +13555,7 @@
               data: {
                 alt_text_modal: this._uiManager.useNewAltTextFlow
               }
-            }), this.#Pl(e));
+            }), this._private_field__Pl(e));
           } else this.remove();
           i();
         }, {
@@ -13565,19 +13565,19 @@
         }, {
           signal: e
         }));
-      }).finally(() => this.#Rl()), t.click());
+      }).finally(() => this._private_field__Rl()), t.click());
     }
     remove() {
-      (this.#Al && (this.#wl = null, this._uiManager.imageManager.deleteId(this.#Al), this.#El?.remove(), this.#El = null, this.#Ml && (clearTimeout(this.#Ml), this.#Ml = null)), super.remove());
+      (this._private_field__Al && (this._private_field__wl = null, this._uiManager.imageManager.deleteId(this._private_field__Al), this._private_field__El?.remove(), this._private_field__El = null, this._private_field__Ml && (clearTimeout(this._private_field__Ml), this._private_field__Ml = null)), super.remove());
     }
     rebuild() {
-      this.parent ? (super.rebuild(), null !== this.div && (this.#Al && null === this.#El && this.#Ll(), this.isAttachedToDOM || this.parent.add(this))) : this.#Al && this.#Ll();
+      this.parent ? (super.rebuild(), null !== this.div && (this._private_field__Al && null === this._private_field__El && this._private_field__Ll(), this.isAttachedToDOM || this.parent.add(this))) : this._private_field__Al && this._private_field__Ll();
     }
     onceAdded(t) {
       (this._isDraggable = !0, t && this.div.focus());
     }
     isEmpty() {
-      return !(this.#xl || this.#wl || this.#_l || this.#Sl || this.#Al || this.#Tl);
+      return !(this._private_field__xl || this._private_field__wl || this._private_field___l || this._private_field__Sl || this._private_field__Al || this._private_field__Tl);
     }
     get toolbarButtons() {
       return [["altText", this.createAltText()]];
@@ -13588,40 +13588,40 @@
     render() {
       if (this.div) return this.div;
       let t, e;
-      return (this._isCopy && (t = this.x, e = this.y), super.render(), this.div.hidden = !0, this.createAltText(), this.#Tl || (this.#wl ? this.#Il() : this.#Ll()), this._isCopy && this._moveAfterPaste(t, e), this._uiManager.addShouldRescale(this), this.div);
+      return (this._isCopy && (t = this.x, e = this.y), super.render(), this.div.hidden = !0, this.createAltText(), this._private_field__Tl || (this._private_field__wl ? this._private_field__Il() : this._private_field__Ll()), this._isCopy && this._moveAfterPaste(t, e), this._uiManager.addShouldRescale(this), this.div);
     }
     setCanvas(t, e) {
       const {id: i, bitmap: s} = this._uiManager.imageManager.getFromCanvas(t, e);
-      (e.remove(), i && this._uiManager.imageManager.isValidId(i) && (this.#Al = i, s && (this.#wl = s), this.#Tl = !1, this.#Il()));
+      (e.remove(), i && this._uiManager.imageManager.isValidId(i) && (this._private_field__Al = i, s && (this._private_field__wl = s), this._private_field__Tl = !1, this._private_field__Il()));
     }
     _onResized() {
       this.onScaleChanging();
     }
     onScaleChanging() {
       if (!this.parent) return;
-      null !== this.#Ml && clearTimeout(this.#Ml);
-      this.#Ml = setTimeout(() => {
-        (this.#Ml = null, this.#Fl());
+      null !== this._private_field__Ml && clearTimeout(this._private_field__Ml);
+      this._private_field__Ml = setTimeout(() => {
+        (this._private_field__Ml = null, this._private_field__Fl());
       }, 200);
     }
-    #Il() {
+    _private_field__Il() {
       const {div: t} = this;
-      let {width: e, height: i} = this.#wl;
+      let {width: e, height: i} = this._private_field__wl;
       const [s, n] = this.pageDimensions, r = .75;
       if (this.width) (e = this.width * s, i = this.height * n); else if (e > r * s || i > r * n) {
         const t = Math.min(r * s / e, r * n / i);
         (e *= t, i *= t);
       }
       this._uiManager.enableWaiting(!1);
-      const a = this.#El = document.createElement("canvas");
-      (a.setAttribute("role", "img"), this.addContainer(a), this.width = e / s, this.height = i / n, this.setDims(), this._initialOptions?.isCentered ? this.center() : this.fixAndSetPosition(), this._initialOptions = null, this._uiManager.useNewAltTextWhenAddingImage && this._uiManager.useNewAltTextFlow && !this.annotationElementId || (t.hidden = !1), this.#Fl(), this.#Dl || (this.parent.addUndoableEditor(this), this.#Dl = !0), this._reportTelemetry({
+      const a = this._private_field__El = document.createElement("canvas");
+      (a.setAttribute("role", "img"), this.addContainer(a), this.width = e / s, this.height = i / n, this.setDims(), this._initialOptions?.isCentered ? this.center() : this.fixAndSetPosition(), this._initialOptions = null, this._uiManager.useNewAltTextWhenAddingImage && this._uiManager.useNewAltTextFlow && !this.annotationElementId || (t.hidden = !1), this._private_field__Fl(), this._private_field__Dl || (this.parent.addUndoableEditor(this), this._private_field__Dl = !0), this._reportTelemetry({
         action: "inserted_image"
-      }), this.#Cl && this.div.setAttribute("aria-description", this.#Cl), this.annotationElementId || this._uiManager.a11yAlert("pdfjs-editor-stamp-added-alert"));
+      }), this._private_field__Cl && this.div.setAttribute("aria-description", this._private_field__Cl), this.annotationElementId || this._uiManager.a11yAlert("pdfjs-editor-stamp-added-alert"));
     }
     copyCanvas(t, e, i = !1) {
       t || (t = 224);
-      const {width: s, height: n} = this.#wl, r = new Ut();
-      let a = this.#wl, o = s, l = n, h = null;
+      const {width: s, height: n} = this._private_field__wl, r = new Ut();
+      let a = this._private_field__wl, o = s, l = n, h = null;
       if (e) {
         if (s > e || n > e) {
           const t = Math.min(e / s, e / n);
@@ -13629,7 +13629,7 @@
         }
         h = document.createElement("canvas");
         const t = h.width = Math.ceil(o * r.sx), i = h.height = Math.ceil(l * r.sy);
-        this.#kl || (a = this.#Bl(t, i));
+        this._private_field__kl || (a = this._private_field__Bl(t, i));
         const c = h.getContext("2d");
         c.filter = this._uiManager.hcmFilter;
         let d = "white", u = "#cfcfd8";
@@ -13640,9 +13640,9 @@
       let c = null;
       if (i) {
         let e, i;
-        if (r.symmetric && a.width < t && a.height < t) (e = a.width, i = a.height); else if ((a = this.#wl, s > t || n > t)) {
+        if (r.symmetric && a.width < t && a.height < t) (e = a.width, i = a.height); else if ((a = this._private_field__wl, s > t || n > t)) {
           const r = Math.min(t / s, t / n);
-          (e = Math.floor(s * r), i = Math.floor(n * r), this.#kl || (a = this.#Bl(e, i)));
+          (e = Math.floor(s * r), i = Math.floor(n * r), this._private_field__kl || (a = this._private_field__Bl(e, i)));
         }
         const o = new OffscreenCanvas(e, i).getContext("2d", {
           willReadFrequently: !0
@@ -13660,9 +13660,9 @@
         imageData: c
       };
     }
-    #Bl(t, e) {
-      const {width: i, height: s} = this.#wl;
-      let n = i, r = s, a = this.#wl;
+    _private_field__Bl(t, e) {
+      const {width: i, height: s} = this._private_field__wl;
+      let n = i, r = s, a = this._private_field__wl;
       for (; n > 2 * t || r > 2 * e; ) {
         const i = n, s = r;
         (n > 2 * t && (n = n >= 16384 ? Math.floor(n / 2) - 1 : Math.ceil(n / 2)), r > 2 * e && (r = r >= 16384 ? Math.floor(r / 2) - 1 : Math.ceil(r / 2)));
@@ -13671,28 +13671,28 @@
       }
       return a;
     }
-    #Fl() {
-      const [t, e] = this.parentDimensions, {width: i, height: s} = this, n = new Ut(), r = Math.ceil(i * t * n.sx), a = Math.ceil(s * e * n.sy), o = this.#El;
+    _private_field__Fl() {
+      const [t, e] = this.parentDimensions, {width: i, height: s} = this, n = new Ut(), r = Math.ceil(i * t * n.sx), a = Math.ceil(s * e * n.sy), o = this._private_field__El;
       if (!o || o.width === r && o.height === a) return;
       (o.width = r, o.height = a);
-      const l = this.#kl ? this.#wl : this.#Bl(r, a), h = o.getContext("2d");
+      const l = this._private_field__kl ? this._private_field__wl : this._private_field__Bl(r, a), h = o.getContext("2d");
       (h.filter = this._uiManager.hcmFilter, h.drawImage(l, 0, 0, l.width, l.height, 0, 0, r, a));
     }
-    #Nl(t) {
+    _private_field__Nl(t) {
       if (t) {
-        if (this.#kl) {
-          const t = this._uiManager.imageManager.getSvgUrl(this.#Al);
+        if (this._private_field__kl) {
+          const t = this._uiManager.imageManager.getSvgUrl(this._private_field__Al);
           if (t) return t;
         }
         const t = document.createElement("canvas");
-        ({width: t.width, height: t.height} = this.#wl);
-        return (t.getContext("2d").drawImage(this.#wl, 0, 0), t.toDataURL());
+        ({width: t.width, height: t.height} = this._private_field__wl);
+        return (t.getContext("2d").drawImage(this._private_field__wl, 0, 0), t.toDataURL());
       }
-      if (this.#kl) {
+      if (this._private_field__kl) {
         const [t, e] = this.pageDimensions, i = Math.round(this.width * t * At.PDF_TO_CSS_UNITS), s = Math.round(this.height * e * At.PDF_TO_CSS_UNITS), n = new OffscreenCanvas(i, s);
-        return (n.getContext("2d").drawImage(this.#wl, 0, 0, this.#wl.width, this.#wl.height, 0, 0, i, s), n.transferToImageBitmap());
+        return (n.getContext("2d").drawImage(this._private_field__wl, 0, 0, this._private_field__wl.width, this._private_field__wl.height, 0, 0, i, s), n.transferToImageBitmap());
       }
-      return structuredClone(this.#wl);
+      return structuredClone(this._private_field__wl);
     }
     static async deserialize(t, e, i) {
       let s = null, n = !1;
@@ -13725,41 +13725,41 @@
         };
       }
       const r = await super.deserialize(t, e, i), {rect: a, bitmap: o, bitmapUrl: l, bitmapId: h, isSvg: c, accessibilityData: d} = t;
-      (n ? (i.addMissingCanvas(t.id, r), r.#Tl = !0) : h && i.imageManager.isValidId(h) ? (r.#Al = h, o && (r.#wl = o)) : r.#_l = l, r.#kl = c);
+      (n ? (i.addMissingCanvas(t.id, r), r._private_field__Tl = !0) : h && i.imageManager.isValidId(h) ? (r._private_field__Al = h, o && (r._private_field__wl = o)) : r._private_field___l = l, r._private_field__kl = c);
       const [u, p] = r.pageDimensions;
-      return (r.width = (a[2] - a[0]) / u, r.height = (a[3] - a[1]) / p, d && (r.altTextData = d), r._initialData = s, t.comment && r.setCommentData(t), r.#Dl = !!s, r);
+      return (r.width = (a[2] - a[0]) / u, r.height = (a[3] - a[1]) / p, d && (r.altTextData = d), r._initialData = s, t.comment && r.setCommentData(t), r._private_field__Dl = !!s, r);
     }
     serialize(t = !1, e = null) {
       if (this.isEmpty()) return null;
       if (this.deleted) return this.serializeDeleted();
       const i = Object.assign(super.serialize(t), {
-        bitmapId: this.#Al,
-        isSvg: this.#kl
+        bitmapId: this._private_field__Al,
+        isSvg: this._private_field__kl
       });
-      if ((this.addComment(i), t)) return (i.bitmapUrl = this.#Nl(!0), i.accessibilityData = this.serializeAltText(!0), i.isCopy = !0, i);
+      if ((this.addComment(i), t)) return (i.bitmapUrl = this._private_field__Nl(!0), i.accessibilityData = this.serializeAltText(!0), i.isCopy = !0, i);
       const {decorative: s, altText: n} = this.serializeAltText(!1);
       if ((!s && n && (i.accessibilityData = {
         type: "Figure",
         alt: n
       }), this.annotationElementId)) {
-        const t = this.#Aa(i);
+        const t = this._private_field__Aa(i);
         return t.isSame ? null : (t.isSameAltText ? delete i.accessibilityData : i.accessibilityData.structParent = this._initialData.structParent ?? -1, i.id = this.annotationElementId, delete i.bitmapId, i);
       }
       if (null === e) return i;
       e.stamps ||= new Map();
-      const r = this.#kl ? (i.rect[2] - i.rect[0]) * (i.rect[3] - i.rect[1]) : null;
-      if (e.stamps.has(this.#Al)) {
-        if (this.#kl) {
-          const t = e.stamps.get(this.#Al);
-          r > t.area && (t.area = r, t.serialized.bitmap.close(), t.serialized.bitmap = this.#Nl(!1));
+      const r = this._private_field__kl ? (i.rect[2] - i.rect[0]) * (i.rect[3] - i.rect[1]) : null;
+      if (e.stamps.has(this._private_field__Al)) {
+        if (this._private_field__kl) {
+          const t = e.stamps.get(this._private_field__Al);
+          r > t.area && (t.area = r, t.serialized.bitmap.close(), t.serialized.bitmap = this._private_field__Nl(!1));
         }
-      } else (e.stamps.set(this.#Al, {
+      } else (e.stamps.set(this._private_field__Al, {
         area: r,
         serialized: i
-      }), i.bitmap = this.#Nl(!1));
+      }), i.bitmap = this._private_field__Nl(!1));
       return i;
     }
-    #Aa(t) {
+    _private_field__Aa(t) {
       const {pageIndex: e, accessibilityData: {altText: i}} = this._initialData, s = t.pageIndex === e, n = (t.accessibilityData?.alt || "") === i;
       return {
         isSame: !this.hasEditedComment && !this._hasBeenMoved && !this._hasBeenResized && s && n,
@@ -13776,42 +13776,41 @@
   jn._type = "stamp";
   jn._editorType = A.STAMP;
   class $n {
-    #na;
-    #Ol = !1;
-    #Ul = null;
-    #zl = null;
-    #Hl = null;
-    #jl = new Map();
-    #$l = !1;
-    #Vl = !1;
-    #Gl = !1;
-    #Wl = null;
-    #ql = null;
-    #Xl = null;
-    #Kl = null;
-    #Yl = null;
-    #Ql = -1;
-    #b;
-    static #G = new Map([xn, Bn, jn, Dn, Hn].map(t => [t._editorType, t]));
+    _private_field__na;
+    _private_field__Ol = !1;
+    _private_field__Ul = null;
+    _private_field__zl = null;
+    _private_field__Hl = null;
+    _private_field__jl = new Map();
+    _private_field__$l = !1;
+    _private_field__Vl = !1;
+    _private_field__Gl = !1;
+    _private_field__Wl = null;
+    _private_field__ql = null;
+    _private_field__Xl = null;
+    _private_field__Kl = null;
+    _private_field__Yl = null;
+    _private_field__Ql = -1;
+    _private_field__b;
     constructor({uiManager: t, pageIndex: e, div: i, structTreeLayer: s, accessibilityManager: n, annotationLayer: r, drawLayer: a, textLayer: o, viewport: l, l10n: h}) {
-      const c = [...$n.#G.values()];
+      const c = [...$n._private_field__G.values()];
       if (!$n._initialized) {
         $n._initialized = !0;
         for (const e of c) e.initialize(h, t);
       }
-      (t.registerEditorTypes(c), this.#b = t, this.pageIndex = e, this.div = i, this.#na = n, this.#Ul = r, this.viewport = l, this.#Xl = o, this.drawLayer = a, this._structTree = s, this.#b.addLayer(this));
+      (t.registerEditorTypes(c), this._private_field__b = t, this.pageIndex = e, this.div = i, this._private_field__na = n, this._private_field__Ul = r, this.viewport = l, this._private_field__Xl = o, this.drawLayer = a, this._structTree = s, this._private_field__b.addLayer(this));
     }
     get isEmpty() {
-      return 0 === this.#jl.size;
+      return 0 === this._private_field__jl.size;
     }
     get isInvisible() {
-      return this.isEmpty && this.#b.getMode() === A.NONE;
+      return this.isEmpty && this._private_field__b.getMode() === A.NONE;
     }
     updateToolbar(t) {
-      this.#b.updateToolbar(t);
+      this._private_field__b.updateToolbar(t);
     }
-    updateMode(t = this.#b.getMode()) {
-      switch ((this.#Jl(), t)) {
+    updateMode(t = this._private_field__b.getMode()) {
+      switch ((this._private_field__Jl(), t)) {
         case A.NONE:
           return (this.div.classList.toggle("nonEditing", !0), this.disableTextSelection(), this.togglePointerEvents(!1), this.toggleAnnotationLayerPointerEvents(!0), void this.disableClick());
         case A.INK:
@@ -13827,21 +13826,21 @@
       const {classList: e} = this.div;
       if ((e.toggle("nonEditing", !1), t === A.POPUP)) e.toggle("commentEditing", !0); else {
         e.toggle("commentEditing", !1);
-        for (const i of $n.#G.values()) e.toggle(`${i._type}Editing`, t === i._editorType);
+        for (const i of $n._private_field__G.values()) e.toggle(`${i._type}Editing`, t === i._editorType);
       }
       this.div.hidden = !1;
     }
     hasTextLayer(t) {
-      return t === this.#Xl?.div;
+      return t === this._private_field__Xl?.div;
     }
     setEditingState(t) {
-      this.#b.setEditingState(t);
+      this._private_field__b.setEditingState(t);
     }
     addCommands(t) {
-      this.#b.addCommands(t);
+      this._private_field__b.addCommands(t);
     }
     cleanUndoStack(t) {
-      this.#b.cleanUndoStack(t);
+      this._private_field__b.cleanUndoStack(t);
     }
     toggleDrawing(t = !1) {
       this.div.classList.toggle("drawing", !t);
@@ -13850,35 +13849,35 @@
       this.div.classList.toggle("disabled", !t);
     }
     toggleAnnotationLayerPointerEvents(t = !1) {
-      this.#Ul?.div.classList.toggle("disabled", !t);
+      this._private_field__Ul?.div.classList.toggle("disabled", !t);
     }
-    get #Zl() {
-      return 0 !== this.#jl.size ? this.#jl.values() : this.#b.getEditors(this.pageIndex);
+    get _private_field__Zl() {
+      return 0 !== this._private_field__jl.size ? this._private_field__jl.values() : this._private_field__b.getEditors(this.pageIndex);
     }
     async enable() {
-      (this.#Gl = !0, this.div.tabIndex = 0, this.togglePointerEvents(!0), this.div.classList.toggle("nonEditing", !1), this.#Yl?.abort(), this.#Yl = null);
+      (this._private_field__Gl = !0, this.div.tabIndex = 0, this.togglePointerEvents(!0), this.div.classList.toggle("nonEditing", !1), this._private_field__Yl?.abort(), this._private_field__Yl = null);
       const t = new Set();
-      for (const i of this.#Zl) (i.enableEditing(), i.show(!0), i.annotationElementId && (this.#b.removeChangedExistingAnnotation(i), t.add(i.annotationElementId)));
-      const e = this.#Ul;
+      for (const i of this._private_field__Zl) (i.enableEditing(), i.show(!0), i.annotationElementId && (this._private_field__b.removeChangedExistingAnnotation(i), t.add(i.annotationElementId)));
+      const e = this._private_field__Ul;
       if (e) for (const i of e.getEditableAnnotations()) {
-        if ((i.hide(), this.#b.isDeletedAnnotationElement(i.data.id))) continue;
+        if ((i.hide(), this._private_field__b.isDeletedAnnotationElement(i.data.id))) continue;
         if (t.has(i.data.id)) continue;
         const e = await this.deserialize(i);
         e && (this.addOrRebuild(e), e.enableEditing());
       }
-      (this.#Gl = !1, this.#b._eventBus.dispatch("editorsrendered", {
+      (this._private_field__Gl = !1, this._private_field__b._eventBus.dispatch("editorsrendered", {
         source: this,
         pageNumber: this.pageIndex + 1
       }));
     }
     disable() {
-      if ((this.#Vl = !0, this.div.tabIndex = -1, this.togglePointerEvents(!1), this.div.classList.toggle("nonEditing", !0), this.#Xl && !this.#Yl)) {
-        this.#Yl = new AbortController();
-        const t = this.#b.combinedSignal(this.#Yl);
-        this.#Xl.div.addEventListener("pointerdown", t => {
+      if ((this._private_field__Vl = !0, this.div.tabIndex = -1, this.togglePointerEvents(!1), this.div.classList.toggle("nonEditing", !0), this._private_field__Xl && !this._private_field__Yl)) {
+        this._private_field__Yl = new AbortController();
+        const t = this._private_field__b.combinedSignal(this._private_field__Yl);
+        this._private_field__Xl.div.addEventListener("pointerdown", t => {
           const {clientX: e, clientY: i, timeStamp: s} = t;
-          if (s - this.#Ql > 500) return void (this.#Ql = s);
-          this.#Ql = -1;
+          if (s - this._private_field__Ql > 500) return void (this._private_field__Ql = s);
+          this._private_field__Ql = -1;
           const {classList: n} = this.div;
           n.toggle("getElements", !0);
           const r = document.elementsFromPoint(e, i);
@@ -13890,75 +13889,75 @@
             break;
           }
           if (!a) return;
-          const l = this.#jl.get(a);
+          const l = this._private_field__jl.get(a);
           null === l?.annotationElementId && (t.stopPropagation(), t.preventDefault(), l.dblclick(t));
         }, {
           signal: t,
           capture: !0
         });
       }
-      const t = this.#Ul;
+      const t = this._private_field__Ul;
       if (t) {
         const e = new Map(), i = new Map();
-        for (const n of this.#Zl) (n.disableEditing(), n.annotationElementId ? null === n.serialize() ? (i.set(n.annotationElementId, n), this.getEditableAnnotation(n.annotationElementId)?.show(), n.remove()) : e.set(n.annotationElementId, n) : n.updateFakeAnnotationElement(t));
+        for (const n of this._private_field__Zl) (n.disableEditing(), n.annotationElementId ? null === n.serialize() ? (i.set(n.annotationElementId, n), this.getEditableAnnotation(n.annotationElementId)?.show(), n.remove()) : e.set(n.annotationElementId, n) : n.updateFakeAnnotationElement(t));
         const s = t.getEditableAnnotations();
         for (const t of s) {
           const {id: s} = t.data;
-          if (this.#b.isDeletedAnnotationElement(s)) {
+          if (this._private_field__b.isDeletedAnnotationElement(s)) {
             t.updateEdited({
               deleted: !0
             });
             continue;
           }
           let n = i.get(s);
-          n ? (n.resetAnnotationElement(t), n.show(!1), t.show()) : (n = e.get(s), n && (this.#b.addChangedExistingAnnotation(n), n.renderAnnotationElement(t) && n.show(!1)), t.show());
+          n ? (n.resetAnnotationElement(t), n.show(!1), t.show()) : (n = e.get(s), n && (this._private_field__b.addChangedExistingAnnotation(n), n.renderAnnotationElement(t) && n.show(!1)), t.show());
         }
       }
-      (this.#Jl(), this.isEmpty && (this.div.hidden = !0));
+      (this._private_field__Jl(), this.isEmpty && (this.div.hidden = !0));
       const {classList: e} = this.div;
-      for (const i of $n.#G.values()) e.remove(`${i._type}Editing`);
-      (this.disableTextSelection(), this.toggleAnnotationLayerPointerEvents(!0), this.#Vl = !1);
+      for (const i of $n._private_field__G.values()) e.remove(`${i._type}Editing`);
+      (this.disableTextSelection(), this.toggleAnnotationLayerPointerEvents(!0), this._private_field__Vl = !1);
     }
     getEditableAnnotation(t) {
-      return this.#Ul?.getEditableAnnotation(t) || null;
+      return this._private_field__Ul?.getEditableAnnotation(t) || null;
     }
     setActiveEditor(t) {
-      this.#b.getActive() !== t && this.#b.setActiveEditor(t);
+      this._private_field__b.getActive() !== t && this._private_field__b.setActiveEditor(t);
     }
     enableTextSelection() {
-      if ((this.div.tabIndex = -1, this.#Xl?.div && !this.#Kl)) {
-        this.#Kl = new AbortController();
-        const t = this.#b.combinedSignal(this.#Kl);
-        (this.#Xl.div.addEventListener("pointerdown", this.#th.bind(this), {
+      if ((this.div.tabIndex = -1, this._private_field__Xl?.div && !this._private_field__Kl)) {
+        this._private_field__Kl = new AbortController();
+        const t = this._private_field__b.combinedSignal(this._private_field__Kl);
+        (this._private_field__Xl.div.addEventListener("pointerdown", this._private_field__th.bind(this), {
           signal: t
-        }), this.#Xl.div.classList.add("highlighting"));
+        }), this._private_field__Xl.div.classList.add("highlighting"));
       }
     }
     disableTextSelection() {
-      (this.div.tabIndex = 0, this.#Xl?.div && this.#Kl && (this.#Kl.abort(), this.#Kl = null, this.#Xl.div.classList.remove("highlighting")));
+      (this.div.tabIndex = 0, this._private_field__Xl?.div && this._private_field__Kl && (this._private_field__Kl.abort(), this._private_field__Kl = null, this._private_field__Xl.div.classList.remove("highlighting")));
     }
-    #th(t) {
-      this.#b.unselectAll();
+    _private_field__th(t) {
+      this._private_field__b.unselectAll();
       const {target: e} = t;
-      if (e === this.#Xl.div || ("img" === e.getAttribute("role") || e.classList.contains("endOfContent")) && this.#Xl.div.contains(e)) {
+      if (e === this._private_field__Xl.div || ("img" === e.getAttribute("role") || e.classList.contains("endOfContent")) && this._private_field__Xl.div.contains(e)) {
         const {isMac: e} = lt.platform;
         if (0 !== t.button || t.ctrlKey && e) return;
-        (this.#b.showAllEditors("highlight", !0, !0), this.#Xl.div.classList.add("free"), this.toggleDrawing(), Dn.startHighlighting(this, "ltr" === this.#b.direction, {
-          target: this.#Xl.div,
+        (this._private_field__b.showAllEditors("highlight", !0, !0), this._private_field__Xl.div.classList.add("free"), this.toggleDrawing(), Dn.startHighlighting(this, "ltr" === this._private_field__b.direction, {
+          target: this._private_field__Xl.div,
           x: t.x,
           y: t.y
-        }), this.#Xl.div.addEventListener("pointerup", () => {
-          (this.#Xl.div.classList.remove("free"), this.toggleDrawing(!0));
+        }), this._private_field__Xl.div.addEventListener("pointerup", () => {
+          (this._private_field__Xl.div.classList.remove("free"), this.toggleDrawing(!0));
         }, {
           once: !0,
-          signal: this.#b._signal
+          signal: this._private_field__b._signal
         }), t.preventDefault());
       }
     }
     enableClick() {
-      if (this.#zl) return;
-      this.#zl = new AbortController();
-      const t = this.#b.combinedSignal(this.#zl);
+      if (this._private_field__zl) return;
+      this._private_field__zl = new AbortController();
+      const t = this._private_field__b.combinedSignal(this._private_field__zl);
       this.div.addEventListener("pointerdown", this.pointerdown.bind(this), {
         signal: t
       });
@@ -13970,42 +13969,42 @@
       }));
     }
     disableClick() {
-      (this.#zl?.abort(), this.#zl = null);
+      (this._private_field__zl?.abort(), this._private_field__zl = null);
     }
     attach(t) {
-      this.#jl.set(t.id, t);
+      this._private_field__jl.set(t.id, t);
       const {annotationElementId: e} = t;
-      e && this.#b.isDeletedAnnotationElement(e) && this.#b.removeDeletedAnnotationElement(t);
+      e && this._private_field__b.isDeletedAnnotationElement(e) && this._private_field__b.removeDeletedAnnotationElement(t);
     }
     detach(t) {
-      (this.#jl.delete(t.id), this.#na?.removePointerInTextLayer(t.contentDiv), !this.#Vl && t.annotationElementId && this.#b.addDeletedAnnotationElement(t));
+      (this._private_field__jl.delete(t.id), this._private_field__na?.removePointerInTextLayer(t.contentDiv), !this._private_field__Vl && t.annotationElementId && this._private_field__b.addDeletedAnnotationElement(t));
     }
     remove(t) {
-      (this.detach(t), this.#b.removeEditor(t), t.div.remove(), t.isAttachedToDOM = !1);
+      (this.detach(t), this._private_field__b.removeEditor(t), t.div.remove(), t.isAttachedToDOM = !1);
     }
     changeParent(t) {
-      t.parent !== this && (t.parent && t.annotationElementId && (this.#b.addDeletedAnnotationElement(t.annotationElementId), he.deleteAnnotationElement(t), t.annotationElementId = null), this.attach(t), t.parent?.detach(t), t.setParent(this), t.div && t.isAttachedToDOM && (t.div.remove(), this.div.append(t.div)));
+      t.parent !== this && (t.parent && t.annotationElementId && (this._private_field__b.addDeletedAnnotationElement(t.annotationElementId), he.deleteAnnotationElement(t), t.annotationElementId = null), this.attach(t), t.parent?.detach(t), t.setParent(this), t.div && t.isAttachedToDOM && (t.div.remove(), this.div.append(t.div)));
     }
     add(t) {
       if (t.parent !== this || !t.isAttachedToDOM) {
-        if ((this.changeParent(t), this.#b.addEditor(t), this.attach(t), !t.isAttachedToDOM)) {
+        if ((this.changeParent(t), this._private_field__b.addEditor(t), this.attach(t), !t.isAttachedToDOM)) {
           const e = t.render();
           (this.div.append(e), t.isAttachedToDOM = !0);
         }
-        (t.fixAndSetPosition(), t.onceAdded(!this.#Gl), this.#b.addToAnnotationStorage(t), t._reportTelemetry(t.telemetryInitialData));
+        (t.fixAndSetPosition(), t.onceAdded(!this._private_field__Gl), this._private_field__b.addToAnnotationStorage(t), t._reportTelemetry(t.telemetryInitialData));
       }
     }
     moveEditorInDOM(t) {
       if (!t.isAttachedToDOM) return;
       const {activeElement: e} = document;
-      (t.div.contains(e) && !this.#Hl && (t._focusEventsAllowed = !1, this.#Hl = setTimeout(() => {
-        (this.#Hl = null, t.div.contains(document.activeElement) ? t._focusEventsAllowed = !0 : (t.div.addEventListener("focusin", () => {
+      (t.div.contains(e) && !this._private_field__Hl && (t._focusEventsAllowed = !1, this._private_field__Hl = setTimeout(() => {
+        (this._private_field__Hl = null, t.div.contains(document.activeElement) ? t._focusEventsAllowed = !0 : (t.div.addEventListener("focusin", () => {
           t._focusEventsAllowed = !0;
         }, {
           once: !0,
-          signal: this.#b._signal
+          signal: this._private_field__b._signal
         }), e.focus()));
-      }, 0)), t._structTreeParentId = this.#na?.moveElementInDOM(this.div, t.div, t.contentDiv, !0));
+      }, 0)), t._structTreeParentId = this._private_field__na?.moveElementInDOM(this.div, t.div, t.contentDiv, !0));
     }
     addOrRebuild(t) {
       t.needsToBeRebuilt() ? (t.parent ||= this, t.rebuild(), t.show()) : this.add(t);
@@ -14020,48 +14019,48 @@
       });
     }
     getEditorByUID(t) {
-      for (const e of this.#jl.values()) if (e.uid === t) return e;
+      for (const e of this._private_field__jl.values()) if (e.uid === t) return e;
       return null;
     }
     getNextId() {
-      return this.#b.getId();
+      return this._private_field__b.getId();
     }
-    get #eh() {
-      return $n.#G.get(this.#b.getMode());
+    get _private_field__eh() {
+      return $n._private_field__G.get(this._private_field__b.getMode());
     }
     combinedSignal(t) {
-      return this.#b.combinedSignal(t);
+      return this._private_field__b.combinedSignal(t);
     }
-    #ih(t) {
-      const e = this.#eh;
+    _private_field__ih(t) {
+      const e = this._private_field__eh;
       return e ? new e.prototype.constructor(t) : null;
     }
     canCreateNewEmptyEditor() {
-      return this.#eh?.canCreateNewEmptyEditor();
+      return this._private_field__eh?.canCreateNewEmptyEditor();
     }
     async pasteEditor(t, e) {
-      (this.updateToolbar(t), await this.#b.updateMode(t.mode));
-      const {offsetX: i, offsetY: s} = this.#sh(), n = this.getNextId(), r = this.#ih({
+      (this.updateToolbar(t), await this._private_field__b.updateMode(t.mode));
+      const {offsetX: i, offsetY: s} = this._private_field__sh(), n = this.getNextId(), r = this._private_field__ih({
         parent: this,
         id: n,
         x: i,
         y: s,
-        uiManager: this.#b,
+        uiManager: this._private_field__b,
         isCentered: !0,
         ...e
       });
       r && this.add(r);
     }
     async deserialize(t) {
-      return await $n.#G.get(t.annotationType ?? t.annotationEditorType)?.deserialize(t, this, this.#b) || null;
+      return await $n._private_field__G.get(t.annotationType ?? t.annotationEditorType)?.deserialize(t, this, this._private_field__b) || null;
     }
     createAndAddNewEditor(t, e, i = {}) {
-      const s = this.getNextId(), n = this.#ih({
+      const s = this.getNextId(), n = this._private_field__ih({
         parent: this,
         id: s,
         x: t.offsetX,
         y: t.offsetY,
-        uiManager: this.#b,
+        uiManager: this._private_field__b,
         isCentered: e,
         ...i
       });
@@ -14070,7 +14069,7 @@
     get boundingClientRect() {
       return this.div.getBoundingClientRect();
     }
-    #sh() {
+    _private_field__sh() {
       const {x: t, y: e, width: i, height: s} = this.boundingClientRect, n = Math.max(0, t), r = Math.max(0, e), a = (n + Math.min(window.innerWidth, t + i)) / 2 - t, o = (r + Math.min(window.innerHeight, e + s)) / 2 - e, [l, h] = this.viewport.rotation % 180 == 0 ? [a, o] : [o, a];
       return {
         offsetX: l,
@@ -14078,127 +14077,127 @@
       };
     }
     addNewEditor(t = {}) {
-      this.createAndAddNewEditor(this.#sh(), !0, t);
+      this.createAndAddNewEditor(this._private_field__sh(), !0, t);
     }
     setSelected(t) {
-      this.#b.setSelected(t);
+      this._private_field__b.setSelected(t);
     }
     toggleSelected(t) {
-      this.#b.toggleSelected(t);
+      this._private_field__b.toggleSelected(t);
     }
     unselect(t) {
-      this.#b.unselect(t);
+      this._private_field__b.unselect(t);
     }
     pointerup(t) {
       const {isMac: e} = lt.platform;
       if (0 !== t.button || t.ctrlKey && e) return;
       if (t.target !== this.div) return;
-      if (!this.#$l) return;
-      if ((this.#$l = !1, this.#eh?.isDrawer && this.#eh.supportMultipleDrawings)) return;
-      if (!this.#Ol) return void (this.#Ol = !0);
-      const i = this.#b.getMode();
-      i !== A.STAMP && i !== A.SIGNATURE ? this.createAndAddNewEditor(t, !1) : this.#b.unselectAll();
+      if (!this._private_field__$l) return;
+      if ((this._private_field__$l = !1, this._private_field__eh?.isDrawer && this._private_field__eh.supportMultipleDrawings)) return;
+      if (!this._private_field__Ol) return void (this._private_field__Ol = !0);
+      const i = this._private_field__b.getMode();
+      i !== A.STAMP && i !== A.SIGNATURE ? this.createAndAddNewEditor(t, !1) : this._private_field__b.unselectAll();
     }
     pointerdown(t) {
-      if ((this.#b.getMode() === A.HIGHLIGHT && this.enableTextSelection(), this.#$l)) return void (this.#$l = !1);
+      if ((this._private_field__b.getMode() === A.HIGHLIGHT && this.enableTextSelection(), this._private_field__$l)) return void (this._private_field__$l = !1);
       const {isMac: e} = lt.platform;
       if (0 !== t.button || t.ctrlKey && e) return;
       if (t.target !== this.div) return;
-      if ((this.#$l = !0, this.#eh?.isDrawer)) return void this.startDrawingSession(t);
-      const i = this.#b.getActive();
-      this.#Ol = !i || i.isEmpty();
+      if ((this._private_field__$l = !0, this._private_field__eh?.isDrawer)) return void this.startDrawingSession(t);
+      const i = this._private_field__b.getActive();
+      this._private_field__Ol = !i || i.isEmpty();
     }
     startDrawingSession(t) {
       if ((this.div.focus({
         preventScroll: !0
-      }), this.#Wl)) return void this.#eh.startDrawing(this, this.#b, !1, t);
-      (this.#b.setCurrentDrawingSession(this), this.#Wl = new AbortController());
-      const e = this.#b.combinedSignal(this.#Wl);
+      }), this._private_field__Wl)) return void this._private_field__eh.startDrawing(this, this._private_field__b, !1, t);
+      (this._private_field__b.setCurrentDrawingSession(this), this._private_field__Wl = new AbortController());
+      const e = this._private_field__b.combinedSignal(this._private_field__Wl);
       (this.div.addEventListener("blur", ({relatedTarget: t}) => {
-        t && !this.div.contains(t) && (this.#ql = null, this.commitOrRemove());
+        t && !this.div.contains(t) && (this._private_field__ql = null, this.commitOrRemove());
       }, {
         signal: e
-      }), this.#eh.startDrawing(this, this.#b, !1, t));
+      }), this._private_field__eh.startDrawing(this, this._private_field__b, !1, t));
     }
     pause(t) {
       if (t) {
         const {activeElement: t} = document;
-        return void (this.div.contains(t) && (this.#ql = t));
+        return void (this.div.contains(t) && (this._private_field__ql = t));
       }
-      this.#ql && setTimeout(() => {
-        (this.#ql?.focus(), this.#ql = null);
+      this._private_field__ql && setTimeout(() => {
+        (this._private_field__ql?.focus(), this._private_field__ql = null);
       }, 0);
     }
     endDrawingSession(t = !1) {
-      return this.#Wl ? (this.#b.setCurrentDrawingSession(null), this.#Wl.abort(), this.#Wl = null, this.#ql = null, this.#eh.endDrawing(t)) : null;
+      return this._private_field__Wl ? (this._private_field__b.setCurrentDrawingSession(null), this._private_field__Wl.abort(), this._private_field__Wl = null, this._private_field__ql = null, this._private_field__eh.endDrawing(t)) : null;
     }
     findNewParent(t, e, i) {
-      const s = this.#b.findParent(e, i);
+      const s = this._private_field__b.findParent(e, i);
       return null !== s && s !== this && (s.changeParent(t), !0);
     }
     commitOrRemove() {
-      return !!this.#Wl && (this.endDrawingSession(), !0);
+      return !!this._private_field__Wl && (this.endDrawingSession(), !0);
     }
     onScaleChanging() {
-      this.#Wl && this.#eh.onScaleChangingWhenDrawing(this);
+      this._private_field__Wl && this._private_field__eh.onScaleChangingWhenDrawing(this);
     }
     destroy() {
-      (this.commitOrRemove(), this.#b.getActive()?.parent === this && (this.#b.commitOrRemove(), this.#b.setActiveEditor(null)), this.#Hl && (clearTimeout(this.#Hl), this.#Hl = null));
-      for (const t of this.#jl.values()) (this.#na?.removePointerInTextLayer(t.contentDiv), t.setParent(null), t.isAttachedToDOM = !1, t.div.remove());
-      (this.div = null, this.#jl.clear(), this.#b.removeLayer(this));
+      (this.commitOrRemove(), this._private_field__b.getActive()?.parent === this && (this._private_field__b.commitOrRemove(), this._private_field__b.setActiveEditor(null)), this._private_field__Hl && (clearTimeout(this._private_field__Hl), this._private_field__Hl = null));
+      for (const t of this._private_field__jl.values()) (this._private_field__na?.removePointerInTextLayer(t.contentDiv), t.setParent(null), t.isAttachedToDOM = !1, t.div.remove());
+      (this.div = null, this._private_field__jl.clear(), this._private_field__b.removeLayer(this));
     }
-    #Jl() {
-      for (const t of this.#jl.values()) t.isEmpty() && t.remove();
+    _private_field__Jl() {
+      for (const t of this._private_field__jl.values()) t.isEmpty() && t.remove();
     }
     render({viewport: t}) {
       (this.viewport = t, Ot(this.div, t));
-      for (const e of this.#b.getEditors(this.pageIndex)) (this.add(e), e.rebuild());
+      for (const e of this._private_field__b.getEditors(this.pageIndex)) (this.add(e), e.rebuild());
       this.updateMode();
     }
     update({viewport: t}) {
-      (this.#b.commitOrRemove(), this.#Jl());
+      (this._private_field__b.commitOrRemove(), this._private_field__Jl());
       const e = this.viewport.rotation, i = t.rotation;
       if ((this.viewport = t, Ot(this.div, {
         rotation: i
-      }), e !== i)) for (const s of this.#jl.values()) s.rotate(i);
+      }), e !== i)) for (const s of this._private_field__jl.values()) s.rotate(i);
     }
     get pageDimensions() {
       const {pageWidth: t, pageHeight: e} = this.viewport.rawDims;
       return [t, e];
     }
     get scale() {
-      return this.#b.viewParameters.realScale;
+      return this._private_field__b.viewParameters.realScale;
     }
   }
   $n._initialized = !1;
+  $n._private_field__G = new Map([xn, Bn, jn, Dn, Hn].map(t => [t._editorType, t]));
   class Vn {
-    #Mr = null;
-    #nh = new Map();
-    #rh = new Map();
-    static #A = 0;
+    _private_field__Mr = null;
+    _private_field__nh = new Map();
+    _private_field__rh = new Map();
     constructor({pageIndex: t}) {
       this.pageIndex = t;
     }
     setParent(t) {
-      if (this.#Mr) {
-        if (this.#Mr !== t) {
-          if (this.#nh.size > 0) for (const e of this.#nh.values()) (e.remove(), t.append(e));
-          this.#Mr = t;
+      if (this._private_field__Mr) {
+        if (this._private_field__Mr !== t) {
+          if (this._private_field__nh.size > 0) for (const e of this._private_field__nh.values()) (e.remove(), t.append(e));
+          this._private_field__Mr = t;
         }
-      } else this.#Mr = t;
+      } else this._private_field__Mr = t;
     }
     static get _svgFactory() {
       return J(this, "_svgFactory", new js());
     }
-    static #ah(t, [e, i, s, n]) {
+    static _private_field__ah(t, [e, i, s, n]) {
       const {style: r} = t;
       (r.top = 100 * i + "%", r.left = 100 * e + "%", r.width = 100 * s + "%", r.height = 100 * n + "%");
     }
-    #oh() {
+    _private_field__oh() {
       const t = Vn._svgFactory.create(1, 1, !0);
-      return (this.#Mr.append(t), t.setAttribute("aria-hidden", !0), t);
+      return (this._private_field__Mr.append(t), t.setAttribute("aria-hidden", !0), t);
     }
-    #lh(t, e) {
+    _private_field__lh(t, e) {
       const i = Vn._svgFactory.createElement("clipPath");
       t.append(i);
       const s = `clip_${e}`;
@@ -14206,24 +14205,24 @@
       const n = Vn._svgFactory.createElement("use");
       return (i.append(n), n.setAttribute("href", `#${e}`), n.classList.add("clip"), s);
     }
-    #hh(t, e) {
+    _private_field__hh(t, e) {
       for (const [i, s] of Object.entries(e)) null === s ? t.removeAttribute(i) : t.setAttribute(i, s);
     }
     draw(t, e = !1, i = !1) {
-      const s = Vn.#A++, n = this.#oh(), r = Vn._svgFactory.createElement("defs");
+      const s = Vn._private_field__A++, n = this._private_field__oh(), r = Vn._svgFactory.createElement("defs");
       n.append(r);
       const a = Vn._svgFactory.createElement("path");
       r.append(a);
       const o = `path_p${this.pageIndex}_${s}`;
-      (a.setAttribute("id", o), a.setAttribute("vector-effect", "non-scaling-stroke"), e && this.#rh.set(s, a));
-      const l = i ? this.#lh(r, o) : null, h = Vn._svgFactory.createElement("use");
-      return (n.append(h), h.setAttribute("href", `#${o}`), this.updateProperties(n, t), this.#nh.set(s, n), {
+      (a.setAttribute("id", o), a.setAttribute("vector-effect", "non-scaling-stroke"), e && this._private_field__rh.set(s, a));
+      const l = i ? this._private_field__lh(r, o) : null, h = Vn._svgFactory.createElement("use");
+      return (n.append(h), h.setAttribute("href", `#${o}`), this.updateProperties(n, t), this._private_field__nh.set(s, n), {
         id: s,
         clipPathId: `url(#${l})`
       });
     }
     drawOutline(t, e) {
-      const i = Vn.#A++, s = this.#oh(), n = Vn._svgFactory.createElement("defs");
+      const i = Vn._private_field__A++, s = this._private_field__oh(), n = Vn._svgFactory.createElement("defs");
       s.append(n);
       const r = Vn._svgFactory.createElement("path");
       n.append(r);
@@ -14240,39 +14239,40 @@
       const l = Vn._svgFactory.createElement("use");
       (s.append(l), l.setAttribute("href", `#${a}`), o && l.setAttribute("mask", `url(#${o})`));
       const h = l.cloneNode();
-      return (s.append(h), l.classList.add("mainOutline"), h.classList.add("secondaryOutline"), this.updateProperties(s, t), this.#nh.set(i, s), i);
+      return (s.append(h), l.classList.add("mainOutline"), h.classList.add("secondaryOutline"), this.updateProperties(s, t), this._private_field__nh.set(i, s), i);
     }
     finalizeDraw(t, e) {
-      (this.#rh.delete(t), this.updateProperties(t, e));
+      (this._private_field__rh.delete(t), this.updateProperties(t, e));
     }
     updateProperties(t, e) {
       if (!e) return;
-      const {root: i, bbox: s, rootClass: n, path: r} = e, a = "number" == typeof t ? this.#nh.get(t) : t;
+      const {root: i, bbox: s, rootClass: n, path: r} = e, a = "number" == typeof t ? this._private_field__nh.get(t) : t;
       if (a) {
-        if ((i && this.#hh(a, i), s && Vn.#ah(a, s), n)) {
+        if ((i && this._private_field__hh(a, i), s && Vn._private_field__ah(a, s), n)) {
           const {classList: t} = a;
           for (const [e, i] of Object.entries(n)) t.toggle(e, i);
         }
         if (r) {
           const t = a.firstChild.firstChild;
-          this.#hh(t, r);
+          this._private_field__hh(t, r);
         }
       }
     }
     updateParent(t, e) {
       if (e === this) return;
-      const i = this.#nh.get(t);
-      i && (e.#Mr.append(i), this.#nh.delete(t), e.#nh.set(t, i));
+      const i = this._private_field__nh.get(t);
+      i && (e._private_field__Mr.append(i), this._private_field__nh.delete(t), e._private_field__nh.set(t, i));
     }
     remove(t) {
-      (this.#rh.delete(t), null !== this.#Mr && (this.#nh.get(t).remove(), this.#nh.delete(t)));
+      (this._private_field__rh.delete(t), null !== this._private_field__Mr && (this._private_field__nh.get(t).remove(), this._private_field__nh.delete(t)));
     }
     destroy() {
-      this.#Mr = null;
-      for (const t of this.#nh.values()) t.remove();
-      (this.#nh.clear(), this.#rh.clear());
+      this._private_field__Mr = null;
+      for (const t of this._private_field__nh.values()) t.remove();
+      (this._private_field__nh.clear(), this._private_field__rh.clear());
     }
   }
+  Vn._private_field__A = 0;
   (globalThis._pdfjsTestingUtils = {
     HighlightOutliner: En
   }, globalThis.pdfjsLib = {

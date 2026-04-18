@@ -15812,11 +15812,11 @@
     return !e.queryFn && t?.initialPromise ? () => t.initialPromise : e.queryFn && e.queryFn !== Zi ? e.queryFn : () => Promise.reject(new Error(`Missing queryFn: '${e.queryHash}'`));
   }
   var Hi = new (class extends ni {
-    #e;
-    #t;
-    #a;
+    _private_field__e;
+    _private_field__t;
+    _private_field__a;
     constructor() {
-      (super(), this.#a = e => {
+      (super(), this._private_field__a = e => {
         if (!ri && window.addEventListener) {
           const t = () => e();
           return (window.addEventListener("visibilitychange", t, !1), () => {
@@ -15826,18 +15826,18 @@
       });
     }
     onSubscribe() {
-      this.#t || this.setEventListener(this.#a);
+      this._private_field__t || this.setEventListener(this._private_field__a);
     }
     onUnsubscribe() {
-      this.hasListeners() || (this.#t?.(), this.#t = void 0);
+      this.hasListeners() || (this._private_field__t?.(), this._private_field__t = void 0);
     }
     setEventListener(e) {
-      (this.#a = e, this.#t?.(), this.#t = e(e => {
+      (this._private_field__a = e, this._private_field__t?.(), this._private_field__t = e(e => {
         "boolean" == typeof e ? this.setFocused(e) : this.onFocus();
       }));
     }
     setFocused(e) {
-      this.#e !== e && (this.#e = e, this.onFocus());
+      this._private_field__e !== e && (this._private_field__e = e, this.onFocus());
     }
     onFocus() {
       const e = this.isFocused();
@@ -15846,14 +15846,14 @@
       });
     }
     isFocused() {
-      return "boolean" == typeof this.#e ? this.#e : "hidden" !== globalThis.document?.visibilityState;
+      return "boolean" == typeof this._private_field__e ? this._private_field__e : "hidden" !== globalThis.document?.visibilityState;
     }
   })(), Vi = new (class extends ni {
-    #n = !0;
-    #t;
-    #a;
+    _private_field__n = !0;
+    _private_field__t;
+    _private_field__a;
     constructor() {
-      (super(), this.#a = e => {
+      (super(), this._private_field__a = e => {
         if (!ri && window.addEventListener) {
           const t = () => e(!0), a = () => e(!1);
           return (window.addEventListener("online", t, !1), window.addEventListener("offline", a, !1), () => {
@@ -15863,21 +15863,21 @@
       });
     }
     onSubscribe() {
-      this.#t || this.setEventListener(this.#a);
+      this._private_field__t || this.setEventListener(this._private_field__a);
     }
     onUnsubscribe() {
-      this.hasListeners() || (this.#t?.(), this.#t = void 0);
+      this.hasListeners() || (this._private_field__t?.(), this._private_field__t = void 0);
     }
     setEventListener(e) {
-      (this.#a = e, this.#t?.(), this.#t = e(this.setOnline.bind(this)));
+      (this._private_field__a = e, this._private_field__t?.(), this._private_field__t = e(this.setOnline.bind(this)));
     }
     setOnline(e) {
-      this.#n !== e && (this.#n = e, this.listeners.forEach(t => {
+      this._private_field__n !== e && (this._private_field__n = e, this.listeners.forEach(t => {
         t(e);
       }));
     }
     isOnline() {
-      return this.#n;
+      return this._private_field__n;
     }
   })();
   function Si() {
@@ -16010,12 +16010,12 @@
       }
     };
   })(), Fi = class {
-    #r;
+    _private_field__r;
     destroy() {
       this.clearGcTimeout();
     }
     scheduleGc() {
-      (this.clearGcTimeout(), ri || ii(this.gcTime) && (this.#r = setTimeout(() => {
+      (this.clearGcTimeout(), ri || ii(this.gcTime) && (this._private_field__r = setTimeout(() => {
         this.optionalRemove();
       }, this.gcTime)));
     }
@@ -16023,17 +16023,17 @@
       this.gcTime = Math.max(this.gcTime || 0, e ?? (ri ? 1 / 0 : 3e5));
     }
     clearGcTimeout() {
-      this.#r && (clearTimeout(this.#r), this.#r = void 0);
+      this._private_field__r && (clearTimeout(this._private_field__r), this._private_field__r = void 0);
     }
   }, Pi = class extends Fi {
-    #o;
-    #i;
-    #s;
-    #l;
-    #c;
-    #u;
+    _private_field__o;
+    _private_field__i;
+    _private_field__s;
+    _private_field__l;
+    _private_field__c;
+    _private_field__u;
     constructor(e) {
-      (super(), this.#u = !1, this.#c = e.defaultOptions, this.setOptions(e.options), this.observers = [], this.#s = e.cache, this.queryKey = e.queryKey, this.queryHash = e.queryHash, this.#o = (function (e) {
+      (super(), this._private_field__u = !1, this._private_field__c = e.defaultOptions, this.setOptions(e.options), this.observers = [], this._private_field__s = e.cache, this.queryKey = e.queryKey, this.queryHash = e.queryHash, this._private_field__o = (function (e) {
         const t = "function" == typeof e.initialData ? e.initialData() : e.initialData, a = void 0 !== t, n = a ? "function" == typeof e.initialDataUpdatedAt ? e.initialDataUpdatedAt() : e.initialDataUpdatedAt : 0;
         return {
           data: t,
@@ -16049,26 +16049,26 @@
           status: a ? "success" : "pending",
           fetchStatus: "idle"
         };
-      })(this.options), this.state = e.state ?? this.#o, this.scheduleGc());
+      })(this.options), this.state = e.state ?? this._private_field__o, this.scheduleGc());
     }
     get meta() {
       return this.options.meta;
     }
     get promise() {
-      return this.#l?.promise;
+      return this._private_field__l?.promise;
     }
     setOptions(e) {
       (this.options = {
-        ...this.#c,
+        ...this._private_field__c,
         ...e
       }, this.updateGcTime(this.options.gcTime));
     }
     optionalRemove() {
-      this.observers.length || "idle" !== this.state.fetchStatus || this.#s.remove(this);
+      this.observers.length || "idle" !== this.state.fetchStatus || this._private_field__s.remove(this);
     }
     setData(e, t) {
       const a = wi(this.state.data, e, this.options);
-      return (this.#h({
+      return (this._private_field__h({
         data: a,
         type: "success",
         dataUpdatedAt: t?.updatedAt,
@@ -16076,15 +16076,15 @@
       }), a);
     }
     setState(e, t) {
-      this.#h({
+      this._private_field__h({
         type: "setState",
         state: e,
         setStateOptions: t
       });
     }
     cancel(e) {
-      const t = this.#l?.promise;
-      return (this.#l?.cancel(e), t ? t.then(oi).catch(oi) : Promise.resolve());
+      const t = this._private_field__l?.promise;
+      return (this._private_field__l?.cancel(e), t ? t.then(oi).catch(oi) : Promise.resolve());
     }
     destroy() {
       (super.destroy(), this.cancel({
@@ -16092,7 +16092,7 @@
       }));
     }
     reset() {
-      (this.destroy(), this.setState(this.#o));
+      (this.destroy(), this.setState(this._private_field__o));
     }
     isActive() {
       return this.observers.some(e => !1 !== ci(e.options.enabled, this));
@@ -16110,25 +16110,25 @@
       const e = this.observers.find(e => e.shouldFetchOnWindowFocus());
       (e?.refetch({
         cancelRefetch: !1
-      }), this.#l?.continue());
+      }), this._private_field__l?.continue());
     }
     onOnline() {
       const e = this.observers.find(e => e.shouldFetchOnReconnect());
       (e?.refetch({
         cancelRefetch: !1
-      }), this.#l?.continue());
+      }), this._private_field__l?.continue());
     }
     addObserver(e) {
-      this.observers.includes(e) || (this.observers.push(e), this.clearGcTimeout(), this.#s.notify({
+      this.observers.includes(e) || (this.observers.push(e), this.clearGcTimeout(), this._private_field__s.notify({
         type: "observerAdded",
         query: this,
         observer: e
       }));
     }
     removeObserver(e) {
-      this.observers.includes(e) && (this.observers = this.observers.filter(t => t !== e), this.observers.length || (this.#l && (this.#u ? this.#l.cancel({
+      this.observers.includes(e) && (this.observers = this.observers.filter(t => t !== e), this.observers.length || (this._private_field__l && (this._private_field__u ? this._private_field__l.cancel({
         revert: !0
-      }) : this.#l.cancelRetry()), this.scheduleGc()), this.#s.notify({
+      }) : this._private_field__l.cancelRetry()), this.scheduleGc()), this._private_field__s.notify({
         type: "observerRemoved",
         query: this,
         observer: e
@@ -16138,14 +16138,14 @@
       return this.observers.length;
     }
     invalidate() {
-      this.state.isInvalidated || this.#h({
+      this.state.isInvalidated || this._private_field__h({
         type: "invalidate"
       });
     }
     fetch(e, t) {
       if ("idle" !== this.state.fetchStatus) if (void 0 !== this.state.data && t?.cancelRefetch) this.cancel({
         silent: !0
-      }); else if (this.#l) return (this.#l.continueRetry(), this.#l.promise);
+      }); else if (this._private_field__l) return (this._private_field__l.continueRetry(), this._private_field__l.promise);
       if ((e && this.setOptions(e), !this.options.queryFn)) {
         const e = this.observers.find(e => e.options.queryFn);
         e && this.setOptions(e.options);
@@ -16153,7 +16153,7 @@
       const a = new AbortController(), n = e => {
         Object.defineProperty(e, "signal", {
           enumerable: !0,
-          get: () => (this.#u = !0, a.signal)
+          get: () => (this._private_field__u = !0, a.signal)
         });
       }, r = {
         fetchOptions: t,
@@ -16165,20 +16165,20 @@
             queryKey: this.queryKey,
             meta: this.meta
           };
-          return (n(a), this.#u = !1, this.options.persister ? this.options.persister(e, a, this) : e(a));
+          return (n(a), this._private_field__u = !1, this.options.persister ? this.options.persister(e, a, this) : e(a));
         }
       };
-      (n(r), this.options.behavior?.onFetch(r, this), this.#i = this.state, "idle" !== this.state.fetchStatus && this.state.fetchMeta === r.fetchOptions?.meta || this.#h({
+      (n(r), this.options.behavior?.onFetch(r, this), this._private_field__i = this.state, "idle" !== this.state.fetchStatus && this.state.fetchMeta === r.fetchOptions?.meta || this._private_field__h({
         type: "fetch",
         meta: r.fetchOptions?.meta
       }));
       const o = e => {
-        (Li(e) && e.silent || this.#h({
+        (Li(e) && e.silent || this._private_field__h({
           type: "error",
           error: e
-        }), Li(e) || (this.#s.config.onError?.(e, this), this.#s.config.onSettled?.(this.state.data, e, this)), this.scheduleGc());
+        }), Li(e) || (this._private_field__s.config.onError?.(e, this), this._private_field__s.config.onSettled?.(this.state.data, e, this)), this.scheduleGc());
       };
-      return (this.#l = Ci({
+      return (this._private_field__l = Ci({
         initialPromise: t?.initialPromise,
         fn: r.fetchFn,
         abort: a.abort.bind(a),
@@ -16189,24 +16189,24 @@
             } catch (t) {
               return void o(t);
             }
-            (this.#s.config.onSuccess?.(e, this), this.#s.config.onSettled?.(e, this.state.error, this), this.scheduleGc());
+            (this._private_field__s.config.onSuccess?.(e, this), this._private_field__s.config.onSettled?.(e, this.state.error, this), this.scheduleGc());
           } else o(new Error(`${this.queryHash} data is undefined`));
         },
         onError: o,
         onFail: (e, t) => {
-          this.#h({
+          this._private_field__h({
             type: "failed",
             failureCount: e,
             error: t
           });
         },
         onPause: () => {
-          this.#h({
+          this._private_field__h({
             type: "pause"
           });
         },
         onContinue: () => {
-          this.#h({
+          this._private_field__h({
             type: "continue"
           });
         },
@@ -16214,9 +16214,9 @@
         retryDelay: r.options.retryDelay,
         networkMode: r.options.networkMode,
         canRun: () => !0
-      }), this.#l.start());
+      }), this._private_field__l.start());
     }
-    #h(e) {
+    _private_field__h(e) {
       (this.state = (t => {
         switch (e.type) {
           case "failed":
@@ -16258,8 +16258,8 @@
             };
           case "error":
             const a = e.error;
-            return Li(a) && a.revert && this.#i ? {
-              ...this.#i,
+            return Li(a) && a.revert && this._private_field__i ? {
+              ...this._private_field__i,
               fetchStatus: "idle"
             } : {
               ...t,
@@ -16285,7 +16285,7 @@
       })(this.state), Ti.batch(() => {
         (this.observers.forEach(e => {
           e.onQueryUpdate();
-        }), this.#s.notify({
+        }), this._private_field__s.notify({
           query: this,
           type: "updated",
           action: e
@@ -16306,9 +16306,9 @@
   }
   var Oi = class extends ni {
     constructor(e = {}) {
-      (super(), this.config = e, this.#d = new Map());
+      (super(), this.config = e, this._private_field__d = new Map());
     }
-    #d;
+    _private_field__d;
     build(e, t, a) {
       const n = t.queryKey, r = t.queryHash ?? di(n, t);
       let o = this.get(r);
@@ -16322,14 +16322,14 @@
       }), this.add(o)), o);
     }
     add(e) {
-      this.#d.has(e.queryHash) || (this.#d.set(e.queryHash, e), this.notify({
+      this._private_field__d.has(e.queryHash) || (this._private_field__d.set(e.queryHash, e), this.notify({
         type: "added",
         query: e
       }));
     }
     remove(e) {
-      const t = this.#d.get(e.queryHash);
-      t && (e.destroy(), t === e && this.#d.delete(e.queryHash), this.notify({
+      const t = this._private_field__d.get(e.queryHash);
+      t && (e.destroy(), t === e && this._private_field__d.delete(e.queryHash), this.notify({
         type: "removed",
         query: e
       }));
@@ -16342,10 +16342,10 @@
       });
     }
     get(e) {
-      return this.#d.get(e);
+      return this._private_field__d.get(e);
     }
     getAll() {
-      return [...this.#d.values()];
+      return [...this._private_field__d.values()];
     }
     find(e) {
       const t = {
@@ -16380,11 +16380,11 @@
       });
     }
   }, zi = class extends Fi {
-    #m;
-    #p;
-    #l;
+    _private_field__m;
+    _private_field__p;
+    _private_field__l;
     constructor(e) {
-      (super(), this.mutationId = e.mutationId, this.#p = e.mutationCache, this.#m = [], this.state = e.state || ({
+      (super(), this.mutationId = e.mutationId, this._private_field__p = e.mutationCache, this._private_field__m = [], this.state = e.state || ({
         context: void 0,
         data: void 0,
         error: null,
@@ -16403,85 +16403,85 @@
       return this.options.meta;
     }
     addObserver(e) {
-      this.#m.includes(e) || (this.#m.push(e), this.clearGcTimeout(), this.#p.notify({
+      this._private_field__m.includes(e) || (this._private_field__m.push(e), this.clearGcTimeout(), this._private_field__p.notify({
         type: "observerAdded",
         mutation: this,
         observer: e
       }));
     }
     removeObserver(e) {
-      (this.#m = this.#m.filter(t => t !== e), this.scheduleGc(), this.#p.notify({
+      (this._private_field__m = this._private_field__m.filter(t => t !== e), this.scheduleGc(), this._private_field__p.notify({
         type: "observerRemoved",
         mutation: this,
         observer: e
       }));
     }
     optionalRemove() {
-      this.#m.length || ("pending" === this.state.status ? this.scheduleGc() : this.#p.remove(this));
+      this._private_field__m.length || ("pending" === this.state.status ? this.scheduleGc() : this._private_field__p.remove(this));
     }
     continue() {
-      return this.#l?.continue() ?? this.execute(this.state.variables);
+      return this._private_field__l?.continue() ?? this.execute(this.state.variables);
     }
     async execute(e) {
-      this.#l = Ci({
+      this._private_field__l = Ci({
         fn: () => this.options.mutationFn ? this.options.mutationFn(e) : Promise.reject(new Error("No mutationFn found")),
         onFail: (e, t) => {
-          this.#h({
+          this._private_field__h({
             type: "failed",
             failureCount: e,
             error: t
           });
         },
         onPause: () => {
-          this.#h({
+          this._private_field__h({
             type: "pause"
           });
         },
         onContinue: () => {
-          this.#h({
+          this._private_field__h({
             type: "continue"
           });
         },
         retry: this.options.retry ?? 0,
         retryDelay: this.options.retryDelay,
         networkMode: this.options.networkMode,
-        canRun: () => this.#p.canRun(this)
+        canRun: () => this._private_field__p.canRun(this)
       });
-      const t = "pending" === this.state.status, a = !this.#l.canStart();
+      const t = "pending" === this.state.status, a = !this._private_field__l.canStart();
       try {
         if (!t) {
-          (this.#h({
+          (this._private_field__h({
             type: "pending",
             variables: e,
             isPaused: a
-          }), await this.#p.config.onMutate?.(e, this));
+          }), await this._private_field__p.config.onMutate?.(e, this));
           const t = await this.options.onMutate?.(e);
-          t !== this.state.context && this.#h({
+          t !== this.state.context && this._private_field__h({
             type: "pending",
             context: t,
             variables: e,
             isPaused: a
           });
         }
-        const n = await this.#l.start();
-        return (await this.#p.config.onSuccess?.(n, e, this.state.context, this), await this.options.onSuccess?.(n, e, this.state.context), await this.#p.config.onSettled?.(n, null, this.state.variables, this.state.context, this), await this.options.onSettled?.(n, null, e, this.state.context), this.#h({
+        const n = await this._private_field__l.start();
+        return (await this._private_field__p.config.onSuccess?.(n, e, this.state.context, this), await this.options.onSuccess?.(n, e, this.state.context), await this._private_field__p.config.onSettled?.(n, null, this.state.variables, this.state.context, this), await this.options.onSettled?.(n, null, e, this.state.context), this._private_field__h({
           type: "success",
           data: n
         }), n);
       } catch (n) {
         try {
-          throw (await this.#p.config.onError?.(n, e, this.state.context, this), await this.options.onError?.(n, e, this.state.context), await this.#p.config.onSettled?.(void 0, n, this.state.variables, this.state.context, this), await this.options.onSettled?.(void 0, n, e, this.state.context), n);
+          throw (await this._private_field__p.config.onError?.(n, e, this.state.context, this), await this.options.onError?.(n, e, this.state.context), await this._private_field__p.config.onSettled?.(void 0, n, this.state.variables, this.state.context, this), await this.options.onSettled?.(void 0, n, e, this.state.context), n);
         } finally {
-          this.#h({
+          this._private_field__h({
             type: "error",
             error: n
           });
         }
       } finally {
-        this.#p.runNext(this);
+        this._private_field__p.runNext(this);
       }
     }
-    #h(e) {
+    _private_field__h(e) {
       (this.state = (t => {
         switch (e.type) {
           case "failed":
@@ -16535,9 +16535,9 @@
             };
         }
       })(this.state), Ti.batch(() => {
-        (this.#m.forEach(t => {
+        (this._private_field__m.forEach(t => {
           t.onMutationUpdate(e);
-        }), this.#p.notify({
+        }), this._private_field__p.notify({
           mutation: this,
           type: "updated",
           action: e
@@ -16547,31 +16547,31 @@
   };
   var Ii = class extends ni {
     constructor(e = {}) {
-      (super(), this.config = e, this.#f = new Map(), this.#g = Date.now());
+      (super(), this.config = e, this._private_field__f = new Map(), this._private_field__g = Date.now());
     }
-    #f;
-    #g;
+    _private_field__f;
+    _private_field__g;
     build(e, t, a) {
       const n = new zi({
         mutationCache: this,
-        mutationId: ++this.#g,
+        mutationId: ++this._private_field__g,
         options: e.defaultMutationOptions(t),
         state: a
       });
       return (this.add(n), n);
     }
     add(e) {
-      const t = Ni(e), a = this.#f.get(t) ?? [];
-      (a.push(e), this.#f.set(t, a), this.notify({
+      const t = Ni(e), a = this._private_field__f.get(t) ?? [];
+      (a.push(e), this._private_field__f.set(t, a), this.notify({
         type: "added",
         mutation: e
       }));
     }
     remove(e) {
       const t = Ni(e);
-      if (this.#f.has(t)) {
-        const a = this.#f.get(t)?.filter(t => t !== e);
-        a && (0 === a.length ? this.#f.delete(t) : this.#f.set(t, a));
+      if (this._private_field__f.has(t)) {
+        const a = this._private_field__f.get(t)?.filter(t => t !== e);
+        a && (0 === a.length ? this._private_field__f.delete(t) : this._private_field__f.set(t, a));
       }
       this.notify({
         type: "removed",
@@ -16579,11 +16579,11 @@
       });
     }
     canRun(e) {
-      const t = this.#f.get(Ni(e))?.find(e => "pending" === e.state.status);
+      const t = this._private_field__f.get(Ni(e))?.find(e => "pending" === e.state.status);
       return !t || t === e;
     }
     runNext(e) {
-      const t = this.#f.get(Ni(e))?.find(t => t !== e && t.state.isPaused);
+      const t = this._private_field__f.get(Ni(e))?.find(t => t !== e && t.state.isPaused);
       return t?.continue() ?? Promise.resolve();
     }
     clear() {
@@ -16594,7 +16594,7 @@
       });
     }
     getAll() {
-      return [...this.#f.values()].flat();
+      return [...this._private_field__f.values()].flat();
     }
     find(e) {
       const t = {
@@ -16691,35 +16691,35 @@
     return !(!t || !e.getPreviousPageParam) && null != $i(e, t);
   }
   var qi = class {
-    #v;
-    #p;
-    #c;
-    #y;
-    #b;
-    #w;
-    #k;
-    #A;
+    _private_field__v;
+    _private_field__p;
+    _private_field__c;
+    _private_field__y;
+    _private_field__b;
+    _private_field__w;
+    _private_field__k;
+    _private_field__A;
     constructor(e = {}) {
-      (this.#v = e.queryCache || new Oi(), this.#p = e.mutationCache || new Ii(), this.#c = e.defaultOptions || ({}), this.#y = new Map(), this.#b = new Map(), this.#w = 0);
+      (this._private_field__v = e.queryCache || new Oi(), this._private_field__p = e.mutationCache || new Ii(), this._private_field__c = e.defaultOptions || ({}), this._private_field__y = new Map(), this._private_field__b = new Map(), this._private_field__w = 0);
     }
     mount() {
-      (this.#w++, 1 === this.#w && (this.#k = Hi.subscribe(async e => {
-        e && (await this.resumePausedMutations(), this.#v.onFocus());
-      }), this.#A = Vi.subscribe(async e => {
-        e && (await this.resumePausedMutations(), this.#v.onOnline());
+      (this._private_field__w++, 1 === this._private_field__w && (this._private_field__k = Hi.subscribe(async e => {
+        e && (await this.resumePausedMutations(), this._private_field__v.onFocus());
+      }), this._private_field__A = Vi.subscribe(async e => {
+        e && (await this.resumePausedMutations(), this._private_field__v.onOnline());
       })));
     }
     unmount() {
-      (this.#w--, 0 === this.#w && (this.#k?.(), this.#k = void 0, this.#A?.(), this.#A = void 0));
+      (this._private_field__w--, 0 === this._private_field__w && (this._private_field__k?.(), this._private_field__k = void 0, this._private_field__A?.(), this._private_field__A = void 0));
     }
     isFetching(e) {
-      return this.#v.findAll({
+      return this._private_field__v.findAll({
         ...e,
         fetchStatus: "fetching"
       }).length;
     }
     isMutating(e) {
-      return this.#p.findAll({
+      return this._private_field__p.findAll({
         ...e,
         status: "pending"
       }).length;
@@ -16728,41 +16728,41 @@
       const t = this.defaultQueryOptions({
         queryKey: e
       });
-      return this.#v.get(t.queryHash)?.state.data;
+      return this._private_field__v.get(t.queryHash)?.state.data;
     }
     ensureQueryData(e) {
       const t = this.getQueryData(e.queryKey);
       if (void 0 === t) return this.fetchQuery(e);
       {
-        const a = this.defaultQueryOptions(e), n = this.#v.build(this, a);
+        const a = this.defaultQueryOptions(e), n = this._private_field__v.build(this, a);
         return (e.revalidateIfStale && n.isStaleByTime(li(a.staleTime, n)) && this.prefetchQuery(a), Promise.resolve(t));
       }
     }
     getQueriesData(e) {
-      return this.#v.findAll(e).map(({queryKey: e, state: t}) => [e, t.data]);
+      return this._private_field__v.findAll(e).map(({queryKey: e, state: t}) => [e, t.data]);
     }
     setQueryData(e, t, a) {
       const n = this.defaultQueryOptions({
         queryKey: e
-      }), r = this.#v.get(n.queryHash), o = r?.state.data, i = (function (e, t) {
+      }), r = this._private_field__v.get(n.queryHash), o = r?.state.data, i = (function (e, t) {
         return "function" == typeof e ? e(t) : e;
       })(t, o);
-      if (void 0 !== i) return this.#v.build(this, n).setData(i, {
+      if (void 0 !== i) return this._private_field__v.build(this, n).setData(i, {
         ...a,
         manual: !0
       });
     }
     setQueriesData(e, t, a) {
-      return Ti.batch(() => this.#v.findAll(e).map(({queryKey: e}) => [e, this.setQueryData(e, t, a)]));
+      return Ti.batch(() => this._private_field__v.findAll(e).map(({queryKey: e}) => [e, this.setQueryData(e, t, a)]));
     }
     getQueryState(e) {
       const t = this.defaultQueryOptions({
         queryKey: e
       });
-      return this.#v.get(t.queryHash)?.state;
+      return this._private_field__v.get(t.queryHash)?.state;
     }
     removeQueries(e) {
-      const t = this.#v;
+      const t = this._private_field__v;
       Ti.batch(() => {
         t.findAll(e).forEach(e => {
           t.remove(e);
@@ -16770,7 +16770,7 @@
       });
     }
     resetQueries(e, t) {
-      const a = this.#v, n = {
+      const a = this._private_field__v, n = {
         type: "active",
         ...e
       };
@@ -16782,12 +16782,12 @@
       const a = {
         revert: !0,
         ...t
-      }, n = Ti.batch(() => this.#v.findAll(e).map(e => e.cancel(a)));
+      }, n = Ti.batch(() => this._private_field__v.findAll(e).map(e => e.cancel(a)));
       return Promise.all(n).then(oi).catch(oi);
     }
     invalidateQueries(e = {}, t = {}) {
       return Ti.batch(() => {
-        if ((this.#v.findAll(e).forEach(e => {
+        if ((this._private_field__v.findAll(e).forEach(e => {
           e.invalidate();
         }), "none" === e.refetchType)) return Promise.resolve();
         const a = {
@@ -16801,7 +16801,7 @@
       const a = {
         ...t,
         cancelRefetch: t?.cancelRefetch ?? !0
-      }, n = Ti.batch(() => this.#v.findAll(e).filter(e => !e.isDisabled()).map(e => {
+      }, n = Ti.batch(() => this._private_field__v.findAll(e).filter(e => !e.isDisabled()).map(e => {
         let t = e.fetch(void 0, a);
         return (a.throwOnError || (t = t.catch(oi)), "paused" === e.state.fetchStatus ? Promise.resolve() : t);
       }));
@@ -16810,7 +16810,7 @@
     fetchQuery(e) {
       const t = this.defaultQueryOptions(e);
       void 0 === t.retry && (t.retry = !1);
-      const a = this.#v.build(this, t);
+      const a = this._private_field__v.build(this, t);
       return a.isStaleByTime(li(t.staleTime, a)) ? a.fetch(t) : Promise.resolve(a.state.data);
     }
     prefetchQuery(e) {
@@ -16826,28 +16826,28 @@
       return (e.behavior = Di(e.pages), this.ensureQueryData(e));
     }
     resumePausedMutations() {
-      return Vi.isOnline() ? this.#p.resumePausedMutations() : Promise.resolve();
+      return Vi.isOnline() ? this._private_field__p.resumePausedMutations() : Promise.resolve();
     }
     getQueryCache() {
-      return this.#v;
+      return this._private_field__v;
     }
     getMutationCache() {
-      return this.#p;
+      return this._private_field__p;
     }
     getDefaultOptions() {
-      return this.#c;
+      return this._private_field__c;
     }
     setDefaultOptions(e) {
-      this.#c = e;
+      this._private_field__c = e;
     }
     setQueryDefaults(e, t) {
-      this.#y.set(mi(e), {
+      this._private_field__y.set(mi(e), {
         queryKey: e,
         defaultOptions: t
       });
     }
     getQueryDefaults(e) {
-      const t = [...this.#y.values()];
+      const t = [...this._private_field__y.values()];
       let a = {};
       return (t.forEach(t => {
         pi(e, t.queryKey) && (a = {
@@ -16857,13 +16857,13 @@
       }), a);
     }
     setMutationDefaults(e, t) {
-      this.#b.set(mi(e), {
+      this._private_field__b.set(mi(e), {
         mutationKey: e,
         defaultOptions: t
       });
     }
     getMutationDefaults(e) {
-      const t = [...this.#b.values()];
+      const t = [...this._private_field__b.values()];
       let a = {};
       return (t.forEach(t => {
         pi(e, t.mutationKey) && (a = {
@@ -16875,7 +16875,7 @@
     defaultQueryOptions(e) {
       if (e._defaulted) return e;
       const t = {
-        ...this.#c.queries,
+        ...this._private_field__c.queries,
         ...this.getQueryDefaults(e.queryKey),
         ...e,
         _defaulted: !0
@@ -16884,74 +16884,74 @@
     }
     defaultMutationOptions(e) {
       return e?._defaulted ? e : {
-        ...this.#c.mutations,
+        ...this._private_field__c.mutations,
         ...e?.mutationKey && this.getMutationDefaults(e.mutationKey),
         ...e,
         _defaulted: !0
       };
     }
     clear() {
-      (this.#v.clear(), this.#p.clear());
+      (this._private_field__v.clear(), this._private_field__p.clear());
     }
   }, Gi = class extends ni {
     constructor(e, t) {
-      (super(), this.options = t, this.#E = e, this.#Z = null, this.#M = Si(), this.options.experimental_prefetchInRender || this.#M.reject(new Error("experimental_prefetchInRender feature flag is not enabled")), this.bindMethods(), this.setOptions(t));
+      (super(), this.options = t, this._private_field__E = e, this._private_field__Z = null, this._private_field__M = Si(), this.options.experimental_prefetchInRender || this._private_field__M.reject(new Error("experimental_prefetchInRender feature flag is not enabled")), this.bindMethods(), this.setOptions(t));
     }
-    #E;
-    #H = void 0;
-    #V = void 0;
-    #S = void 0;
-    #x;
-    #_;
-    #M;
-    #Z;
-    #j;
-    #L;
-    #C;
-    #T;
-    #F;
-    #P;
-    #R = new Set();
+    _private_field__E;
+    _private_field__H = void 0;
+    _private_field__V = void 0;
+    _private_field__S = void 0;
+    _private_field__x;
+    _private_field___;
+    _private_field__M;
+    _private_field__Z;
+    _private_field__j;
+    _private_field__L;
+    _private_field__C;
+    _private_field__T;
+    _private_field__F;
+    _private_field__P;
+    _private_field__R = new Set();
     bindMethods() {
       this.refetch = this.refetch.bind(this);
     }
     onSubscribe() {
-      1 === this.listeners.size && (this.#H.addObserver(this), Ki(this.#H, this.options) ? this.#O() : this.updateResult(), this.#z());
+      1 === this.listeners.size && (this._private_field__H.addObserver(this), Ki(this._private_field__H, this.options) ? this._private_field__O() : this.updateResult(), this._private_field__z());
     }
     onUnsubscribe() {
       this.hasListeners() || this.destroy();
     }
     shouldFetchOnReconnect() {
-      return Yi(this.#H, this.options, this.options.refetchOnReconnect);
+      return Yi(this._private_field__H, this.options, this.options.refetchOnReconnect);
     }
     shouldFetchOnWindowFocus() {
-      return Yi(this.#H, this.options, this.options.refetchOnWindowFocus);
+      return Yi(this._private_field__H, this.options, this.options.refetchOnWindowFocus);
     }
     destroy() {
-      (this.listeners = new Set(), this.#I(), this.#N(), this.#H.removeObserver(this));
+      (this.listeners = new Set(), this._private_field__I(), this._private_field__N(), this._private_field__H.removeObserver(this));
     }
     setOptions(e, t) {
-      const a = this.options, n = this.#H;
-      if ((this.options = this.#E.defaultQueryOptions(e), void 0 !== this.options.enabled && "boolean" != typeof this.options.enabled && "function" != typeof this.options.enabled && "boolean" != typeof ci(this.options.enabled, this.#H))) throw new Error("Expected enabled to be a boolean or a callback that returns a boolean");
-      (this.#D(), this.#H.setOptions(this.options), a._defaulted && !gi(this.options, a) && this.#E.getQueryCache().notify({
+      const a = this.options, n = this._private_field__H;
+      if ((this.options = this._private_field__E.defaultQueryOptions(e), void 0 !== this.options.enabled && "boolean" != typeof this.options.enabled && "function" != typeof this.options.enabled && "boolean" != typeof ci(this.options.enabled, this._private_field__H))) throw new Error("Expected enabled to be a boolean or a callback that returns a boolean");
+      (this._private_field__D(), this._private_field__H.setOptions(this.options), a._defaulted && !gi(this.options, a) && this._private_field__E.getQueryCache().notify({
         type: "observerOptionsUpdated",
-        query: this.#H,
+        query: this._private_field__H,
         observer: this
       }));
       const r = this.hasListeners();
-      (r && Qi(this.#H, n, this.options, a) && this.#O(), this.updateResult(t), !r || this.#H === n && ci(this.options.enabled, this.#H) === ci(a.enabled, this.#H) && li(this.options.staleTime, this.#H) === li(a.staleTime, this.#H) || this.#B());
-      const o = this.#$();
-      !r || this.#H === n && ci(this.options.enabled, this.#H) === ci(a.enabled, this.#H) && o === this.#P || this.#U(o);
+      (r && Qi(this._private_field__H, n, this.options, a) && this._private_field__O(), this.updateResult(t), !r || this._private_field__H === n && ci(this.options.enabled, this._private_field__H) === ci(a.enabled, this._private_field__H) && li(this.options.staleTime, this._private_field__H) === li(a.staleTime, this._private_field__H) || this._private_field__B());
+      const o = this._private_field__$();
+      !r || this._private_field__H === n && ci(this.options.enabled, this._private_field__H) === ci(a.enabled, this._private_field__H) && o === this._private_field__P || this._private_field__U(o);
     }
     getOptimisticResult(e) {
-      const t = this.#E.getQueryCache().build(this.#E, e), a = this.createResult(t, e);
+      const t = this._private_field__E.getQueryCache().build(this._private_field__E, e), a = this.createResult(t, e);
       return ((function (e, t) {
         if (!gi(e.getCurrentResult(), t)) return !0;
         return !1;
-      })(this, a) && (this.#S = a, this.#_ = this.options, this.#x = this.#H.state), a);
+      })(this, a) && (this._private_field__S = a, this._private_field___ = this.options, this._private_field__x = this._private_field__H.state), a);
     }
     getCurrentResult() {
-      return this.#S;
+      return this._private_field__S;
     }
     trackResult(e, t) {
       const a = {};
@@ -16964,10 +16964,10 @@
       }), a);
     }
     trackProp(e) {
-      this.#R.add(e);
+      this._private_field__R.add(e);
     }
     getCurrentQuery() {
-      return this.#H;
+      return this._private_field__H;
     }
     refetch({...e} = {}) {
       return this.fetch({
@@ -16975,48 +16975,48 @@
       });
     }
     fetchOptimistic(e) {
-      const t = this.#E.defaultQueryOptions(e), a = this.#E.getQueryCache().build(this.#E, t);
+      const t = this._private_field__E.defaultQueryOptions(e), a = this._private_field__E.getQueryCache().build(this._private_field__E, t);
       return a.fetch().then(() => this.createResult(a, t));
     }
     fetch(e) {
-      return this.#O({
+      return this._private_field__O({
         ...e,
         cancelRefetch: e.cancelRefetch ?? !0
-      }).then(() => (this.updateResult(), this.#S));
+      }).then(() => (this.updateResult(), this._private_field__S));
     }
-    #O(e) {
-      this.#D();
-      let t = this.#H.fetch(this.options, e);
+    _private_field__O(e) {
+      this._private_field__D();
+      let t = this._private_field__H.fetch(this.options, e);
       return (e?.throwOnError || (t = t.catch(oi)), t);
     }
-    #B() {
-      this.#I();
-      const e = li(this.options.staleTime, this.#H);
-      if (ri || this.#S.isStale || !ii(e)) return;
-      const t = si(this.#S.dataUpdatedAt, e) + 1;
-      this.#T = setTimeout(() => {
-        this.#S.isStale || this.updateResult();
+    _private_field__B() {
+      this._private_field__I();
+      const e = li(this.options.staleTime, this._private_field__H);
+      if (ri || this._private_field__S.isStale || !ii(e)) return;
+      const t = si(this._private_field__S.dataUpdatedAt, e) + 1;
+      this._private_field__T = setTimeout(() => {
+        this._private_field__S.isStale || this.updateResult();
       }, t);
     }
-    #$() {
-      return ("function" == typeof this.options.refetchInterval ? this.options.refetchInterval(this.#H) : this.options.refetchInterval) ?? !1;
+    _private_field__$() {
+      return ("function" == typeof this.options.refetchInterval ? this.options.refetchInterval(this._private_field__H) : this.options.refetchInterval) ?? !1;
     }
-    #U(e) {
-      (this.#N(), this.#P = e, !ri && !1 !== ci(this.options.enabled, this.#H) && ii(this.#P) && 0 !== this.#P && (this.#F = setInterval(() => {
-        (this.options.refetchIntervalInBackground || Hi.isFocused()) && this.#O();
-      }, this.#P)));
+    _private_field__U(e) {
+      (this._private_field__N(), this._private_field__P = e, !ri && !1 !== ci(this.options.enabled, this._private_field__H) && ii(this._private_field__P) && 0 !== this._private_field__P && (this._private_field__F = setInterval(() => {
+        (this.options.refetchIntervalInBackground || Hi.isFocused()) && this._private_field__O();
+      }, this._private_field__P)));
     }
-    #z() {
-      (this.#B(), this.#U(this.#$()));
+    _private_field__z() {
+      (this._private_field__B(), this._private_field__U(this._private_field__$()));
     }
-    #I() {
-      this.#T && (clearTimeout(this.#T), this.#T = void 0);
+    _private_field__I() {
+      this._private_field__T && (clearTimeout(this._private_field__T), this._private_field__T = void 0);
     }
-    #N() {
-      this.#F && (clearInterval(this.#F), this.#F = void 0);
+    _private_field__N() {
+      this._private_field__F && (clearInterval(this._private_field__F), this._private_field__F = void 0);
     }
     createResult(e, t) {
-      const a = this.#H, n = this.options, r = this.#S, o = this.#x, i = this.#_, s = e !== a ? e.state : this.#V, {state: l} = e;
+      const a = this._private_field__H, n = this.options, r = this._private_field__S, o = this._private_field__x, i = this._private_field___, s = e !== a ? e.state : this._private_field__V, {state: l} = e;
       let c, u = {
         ...l
       }, h = !1;
@@ -17028,21 +17028,21 @@
         }), "isRestoring" === t._optimisticResults && (u.fetchStatus = "idle"));
       }
       let {error: d, errorUpdatedAt: m, status: p} = u;
-      if (t.select && void 0 !== u.data) if (r && u.data === o?.data && t.select === this.#j) c = this.#L; else try {
-        (this.#j = t.select, c = t.select(u.data), c = wi(r?.data, c, t), this.#L = c, this.#Z = null);
+      if (t.select && void 0 !== u.data) if (r && u.data === o?.data && t.select === this._private_field__j) c = this._private_field__L; else try {
+        (this._private_field__j = t.select, c = t.select(u.data), c = wi(r?.data, c, t), this._private_field__L = c, this._private_field__Z = null);
       } catch (k) {
-        this.#Z = k;
+        this._private_field__Z = k;
       } else c = u.data;
       if (void 0 !== t.placeholderData && void 0 === c && "pending" === p) {
         let e;
-        if (r?.isPlaceholderData && t.placeholderData === i?.placeholderData) e = r.data; else if ((e = "function" == typeof t.placeholderData ? t.placeholderData(this.#C?.state.data, this.#C) : t.placeholderData, t.select && void 0 !== e)) try {
-          (e = t.select(e), this.#Z = null);
+        if (r?.isPlaceholderData && t.placeholderData === i?.placeholderData) e = r.data; else if ((e = "function" == typeof t.placeholderData ? t.placeholderData(this._private_field__C?.state.data, this._private_field__C) : t.placeholderData, t.select && void 0 !== e)) try {
+          (e = t.select(e), this._private_field__Z = null);
         } catch (k) {
-          this.#Z = k;
+          this._private_field__Z = k;
         }
         void 0 !== e && (p = "success", c = wi(r?.data, e, t), h = !0);
       }
-      this.#Z && (d = this.#Z, c = this.#L, m = Date.now(), p = "error");
+      this._private_field__Z && (d = this._private_field__Z, c = this._private_field__L, m = Date.now(), p = "error");
       const f = "fetching" === u.fetchStatus, g = "pending" === p, v = "error" === p, y = g && f, b = void 0 !== c, w = {
         status: p,
         fetchStatus: u.fetchStatus,
@@ -17068,15 +17068,15 @@
         isRefetchError: v && b,
         isStale: Xi(e, t),
         refetch: this.refetch,
-        promise: this.#M
+        promise: this._private_field__M
       };
       if (this.options.experimental_prefetchInRender) {
         const t = e => {
           "error" === w.status ? e.reject(w.error) : void 0 !== w.data && e.resolve(w.data);
         }, n = () => {
-          const e = this.#M = w.promise = Si();
+          const e = this._private_field__M = w.promise = Si();
           t(e);
-        }, r = this.#M;
+        }, r = this._private_field__M;
         switch (r.status) {
           case "pending":
             e.queryHash === a.queryHash && t(r);
@@ -17091,39 +17091,39 @@
       return w;
     }
     updateResult(e) {
-      const t = this.#S, a = this.createResult(this.#H, this.options);
-      if ((this.#x = this.#H.state, this.#_ = this.options, void 0 !== this.#x.data && (this.#C = this.#H), gi(a, t))) return;
-      this.#S = a;
+      const t = this._private_field__S, a = this.createResult(this._private_field__H, this.options);
+      if ((this._private_field__x = this._private_field__H.state, this._private_field___ = this.options, void 0 !== this._private_field__x.data && (this._private_field__C = this._private_field__H), gi(a, t))) return;
+      this._private_field__S = a;
       const n = {};
       (!1 !== e?.listeners && (() => {
         if (!t) return !0;
         const {notifyOnChangeProps: e} = this.options, a = "function" == typeof e ? e() : e;
-        if ("all" === a || !a && !this.#R.size) return !0;
-        const n = new Set(a ?? this.#R);
-        return (this.options.throwOnError && n.add("error"), Object.keys(this.#S).some(e => {
+        if ("all" === a || !a && !this._private_field__R.size) return !0;
+        const n = new Set(a ?? this._private_field__R);
+        return (this.options.throwOnError && n.add("error"), Object.keys(this._private_field__S).some(e => {
           const a = e;
-          return this.#S[a] !== t[a] && n.has(a);
+          return this._private_field__S[a] !== t[a] && n.has(a);
         }));
-      })() && (n.listeners = !0), this.#W({
+      })() && (n.listeners = !0), this._private_field__W({
         ...n,
         ...e
       }));
     }
-    #D() {
-      const e = this.#E.getQueryCache().build(this.#E, this.options);
-      if (e === this.#H) return;
-      const t = this.#H;
-      (this.#H = e, this.#V = e.state, this.hasListeners() && (t?.removeObserver(this), e.addObserver(this)));
+    _private_field__D() {
+      const e = this._private_field__E.getQueryCache().build(this._private_field__E, this.options);
+      if (e === this._private_field__H) return;
+      const t = this._private_field__H;
+      (this._private_field__H = e, this._private_field__V = e.state, this.hasListeners() && (t?.removeObserver(this), e.addObserver(this)));
     }
     onQueryUpdate() {
-      (this.updateResult(), this.hasListeners() && this.#z());
+      (this.updateResult(), this.hasListeners() && this._private_field__z());
     }
-    #W(e) {
+    _private_field__W(e) {
       Ti.batch(() => {
         (e.listeners && this.listeners.forEach(e => {
-          e(this.#S);
-        }), this.#E.getQueryCache().notify({
-          query: this.#H,
+          e(this._private_field__S);
+        }), this._private_field__E.getQueryCache().notify({
+          query: this._private_field__H,
           type: "observerResultsUpdated"
         }));
       });
@@ -17151,21 +17151,21 @@
     return e.filter(e => !t.includes(e));
   }
   var es = class extends ni {
-    #E;
-    #q;
-    #d;
-    #G;
-    #m;
-    #K;
-    #Y;
-    #Q;
+    _private_field__E;
+    _private_field__q;
+    _private_field__d;
+    _private_field__G;
+    _private_field__m;
+    _private_field__K;
+    _private_field__Y;
+    _private_field__Q;
     constructor(e, t, a) {
-      (super(), this.#E = e, this.#G = a, this.#d = [], this.#m = [], this.#q = [], this.setQueries(t));
+      (super(), this._private_field__E = e, this._private_field__G = a, this._private_field__d = [], this._private_field__m = [], this._private_field__q = [], this.setQueries(t));
     }
     onSubscribe() {
-      1 === this.listeners.size && this.#m.forEach(e => {
+      1 === this.listeners.size && this._private_field__m.forEach(e => {
         e.subscribe(t => {
-          this.#X(e, t);
+          this._private_field__X(e, t);
         });
       });
     }
@@ -17173,39 +17173,39 @@
       this.listeners.size || this.destroy();
     }
     destroy() {
-      (this.listeners = new Set(), this.#m.forEach(e => {
+      (this.listeners = new Set(), this._private_field__m.forEach(e => {
         e.destroy();
       }));
     }
     setQueries(e, t, a) {
-      (this.#d = e, this.#G = t, Ti.batch(() => {
-        const e = this.#m, t = this.#J(this.#d);
+      (this._private_field__d = e, this._private_field__G = t, Ti.batch(() => {
+        const e = this._private_field__m, t = this._private_field__J(this._private_field__d);
         t.forEach(e => e.observer.setOptions(e.defaultedQueryOptions, a));
         const n = t.map(e => e.observer), r = n.map(e => e.getCurrentResult()), o = n.some((t, a) => t !== e[a]);
-        (e.length !== n.length || o) && (this.#m = n, this.#q = r, this.hasListeners() && (Ji(e, n).forEach(e => {
+        (e.length !== n.length || o) && (this._private_field__m = n, this._private_field__q = r, this.hasListeners() && (Ji(e, n).forEach(e => {
           e.destroy();
         }), Ji(n, e).forEach(e => {
           e.subscribe(t => {
-            this.#X(e, t);
+            this._private_field__X(e, t);
           });
-        }), this.#W()));
+        }), this._private_field__W()));
       }));
     }
     getCurrentResult() {
-      return this.#q;
+      return this._private_field__q;
     }
     getQueries() {
-      return this.#m.map(e => e.getCurrentQuery());
+      return this._private_field__m.map(e => e.getCurrentQuery());
     }
     getObservers() {
-      return this.#m;
+      return this._private_field__m;
     }
     getOptimisticResult(e, t) {
-      const a = this.#J(e).map(e => e.observer.getOptimisticResult(e.defaultedQueryOptions));
-      return [a, e => this.#ee(e ?? a, t), () => this.#te(a, e)];
+      const a = this._private_field__J(e).map(e => e.observer.getOptimisticResult(e.defaultedQueryOptions));
+      return [a, e => this._private_field__ee(e ?? a, t), () => this._private_field__te(a, e)];
     }
-    #te(e, t) {
-      const a = this.#J(t);
+    _private_field__te(e, t) {
+      const a = this._private_field__J(t);
       return a.map((t, n) => {
         const r = e[n];
         return t.defaultedQueryOptions.notifyOnChangeProps ? r : t.observer.trackResult(r, e => {
@@ -17215,34 +17215,34 @@
         });
       });
     }
-    #ee(e, t) {
-      return t ? (this.#K && this.#q === this.#Q && t === this.#Y || (this.#Y = t, this.#Q = this.#q, this.#K = fi(this.#K, t(e))), this.#K) : e;
+    _private_field__ee(e, t) {
+      return t ? (this._private_field__K && this._private_field__q === this._private_field__Q && t === this._private_field__Y || (this._private_field__Y = t, this._private_field__Q = this._private_field__q, this._private_field__K = fi(this._private_field__K, t(e))), this._private_field__K) : e;
     }
-    #J(e) {
-      const t = new Map(this.#m.map(e => [e.options.queryHash, e])), a = [];
+    _private_field__J(e) {
+      const t = new Map(this._private_field__m.map(e => [e.options.queryHash, e])), a = [];
       return (e.forEach(e => {
-        const n = this.#E.defaultQueryOptions(e), r = t.get(n.queryHash);
+        const n = this._private_field__E.defaultQueryOptions(e), r = t.get(n.queryHash);
         r ? a.push({
           defaultedQueryOptions: n,
           observer: r
         }) : a.push({
           defaultedQueryOptions: n,
-          observer: new Gi(this.#E, n)
+          observer: new Gi(this._private_field__E, n)
         });
       }), a);
     }
-    #X(e, t) {
-      const a = this.#m.indexOf(e);
-      -1 !== a && (this.#q = (function (e, t, a) {
+    _private_field__X(e, t) {
+      const a = this._private_field__m.indexOf(e);
+      -1 !== a && (this._private_field__q = (function (e, t, a) {
         const n = e.slice(0);
         return (n[t] = a, n);
-      })(this.#q, a, t), this.#W());
+      })(this._private_field__q, a, t), this._private_field__W());
     }
-    #W() {
+    _private_field__W() {
       if (this.hasListeners()) {
-        this.#K !== this.#ee(this.#te(this.#q, this.#d), this.#G?.combine) && Ti.batch(() => {
+        this._private_field__K !== this._private_field__ee(this._private_field__te(this._private_field__q, this._private_field__d), this._private_field__G?.combine) && Ti.batch(() => {
           this.listeners.forEach(e => {
-            e(this.#q);
+            e(this._private_field__q);
           });
         });
       }
@@ -17300,41 +17300,41 @@
       };
     }
   }, as = class extends ni {
-    #E;
-    #S = void 0;
-    #ae;
-    #ne;
+    _private_field__E;
+    _private_field__S = void 0;
+    _private_field__ae;
+    _private_field__ne;
     constructor(e, t) {
-      (super(), this.#E = e, this.setOptions(t), this.bindMethods(), this.#re());
+      (super(), this._private_field__E = e, this.setOptions(t), this.bindMethods(), this._private_field__re());
     }
     bindMethods() {
       (this.mutate = this.mutate.bind(this), this.reset = this.reset.bind(this));
     }
     setOptions(e) {
       const t = this.options;
-      (this.options = this.#E.defaultMutationOptions(e), gi(this.options, t) || this.#E.getMutationCache().notify({
+      (this.options = this._private_field__E.defaultMutationOptions(e), gi(this.options, t) || this._private_field__E.getMutationCache().notify({
         type: "observerOptionsUpdated",
-        mutation: this.#ae,
+        mutation: this._private_field__ae,
         observer: this
-      }), t?.mutationKey && this.options.mutationKey && mi(t.mutationKey) !== mi(this.options.mutationKey) ? this.reset() : "pending" === this.#ae?.state.status && this.#ae.setOptions(this.options));
+      }), t?.mutationKey && this.options.mutationKey && mi(t.mutationKey) !== mi(this.options.mutationKey) ? this.reset() : "pending" === this._private_field__ae?.state.status && this._private_field__ae.setOptions(this.options));
     }
     onUnsubscribe() {
-      this.hasListeners() || this.#ae?.removeObserver(this);
+      this.hasListeners() || this._private_field__ae?.removeObserver(this);
     }
     onMutationUpdate(e) {
-      (this.#re(), this.#W(e));
+      (this._private_field__re(), this._private_field__W(e));
     }
     getCurrentResult() {
-      return this.#S;
+      return this._private_field__S;
     }
     reset() {
-      (this.#ae?.removeObserver(this), this.#ae = void 0, this.#re(), this.#W());
+      (this._private_field__ae?.removeObserver(this), this._private_field__ae = void 0, this._private_field__re(), this._private_field__W());
     }
     mutate(e, t) {
-      return (this.#ne = t, this.#ae?.removeObserver(this), this.#ae = this.#E.getMutationCache().build(this.#E, this.options), this.#ae.addObserver(this), this.#ae.execute(e));
+      return (this._private_field__ne = t, this._private_field__ae?.removeObserver(this), this._private_field__ae = this._private_field__E.getMutationCache().build(this._private_field__E, this.options), this._private_field__ae.addObserver(this), this._private_field__ae.execute(e));
     }
-    #re() {
-      const e = this.#ae?.state ?? ({
+    _private_field__re() {
+      const e = this._private_field__ae?.state ?? ({
         context: void 0,
         data: void 0,
         error: null,
@@ -17345,7 +17345,7 @@
         variables: void 0,
         submittedAt: 0
       });
-      this.#S = {
+      this._private_field__S = {
         ...e,
         isPending: "pending" === e.status,
         isSuccess: "success" === e.status,
@@ -17355,14 +17355,14 @@
         reset: this.reset
       };
     }
-    #W(e) {
+    _private_field__W(e) {
       Ti.batch(() => {
-        if (this.#ne && this.hasListeners()) {
-          const t = this.#S.variables, a = this.#S.context;
-          "success" === e?.type ? (this.#ne.onSuccess?.(e.data, t, a), this.#ne.onSettled?.(e.data, null, t, a)) : "error" === e?.type && (this.#ne.onError?.(e.error, t, a), this.#ne.onSettled?.(void 0, e.error, t, a));
+        if (this._private_field__ne && this.hasListeners()) {
+          const t = this._private_field__S.variables, a = this._private_field__S.context;
+          "success" === e?.type ? (this._private_field__ne.onSuccess?.(e.data, t, a), this._private_field__ne.onSettled?.(e.data, null, t, a)) : "error" === e?.type && (this._private_field__ne.onError?.(e.error, t, a), this._private_field__ne.onSettled?.(void 0, e.error, t, a));
         }
         this.listeners.forEach(e => {
-          e(this.#S);
+          e(this._private_field__S);
         });
       });
     }

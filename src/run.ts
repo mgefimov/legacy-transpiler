@@ -11,6 +11,7 @@ import {
   createImportMetaVisitor,
   createLookbehindVisitor,
   createStaticBlocksVisitor,
+  createPrivateFieldsVisitor,
   transformExports,
   transformStaticClassFields,
   transformWrapAsyncIIFE,
@@ -31,6 +32,7 @@ const transforms = [
       createDynamicImportsVisitor(),
       createImportMetaVisitor({ url: src }),
       createLookbehindVisitor(),
+      createPrivateFieldsVisitor(),
       createStaticBlocksVisitor(),
     );
     walk.simple(ast, merged);
@@ -74,7 +76,7 @@ function transpileWithProfile(src: string, code: string): string {
 }
 
 (async () => {
-  init({ BASE_URL, minify: false, runScript: () => {} });
+  init({ BASE_URL, minify: false, runScript: () => {}, target: { platform: 'iOS', version: '14.0' } });
 
   for (const file of files) {
     const inputPath = join(inputDir, file);
