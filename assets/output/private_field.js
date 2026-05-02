@@ -3,6 +3,10 @@
   class BankAccount {
     _private_field__balance = 0;
     owner;
+    static _static_block__0() {
+      this.val = 42;
+      console.log('static initializer');
+    }
     constructor(owner, initial) {
       this.owner = owner;
       this._private_field__balance = initial;
@@ -14,9 +18,14 @@
       return this._private_field__balance;
     }
   }
+  BankAccount._private_field__kek = 0;
+  BankAccount.val = 33;
+  BankAccount._static_block__0();
   var acct = new BankAccount('Alice', 100);
   acct.deposit(50);
+  const log = console.log;
   log('owner = ' + acct.owner);
   log('balance = ' + acct.getBalance());
   log('has #balance = ' + (acct.balance === undefined));
+  log(BankAccount.val);
 })();

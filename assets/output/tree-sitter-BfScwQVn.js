@@ -18,7 +18,7 @@
   }
   (__name(assertInternal, "assertInternal"), __name(isPoint, "isPoint"), __name(setModule, "setModule"));
   var LookaheadIterator = class {
-    static {
+    static _static_block__1() {
       __name(this, "LookaheadIterator");
     }
     0 = 0;
@@ -53,6 +53,7 @@
       };
     }
   };
+  LookaheadIterator._static_block__1();
   function getText(e, t, r, s) {
     const a = r - t;
     let _ = e.textCallback(t, s);
@@ -68,7 +69,7 @@
   }
   __name(getText, "getText");
   var Tree = class e {
-    static {
+    static _static_block__2() {
       __name(this, "Tree");
     }
     0 = 0;
@@ -119,7 +120,7 @@
       return r;
     }
   }, TreeCursor = class e {
-    static {
+    static _static_block__3() {
       __name(this, "TreeCursor");
     }
     0 = 0;
@@ -234,7 +235,7 @@
       (marshalTreeCursor(this, TRANSFER_BUFFER), marshalTreeCursor(e, TRANSFER_BUFFER + SIZE_OF_CURSOR), C._ts_tree_cursor_reset_to_wasm(this.tree[0], e.tree[0]), unmarshalTreeCursor(this));
     }
   }, Node = class {
-    static {
+    static _static_block__4() {
       __name(this, "Node");
     }
     0 = 0;
@@ -459,6 +460,9 @@
       return (C._free(e), t);
     }
   };
+  Tree._static_block__2();
+  TreeCursor._static_block__3();
+  Node._static_block__4();
   function unmarshalCaptures(e, t, r, s, a) {
     for (let _ = 0, n = a.length; _ < n; _++) {
       const n = C.getValue(r, "i32"), o = unmarshalNode(t, r += SIZE_OF_INT);
@@ -529,7 +533,7 @@
   }
   (__name(unmarshalCaptures, "unmarshalCaptures"), __name(marshalNode, "marshalNode"), __name(unmarshalNode, "unmarshalNode"), __name(marshalTreeCursor, "marshalTreeCursor"), __name(unmarshalTreeCursor, "unmarshalTreeCursor"), __name(marshalPoint, "marshalPoint"), __name(unmarshalPoint, "unmarshalPoint"), __name(marshalRange, "marshalRange"), __name(unmarshalRange, "unmarshalRange"), __name(marshalEdit, "marshalEdit"), __name(unmarshalLanguageMetadata, "unmarshalLanguageMetadata"));
   var LANGUAGE_FUNCTION_REGEX = /^tree_sitter_\w+$/, Language = class e {
-    static {
+    static _static_block__5() {
       __name(this, "Language");
     }
     0 = 0;
@@ -635,12 +639,13 @@
       return new e(INTERNAL, n);
     }
   };
+  Language._static_block__5();
   async function Module2(moduleArg = {}) {
     var moduleRtn, Module = moduleArg, ENVIRONMENT_IS_WEB = "object" == typeof window, ENVIRONMENT_IS_WORKER = "undefined" != typeof WorkerGlobalScope;
     (Module.currentQueryProgressCallback = null, Module.currentProgressCallback = null, Module.currentLogCallback = null, Module.currentParseCallback = null);
     var arguments_ = [], thisProgram = "./this.program", quit_ = __name((e, t) => {
       throw t;
-    }, "quit_"), _scriptName = import.meta.url, scriptDirectory = "", readAsync, readBinary;
+    }, "quit_"), _scriptName = "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/tree-sitter-BfScwQVn.js", scriptDirectory = "", readAsync, readBinary;
     function locateFile(e) {
       return Module.locateFile ? Module.locateFile(e, scriptDirectory) : scriptDirectory + e;
     }
@@ -716,7 +721,7 @@
       throw (readyPromiseReject?.(t), t);
     }
     function findWasmBinary() {
-      return Module.locateFile ? locateFile("web-tree-sitter.wasm") : new URL("https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c571a2685-sT_OTiSe.wasm", import.meta.url).href;
+      return Module.locateFile ? locateFile("web-tree-sitter.wasm") : new URL("https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c571a2685-sT_OTiSe.wasm", "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/tree-sitter-BfScwQVn.js").href;
     }
     function getBinarySync(e) {
       if (e == wasmBinaryFile && wasmBinary) return new Uint8Array(wasmBinary);
@@ -776,7 +781,7 @@
     }
     (__name(addRunDependency, "addRunDependency"), __name(removeRunDependency, "removeRunDependency"), __name(abort, "abort"), __name(findWasmBinary, "findWasmBinary"), __name(getBinarySync, "getBinarySync"), __name(getWasmBinary, "getWasmBinary"), __name(instantiateArrayBuffer, "instantiateArrayBuffer"), __name(instantiateAsync, "instantiateAsync"), __name(getWasmImports, "getWasmImports"), __name(createWasm, "createWasm"));
     class ExitStatus {
-      static {
+      static _static_block__0() {
         __name(this, "ExitStatus");
       }
       name = "ExitStatus";
@@ -784,6 +789,7 @@
         (this.message = `Program terminated with exit(${e})`, this.status = e);
       }
     }
+    ExitStatus._static_block__0();
     var GOT = {}, currentModuleWeakSymbols = new Set([]), GOTHandler = {
       get(e, t) {
         var r = GOT[t];
@@ -1338,7 +1344,7 @@
   }
   (__name(initializeBinding, "initializeBinding"), __name(checkModule, "checkModule"));
   var Parser = class {
-    static {
+    static _static_block__6() {
       __name(this, "Parser");
     }
     0 = 0;
@@ -1422,7 +1428,7 @@
     constructor(t, r, s, a) {
       (super(e.formatMessage(t, r)), this.kind = t, this.info = r, this.index = s, this.length = a, this.name = "QueryError");
     }
-    static {
+    static _static_block__7() {
       __name(this, "QueryError");
     }
     static formatMessage(e, t) {
@@ -1440,6 +1446,8 @@
       }
     }
   };
+  Parser._static_block__6();
+  QueryError._static_block__7();
   function parseAnyPredicate(e, t, r, s) {
     if (3 !== e.length) throw new Error(`Wrong number of arguments to \`#${r}\` predicate. Expected 2, got ${e.length - 1}`);
     if (!isCaptureStep(e[1])) throw new Error(`First argument of \`#${r}\` predicate must be a capture. Got "${e[1].value}"`);
@@ -1545,7 +1553,7 @@
   }
   (__name(parseAnyPredicate, "parseAnyPredicate"), __name(parseMatchPredicate, "parseMatchPredicate"), __name(parseAnyOfPredicate, "parseAnyOfPredicate"), __name(parseIsPredicate, "parseIsPredicate"), __name(parseSetDirective, "parseSetDirective"), __name(parsePattern, "parsePattern"));
   var Query = class {
-    static {
+    static _static_block__8() {
       __name(this, "Query");
     }
     0 = 0;
@@ -1712,5 +1720,10 @@
       return 1 === C._ts_query_is_pattern_guaranteed_at_step(this[0], e);
     }
   };
-  export {Language as L, Parser as P, Query as Q};
+  Query._static_block__8();
+  window.LegacyTranspiler.exportModule("https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/tree-sitter-BfScwQVn.js", {
+    L: Language,
+    P: Parser,
+    Q: Query
+  });
 })();

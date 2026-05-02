@@ -4,7 +4,7 @@ export { createImportMetaVisitor, type ReplaceImportMetaOptions } from './replac
 export { createLookbehindVisitor } from './removeLookbehind'
 export { transformExports, type RemoveExportOptions } from './removeExport'
 export { createStaticBlocksVisitor } from './transformStaticBlock'
-export { transformStaticClassFields } from './transformStaticClassField'
+export { createStaticClassFieldsVisitor } from './transformStaticClassField'
 export { createPrivateFieldsVisitor } from './transformPrivateFields'
 export { transformWrapAsyncIIFE, type WrapAsyncIIFEOptions } from './wrapAsyncIIFE'
 export { mergeVisitors } from './mergeVisitors'

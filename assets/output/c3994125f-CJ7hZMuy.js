@@ -8240,7 +8240,7 @@
     _private_field__kn = null;
     _private_field__Rs = null;
     _private_field__Dn = null;
-    static #_0 = (() => {
+    static _static_block__0() {
       (l && (this._private_field__In = !0, Ki.workerSrc ||= "./pdf.worker.mjs"), this._isSameOrigin = (t, e) => {
         const i = URL.parse(t);
         if (!i?.origin || "null" === i.origin) return !1;
@@ -8256,7 +8256,7 @@
         if ((e = "`PDFWorker.fromPort` - please use `PDFWorker.create` instead.", console.log("Deprecated API usage: " + e), !t?.port)) throw new Error("PDFWorker.fromPort - invalid method signature.");
         return this.create(t);
       });
-    })();
+    }
     constructor({name: t = null, port: e = null, verbosity: i = G()} = {}) {
       if ((this.name = t, this.destroyed = !1, this.verbosity = i, e)) {
         if (Ds._private_field__Rn.has(e)) throw new Error("Cannot use more than one PDFWorker per port.");
@@ -8356,6 +8356,7 @@
   Ds._private_field__Pn = 0;
   Ds._private_field__In = !1;
   Ds._private_field__Rn = new WeakMap();
+  Ds._static_block__0();
   class Ps {
     _private_field__Un = new Map();
     _private_field__zn = new Map();

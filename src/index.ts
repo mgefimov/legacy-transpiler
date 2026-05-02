@@ -8,7 +8,7 @@ import {
   createImportMetaVisitor,
   createLookbehindVisitor,
   createStaticBlocksVisitor,
-  transformStaticClassFields,
+  createStaticClassFieldsVisitor,
   createPrivateFieldsVisitor,
   transformExports,
   transformWrapAsyncIIFE,
@@ -57,7 +57,7 @@ const resolveModule = (source = "") => {
   return `${BASE_URL}/${source.replace(/^\.\//, "")}`;
 };
 
-const CACHE_NAME = 'transpiled-v1';
+const CACHE_NAME = 'transpiled-v5';
 
 async function openCache(): Promise<Cache | null> {
   if (typeof caches === 'undefined') return null;
@@ -145,12 +145,12 @@ export function transpile(src: string, code: string): string {
     visitors.push(createPrivateFieldsVisitor());
   }
   visitors.push(createStaticBlocksVisitor());
+  if (!targetAtLeast('iOS', [15, 0])) {
+    visitors.push(createStaticClassFieldsVisitor());
+  }
   walk.simple(ast, mergeVisitors(...visitors));
 
   transformExports(ast, { src });
-  if (!targetAtLeast('iOS', [15, 0])) {
-    transformStaticClassFields(ast);
-  }
   transformWrapAsyncIIFE(ast);
 
   const result = generate(ast, options.minify ? { indent: '', lineEnd: '' } : undefined);

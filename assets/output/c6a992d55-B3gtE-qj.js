@@ -2752,9 +2752,9 @@
         id: e
       });
     }
-    static #_0 = (() => {
+    static _static_block__0() {
       this.isEipc = !0;
-    })();
+    }
     getVersionUrl(e) {
       return bs.isEipc ? `operon-artifact://version/${e}` : xs(`/artifacts/versions/${e}`);
     }
@@ -2988,6 +2988,7 @@
       (a.href = r, a.download = n, document.body.appendChild(a), a.click(), a.remove(), URL.revokeObjectURL(r));
     }
   }
+  bs._static_block__0();
   const vs = new bs();
   function ys(t, n) {
     return e.useMemo(() => {

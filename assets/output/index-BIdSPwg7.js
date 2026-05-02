@@ -94695,15 +94695,15 @@
       const e = U6.getState();
       (e.setMicStream(null), e.setSpeakerAnalyser(null), e.setAudioLevel(null));
     }
-    static #_0 = (() => {
+    static _static_block__0() {
       this.TELEMETRY_CONNECTION_TIMEOUT_MS = 15e3;
-    })();
-    static #_1 = (() => {
+    }
+    static _static_block__1() {
       this.TELEMETRY_MIC_AUDIO_TIMEOUT_MS = 5e3;
-    })();
-    static #_2 = (() => {
+    }
+    static _static_block__2() {
       this.TELEMETRY_PLAYBACK_TIMEOUT_MS = 3e4;
-    })();
+    }
     resetTelemetryState() {
       (this.telemetrySessionStartMs = Date.now(), this.telemetryTurnCount = 0, this.telemetryFirstPlaybackFired = !1, this.telemetryMicAudioReceived = !1, this.clearTelemetryWatchdogs());
     }
@@ -94735,6 +94735,9 @@
       }, Xze.TELEMETRY_PLAYBACK_TIMEOUT_MS));
     }
   }
+  Xze._static_block__0();
+  Xze._static_block__1();
+  Xze._static_block__2();
   const Yze = new Xze();
   function Jze(e, t, n) {
     const s = d.useRef(void 0), a = d.useCallback(e, t), r = d.useCallback(() => {

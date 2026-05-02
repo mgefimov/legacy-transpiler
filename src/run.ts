@@ -13,7 +13,7 @@ import {
   createStaticBlocksVisitor,
   createPrivateFieldsVisitor,
   transformExports,
-  transformStaticClassFields,
+  createStaticClassFieldsVisitor,
   transformWrapAsyncIIFE,
   mergeVisitors,
 } from './transforms';
@@ -34,11 +34,11 @@ const transforms = [
       createLookbehindVisitor(),
       createPrivateFieldsVisitor(),
       createStaticBlocksVisitor(),
+      createStaticClassFieldsVisitor(),
     );
     walk.simple(ast, merged);
   }},
   { name: 'transformExports',            fn: (ast: acorn.Program, src: string) => transformExports(ast, { src }) },
-  { name: 'transformStaticClassFields', fn: (ast: acorn.Program, _src: string) => transformStaticClassFields(ast) },
   { name: 'transformWrapAsyncIIFE',     fn: (ast: acorn.Program, _src: string) => transformWrapAsyncIIFE(ast) },
 ];
 
