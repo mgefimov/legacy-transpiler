@@ -62,9 +62,9 @@
     static _static_block__1() {
       __name(this, "LookaheadIterator");
     }
-    0 = 0;
-    language;
     constructor(e, t, r) {
+      this.0 = 0;
+      this.language = undefined;
       (assertInternal(e), this[0] = t, this.language = r);
     }
     get currentTypeId() {
@@ -113,10 +113,10 @@
     static _static_block__2() {
       __name(this, "Tree");
     }
-    0 = 0;
-    textCallback;
-    language;
     constructor(e, t, r, s) {
+      this.0 = 0;
+      this.textCallback = undefined;
+      this.language = undefined;
       (assertInternal(e), this[0] = t, this.language = r, this.textCallback = s);
     }
     copy() {
@@ -164,12 +164,12 @@
     static _static_block__3() {
       __name(this, "TreeCursor");
     }
-    0 = 0;
-    1 = 0;
-    2 = 0;
-    3 = 0;
-    tree;
     constructor(e, t) {
+      this.0 = 0;
+      this.1 = 0;
+      this.2 = 0;
+      this.3 = 0;
+      this.tree = undefined;
       (assertInternal(e), this.tree = t, unmarshalTreeCursor(this));
     }
     copy() {
@@ -279,16 +279,16 @@
     static _static_block__4() {
       __name(this, "Node");
     }
-    0 = 0;
-    _children;
-    _namedChildren;
     constructor(e, {id: t, tree: r, startIndex: s, startPosition: a, other: _}) {
+      this.0 = 0;
+      this._children = undefined;
+      this._namedChildren = undefined;
+      this.id = undefined;
+      this.startIndex = undefined;
+      this.startPosition = undefined;
+      this.tree = undefined;
       (assertInternal(e), this[0] = _, this.id = t, this.tree = r, this.startIndex = s, this.startPosition = a);
     }
-    id;
-    startIndex;
-    startPosition;
-    tree;
     get typeId() {
       return (marshalNode(this), C._ts_node_symbol_wasm(this.tree[0]));
     }
@@ -577,10 +577,10 @@
     static _static_block__5() {
       __name(this, "Language");
     }
-    0 = 0;
-    types;
-    fields;
     constructor(e, t) {
+      this.0 = 0;
+      this.types = undefined;
+      this.fields = undefined;
       (assertInternal(e), this[0] = t, this.types = new Array(C._ts_language_symbol_count(this[0])));
       for (let r = 0, s = this.types.length; r < s; r++) C._ts_language_symbol_type(this[0], r) < 2 && (this.types[r] = C.UTF8ToString(C._ts_language_symbol_name(this[0], r)));
       this.fields = new Array(C._ts_language_field_count(this[0]) + 1);
@@ -842,8 +842,8 @@
       static _static_block__0() {
         __name(this, "ExitStatus");
       }
-      name = "ExitStatus";
       constructor(e) {
+        this.name = "ExitStatus";
         (this.message = `Program terminated with exit(${e})`, this.status = e);
       }
     }
@@ -1405,14 +1405,14 @@
     static _static_block__6() {
       __name(this, "Parser");
     }
-    0 = 0;
-    1 = 0;
-    logCallback = null;
-    language = null;
     static async init(e) {
       (setModule(await initializeBinding(e)), TRANSFER_BUFFER = C._ts_init(), LANGUAGE_VERSION = C.getValue(TRANSFER_BUFFER, "i32"), MIN_COMPATIBLE_VERSION = C.getValue(TRANSFER_BUFFER + SIZE_OF_INT, "i32"));
     }
     constructor() {
+      this.0 = 0;
+      this.1 = 0;
+      this.logCallback = null;
+      this.language = null;
       this.initialize();
     }
     initialize() {
@@ -1614,17 +1614,17 @@
     static _static_block__8() {
       __name(this, "Query");
     }
-    0 = 0;
-    exceededMatchLimit;
-    textPredicates;
-    captureNames;
-    captureQuantifiers;
-    predicates;
-    setProperties;
-    assertedProperties;
-    refutedProperties;
-    matchLimit;
     constructor(e, t) {
+      this.0 = 0;
+      this.exceededMatchLimit = undefined;
+      this.textPredicates = undefined;
+      this.captureNames = undefined;
+      this.captureQuantifiers = undefined;
+      this.predicates = undefined;
+      this.setProperties = undefined;
+      this.assertedProperties = undefined;
+      this.refutedProperties = undefined;
+      this.matchLimit = undefined;
       const r = C.lengthBytesUTF8(t), s = C._malloc(r + 1);
       C.stringToUTF8(t, s, r + 1);
       const a = C._ts_query_new(e[0], s, r, TRANSFER_BUFFER, TRANSFER_BUFFER + SIZE_OF_INT);

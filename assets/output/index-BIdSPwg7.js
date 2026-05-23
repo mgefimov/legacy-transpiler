@@ -6198,9 +6198,9 @@
     return t;
   }
   class Ty extends Error {
-    __isNotFound = !0;
     constructor() {
       super("NEXT_NOT_FOUND");
+      this.__isNotFound = !0;
     }
   }
   function Ly() {
@@ -24979,10 +24979,15 @@
     hostContext: XV.describe("Rich context about the host environment.")
   }).passthrough();
   let QV = class {
-    eventTarget;
-    eventSource;
-    messageListener;
     constructor(e = window.parent, t) {
+      this.eventTarget = undefined;
+      this.eventSource = undefined;
+      this.messageListener = undefined;
+      this.onclose = undefined;
+      this.onerror = undefined;
+      this.onmessage = undefined;
+      this.sessionId = undefined;
+      this.setProtocolVersion = undefined;
       (this.eventTarget = e, this.eventSource = t, this.messageListener = e => {
         if (t && e.source !== this.eventSource) return void console.debug("Ignoring message from unknown source", e);
         let n = QF.safeParse(e.data);
@@ -24998,11 +25003,6 @@
     async close() {
       (window.removeEventListener("message", this.messageListener), this.onclose?.());
     }
-    onclose;
-    onerror;
-    onmessage;
-    sessionId;
-    setProtocolVersion;
   };
   function eq(e) {
     let t = e._meta?.ui?.resourceUri;
@@ -25011,13 +25011,15 @@
   }
   var tq = [IV];
   class nq extends MV {
-    _client;
-    _hostInfo;
-    _capabilities;
-    _appCapabilities;
-    _hostContext = {};
-    _appInfo;
     constructor(e, t, n, s) {
+      this._client = undefined;
+      this._hostInfo = undefined;
+      this._capabilities = undefined;
+      this._appCapabilities = undefined;
+      this._hostContext = {};
+      this._appInfo = undefined;
+      this.onping = undefined;
+      this.sendResourceTeardown = this.teardownResource;
       (super(s), this._client = e, this._hostInfo = t, this._capabilities = n, this._hostContext = s?.hostContext || ({}), this.setRequestHandler(JV, e => this._oninitialize(e)), this.setRequestHandler(xB, (e, t) => (this.onping?.(e.params, t), {})), this.setRequestHandler(HV, e => ({
         mode: this._hostContext.displayMode ?? "inline"
       })));
@@ -25028,7 +25030,6 @@
     getAppVersion() {
       return this._appInfo;
     }
-    onping;
     set onsizechange(e) {
       this.setNotificationHandler(PV, t => e(t.params));
     }
@@ -25162,7 +25163,6 @@
         params: e
       }, BV, t);
     }
-    sendResourceTeardown = this.teardownResource;
     async connect(e) {
       if (this.transport) throw Error("AppBridge is already connected. Call close() before connecting again.");
       if (this._client) {
@@ -78758,11 +78758,11 @@
     };
   }
   class eAe {
-    schema;
-    draft;
-    shortCircuit;
-    lookup;
     constructor(e, t = "2019-09", n = !0) {
+      this.schema = undefined;
+      this.draft = undefined;
+      this.shortCircuit = undefined;
+      this.lookup = undefined;
       (this.schema = e, this.draft = t, this.shortCircuit = n, this.lookup = UEe(e));
     }
     validate(e) {
@@ -122949,10 +122949,16 @@
     d.useEffect(e, c6e);
   }
   class u6e {
+    constructor() {
+      this.currentId = (() => 0)();
+      this.clear = () => {
+        0 !== this.currentId && (clearTimeout(this.currentId), this.currentId = 0);
+      };
+      this.disposeEffect = () => this.clear;
+    }
     static create() {
       return new u6e();
     }
-    currentId = (() => 0)();
     start(e, t) {
       (this.clear(), this.currentId = setTimeout(() => {
         (this.currentId = 0, t());
@@ -122961,10 +122967,6 @@
     isStarted() {
       return 0 !== this.currentId;
     }
-    clear = () => {
-      0 !== this.currentId && (clearTimeout(this.currentId), this.currentId = 0);
-    };
-    disposeEffect = () => this.clear;
   }
   function p6e() {
     const e = v4e(u6e.create).current;
@@ -123569,16 +123571,18 @@
     margin: -1
   }, J7e = null;
   const Q7e = new (class {
-    callbacks = (() => [])();
-    callbacksCount = 0;
-    nextId = 1;
-    startId = 1;
-    isScheduled = !1;
-    tick = e => {
+    constructor() {
+      this.callbacks = (() => [])();
+      this.callbacksCount = 0;
+      this.nextId = 1;
+      this.startId = 1;
       this.isScheduled = !1;
-      const t = this.callbacks, n = this.callbacksCount;
-      if ((this.callbacks = [], this.callbacksCount = 0, this.startId = this.nextId, n > 0)) for (let s = 0; s < t.length; s += 1) t[s]?.(e);
-    };
+      this.tick = e => {
+        this.isScheduled = !1;
+        const t = this.callbacks, n = this.callbacksCount;
+        if ((this.callbacks = [], this.callbacksCount = 0, this.startId = this.nextId, n > 0)) for (let s = 0; s < t.length; s += 1) t[s]?.(e);
+      };
+    }
     request(e) {
       const t = this.nextId;
       (this.nextId += 1, this.callbacks.push(e), this.callbacksCount += 1);
@@ -123590,6 +123594,13 @@
     }
   })();
   class e8e {
+    constructor() {
+      this.currentId = (() => J7e)();
+      this.cancel = () => {
+        this.currentId !== J7e && (Q7e.cancel(this.currentId), this.currentId = J7e);
+      };
+      this.disposeEffect = () => this.cancel;
+    }
     static create() {
       return new e8e();
     }
@@ -123599,16 +123610,11 @@
     static cancel(e) {
       return Q7e.cancel(e);
     }
-    currentId = (() => J7e)();
     request(e) {
       (this.cancel(), this.currentId = Q7e.request(() => {
         (this.currentId = J7e, e());
       }));
     }
-    cancel = () => {
-      this.currentId !== J7e && (Q7e.cancel(this.currentId), this.currentId = J7e);
-    };
-    disposeEffect = () => this.cancel;
   }
   function t8e() {
     const e = v4e(e8e.create).current;
@@ -125632,19 +125638,21 @@
   const I9e = () => {};
   let E9e = {}, A9e = {}, T9e = "";
   const L9e = new (class {
-    lockCount = 0;
-    restore = (() => null)();
-    timeoutLock = (() => u6e.create())();
-    timeoutUnlock = (() => u6e.create())();
+    constructor() {
+      this.lockCount = 0;
+      this.restore = (() => null)();
+      this.timeoutLock = (() => u6e.create())();
+      this.timeoutUnlock = (() => u6e.create())();
+      this.release = () => {
+        (this.lockCount -= 1, 0 === this.lockCount && this.restore && this.timeoutUnlock.start(0, this.unlock));
+      };
+      this.unlock = () => {
+        0 === this.lockCount && this.restore && (this.restore?.(), this.restore = null);
+      };
+    }
     acquire(e) {
       return (this.lockCount += 1, 1 === this.lockCount && null === this.restore && this.timeoutLock.start(0, () => this.lock(e)), this.release);
     }
-    release = () => {
-      (this.lockCount -= 1, 0 === this.lockCount && this.restore && this.timeoutUnlock.start(0, this.unlock));
-    };
-    unlock = () => {
-      0 === this.lockCount && this.restore && (this.restore?.(), this.restore = null);
-    };
     lock(e) {
       if (0 === this.lockCount || null !== this.restore) return;
       const t = n8e(e).documentElement, n = Is(t).getComputedStyle(t).overflowY;

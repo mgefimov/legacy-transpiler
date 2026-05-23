@@ -14,6 +14,7 @@ import {
   createPrivateFieldsVisitor,
   transformExports,
   createStaticClassFieldsVisitor,
+  createInstanceClassFieldsVisitor,
   transformWrapAsyncIIFE,
   mergeVisitors,
 } from './transforms';
@@ -35,6 +36,7 @@ const transforms = [
       createPrivateFieldsVisitor(),
       createStaticBlocksVisitor(),
       createStaticClassFieldsVisitor(),
+      createInstanceClassFieldsVisitor(),
     );
     walk.simple(ast, merged);
   }},

@@ -725,8 +725,10 @@
     return e;
   }
   class kt {
-    started = Object.create(null);
-    times = [];
+    constructor() {
+      this.started = Object.create(null);
+      this.times = [];
+    }
     time(t) {
       ((t in this.started) && q(`Timer is already running for ${t}`), this.started[t] = Date.now());
     }
@@ -951,15 +953,15 @@
     (n.firstChild.classList.add("richText", i), s.append(n));
   }
   class Qt {
-    _private_field__s = null;
-    _private_field__n = null;
-    _private_field__r;
-    _private_field__a = null;
-    _private_field__o = null;
-    _private_field__l = null;
-    _private_field__h = null;
-    _private_field__c = null;
     constructor(t) {
+      this._private_field__s = null;
+      this._private_field__n = null;
+      this._private_field__r = undefined;
+      this._private_field__a = null;
+      this._private_field__o = null;
+      this._private_field__l = null;
+      this._private_field__h = null;
+      this._private_field__c = null;
       (this._private_field__r = t, Qt._private_field__d ||= Object.freeze({
         freetext: "pdfjs-editor-remove-freetext-button",
         highlight: "pdfjs-editor-remove-highlight-button",
@@ -1084,10 +1086,10 @@
   }
   Qt._private_field__d = null;
   class Jt {
-    _private_field__a = null;
-    _private_field__s = null;
-    _private_field__b;
     constructor(t) {
+      this._private_field__a = null;
+      this._private_field__s = null;
+      this._private_field__b = undefined;
       this._private_field__b = t;
     }
     _private_field__v() {
@@ -1138,15 +1140,19 @@
     for (const s of i) e.addEventListener(s, t[s].bind(t));
   }
   class te {
-    _private_field__A = 0;
+    constructor() {
+      this._private_field__A = 0;
+    }
     get id() {
       return `${w}${this._private_field__A++}`;
     }
   }
   class ee {
-    _private_field__x = gt();
-    _private_field__A = 0;
-    _private_field___ = null;
+    constructor() {
+      this._private_field__x = gt();
+      this._private_field__A = 0;
+      this._private_field___ = null;
+    }
     static get _isSVGFittingCanvas() {
       const t = new OffscreenCanvas(1, 3).getContext("2d", {
         willReadFrequently: !0
@@ -1239,11 +1245,11 @@
     }
   }
   class ie {
-    _private_field__C = [];
-    _private_field__E = !1;
-    _private_field__T;
-    _private_field__M = -1;
     constructor(t = 128) {
+      this._private_field__C = [];
+      this._private_field__E = !1;
+      this._private_field__T = undefined;
+      this._private_field__M = -1;
       this._private_field__T = t;
     }
     add({cmd: t, undo: e, post: i, mustExec: s, type: n = NaN, overwriteIfSameType: r = !1, keepUndo: a = !1}) {
@@ -1343,63 +1349,6 @@
   }
   ne._colorsMapping = new Map([["CanvasText", [0, 0, 0]], ["Canvas", [255, 255, 255]]]);
   class re {
-    _private_field__D = new AbortController();
-    _private_field__P = null;
-    _private_field__I = null;
-    _private_field__R = new Map();
-    _private_field__L = new Map();
-    _private_field__F = null;
-    _private_field__B = null;
-    _private_field__N = null;
-    _private_field__O = new ie();
-    _private_field__U = null;
-    _private_field__z = null;
-    _private_field__H = null;
-    _private_field__j = 0;
-    _private_field__$ = new Set();
-    _private_field__V = null;
-    _private_field__G = null;
-    _private_field__W = new Set();
-    _editorUndoBar = null;
-    _private_field__q = !1;
-    _private_field__X = !1;
-    _private_field__K = !1;
-    _private_field__Y = null;
-    _private_field__Q = null;
-    _private_field__J = null;
-    _private_field__Z = null;
-    _private_field__tt = !1;
-    _private_field__et = null;
-    _private_field__it = new te();
-    _private_field__st = !1;
-    _private_field__nt = !1;
-    _private_field__rt = !1;
-    _private_field__at = null;
-    _private_field__ot = null;
-    _private_field__lt = null;
-    _private_field__ht = null;
-    _private_field__ct = null;
-    _private_field__dt = A.NONE;
-    _private_field__ut = new Set();
-    _private_field__pt = null;
-    _private_field__gt = null;
-    _private_field__mt = null;
-    _private_field__ft = null;
-    _private_field__bt = null;
-    _private_field__vt = {
-      isEditing: !1,
-      isEmpty: !0,
-      hasSomethingToUndo: !1,
-      hasSomethingToRedo: !1,
-      hasSelectedEditor: !1,
-      hasSelectedText: !1
-    };
-    _private_field__yt = [0, 0];
-    _private_field__wt = null;
-    _private_field__At = null;
-    _private_field__xt = null;
-    _private_field___t = null;
-    _private_field__St = null;
     static get _keyboardManager() {
       const t = re.prototype, e = t => t._private_field__At.contains(document.activeElement) && "BUTTON" !== document.activeElement.tagName && t.hasSomethingToControl(), i = (t, {target: e}) => {
         if (e instanceof HTMLInputElement) {
@@ -1447,6 +1396,63 @@
       }]]));
     }
     constructor(t, e, i, s, n, r, a, o, l, h, c, d, u, p, g, m) {
+      this._private_field__D = new AbortController();
+      this._private_field__P = null;
+      this._private_field__I = null;
+      this._private_field__R = new Map();
+      this._private_field__L = new Map();
+      this._private_field__F = null;
+      this._private_field__B = null;
+      this._private_field__N = null;
+      this._private_field__O = new ie();
+      this._private_field__U = null;
+      this._private_field__z = null;
+      this._private_field__H = null;
+      this._private_field__j = 0;
+      this._private_field__$ = new Set();
+      this._private_field__V = null;
+      this._private_field__G = null;
+      this._private_field__W = new Set();
+      this._editorUndoBar = null;
+      this._private_field__q = !1;
+      this._private_field__X = !1;
+      this._private_field__K = !1;
+      this._private_field__Y = null;
+      this._private_field__Q = null;
+      this._private_field__J = null;
+      this._private_field__Z = null;
+      this._private_field__tt = !1;
+      this._private_field__et = null;
+      this._private_field__it = new te();
+      this._private_field__st = !1;
+      this._private_field__nt = !1;
+      this._private_field__rt = !1;
+      this._private_field__at = null;
+      this._private_field__ot = null;
+      this._private_field__lt = null;
+      this._private_field__ht = null;
+      this._private_field__ct = null;
+      this._private_field__dt = A.NONE;
+      this._private_field__ut = new Set();
+      this._private_field__pt = null;
+      this._private_field__gt = null;
+      this._private_field__mt = null;
+      this._private_field__ft = null;
+      this._private_field__bt = null;
+      this._private_field__vt = {
+        isEditing: !1,
+        isEmpty: !0,
+        hasSomethingToUndo: !1,
+        hasSomethingToRedo: !1,
+        hasSelectedEditor: !1,
+        hasSelectedText: !1
+      };
+      this._private_field__yt = [0, 0];
+      this._private_field__wt = null;
+      this._private_field__At = null;
+      this._private_field__xt = null;
+      this._private_field___t = null;
+      this._private_field__St = null;
       const f = this._signal = this._private_field__D.signal;
       (this._private_field__At = t, this._private_field__xt = e, this._private_field___t = i, this._private_field__F = s, this._private_field__U = n, this._private_field__gt = r, this._private_field__bt = o, this._eventBus = a, a._on("editingaction", this.onEditingAction.bind(this), {
         signal: f
@@ -2288,19 +2294,19 @@
   re.TRANSLATE_SMALL = 1;
   re.TRANSLATE_BIG = 10;
   class ae {
-    _private_field__o = null;
-    _private_field__Wt = !1;
-    _private_field__qt = null;
-    _private_field__Xt = null;
-    _private_field__Kt = null;
-    _private_field__Yt = null;
-    _private_field__Qt = !1;
-    _private_field__Jt = null;
-    _private_field__r = null;
-    _private_field__Zt = null;
-    _private_field__te = null;
-    _private_field__ee = !1;
     constructor(t) {
+      this._private_field__o = null;
+      this._private_field__Wt = !1;
+      this._private_field__qt = null;
+      this._private_field__Xt = null;
+      this._private_field__Kt = null;
+      this._private_field__Yt = null;
+      this._private_field__Qt = !1;
+      this._private_field__Jt = null;
+      this._private_field__r = null;
+      this._private_field__Zt = null;
+      this._private_field__te = null;
+      this._private_field__ee = !1;
       (this._private_field__r = t, this._private_field__ee = t._uiManager.useNewAltTextFlow, ae._private_field__ie ||= Object.freeze({
         added: "pdfjs-editor-new-alt-text-added-button",
         "added-label": "pdfjs-editor-new-alt-text-added-button-label",
@@ -2442,17 +2448,17 @@
   ae._private_field__ie = null;
   ae._l10n = null;
   class oe {
-    _private_field__re = null;
-    _private_field__ae = null;
-    _private_field__oe = !1;
-    _private_field__r = null;
-    _private_field__le = null;
-    _private_field__he = null;
-    _private_field__ce = null;
-    _private_field__de = null;
-    _private_field__ue = !1;
-    _private_field__pe = null;
     constructor(t) {
+      this._private_field__re = null;
+      this._private_field__ae = null;
+      this._private_field__oe = !1;
+      this._private_field__r = null;
+      this._private_field__le = null;
+      this._private_field__he = null;
+      this._private_field__ce = null;
+      this._private_field__de = null;
+      this._private_field__ue = !1;
+      this._private_field__pe = null;
       this._private_field__r = t;
     }
     renderForToolbar() {
@@ -2597,19 +2603,19 @@
     }
   }
   class le {
-    _private_field__At;
-    _private_field__ge = !1;
-    _private_field__me = null;
-    _private_field__fe;
-    _private_field__be;
-    _private_field__ve;
-    _private_field__ye;
-    _private_field__we = null;
-    _private_field__Ae;
-    _private_field__xe = null;
-    _private_field___e;
-    _private_field__Se = null;
     constructor({container: t, isPinchingDisabled: e = null, isPinchingStopped: i = null, onPinchStart: s = null, onPinching: n = null, onPinchEnd: r = null, signal: a}) {
+      this._private_field__At = undefined;
+      this._private_field__ge = !1;
+      this._private_field__me = null;
+      this._private_field__fe = undefined;
+      this._private_field__be = undefined;
+      this._private_field__ve = undefined;
+      this._private_field__ye = undefined;
+      this._private_field__we = null;
+      this._private_field__Ae = undefined;
+      this._private_field__xe = null;
+      this._private_field___e = undefined;
+      this._private_field__Se = null;
       (this._private_field__At = t, this._private_field__me = i, this._private_field__fe = e, this._private_field__be = s, this._private_field__ve = n, this._private_field__ye = r, this._private_field___e = new AbortController(), this._private_field__Ae = AbortSignal.any([a, this._private_field___e.signal]), t.addEventListener("touchstart", this._private_field__Ce.bind(this), {
         passive: !1,
         signal: this._private_field__Ae
@@ -2672,40 +2678,6 @@
     }
   }
   class he {
-    _private_field__Me = null;
-    _private_field__ke = null;
-    _private_field__o = null;
-    _private_field__l = null;
-    _private_field__re = null;
-    _private_field__De = !1;
-    _private_field__Pe = null;
-    _private_field__Ie = "";
-    _private_field__Re = null;
-    _private_field__Le = null;
-    _private_field__Fe = null;
-    _private_field__Be = null;
-    _private_field__Ne = null;
-    _private_field__Oe = "";
-    _private_field__Ue = !1;
-    _private_field__ze = null;
-    _private_field__He = !1;
-    _private_field__je = !1;
-    _private_field__$e = !1;
-    _private_field__Ve = null;
-    _private_field__Ge = 0;
-    _private_field__We = 0;
-    _private_field__qe = null;
-    _private_field__Xe = null;
-    isSelected = !1;
-    _isCopy = !1;
-    _editToolbar = null;
-    _initialOptions = Object.create(null);
-    _initialData = null;
-    _isVisible = !0;
-    _uiManager = null;
-    _focusEventsAllowed = !0;
-    _private_field__Ke = !1;
-    _private_field__Ye = he._zIndex++;
     static get _resizerKeyboardManager() {
       const t = he.prototype._resizeWithKeyboard, e = re.TRANSLATE_SMALL, i = re.TRANSLATE_BIG;
       return J(this, "_resizerKeyboardManager", new se([[["ArrowLeft", "mac+ArrowLeft"], t, {
@@ -2727,6 +2699,40 @@
       }], [["Escape", "mac+Escape"], he.prototype._stopResizingWithKeyboard]]));
     }
     constructor(t) {
+      this._private_field__Me = null;
+      this._private_field__ke = null;
+      this._private_field__o = null;
+      this._private_field__l = null;
+      this._private_field__re = null;
+      this._private_field__De = !1;
+      this._private_field__Pe = null;
+      this._private_field__Ie = "";
+      this._private_field__Re = null;
+      this._private_field__Le = null;
+      this._private_field__Fe = null;
+      this._private_field__Be = null;
+      this._private_field__Ne = null;
+      this._private_field__Oe = "";
+      this._private_field__Ue = !1;
+      this._private_field__ze = null;
+      this._private_field__He = !1;
+      this._private_field__je = !1;
+      this._private_field__$e = !1;
+      this._private_field__Ve = null;
+      this._private_field__Ge = 0;
+      this._private_field__We = 0;
+      this._private_field__qe = null;
+      this._private_field__Xe = null;
+      this.isSelected = !1;
+      this._isCopy = !1;
+      this._editToolbar = null;
+      this._initialOptions = Object.create(null);
+      this._initialData = null;
+      this._isVisible = !0;
+      this._uiManager = null;
+      this._focusEventsAllowed = !0;
+      this._private_field__Ke = !1;
+      this._private_field__Ye = he._zIndex++;
       (this.parent = t.parent, this.id = t.id, this.width = this.height = null, this.pageIndex = t.parent.pageIndex, this.name = t.name, this.div = null, this._uiManager = t.uiManager, this.annotationElementId = null, this._willKeepAspectRatio = !1, this._initialOptions.isCentered = t.isCentered, this._structTreeParentId = null, this.annotationElementId = t.annotationElementId || null, this.creationDate = t.creationDate || new Date(), this.modificationDate = t.modificationDate || null);
       const {rotation: e, rawDims: {pageWidth: i, pageHeight: s, pageX: n, pageY: r}} = this.parent.viewport;
       (this.rotation = e, this.pageRotation = (360 + e - this._uiManager.viewParameters.rotation) % 360, this.pageDimensions = [i, s], this.pageTranslation = [n, r]);
@@ -3695,11 +3701,11 @@
     transfer: void 0
   });
   class fe {
-    _private_field__fi = !1;
-    _private_field__bi = null;
-    _private_field__vi = null;
-    _private_field__yi = new Map();
     constructor() {
+      this._private_field__fi = !1;
+      this._private_field__bi = null;
+      this._private_field__vi = null;
+      this._private_field__yi = new Map();
       (this.onSetModified = null, this.onResetModified = null, this.onAnnotationEditor = null);
     }
     getValue(t, e) {
@@ -3806,9 +3812,9 @@
     }
   }
   class be extends fe {
-    _private_field__Ai;
     constructor(t) {
       super();
+      this._private_field__Ai = undefined;
       const {map: e, hash: i, transfer: s} = t.serializable, n = structuredClone(e, s ? {
         transfer: s
       } : null);
@@ -3832,8 +3838,8 @@
     }
   }
   class ve {
-    _private_field__xi = new Set();
     constructor({ownerDocument: t = globalThis.document, styleElement: e = null}) {
+      this._private_field__xi = new Set();
       (this._document = t, this.nativeFontFaces = new Set(), this.styleElement = null, this.loadingRequests = [], this.loadTestFontId = 0);
     }
     addNativeFontFace(t) {
@@ -3949,8 +3955,8 @@
     }
   }
   class ye {
-    _private_field___i;
     constructor(t, e = null, i, s) {
+      this._private_field___i = undefined;
       (this.compiledGlyphs = Object.create(null), this._private_field___i = t, this._inspectFont = e, i && Object.assign(this, i), s && (this.charProcOperatorList = s));
     }
     createNativeFontFace() {
@@ -4095,8 +4101,10 @@
     return !0;
   }).bind(null, Ae, t => "object" == typeof t && "string" == typeof t?.name);
   class _e {
-    _private_field__Si = new Map();
-    _private_field__Ci = Promise.resolve();
+    constructor() {
+      this._private_field__Si = new Map();
+      this._private_field__Ci = Promise.resolve();
+    }
     postMessage(t, e) {
       const i = {
         data: structuredClone(t, e ? {
@@ -4145,8 +4153,8 @@
     return new et(t.message, t.toString());
   }
   class Be {
-    _private_field__Ei = new AbortController();
     constructor(t, e, i) {
+      this._private_field__Ei = new AbortController();
       (this.sourceName = t, this.targetName = e, this.comObj = i, this.callbackId = 1, this.streamId = 1, this.streamSinks = Object.create(null), this.streamControllers = Object.create(null), this.callbackCapabilities = Object.create(null), this.actionHandler = Object.create(null), i.addEventListener("message", this._private_field__Ti.bind(this), {
         signal: this._private_field__Ei.signal
       }));
@@ -4399,8 +4407,8 @@
     }
   }
   class Ne {
-    _private_field__Pi = !1;
     constructor({enableHWA: t = !1}) {
+      this._private_field__Pi = !1;
       this._private_field__Pi = t;
     }
     create(t, e) {
@@ -4481,14 +4489,14 @@
     destroy(t = !1) {}
   }
   class je extends He {
-    _private_field__Ii;
-    _private_field__Ri;
-    _private_field__Li;
-    _private_field__Fi;
-    _private_field__Bi;
-    _private_field__Ni;
-    _private_field__A = 0;
     constructor({docId: t, ownerDocument: e = globalThis.document}) {
+      this._private_field__Ii = undefined;
+      this._private_field__Ri = undefined;
+      this._private_field__Li = undefined;
+      this._private_field__Fi = undefined;
+      this._private_field__Bi = undefined;
+      this._private_field__Ni = undefined;
+      this._private_field__A = 0;
       (super(), this._private_field__Fi = t, this._private_field__Bi = e);
     }
     get _private_field___() {
@@ -4714,9 +4722,9 @@
   }
   const si = new Uint32Array(new Uint8Array([255, 255, 0, 0]).buffer)[0];
   class ni {
-    _private_field__Ki;
-    _private_field__Yi;
     constructor(t, e) {
+      this._private_field__Ki = undefined;
+      this._private_field__Yi = undefined;
       (this._private_field__Ki = t, this._private_field__Yi = e);
     }
     get length() {
@@ -4747,32 +4755,32 @@
     }, t.set(e, i)), i);
   };
   class ai {
-    _private_field__Qi = {
-      __proto__: null
-    };
-    _private_field__Ji = {
-      __proto__: null,
-      transform: [],
-      moveText: [],
-      sameLineText: [],
-      [Ze]: []
-    };
-    _private_field__Zi = new Map();
-    _private_field__ts = [];
-    _private_field__es = [];
-    _private_field__is = [[1, 0, 0, 1, 0, 0]];
-    _private_field__ss = [-1 / 0, -1 / 0, 1 / 0, 1 / 0];
-    _private_field__ns = new Float64Array([1 / 0, 1 / 0, -1 / 0, -1 / 0]);
-    _private_field__rs = -1;
-    _private_field__as = new Set();
-    _private_field__os = new Map();
-    _private_field__ls = new Map();
-    _private_field__hs;
-    _private_field__cs;
-    _private_field__ds;
-    _private_field__Ki;
-    _private_field__us;
     constructor(t, e, i = !1) {
+      this._private_field__Qi = {
+        __proto__: null
+      };
+      this._private_field__Ji = {
+        __proto__: null,
+        transform: [],
+        moveText: [],
+        sameLineText: [],
+        [Ze]: []
+      };
+      this._private_field__Zi = new Map();
+      this._private_field__ts = [];
+      this._private_field__es = [];
+      this._private_field__is = [[1, 0, 0, 1, 0, 0]];
+      this._private_field__ss = [-1 / 0, -1 / 0, 1 / 0, 1 / 0];
+      this._private_field__ns = new Float64Array([1 / 0, 1 / 0, -1 / 0, -1 / 0]);
+      this._private_field__rs = -1;
+      this._private_field__as = new Set();
+      this._private_field__os = new Map();
+      this._private_field__ls = new Map();
+      this._private_field__hs = undefined;
+      this._private_field__cs = undefined;
+      this._private_field__ds = undefined;
+      this._private_field__Ki = undefined;
+      this._private_field__us = undefined;
       (this._private_field__hs = t.width, this._private_field__cs = t.height, this._private_field__ps(e), i && (this._private_field__us = new Map()));
     }
     growOperationsCount(t) {
@@ -4941,12 +4949,12 @@
     }
   }
   class oi {
-    _private_field__gs;
-    _private_field__ms;
-    _private_field__fs;
-    _private_field__bs = 0;
-    _private_field__vs = 0;
     constructor(t, e, i) {
+      this._private_field__gs = undefined;
+      this._private_field__ms = undefined;
+      this._private_field__fs = undefined;
+      this._private_field__bs = 0;
+      this._private_field__vs = 0;
       if (t instanceof oi && t._private_field__fs === !!i) return t;
       (this._private_field__gs = t, this._private_field__ms = e, this._private_field__fs = !!i);
     }
@@ -5297,32 +5305,32 @@
     return [Math.hypot(c, d) * l, Math.hypot(u, p) * h];
   }
   class Fi {
-    alphaIsShape = !1;
-    fontSize = 0;
-    fontSizeScale = 1;
-    textMatrix = null;
-    textMatrixScale = 1;
-    fontMatrix = h;
-    leading = 0;
-    x = 0;
-    y = 0;
-    lineX = 0;
-    lineY = 0;
-    charSpacing = 0;
-    wordSpacing = 0;
-    textHScale = 1;
-    textRenderingMode = S;
-    textRise = 0;
-    fillColor = "#000000";
-    strokeColor = "#000000";
-    patternFill = !1;
-    patternStroke = !1;
-    fillAlpha = 1;
-    strokeAlpha = 1;
-    lineWidth = 1;
-    activeSMask = null;
-    transferMaps = "none";
     constructor(t, e, i) {
+      this.alphaIsShape = !1;
+      this.fontSize = 0;
+      this.fontSizeScale = 1;
+      this.textMatrix = null;
+      this.textMatrixScale = 1;
+      this.fontMatrix = h;
+      this.leading = 0;
+      this.x = 0;
+      this.y = 0;
+      this.lineX = 0;
+      this.lineY = 0;
+      this.charSpacing = 0;
+      this.wordSpacing = 0;
+      this.textHScale = 1;
+      this.textRenderingMode = S;
+      this.textRise = 0;
+      this.fillColor = "#000000";
+      this.strokeColor = "#000000";
+      this.patternFill = !1;
+      this.patternStroke = !1;
+      this.fillAlpha = 1;
+      this.strokeAlpha = 1;
+      this.lineWidth = 1;
+      this.activeSMask = null;
+      this.transferMaps = "none";
       (i?.(this), this.clipBox = new Float32Array([0, 0, t, e]), this.minMax = Ii.slice());
     }
     clone() {
@@ -6257,9 +6265,6 @@
   }
   for (const Vr in O) void 0 !== Gi.prototype[Vr] && (Gi.prototype[O[Vr]] = Gi.prototype[Vr]);
   class Wi {
-    _private_field__xs;
-    _private_field___s;
-    _private_field__Ss;
     static write(t) {
       const e = new TextEncoder(), i = {};
       let s = 0;
@@ -6276,6 +6281,9 @@
       return (K(o === n.byteLength, "CssFontInfo.write: Buffer overflow"), n);
     }
     constructor(t) {
+      this._private_field__xs = undefined;
+      this._private_field___s = undefined;
+      this._private_field__Ss = undefined;
       (this._private_field__xs = t, this._private_field___s = new DataView(this._private_field__xs), this._private_field__Ss = new TextDecoder());
     }
     _private_field__Cs(t) {
@@ -6297,9 +6305,6 @@
   }
   Wi.strings = ["fontFamily", "fontWeight", "italicAngle"];
   class qi {
-    _private_field__xs;
-    _private_field___s;
-    _private_field__Ss;
     static write(t) {
       const e = new TextEncoder(), i = {};
       let s = 0;
@@ -6320,6 +6325,9 @@
       return (h.setUint32(c - s - 4, s), t.style && (h.setUint32(c, n.length), l.set(n, c + 4), c += 4 + n.length, h.setUint32(c, r.length), l.set(r, c + 4), c += 4 + r.length), K(c <= o.byteLength, "SubstitionInfo.write: Buffer overflow"), o.transferToFixedLength(c));
     }
     constructor(t) {
+      this._private_field__xs = undefined;
+      this._private_field___s = undefined;
+      this._private_field__Ss = undefined;
       (this._private_field__xs = t, this._private_field___s = new DataView(this._private_field__xs), this._private_field__Ss = new TextDecoder());
     }
     get guessFallback() {
@@ -6358,10 +6366,10 @@
   }
   qi.strings = ["css", "loadedName", "baseFontName", "src"];
   class Xi {
-    _private_field__xs;
-    _private_field__Ss;
-    _private_field___s;
     constructor({data: t, extra: e}) {
+      this._private_field__xs = undefined;
+      this._private_field__Ss = undefined;
+      this._private_field___s = undefined;
       (this._private_field__xs = t, this._private_field__Ss = new TextDecoder(), this._private_field___s = new DataView(this._private_field__xs), e && Object.assign(this, e));
     }
     _private_field__Ps(t) {
@@ -6556,9 +6564,9 @@
   Ki._private_field__Rs = null;
   Ki._private_field__Ls = "";
   class Yi {
-    _private_field__Fs;
-    _private_field__Bs;
     constructor({parsedData: t, rawData: e}) {
+      this._private_field__Fs = undefined;
+      this._private_field__Bs = undefined;
       (this._private_field__Fs = t, this._private_field__Bs = e);
     }
     getRaw() {
@@ -6573,11 +6581,11 @@
   }
   const Qi = Symbol("INTERNAL");
   class Ji {
-    _private_field__Ns = !1;
-    _private_field__Os = !1;
-    _private_field__Us = !1;
-    _private_field__zs = !0;
     constructor(t, {name: e, intent: i, usage: s, rbGroups: n}) {
+      this._private_field__Ns = !1;
+      this._private_field__Os = !1;
+      this._private_field__Us = !1;
+      this._private_field__zs = !0;
       (this._private_field__Ns = !!(t & u), this._private_field__Os = !!(t & p), this.name = e, this.intent = i, this.usage = s, this.rbGroups = n);
     }
     get visible() {
@@ -6591,11 +6599,11 @@
     }
   }
   class Zi {
-    _private_field__Hs = null;
-    _private_field__js = new Map();
-    _private_field__$s = null;
-    _private_field__Vs = null;
     constructor(t, e = u) {
+      this._private_field__Hs = null;
+      this._private_field__js = new Map();
+      this._private_field__$s = null;
+      this._private_field__Vs = null;
       if ((this.renderingIntent = e, this.name = null, this.creator = null, null !== t)) {
         (this.name = t.name, this.creator = t.creator, this._private_field__Vs = t.order);
         for (const i of t.groups) this._private_field__js.set(i.id, new Ji(e, i));
@@ -7020,8 +7028,8 @@
     return t instanceof Uint8Array ? t.buffer : t instanceof ArrayBuffer ? t : (q(`getArrayBuffer - unexpected data format: ${t}`), new Uint8Array(t).buffer);
   }
   class ds {
-    _responseOrigin = null;
     constructor(t) {
+      this._responseOrigin = null;
       (this.source = t, this.isHttp = (/^https?:/i).test(t.url), this.headers = ss(this.isHttp, t.httpHeaders), this._fullRequestReader = null, this._rangeRequestReaders = []);
     }
     get _progressiveDataLength() {
@@ -7127,8 +7135,8 @@
     }
   }
   class gs {
-    _responseOrigin = null;
     constructor({url: t, httpHeaders: e, withCredentials: i}) {
+      this._responseOrigin = null;
       (this.url = t, this.isHttp = (/^https?:/i).test(t), this.headers = ss(this.isHttp, e), this.withCredentials = i || !1, this.currXhrId = 0, this.pendingRequests = Object.create(null));
     }
     request(t) {
@@ -7492,7 +7500,9 @@
   }
   const xs = Symbol("INITIAL_DATA");
   class _s {
-    _private_field__Ws = Object.create(null);
+    constructor() {
+      this._private_field__Ws = Object.create(null);
+    }
     _private_field__qs(t) {
       return this._private_field__Ws[t] ||= {
         ...Promise.withResolvers(),
@@ -7535,25 +7545,25 @@
     }
   }
   let Ss = class t {
-    _private_field__Xs = Promise.withResolvers();
-    _private_field__At = null;
-    _private_field__Ks = !1;
-    _private_field__Ys = !!globalThis.FontInspector?.enabled;
-    _private_field__Qs = null;
-    _private_field__Js = null;
-    _private_field__Zs = 0;
-    _private_field__tn = 0;
-    _private_field__en = null;
-    _private_field__in = null;
-    _private_field__sn = 0;
-    _private_field__nn = 0;
-    _private_field__rn = Object.create(null);
-    _private_field__an = [];
-    _private_field__on = null;
-    _private_field__ln = [];
-    _private_field__hn = new WeakMap();
-    _private_field__cn = null;
     constructor({textContentSource: e, container: i, viewport: s}) {
+      this._private_field__Xs = Promise.withResolvers();
+      this._private_field__At = null;
+      this._private_field__Ks = !1;
+      this._private_field__Ys = !!globalThis.FontInspector?.enabled;
+      this._private_field__Qs = null;
+      this._private_field__Js = null;
+      this._private_field__Zs = 0;
+      this._private_field__tn = 0;
+      this._private_field__en = null;
+      this._private_field__in = null;
+      this._private_field__sn = 0;
+      this._private_field__nn = 0;
+      this._private_field__rn = Object.create(null);
+      this._private_field__an = [];
+      this._private_field__on = null;
+      this._private_field__ln = [];
+      this._private_field__hn = new WeakMap();
+      this._private_field__cn = null;
       if (e instanceof ReadableStream) this._private_field__on = e; else {
         if ("object" != typeof e) throw new Error('No "textContentSource" parameter specified.');
         this._private_field__on = new ReadableStream({
@@ -7822,13 +7832,15 @@
     }).catch(e._capability.reject), e);
   }
   class Es {
-    _capability = Promise.withResolvers();
-    _transport = null;
-    _worker = null;
-    docId = "d" + Es._private_field__Fi++;
-    destroyed = !1;
-    onPassword = null;
-    onProgress = null;
+    constructor() {
+      this._capability = Promise.withResolvers();
+      this._transport = null;
+      this._worker = null;
+      this.docId = "d" + Es._private_field__Fi++;
+      this.destroyed = !1;
+      this.onPassword = null;
+      this.onProgress = null;
+    }
     get promise() {
       return this._capability.promise;
     }
@@ -7847,12 +7859,12 @@
   }
   Es._private_field__Fi = 0;
   let Ts = class {
-    _private_field__Xs = Promise.withResolvers();
-    _private_field___n = [];
-    _private_field__Sn = [];
-    _private_field__Cn = [];
-    _private_field__En = [];
     constructor(t, e, i = !1, s = null) {
+      this._private_field__Xs = Promise.withResolvers();
+      this._private_field___n = [];
+      this._private_field__Sn = [];
+      this._private_field__Cn = [];
+      this._private_field__En = [];
       (this.length = t, this.initialData = e, this.progressiveDone = i, this.contentDispositionFilename = s);
     }
     addRangeListener(t) {
@@ -8005,8 +8017,8 @@
     }
   }
   class ks {
-    _private_field__Tn = !1;
     constructor(t, e, i, s = !1) {
+      this._private_field__Tn = !1;
       (this._pageIndex = t, this._pageInfo = e, this._transport = i, this._stats = s ? new kt() : null, this._pdfBug = s, this.commonObjs = i.commonObjs, this.objs = new _s(), this._intentStates = new Map(), this.destroyed = !1, this.recordedBBoxes = null);
     }
     get pageNumber() {
@@ -8236,10 +8248,6 @@
     }
   }
   class Ds {
-    _private_field__Xs = Promise.withResolvers();
-    _private_field__kn = null;
-    _private_field__Rs = null;
-    _private_field__Dn = null;
     static _static_block__0() {
       (l && (this._private_field__In = !0, Ki.workerSrc ||= "./pdf.worker.mjs"), this._isSameOrigin = (t, e) => {
         const i = URL.parse(t);
@@ -8258,6 +8266,10 @@
       });
     }
     constructor({name: t = null, port: e = null, verbosity: i = G()} = {}) {
+      this._private_field__Xs = Promise.withResolvers();
+      this._private_field__kn = null;
+      this._private_field__Rs = null;
+      this._private_field__Dn = null;
       if ((this.name = t, this.destroyed = !1, this.verbosity = i, e)) {
         if (Ds._private_field__Rn.has(e)) throw new Error("Cannot use more than one PDFWorker per port.");
         (Ds._private_field__Rn.set(e, this), this._private_field__Ln(e));
@@ -8358,12 +8370,12 @@
   Ds._private_field__Rn = new WeakMap();
   Ds._static_block__0();
   class Ps {
-    _private_field__Un = new Map();
-    _private_field__zn = new Map();
-    _private_field__Hn = new Map();
-    _private_field__jn = new Map();
-    _private_field__$n = null;
     constructor(t, e, i, s, n, r) {
+      this._private_field__Un = new Map();
+      this._private_field__zn = new Map();
+      this._private_field__Hn = new Map();
+      this._private_field__jn = new Map();
+      this._private_field__$n = null;
       (this.messageHandler = t, this.loadingTask = e, this.commonObjs = new _s(), this.fontLoader = new ve({
         ownerDocument: s.ownerDocument,
         styleElement: s.styleElement
@@ -8688,10 +8700,10 @@
     }
   }
   class Is {
-    _private_field__Gn = null;
-    onContinue = null;
-    onError = null;
     constructor(t) {
+      this._private_field__Gn = null;
+      this.onContinue = null;
+      this.onError = null;
       this._private_field__Gn = t;
     }
     get promise() {
@@ -8708,8 +8720,8 @@
     }
   }
   class Rs {
-    _private_field__Wn = null;
     constructor({callback: t, params: e, objs: i, commonObjs: s, annotationCanvasMap: n, operatorList: r, pageIndex: a, canvasFactory: o, filterFactory: l, useRequestAnimationFrame: h = !1, pdfBug: c = !1, pageColors: d = null, enableHWA: u = !1, operationsFilter: p = null}) {
+      this._private_field__Wn = null;
       (this.callback = t, this.params = e, this.objs = i, this.commonObjs = s, this.annotationCanvasMap = n, this.operatorListIdx = null, this.operatorList = r, this._pageIndex = a, this.canvasFactory = o, this.filterFactory = l, this._pdfBug = c, this.pageColors = d, this.running = !1, this.graphicsReadyCallback = null, this.graphicsReady = !1, this._useRequestAnimationFrame = !0 === h && "undefined" != typeof window, this.cancelled = !1, this.capability = Promise.withResolvers(), this.task = new Is(this), this._cancelBound = this.cancel.bind(this), this._continueBound = this._continue.bind(this), this._scheduleNextBound = this._scheduleNext.bind(this), this._nextBound = this._next.bind(this), this._canvas = e.canvas, this._canvasContext = e.canvas ? null : e.canvasContext, this._enableHWA = u, this._dependencyTracker = e.dependencyTracker, this._operationsFilter = p);
     }
     get completed() {
@@ -8756,20 +8768,20 @@
   Rs._private_field__qn = new WeakSet();
   const Ls = "5.4.296", Fs = "f56dc8601";
   class Bs {
-    _private_field__Xn = null;
-    _private_field__Kn = null;
-    _private_field__Yn;
-    _private_field__Qn = null;
-    _private_field__Jn = !1;
-    _private_field__Zn = !1;
-    _private_field__r = null;
-    _private_field__tr;
-    _private_field__er = null;
-    _private_field__b = null;
     static get _keyboardManager() {
       return J(this, "_keyboardManager", new se([[["Escape", "mac+Escape"], Bs.prototype._hideDropdownFromKeyboard], [[" ", "mac+ "], Bs.prototype._colorSelectFromKeyboard], [["ArrowDown", "ArrowRight", "mac+ArrowDown", "mac+ArrowRight"], Bs.prototype._moveToNext], [["ArrowUp", "ArrowLeft", "mac+ArrowUp", "mac+ArrowLeft"], Bs.prototype._moveToPrevious], [["Home", "mac+Home"], Bs.prototype._moveToBeginning], [["End", "mac+End"], Bs.prototype._moveToEnd]]));
     }
     constructor({editor: t = null, uiManager: e = null}) {
+      this._private_field__Xn = null;
+      this._private_field__Kn = null;
+      this._private_field__Yn = undefined;
+      this._private_field__Qn = null;
+      this._private_field__Jn = !1;
+      this._private_field__Zn = !1;
+      this._private_field__r = null;
+      this._private_field__tr = undefined;
+      this._private_field__er = null;
+      this._private_field__b = null;
       (t ? (this._private_field__Zn = !1, this._private_field__r = t) : this._private_field__Zn = !0, this._private_field__b = t?._uiManager || e, this._private_field__tr = this._private_field__b._eventBus, this._private_field__Yn = t?.color?.toUpperCase() || this._private_field__b?.highlightColors.values().next().value || "#FFFF98", Bs._private_field__ir ||= Object.freeze({
         blue: "pdfjs-editor-colorpicker-blue",
         green: "pdfjs-editor-colorpicker-green",
@@ -8872,10 +8884,10 @@
   }
   Bs._private_field__ir = null;
   class Ns {
-    _private_field__lr = null;
-    _private_field__r = null;
-    _private_field__b = null;
     constructor(t) {
+      this._private_field__lr = null;
+      this._private_field__r = null;
+      this._private_field__b = null;
       (this._private_field__r = t, this._private_field__b = t._uiManager, Ns._private_field__ir ||= Object.freeze({
         freetext: "pdfjs-editor-color-picker-free-text-input",
         ink: "pdfjs-editor-color-picker-ink-input"
@@ -9027,10 +9039,10 @@
     }
   }
   class Ws {
-    _private_field__hr = null;
-    _private_field__cr = !1;
-    _private_field__dr = null;
     constructor(t, {isRenderable: e = !1, ignoreBorder: i = !1, createQuadrilaterals: s = !1} = {}) {
+      this._private_field__hr = null;
+      this._private_field__cr = !1;
+      this._private_field__dr = null;
       (this.isRenderable = e, this.data = t.data, this.layer = t.layer, this.linkService = t.linkService, this.downloadManager = t.downloadManager, this.imageResourcesPath = t.imageResourcesPath, this.renderForms = t.renderForms, this.svgFactory = t.svgFactory, this.annotationStorage = t.annotationStorage, this.enableComment = t.enableComment, this.enableScripting = t.enableScripting, this.hasJSActions = t.hasJSActions, this._fieldObjects = t.fieldObjects, this.parent = t.parent, e && (this.container = this._createContainer(i)), s && this._createQuadrilaterals());
     }
     static _hasPopupData({contentsObj: t, richText: e}) {
@@ -10046,33 +10058,33 @@
     }
   }
   class rn {
-    _private_field__U = null;
-    _private_field__br = this._private_field__nr.bind(this);
-    _private_field__vr = this._private_field__yr.bind(this);
-    _private_field__wr = this._private_field__Ar.bind(this);
-    _private_field__xr = this._private_field___r.bind(this);
-    _private_field__Sr = null;
-    _private_field__At = null;
-    _private_field__Cr = null;
-    _private_field__Er = null;
-    _private_field__Tr = null;
-    _private_field__Mr = null;
-    _private_field__kr = null;
-    _private_field__Dr = !1;
-    _private_field__Pr = null;
-    _private_field__Ir = null;
-    _private_field__M = null;
-    _private_field__Rr = null;
-    _private_field__Lr = null;
-    _private_field__pe = null;
-    _private_field__Fr = null;
-    _private_field__he = null;
-    _private_field__Br = null;
-    _private_field__hr = null;
-    _private_field__Nr = !1;
-    _private_field__Or = null;
-    _private_field__Ur = null;
     constructor({container: t, color: e, elements: i, titleObj: s, modificationDate: n, contentsObj: r, richText: a, parent: o, rect: l, parentRect: h, open: c, commentManager: d = null}) {
+      this._private_field__U = null;
+      this._private_field__br = this._private_field__nr.bind(this);
+      this._private_field__vr = this._private_field__yr.bind(this);
+      this._private_field__wr = this._private_field__Ar.bind(this);
+      this._private_field__xr = this._private_field___r.bind(this);
+      this._private_field__Sr = null;
+      this._private_field__At = null;
+      this._private_field__Cr = null;
+      this._private_field__Er = null;
+      this._private_field__Tr = null;
+      this._private_field__Mr = null;
+      this._private_field__kr = null;
+      this._private_field__Dr = !1;
+      this._private_field__Pr = null;
+      this._private_field__Ir = null;
+      this._private_field__M = null;
+      this._private_field__Rr = null;
+      this._private_field__Lr = null;
+      this._private_field__pe = null;
+      this._private_field__Fr = null;
+      this._private_field__he = null;
+      this._private_field__Br = null;
+      this._private_field__hr = null;
+      this._private_field__Nr = !1;
+      this._private_field__Or = null;
+      this._private_field__Ur = null;
       (this._private_field__At = t, this._private_field__Br = s, this._private_field__Cr = r, this._private_field__he = a, this._private_field__Mr = o, this._private_field__Sr = e, this._private_field__Fr = l, this._private_field__kr = h, this._private_field__Tr = i, this._private_field__U = d, this._private_field__Or = i[0], this._private_field__Er = Rt.toDateObject(n), this.trigger = i.flatMap(t => t.getElementsToTriggerPopup()), d ? this.renderCommentButton() : (this._private_field__zr(), this._private_field__At.hidden = !0, c && this._private_field___r()));
     }
     _private_field__zr() {
@@ -10332,12 +10344,12 @@
     }
   }
   class on extends Ws {
-    _private_field__Kr = null;
     constructor(t) {
       super(t, {
         isRenderable: !0,
         ignoreBorder: !0
       });
+      this._private_field__Kr = null;
     }
     render() {
       this.container.classList.add("lineAnnotation");
@@ -10352,12 +10364,12 @@
     }
   }
   class ln extends Ws {
-    _private_field__Yr = null;
     constructor(t) {
       super(t, {
         isRenderable: !0,
         ignoreBorder: !0
       });
+      this._private_field__Yr = null;
     }
     render() {
       this.container.classList.add("squareAnnotation");
@@ -10372,12 +10384,12 @@
     }
   }
   class hn extends Ws {
-    _private_field__Qr = null;
     constructor(t) {
       super(t, {
         isRenderable: !0,
         ignoreBorder: !0
       });
+      this._private_field__Qr = null;
     }
     render() {
       this.container.classList.add("circleAnnotation");
@@ -10392,8 +10404,8 @@
     }
   }
   class cn extends Ws {
-    _private_field__Jr = null;
     constructor(t) {
+      this._private_field__Jr = null;
       (super(t, {
         isRenderable: !0,
         ignoreBorder: !0
@@ -10437,9 +10449,9 @@
     }
   }
   class pn extends Ws {
-    _private_field__Zr = null;
-    _private_field__ta = [];
     constructor(t) {
+      this._private_field__Zr = null;
+      this._private_field__ta = [];
       (super(t, {
         isRenderable: !0,
         ignoreBorder: !0
@@ -10579,11 +10591,11 @@
     }
   }
   class yn extends Ws {
-    _private_field__ia = null;
     constructor(t) {
       super(t, {
         isRenderable: !0
       });
+      this._private_field__ia = null;
       const {file: e} = this.data;
       (this.filename = e.filename, this.content = e.content, this.linkService.eventBus?.dispatch("fileattachmentannotation", {
         source: this,
@@ -10611,13 +10623,13 @@
     }
   }
   let wn = class t {
-    _private_field__na = null;
-    _private_field__ra = null;
-    _private_field__B = null;
-    _private_field__aa = new Map();
-    _private_field__oa = null;
-    _private_field__la = null;
     constructor({div: t, accessibilityManager: e, annotationCanvasMap: i, annotationEditorUIManager: s, page: n, viewport: r, structTreeLayer: a, commentManager: o, linkService: l, annotationStorage: h}) {
+      this._private_field__na = null;
+      this._private_field__ra = null;
+      this._private_field__B = null;
+      this._private_field__aa = new Map();
+      this._private_field__oa = null;
+      this._private_field__la = null;
       (this.div = t, this._private_field__na = e, this._private_field__ra = i, this._private_field__oa = a || null, this._private_field__la = l || null, this._private_field__B = h || new fe(), this.page = n, this.viewport = r, this.zIndex = 0, this._annotationEditorUIManager = s, this._commentManager = o || null);
     }
     hasEditableAnnotations() {
@@ -10738,11 +10750,6 @@
   };
   const An = /\r\n?|\n/g;
   class xn extends he {
-    _private_field__da = "";
-    _private_field__ua = `${this.id}-editor`;
-    _private_field__pa = null;
-    _private_field__Gr;
-    _colorPicker = null;
     static get _keyboardManager() {
       const t = xn.prototype, e = t => t.isEmpty(), i = re.TRANSLATE_SMALL, s = re.TRANSLATE_BIG;
       return J(this, "_keyboardManager", new se([[["ctrl+s", "mac+meta+s", "ctrl+p", "mac+meta+p"], t.commitOrRemove, {
@@ -10774,6 +10781,11 @@
       }]]));
     }
     constructor(t) {
+      this._private_field__da = "";
+      this._private_field__ua = `${this.id}-editor`;
+      this._private_field__pa = null;
+      this._private_field__Gr = undefined;
+      this._colorPicker = null;
       (super({
         ...t,
         name: "freeTextEditor"
@@ -11167,20 +11179,20 @@
   }
   _n.PRECISION = 1e-4;
   class Sn {
-    _private_field__xa;
-    _private_field___a = [];
-    _private_field__Sa;
-    _private_field__Ca;
-    _private_field__Ea = [];
-    _private_field__Ta = new Float32Array(18);
-    _private_field__Ma;
-    _private_field__ka;
-    _private_field__Da;
-    _private_field__Pa;
-    _private_field__Ia;
-    _private_field__Ra;
-    _private_field__La = [];
     constructor({x: t, y: e}, i, s, n, r, a = 0) {
+      this._private_field__xa = undefined;
+      this._private_field___a = [];
+      this._private_field__Sa = undefined;
+      this._private_field__Ca = undefined;
+      this._private_field__Ea = [];
+      this._private_field__Ta = new Float32Array(18);
+      this._private_field__Ma = undefined;
+      this._private_field__ka = undefined;
+      this._private_field__Da = undefined;
+      this._private_field__Pa = undefined;
+      this._private_field__Ia = undefined;
+      this._private_field__Ra = undefined;
+      this._private_field__La = [];
       (this._private_field__xa = i, this._private_field__Ra = n * s, this._private_field__Ca = r, this._private_field__Ta.set([NaN, NaN, NaN, NaN, t, e], 6), this._private_field__Sa = a, this._private_field__Pa = Sn._private_field__Fa * s, this._private_field__Da = Sn._private_field__Na * s, this._private_field__Ia = s, this._private_field__La.push(t, e));
     }
     isEmpty() {
@@ -11258,14 +11270,14 @@
   Sn._private_field__Ba = 2;
   Sn._private_field__Na = Sn._private_field__Fa + Sn._private_field__Ba;
   class Cn extends _n {
-    _private_field__xa;
-    _private_field__Ga = new Float32Array(4);
-    _private_field__Sa;
-    _private_field__Ca;
-    _private_field__La;
-    _private_field__Ia;
-    _private_field__Wa;
     constructor(t, e, i, s, n, r) {
+      this._private_field__xa = undefined;
+      this._private_field__Ga = new Float32Array(4);
+      this._private_field__Sa = undefined;
+      this._private_field__Ca = undefined;
+      this._private_field__La = undefined;
+      this._private_field__Ia = undefined;
+      this._private_field__Wa = undefined;
       (super(), this._private_field__Wa = t, this._private_field__La = e, this._private_field__xa = i, this._private_field__Ia = s, this._private_field__Sa = n, this._private_field__Ca = r, this.firstPoint = [NaN, NaN], this.lastPoint = [NaN, NaN], this._private_field__qa(r));
       const [a, o, l, h] = this._private_field__Ga;
       for (let c = 0, d = t.length; c < d; c += 2) (t[c] = (t[c] - a) / l, t[c + 1] = (t[c + 1] - o) / h);
@@ -11329,12 +11341,12 @@
     }
   }
   class En {
-    _private_field__xa;
-    _private_field__Xa;
-    _private_field__Ka;
-    _private_field__Ya = [];
-    _private_field__Qa = [];
     constructor(t, e = 0, i = 0, s = !0) {
+      this._private_field__xa = undefined;
+      this._private_field__Xa = undefined;
+      this._private_field__Ka = undefined;
+      this._private_field__Ya = [];
+      this._private_field__Qa = [];
       const n = [1 / 0, 1 / 0, -1 / 0, -1 / 0], r = 10 ** -4;
       for (const {x: g, y: m, width: f, height: b} of t) {
         const t = Math.floor((g - e) / r) * r, i = Math.ceil((g + f + e) / r) * r, s = Math.floor((m - e) / r) * r, a = Math.ceil((m + b + e) / r) * r, o = [t, s, a, !0], l = [i, s, a, !1];
@@ -11428,9 +11440,9 @@
     }
   }
   class Tn extends _n {
-    _private_field__xa;
-    _private_field__so;
     constructor(t, e, i, s) {
+      this._private_field__xa = undefined;
+      this._private_field__so = undefined;
       (super(), this._private_field__so = t, this._private_field__xa = e, this.firstPoint = i, this.lastPoint = s);
     }
     toSVGPath() {
@@ -11473,24 +11485,6 @@
     }
   }
   class Dn extends he {
-    _private_field__no = null;
-    _private_field__ro = 0;
-    _private_field__ao;
-    _private_field__oo = null;
-    _private_field__n = null;
-    _private_field__lo = null;
-    _private_field__ho = null;
-    _private_field__co = 0;
-    _private_field__do = null;
-    _private_field__uo = null;
-    _private_field__A = null;
-    _private_field__po = !1;
-    _private_field__Xa = null;
-    _private_field__Ka = null;
-    _private_field__go = null;
-    _private_field__ce = "";
-    _private_field__Ra;
-    _private_field__mo = "";
     static get _keyboardManager() {
       const t = Dn.prototype;
       return J(this, "_keyboardManager", new se([[["ArrowLeft", "mac+ArrowLeft"], t._moveCaret, {
@@ -11504,6 +11498,24 @@
       }]]));
     }
     constructor(t) {
+      this._private_field__no = null;
+      this._private_field__ro = 0;
+      this._private_field__ao = undefined;
+      this._private_field__oo = null;
+      this._private_field__n = null;
+      this._private_field__lo = null;
+      this._private_field__ho = null;
+      this._private_field__co = 0;
+      this._private_field__do = null;
+      this._private_field__uo = null;
+      this._private_field__A = null;
+      this._private_field__po = !1;
+      this._private_field__Xa = null;
+      this._private_field__Ka = null;
+      this._private_field__go = null;
+      this._private_field__ce = "";
+      this._private_field__Ra = undefined;
+      this._private_field__mo = "";
       (super({
         ...t,
         name: "highlightEditor"
@@ -12026,7 +12038,9 @@
   Dn._freeHighlight = null;
   Dn._freeHighlightClipId = "";
   class Pn {
-    _private_field__Do = Object.create(null);
+    constructor() {
+      this._private_field__Do = Object.create(null);
+    }
     updateProperty(t, e) {
       (this[t] = e, this.updateSVGProperty(t, e));
     }
@@ -12053,11 +12067,11 @@
     }
   }
   class In extends he {
-    _private_field__Po = null;
-    _private_field__Io;
-    _colorPicker = null;
-    _drawId = null;
     constructor(t) {
+      this._private_field__Po = null;
+      this._private_field__Io = undefined;
+      this._colorPicker = null;
+      this._drawId = null;
       (super(t), this._private_field__Io = t.mustBeCommitted || !1, this._addOutlines(t));
     }
     onUpdatedColor() {
@@ -12385,18 +12399,18 @@
   In._private_field__Uo = NaN;
   In._INNER_MARGIN = 3;
   class Rn {
-    _private_field__Ta = new Float64Array(6);
-    _private_field__Kr;
-    _private_field__Wo;
-    _private_field__sn;
-    _private_field__Ra;
-    _private_field__La;
-    _private_field__qo = "";
-    _private_field__Xo = 0;
-    _private_field__so = new Ln();
-    _private_field__Ko;
-    _private_field__Yo;
     constructor(t, e, i, s, n, r) {
+      this._private_field__Ta = new Float64Array(6);
+      this._private_field__Kr = undefined;
+      this._private_field__Wo = undefined;
+      this._private_field__sn = undefined;
+      this._private_field__Ra = undefined;
+      this._private_field__La = undefined;
+      this._private_field__qo = "";
+      this._private_field__Xo = 0;
+      this._private_field__so = new Ln();
+      this._private_field__Ko = undefined;
+      this._private_field__Yo = undefined;
       (this._private_field__Ko = i, this._private_field__Yo = s, this._private_field__sn = n, this._private_field__Ra = r, [t, e] = this._private_field__Qo(t, e));
       const a = this._private_field__Kr = [NaN, NaN, NaN, NaN, t, e];
       (this._private_field__La = [t, e], this._private_field__Wo = [{
@@ -12506,15 +12520,18 @@
     }
   }
   class Ln extends _n {
-    _private_field__Ga;
-    _private_field__Jo = 0;
-    _private_field__Sa;
-    _private_field__Wo;
-    _private_field__Ko;
-    _private_field__Yo;
-    _private_field__Zo;
-    _private_field__sn;
-    _private_field__Ra;
+    constructor(...args) {
+      super(...args);
+      this._private_field__Ga = undefined;
+      this._private_field__Jo = 0;
+      this._private_field__Sa = undefined;
+      this._private_field__Wo = undefined;
+      this._private_field__Ko = undefined;
+      this._private_field__Yo = undefined;
+      this._private_field__Zo = undefined;
+      this._private_field__sn = undefined;
+      this._private_field__Ra = undefined;
+    }
     build(t, e, i, s, n, r, a) {
       (this._private_field__Ko = e, this._private_field__Yo = i, this._private_field__Zo = s, this._private_field__sn = n, this._private_field__Ra = r, this._private_field__Sa = a ?? 0, this._private_field__Wo = t, this._private_field__tl());
     }
@@ -13260,11 +13277,11 @@
     }
   }
   class Hn extends In {
-    _private_field__fl = !1;
-    _private_field__bl = null;
-    _private_field__vl = null;
-    _private_field__yl = null;
     constructor(t) {
+      this._private_field__fl = !1;
+      this._private_field__bl = null;
+      this._private_field__vl = null;
+      this._private_field__yl = null;
       (super({
         ...t,
         mustBeCommitted: !0,
@@ -13441,18 +13458,18 @@
   Hn._editorType = A.SIGNATURE;
   Hn._defaultDrawingOptions = null;
   class jn extends he {
-    _private_field__wl = null;
-    _private_field__Al = null;
-    _private_field__xl = null;
-    _private_field___l = null;
-    _private_field__Sl = null;
-    _private_field__Cl = "";
-    _private_field__El = null;
-    _private_field__Tl = !1;
-    _private_field__Ml = null;
-    _private_field__kl = !1;
-    _private_field__Dl = !1;
     constructor(t) {
+      this._private_field__wl = null;
+      this._private_field__Al = null;
+      this._private_field__xl = null;
+      this._private_field___l = null;
+      this._private_field__Sl = null;
+      this._private_field__Cl = "";
+      this._private_field__El = null;
+      this._private_field__Tl = !1;
+      this._private_field__Ml = null;
+      this._private_field__kl = !1;
+      this._private_field__Dl = !1;
       (super({
         ...t,
         name: "stampEditor"
@@ -13777,23 +13794,23 @@
   jn._type = "stamp";
   jn._editorType = A.STAMP;
   class $n {
-    _private_field__na;
-    _private_field__Ol = !1;
-    _private_field__Ul = null;
-    _private_field__zl = null;
-    _private_field__Hl = null;
-    _private_field__jl = new Map();
-    _private_field__$l = !1;
-    _private_field__Vl = !1;
-    _private_field__Gl = !1;
-    _private_field__Wl = null;
-    _private_field__ql = null;
-    _private_field__Xl = null;
-    _private_field__Kl = null;
-    _private_field__Yl = null;
-    _private_field__Ql = -1;
-    _private_field__b;
     constructor({uiManager: t, pageIndex: e, div: i, structTreeLayer: s, accessibilityManager: n, annotationLayer: r, drawLayer: a, textLayer: o, viewport: l, l10n: h}) {
+      this._private_field__na = undefined;
+      this._private_field__Ol = !1;
+      this._private_field__Ul = null;
+      this._private_field__zl = null;
+      this._private_field__Hl = null;
+      this._private_field__jl = new Map();
+      this._private_field__$l = !1;
+      this._private_field__Vl = !1;
+      this._private_field__Gl = !1;
+      this._private_field__Wl = null;
+      this._private_field__ql = null;
+      this._private_field__Xl = null;
+      this._private_field__Kl = null;
+      this._private_field__Yl = null;
+      this._private_field__Ql = -1;
+      this._private_field__b = undefined;
       const c = [...$n._private_field__G.values()];
       if (!$n._initialized) {
         $n._initialized = !0;
@@ -14173,10 +14190,10 @@
   $n._initialized = !1;
   $n._private_field__G = new Map([xn, Bn, jn, Dn, Hn].map(t => [t._editorType, t]));
   class Vn {
-    _private_field__Mr = null;
-    _private_field__nh = new Map();
-    _private_field__rh = new Map();
     constructor({pageIndex: t}) {
+      this._private_field__Mr = null;
+      this._private_field__nh = new Map();
+      this._private_field__rh = new Map();
       this.pageIndex = t;
     }
     setParent(t) {

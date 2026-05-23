@@ -1,13 +1,13 @@
 'use strict';
 (async function () {
   class BankAccount {
-    _private_field__balance = 0;
-    owner;
     static _static_block__0() {
       this.val = 42;
       console.log('static initializer');
     }
     constructor(owner, initial) {
+      this._private_field__balance = 0;
+      this.owner = undefined;
       this.owner = owner;
       this._private_field__balance = initial;
     }

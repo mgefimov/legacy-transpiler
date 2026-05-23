@@ -16909,10 +16909,10 @@
     return !e.queryFn && t?.initialPromise ? () => t.initialPromise : e.queryFn && e.queryFn !== Ul ? e.queryFn : () => Promise.reject(new Error(`Missing queryFn: '${e.queryHash}'`));
   }
   var Wl = new (class extends Zl {
-    _private_field__e;
-    _private_field__t;
-    _private_field__a;
     constructor() {
+      this._private_field__e = undefined;
+      this._private_field__t = undefined;
+      this._private_field__a = undefined;
       (super(), this._private_field__a = e => {
         if (!Ml && window.addEventListener) {
           const t = () => e();
@@ -16946,10 +16946,10 @@
       return "boolean" == typeof this._private_field__e ? this._private_field__e : "hidden" !== globalThis.document?.visibilityState;
     }
   })(), Gl = new (class extends Zl {
-    _private_field__n = !0;
-    _private_field__t;
-    _private_field__a;
     constructor() {
+      this._private_field__n = !0;
+      this._private_field__t = undefined;
+      this._private_field__a = undefined;
       (super(), this._private_field__a = e => {
         if (!Ml && window.addEventListener) {
           const t = () => e(!0), a = () => e(!1);
@@ -17107,7 +17107,9 @@
       }
     };
   })(), ac = class {
-    _private_field__r;
+    constructor() {
+      this._private_field__r = undefined;
+    }
     destroy() {
       this.clearGcTimeout();
     }
@@ -17123,13 +17125,13 @@
       this._private_field__r && (clearTimeout(this._private_field__r), this._private_field__r = void 0);
     }
   }, nc = class extends ac {
-    _private_field__o;
-    _private_field__i;
-    _private_field__s;
-    _private_field__l;
-    _private_field__c;
-    _private_field__u;
     constructor(e) {
+      this._private_field__o = undefined;
+      this._private_field__i = undefined;
+      this._private_field__s = undefined;
+      this._private_field__l = undefined;
+      this._private_field__c = undefined;
+      this._private_field__u = undefined;
       (super(), this._private_field__u = !1, this._private_field__c = e.defaultOptions, this.setOptions(e.options), this.observers = [], this._private_field__s = e.cache, this.queryKey = e.queryKey, this.queryHash = e.queryHash, this._private_field__o = (function (e) {
         const t = "function" == typeof e.initialData ? e.initialData() : e.initialData, a = void 0 !== t, n = a ? "function" == typeof e.initialDataUpdatedAt ? e.initialDataUpdatedAt() : e.initialDataUpdatedAt : 0;
         return {
@@ -17403,9 +17405,9 @@
   }
   var oc = class extends Zl {
     constructor(e = {}) {
+      this._private_field__h = undefined;
       (super(), this.config = e, this._private_field__h = new Map());
     }
-    _private_field__h;
     build(e, t, a) {
       const n = t.queryKey, r = t.queryHash ?? _l(n, t);
       let o = this.get(r);
@@ -17477,10 +17479,10 @@
       });
     }
   }, ic = class extends ac {
-    _private_field__m;
-    _private_field__p;
-    _private_field__l;
     constructor(e) {
+      this._private_field__m = undefined;
+      this._private_field__p = undefined;
+      this._private_field__l = undefined;
       (super(), this.mutationId = e.mutationId, this._private_field__p = e.mutationCache, this._private_field__m = [], this.state = e.state || ({
         context: void 0,
         data: void 0,
@@ -17644,10 +17646,10 @@
   };
   var sc = class extends Zl {
     constructor(e = {}) {
+      this._private_field__f = undefined;
+      this._private_field__g = undefined;
       (super(), this.config = e, this._private_field__f = new Map(), this._private_field__g = Date.now());
     }
-    _private_field__f;
-    _private_field__g;
     build(e, t, a) {
       const n = new ic({
         mutationCache: this,
@@ -17788,15 +17790,15 @@
     return !(!t || !e.getPreviousPageParam) && null != dc(e, t);
   }
   var pc = class {
-    _private_field__v;
-    _private_field__p;
-    _private_field__c;
-    _private_field__y;
-    _private_field__b;
-    _private_field__w;
-    _private_field__A;
-    _private_field__k;
     constructor(e = {}) {
+      this._private_field__v = undefined;
+      this._private_field__p = undefined;
+      this._private_field__c = undefined;
+      this._private_field__y = undefined;
+      this._private_field__b = undefined;
+      this._private_field__w = undefined;
+      this._private_field__A = undefined;
+      this._private_field__k = undefined;
       (this._private_field__v = e.queryCache || new oc(), this._private_field__p = e.mutationCache || new sc(), this._private_field__c = e.defaultOptions || ({}), this._private_field__y = new Map(), this._private_field__b = new Map(), this._private_field__w = 0);
     }
     mount() {
@@ -17992,23 +17994,23 @@
     }
   }, fc = class extends Zl {
     constructor(e, t) {
+      this._private_field__E = undefined;
+      this._private_field__H = void 0;
+      this._private_field__V = void 0;
+      this._private_field__x = void 0;
+      this._private_field__L = undefined;
+      this._private_field__j = undefined;
+      this._private_field__M = undefined;
+      this._private_field__Z = undefined;
+      this._private_field__S = undefined;
+      this._private_field__C = undefined;
+      this._private_field___ = undefined;
+      this._private_field__F = undefined;
+      this._private_field__T = undefined;
+      this._private_field__P = undefined;
+      this._private_field__R = new Set();
       (super(), this.options = t, this._private_field__E = e, this._private_field__Z = null, this._private_field__M = Kl(), this.options.experimental_prefetchInRender || this._private_field__M.reject(new Error("experimental_prefetchInRender feature flag is not enabled")), this.bindMethods(), this.setOptions(t));
     }
-    _private_field__E;
-    _private_field__H = void 0;
-    _private_field__V = void 0;
-    _private_field__x = void 0;
-    _private_field__L;
-    _private_field__j;
-    _private_field__M;
-    _private_field__Z;
-    _private_field__S;
-    _private_field__C;
-    _private_field___;
-    _private_field__F;
-    _private_field__T;
-    _private_field__P;
-    _private_field__R = new Set();
     bindMethods() {
       this.refetch = this.refetch.bind(this);
     }
@@ -18248,15 +18250,15 @@
     return e.filter(e => !t.includes(e));
   }
   var Ac = class extends Zl {
-    _private_field__E;
-    _private_field__W;
-    _private_field__h;
-    _private_field__G;
-    _private_field__m;
-    _private_field__K;
-    _private_field__Y;
-    _private_field__Q;
     constructor(e, t, a) {
+      this._private_field__E = undefined;
+      this._private_field__W = undefined;
+      this._private_field__h = undefined;
+      this._private_field__G = undefined;
+      this._private_field__m = undefined;
+      this._private_field__K = undefined;
+      this._private_field__Y = undefined;
+      this._private_field__Q = undefined;
       (super(), this._private_field__E = e, this._private_field__G = a, this._private_field__h = [], this._private_field__m = [], this._private_field__W = [], this.setQueries(t));
     }
     onSubscribe() {
@@ -18397,11 +18399,11 @@
       };
     }
   }, Ec = class extends Zl {
-    _private_field__E;
-    _private_field__x = void 0;
-    _private_field__ae;
-    _private_field__ne;
     constructor(e, t) {
+      this._private_field__E = undefined;
+      this._private_field__x = void 0;
+      this._private_field__ae = undefined;
+      this._private_field__ne = undefined;
       (super(), this._private_field__E = e, this.setOptions(t), this.bindMethods(), this._private_field__re());
     }
     bindMethods() {

@@ -20996,10 +20996,10 @@
         };
       }
       class _ {
-        options;
-        rules;
-        lexer;
         constructor(t) {
+          this.options = undefined;
+          this.rules = undefined;
+          this.lexer = undefined;
           this.options = t || e.defaults;
         }
         space(e) {
@@ -21505,12 +21505,12 @@
         pedantic: Z
       };
       class ee {
-        tokens;
-        options;
-        state;
-        tokenizer;
-        inlineQueue;
         constructor(t) {
+          this.tokens = undefined;
+          this.options = undefined;
+          this.state = undefined;
+          this.tokenizer = undefined;
+          this.inlineQueue = undefined;
           (this.tokens = [], this.tokens.links = Object.create(null), this.options = t || e.defaults, this.options.tokenizer = this.options.tokenizer || new _(), this.tokenizer = this.options.tokenizer, this.tokenizer.options = this.options, this.tokenizer.lexer = this, this.inlineQueue = [], this.state = {
             inLink: !1,
             inRawBlock: !1,
@@ -21611,9 +21611,9 @@
         }
       }
       class te {
-        options;
-        parser;
         constructor(t) {
+          this.options = undefined;
+          this.parser = undefined;
           this.options = t || e.defaults;
         }
         space(e) {
@@ -21750,10 +21750,10 @@
         }
       }
       class ne {
-        options;
-        renderer;
-        textRenderer;
         constructor(t) {
+          this.options = undefined;
+          this.renderer = undefined;
+          this.textRenderer = undefined;
           (this.options = t || e.defaults, this.options.renderer = this.options.renderer || new te(), this.renderer = this.options.renderer, this.renderer.options = this.options, this.renderer.parser = this, this.textRenderer = new ie());
         }
         static parse(e, t) {
@@ -21886,8 +21886,8 @@
         }
       }
       class se {
-        options;
         constructor(t) {
+          this.options = undefined;
           this.options = t || e.defaults;
         }
         preprocess(e) {
@@ -21902,28 +21902,28 @@
       }
       se.passThroughHooks = new Set(["preprocess", "postprocess", "processAllTokens"]);
       class oe {
-        defaults = {
-          async: !1,
-          breaks: !1,
-          extensions: null,
-          gfm: !0,
-          hooks: null,
-          pedantic: !1,
-          renderer: null,
-          silent: !1,
-          tokenizer: null,
-          walkTokens: null
-        };
-        options = this.setOptions;
-        parse = this.parseMarkdown(ee.lex, ne.parse);
-        parseInline = this.parseMarkdown(ee.lexInline, ne.parseInline);
-        Parser = ne;
-        Renderer = te;
-        TextRenderer = ie;
-        Lexer = ee;
-        Tokenizer = _;
-        Hooks = se;
         constructor(...e) {
+          this.defaults = {
+            async: !1,
+            breaks: !1,
+            extensions: null,
+            gfm: !0,
+            hooks: null,
+            pedantic: !1,
+            renderer: null,
+            silent: !1,
+            tokenizer: null,
+            walkTokens: null
+          };
+          this.options = this.setOptions;
+          this.parse = this.parseMarkdown(ee.lex, ne.parse);
+          this.parseInline = this.parseMarkdown(ee.lexInline, ne.parseInline);
+          this.Parser = ne;
+          this.Renderer = te;
+          this.TextRenderer = ie;
+          this.Lexer = ee;
+          this.Tokenizer = _;
+          this.Hooks = se;
           this.use(...e);
         }
         walkTokens(e, t) {

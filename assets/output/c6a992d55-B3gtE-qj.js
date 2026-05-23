@@ -1841,6 +1841,7 @@
   }]]), ps = ("http://localhost:8000").replace(/^http/, "ws") + "/api/ws";
   const ms = new (class {
     constructor() {
+      this._private_field__e = undefined;
       (this.ws = null, this.connectPromise = null, this.frameSubscribers = new Map(), this.globalFrameSubscribers = new Set(), this.artifactSubscribers = new Map(), this.textChunkSubscribers = new Map(), this.compactionStatusSubscribers = new Map(), this.frameActivitySubscribers = new Map(), this.projectDeletedSubscribers = new Set(), this.displayArtifactsSubscribers = new Set(), this.folderSubscribers = new Map(), this.noteSubscribers = new Map(), this.environmentStatusSubscribers = new Set(), this.statusSubscribers = new Set(), this.hostAccessGrantedSubscribers = new Set(), this.networkAccessGrantedSubscribers = new Set(), this.rawSubscribers = new Set(), this.reconnectAttempts = 0, this.maxReconnectAttempts = 5, this.reconnectDelay = 1e3, this.reconnectTimer = null, this._connectionStatus = "disconnected", this._private_field__e = !1);
     }
     get connectionStatus() {
@@ -1938,7 +1939,6 @@
         this.rawSubscribers.delete(e);
       });
     }
-    _private_field__e;
     async connect() {
       {
         if (this._private_field__e) return;
@@ -3504,7 +3504,9 @@
     return o;
   }
   class sr {
-    _private_field__t = {};
+    constructor() {
+      this._private_field__t = {};
+    }
     addListener(e, t) {
       const n = this._private_field__t[e];
       return (void 0 === n ? this._private_field__t[e] = [t] : n.includes(t) || n.push(t), () => {

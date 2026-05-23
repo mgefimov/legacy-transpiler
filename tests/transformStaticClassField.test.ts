@@ -7,7 +7,7 @@ import { transpile, init } from '../src/index';
 const BASE_URL = 'https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1';
 const src = `${BASE_URL}/test.js`;
 
-init({ BASE_URL, minify: false, runScript: () => {} });
+init({ BASE_URL, minify: false, target: { platform: 'iOS', version: '14.0' }, runScript: () => {} });
 
 function iife(body: string): string {
   const lines = body.split('\n').filter(l => l.length > 0);
@@ -72,7 +72,7 @@ describe('transformStaticClassFields', () => {
     expect(transpile(src, input)).toBe(
       iife("class Config {\n  static defaultLocale = 'en';\n}\n")
     );
-    init({ BASE_URL, minify: false, runScript: () => {} });
+    init({ BASE_URL, minify: false, target: { platform: 'iOS', version: '14.0' }, runScript: () => {} });
   });
 
   it('applies the transform for iOS below 15.0', () => {
@@ -81,6 +81,6 @@ describe('transformStaticClassFields', () => {
     expect(transpile(src, input)).toBe(
       iife("class Config {}\nConfig.defaultLocale = 'en';\n")
     );
-    init({ BASE_URL, minify: false, runScript: () => {} });
+    init({ BASE_URL, minify: false, target: { platform: 'iOS', version: '14.0' }, runScript: () => {} });
   });
 });
