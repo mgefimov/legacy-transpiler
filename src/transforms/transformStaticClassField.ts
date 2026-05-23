@@ -31,7 +31,9 @@ function makeAssignment(className: string, field: StaticField): acorn.Expression
     type: 'MemberExpression',
     object,
     property: field.key,
-    computed: field.computed,
+    // A non-identifier key (numeric/string literal) needs computed access:
+    // `C[0]`, not the invalid `C.0`.
+    computed: field.computed || field.key.type !== 'Identifier',
     optional: false,
     start: 0,
     end: 0,

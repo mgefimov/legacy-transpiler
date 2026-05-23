@@ -66,6 +66,13 @@ describe('transformStaticClassFields', () => {
     );
   });
 
+  it('uses computed access for a numeric static field name', () => {
+    const input = `class C {\n  static 0 = 'zero';\n}`;
+    expect(transpile(src, input)).toBe(
+      iife("class C {}\nC[0] = 'zero';\n")
+    );
+  });
+
   it('skips the transform for iOS 15.0 and above', () => {
     init({ BASE_URL, minify: false, target: { platform: 'iOS', version: '15.4' }, runScript: () => {} });
     const input = `class Config {\n  static defaultLocale = 'en';\n}`;

@@ -32,30 +32,31 @@ function extractInstanceFields(classNode: ClassLike): InstanceField[] {
   return fields;
 }
 
-function makeAssignment(field: InstanceField): acorn.ExpressionStatement {
+function makeAssignment(field: InstanceField): acorn.AssignmentExpression {
   const left: acorn.MemberExpression = {
     type: 'MemberExpression',
     object: { type: 'ThisExpression', start: 0, end: 0 },
     property: field.key,
-    computed: field.computed,
+    // A non-identifier key (numeric/string literal) needs computed access:
+    // `this[0]`, not the invalid `this.0`.
+    computed: field.computed || field.key.type !== 'Identifier',
     optional: false,
     start: 0,
     end: 0,
   };
   const fallback: acorn.Identifier = { type: 'Identifier', name: 'undefined', start: 0, end: 0 };
   return {
-    type: 'ExpressionStatement',
-    expression: {
-      type: 'AssignmentExpression',
-      operator: '=',
-      left,
-      right: field.value ?? fallback,
-      start: 0,
-      end: 0,
-    },
+    type: 'AssignmentExpression',
+    operator: '=',
+    left,
+    right: field.value ?? fallback,
     start: 0,
     end: 0,
   };
+}
+
+function toStatement(expression: acorn.Expression): acorn.ExpressionStatement {
+  return { type: 'ExpressionStatement', expression, start: 0, end: 0 };
 }
 
 function findConstructor(classNode: ClassLike): acorn.MethodDefinition | null {
@@ -67,17 +68,41 @@ function findConstructor(classNode: ClassLike): acorn.MethodDefinition | null {
   return null;
 }
 
-// Index of the first top-level `super(...)` statement, or -1 if none is found.
-function findSuperCallIndex(body: acorn.Statement[]): number {
-  return body.findIndex(
-    (stmt) =>
-      stmt.type === 'ExpressionStatement' &&
-      stmt.expression.type === 'CallExpression' &&
-      stmt.expression.callee.type === 'Super',
-  );
+function isSuperCall(expr: acorn.Expression): boolean {
+  return expr.type === 'CallExpression' && expr.callee.type === 'Super';
 }
 
-function makeConstructor(inits: acorn.ExpressionStatement[], derived: boolean): acorn.MethodDefinition {
+// Field initializers must run after super() returns (`this` is unbound before
+// it). super() may appear as its own statement (`super(); ...`) or, in minified
+// code, as the head of a comma sequence (`super(), this.x = ...`).
+function insertAfterSuper(ctorBody: acorn.Statement[], inits: acorn.AssignmentExpression[]): void {
+  // super(...) as its own statement.
+  const stmtIndex = ctorBody.findIndex(
+    (stmt) => stmt.type === 'ExpressionStatement' && isSuperCall(stmt.expression),
+  );
+  if (stmtIndex !== -1) {
+    ctorBody.splice(stmtIndex + 1, 0, ...inits.map(toStatement));
+    return;
+  }
+
+  // super(...) nested inside a comma sequence statement.
+  for (const stmt of ctorBody) {
+    if (stmt.type === 'ExpressionStatement' && stmt.expression.type === 'SequenceExpression') {
+      const seq = stmt.expression.expressions;
+      const seqIndex = seq.findIndex(isSuperCall);
+      if (seqIndex !== -1) {
+        seq.splice(seqIndex + 1, 0, ...inits);
+        return;
+      }
+    }
+  }
+
+  // super() is nested somewhere we cannot statically locate (rare). Append the
+  // inits so we never emit a `this.*` write before super() has run.
+  ctorBody.push(...inits.map(toStatement));
+}
+
+function makeConstructor(inits: acorn.AssignmentExpression[], derived: boolean): acorn.MethodDefinition {
   const body: acorn.Statement[] = [];
   const params: acorn.Pattern[] = [];
 
@@ -85,22 +110,18 @@ function makeConstructor(inits: acorn.ExpressionStatement[], derived: boolean): 
     // constructor(...args) { super(...args); ...inits }
     const args: acorn.Identifier = { type: 'Identifier', name: 'args', start: 0, end: 0 };
     params.push({ type: 'RestElement', argument: args, start: 0, end: 0 });
-    body.push({
-      type: 'ExpressionStatement',
-      expression: {
-        type: 'CallExpression',
-        callee: { type: 'Super', start: 0, end: 0 },
-        arguments: [{ type: 'SpreadElement', argument: args, start: 0, end: 0 }],
-        optional: false,
-        start: 0,
-        end: 0,
-      },
+    const superCall: acorn.CallExpression = {
+      type: 'CallExpression',
+      callee: { type: 'Super', start: 0, end: 0 },
+      arguments: [{ type: 'SpreadElement', argument: args, start: 0, end: 0 }],
+      optional: false,
       start: 0,
       end: 0,
-    });
+    };
+    body.push(toStatement(superCall));
   }
 
-  body.push(...inits);
+  body.push(...inits.map(toStatement));
 
   return {
     type: 'MethodDefinition',
@@ -139,12 +160,9 @@ function processClass(classNode: ClassLike): void {
 
   const ctorBody = ctor.value.body.body;
   if (derived) {
-    // Field initializers must run after super() returns (`this` is unbound before it).
-    // Falls back to prepending if no top-level super() call is present.
-    const superIndex = findSuperCallIndex(ctorBody);
-    ctorBody.splice(superIndex + 1, 0, ...inits);
+    insertAfterSuper(ctorBody, inits);
   } else {
-    ctorBody.unshift(...inits);
+    ctorBody.unshift(...inits.map(toStatement));
   }
 }
 

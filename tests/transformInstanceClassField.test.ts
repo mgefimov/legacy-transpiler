@@ -85,6 +85,21 @@ describe('transformInstanceClassFields', () => {
     );
   });
 
+  it('inserts inits after super() when super() is the head of a comma sequence (minified)', () => {
+    const input =
+      `class C extends S {\n  x;\n  y;\n` +
+      `  constructor() {\n    super(), this.z = 1;\n  }\n}`;
+    expect(transpile(src, input)).toBe(
+      iife(
+        "class C extends S {\n" +
+        "  constructor() {\n" +
+        "    (super(), this.x = undefined, this.y = undefined, this.z = 1);\n" +
+        "  }\n" +
+        "}\n"
+      )
+    );
+  });
+
   it('synthesizes a super-forwarding constructor for a derived class with none', () => {
     const input = `class Dog extends Animal {\n  sound = 'woof';\n}`;
     expect(transpile(src, input)).toBe(
@@ -135,6 +150,32 @@ describe('transformInstanceClassFields', () => {
         "class C {\n" +
         "  m() {\n" +
         "    return 1;\n" +
+        "  }\n" +
+        "}\n"
+      )
+    );
+  });
+
+  it('uses computed access for a numeric field name', () => {
+    const input = `class C {\n  0 = 'zero';\n}`;
+    expect(transpile(src, input)).toBe(
+      iife(
+        "class C {\n" +
+        "  constructor() {\n" +
+        "    this[0] = 'zero';\n" +
+        "  }\n" +
+        "}\n"
+      )
+    );
+  });
+
+  it('uses computed access for a string-literal field name', () => {
+    const input = `class C {\n  "foo bar" = 1;\n}`;
+    expect(transpile(src, input)).toBe(
+      iife(
+        "class C {\n" +
+        "  constructor() {\n" +
+        "    this[\"foo bar\"] = 1;\n" +
         "  }\n" +
         "}\n"
       )
