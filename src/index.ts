@@ -15,6 +15,7 @@ import {
   transformWrapAsyncIIFE,
 } from './transforms';
 import { mergeVisitors } from './transforms/mergeVisitors';
+import { version as pkgVersion } from '../package.json';
 
 export interface Target {
   platform: 'iOS';
@@ -58,7 +59,7 @@ const resolveModule = (source = "") => {
   return `${BASE_URL}/${source.replace(/^\.\//, "")}`;
 };
 
-const CACHE_NAME = 'transpiled-v5';
+const CACHE_NAME = `transpiled-v${pkgVersion}`;
 
 async function openCache(): Promise<Cache | null> {
   if (typeof caches === 'undefined') return null;
