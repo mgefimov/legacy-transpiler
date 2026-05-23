@@ -17,9 +17,9 @@ function runCase(name, fn) {
 log('UA: ' + navigator.userAgent);
 log('');
 
-runCase("const {K: as} = obj:", function () {
+runCase("const {K: as} = obj;", function () {
     var obj = { K: 1 };
-    eval('const {K: as} = obj: if (as !== 1) throw new Error("bad value");');
+    eval('const {K: as} = obj; if (as !== 1) throw new Error("bad value");');
 });
 
 runCase("const {c: is, d: ns, K: as, L: rs, F: os} = obj", function () {

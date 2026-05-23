@@ -10,6 +10,7 @@ import {
   createStaticBlocksVisitor,
   createStaticClassFieldsVisitor,
   createInstanceClassFieldsVisitor,
+  createLogicalAssignmentVisitor,
   createPrivateFieldsVisitor,
   transformExports,
   transformWrapAsyncIIFE,
@@ -152,6 +153,9 @@ export function transpile(src: string, code: string): string {
   }
   if (!targetAtLeast('iOS', [14, 0])) {
     visitors.push(createInstanceClassFieldsVisitor());
+  }
+  if (!targetAtLeast('iOS', [14, 0])) {
+    visitors.push(createLogicalAssignmentVisitor());
   }
   walk.simple(ast, mergeVisitors(...visitors));
 

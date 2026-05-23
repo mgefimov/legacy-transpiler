@@ -15,6 +15,7 @@ import {
   transformExports,
   createStaticClassFieldsVisitor,
   createInstanceClassFieldsVisitor,
+  createLogicalAssignmentVisitor,
   transformWrapAsyncIIFE,
   mergeVisitors,
 } from './transforms';
@@ -37,6 +38,7 @@ const transforms = [
       createStaticBlocksVisitor(),
       createStaticClassFieldsVisitor(),
       createInstanceClassFieldsVisitor(),
+      createLogicalAssignmentVisitor(),
     );
     walk.simple(ast, merged);
   }},
