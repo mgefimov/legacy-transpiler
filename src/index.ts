@@ -1,7 +1,7 @@
 import * as acorn from 'acorn';
 import * as walk from 'acorn-walk';
 import { generate } from 'astring';
-import { patchFetch } from './utils'
+import { patchFetch, patchAnimate } from './utils'
 import {
   transformStaticImports,
   createDynamicImportsVisitor,
@@ -48,7 +48,10 @@ const _importWaitlist: Record<string, (() => void)[]> = {}
 
 const loaded = new Set();
 
-if (typeof window !== 'undefined') patchFetch()
+if (typeof window !== 'undefined') {
+  patchFetch()
+  patchAnimate()
+}
 
 const resolveModule = (source = "") => {
   // const BASE_URL =
