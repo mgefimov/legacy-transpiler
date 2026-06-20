@@ -45,6 +45,17 @@ var redactDash = new RegExp(`(?<![\\w-])(--${hm})(\\s+)${vm}`, 'gi');
 var flagSrc = '--token foo --other bar';
 log('escaped template RegExp on "' + flagSrc + '" -> ' + flagSrc.replace(redactDash, '$1$2<redacted>'));
 
+log('=============================nested lookbehind spanning interpolations========================')
+
+// (?<!(?:(?![..])[^..])[..]{0,31})[..]+  - lookbehind with two levels of nested
+// groups, opened and closed across several ${...} interpolations. Transform must
+// drop the whole assertion and the interpolations inside it, keeping only [${DHe}]+
+var OHe = 'A-Z';
+var DHe = '0-9';
+var nestedTpl = new RegExp(`(?<!(?:(?![${OHe}${DHe}])[^\\x00-\\x7F])[${DHe}]{0,31})[${DHe}]+`, 'gu');
+var digitsSrc = 'abc123 def4567';
+log('nested template RegExp on "' + digitsSrc + '" -> ' + JSON.stringify(digitsSrc.match(nestedTpl)));
+
 log('=============================control: regex without lookbehind========================')
 
 var plain = /\d+/g;

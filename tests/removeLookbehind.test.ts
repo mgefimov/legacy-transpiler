@@ -83,4 +83,14 @@ describe('removeLookbehind', () => {
     const input = 'new RegExp(`(?!<token>)${hm}x`, "gi");';
     expect(transpile(src,input)).toBe(iife('new RegExp(`(?!<token>)${hm}x`, "gi");\n'));
   });
+
+  it('removes a deeply nested lookbehind from a literal regex', async () => {
+    const input = `/(?<!(?:(?![ab])[^x])[c]{0,31})[c]+/gu`;
+    expect(transpile(src,input)).toBe(iife('/[c]+/gu;\n'));
+  });
+
+  it('removes a nested lookbehind that spans interpolations in a template RegExp', async () => {
+    const input = 'new RegExp(`(?<!(?:(?![${OHe}${DHe}])[^\\\\x00-\\\\x7F])[${DHe}]{0,31})[${DHe}]+`, "gu");';
+    expect(transpile(src,input)).toBe(iife('new RegExp(`[${DHe}]+`, "gu");\n'));
+  });
 });
