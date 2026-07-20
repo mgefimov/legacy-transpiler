@@ -2,10 +2,10 @@ import * as acorn from 'acorn';
 import * as walk from 'acorn-walk';
 import { moduleExportsAccess } from './moduleExportsAccess';
 
-export const createDynamicImportsVisitor = (): walk.SimpleVisitors<unknown> => {
+export const createDynamicImportsVisitor = (src?: string): walk.SimpleVisitors<unknown> => {
   return {
     ImportExpression(node: acorn.ImportExpression) {
-      mutateNode(node, moduleExportsAccess(node.source, node.start, node.end));
+      mutateNode(node, moduleExportsAccess(node.source, node.start, node.end, src));
     }
   }
 };

@@ -3,7 +3,7 @@ import { transpile, init } from '../src/index';
 
 const BASE_URL = 'https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1';
 const src = `${BASE_URL}/test.js`;
-const im = (s: string) => `window.LegacyTranspiler.importModule(${s})`;
+const im = (s: string) => `window.LegacyTranspiler.importModule(${s}, "${src}")`;
 
 init({ BASE_URL, minify: false, runScript: () => {} });
 

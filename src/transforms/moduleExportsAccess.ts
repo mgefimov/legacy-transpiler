@@ -1,9 +1,16 @@
 import * as acorn from 'acorn';
 
 /**
- * Build AST for: window.LegacyTranspiler.importModule(source)
+ * Build AST for: window.LegacyTranspiler.importModule(source[, importer])
+ *
+ * `importer` (the importing module's own resolved src) lets the runtime detect
+ * circular imports — without it, a module cycle deadlocks (see moduleCycle.test.ts).
  */
-export function moduleExportsAccess(source: acorn.Expression, start: number, end: number): acorn.CallExpression {
+export function moduleExportsAccess(source: acorn.Expression, start: number, end: number, importer?: string): acorn.CallExpression {
+  const args: acorn.Expression[] = [source];
+  if (importer !== undefined) {
+    args.push({ type: 'Literal', value: importer, start, end });
+  }
   return {
     type: 'CallExpression',
     callee: {
@@ -23,7 +30,7 @@ export function moduleExportsAccess(source: acorn.Expression, start: number, end
       start,
       end,
     },
-    arguments: [source],
+    arguments: args,
     optional: false,
     start,
     end,

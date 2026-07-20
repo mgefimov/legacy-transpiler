@@ -43,10 +43,28 @@ function targetAtLeast(platform: Target['platform'], min: [number, number]): boo
   return minor >= min[1];
 }
 
-const _moduleExports: Record<string, unknown> = {}
+const _moduleExports: Record<string, Record<string, unknown>> = {}
+const _moduleFinalized = new Set<string>();
 const _importWaitlist: Record<string, (() => void)[]> = {}
+// importer src -> source it is currently blocked awaiting; used to detect import cycles
+const _blockedOn: Record<string, string> = {}
 
 const loaded = new Set();
+
+// Is `importer` reachable from `source` by following the current chain of
+// in-flight imports? If so, `importer` awaiting `source` would deadlock:
+// `source` is (transitively) already waiting on `importer` to finish.
+function isCircular(source: string, importer: string): boolean {
+  const seen = new Set<string>();
+  let current: string | undefined = source;
+  while (current !== undefined) {
+    if (current === importer) return true;
+    if (seen.has(current)) return false;
+    seen.add(current);
+    current = _blockedOn[current];
+  }
+  return false;
+}
 
 if (typeof window !== 'undefined') {
   patchFetch()
@@ -107,7 +125,17 @@ export function init(o: TranspileOptions) {
 export function exportModule(source: string, exports: Record<string, unknown>): void {
   console.log(`[exportModule] ${source} →`, exports);
 
-  _moduleExports[source] = exports;
+  // A circular importer may already hold a reference to this module's
+  // placeholder exports object (see importModule below) — mutate it in
+  // place rather than replacing it, so that reference stays live.
+  if (_moduleExports[source]) {
+    Object.assign(_moduleExports[source], exports);
+  } else {
+    _moduleExports[source] = exports;
+  }
+  _moduleFinalized.add(source);
+  delete _blockedOn[source];
+
   if (_importWaitlist[source]) {
     for (const resolve of _importWaitlist[source]) {
       resolve();
@@ -116,12 +144,28 @@ export function exportModule(source: string, exports: Record<string, unknown>): 
   }
 }
 
-export function importModule(source: string): Promise<unknown> {
+export function importModule(source: string, importer?: string): Promise<unknown> {
   source = resolveModule(source);
   console.log('[importModule]', source);
-  if (_moduleExports[source]) {
+
+  if (_moduleFinalized.has(source)) {
     return Promise.resolve(_moduleExports[source]);
   }
+
+  // `importer` is already (transitively) what `source` is waiting on, so
+  // waiting here would deadlock. Hand back source's in-progress exports
+  // (possibly incomplete) instead, same as Node's circular require().
+  if (importer !== undefined && isCircular(source, importer)) {
+    if (!_moduleExports[source]) {
+      _moduleExports[source] = {};
+    }
+    return Promise.resolve(_moduleExports[source]);
+  }
+
+  if (importer !== undefined) {
+    _blockedOn[importer] = source;
+  }
+
   return new Promise((resolve) => {
     if (!_importWaitlist[source]) {
       _importWaitlist[source] = [];
@@ -141,10 +185,10 @@ export function transpile(src: string, code: string): string {
     allowAwaitOutsideFunction: true,
   });
 
-  transformStaticImports(ast);
+  transformStaticImports(ast, src);
 
   const visitors: walk.SimpleVisitors<unknown>[] = [
-    createDynamicImportsVisitor(),
+    createDynamicImportsVisitor(src),
     createImportMetaVisitor({ url: src }),
     createLookbehindVisitor(),
   ];

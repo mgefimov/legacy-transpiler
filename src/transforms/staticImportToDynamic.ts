@@ -2,14 +2,14 @@ import * as acorn from 'acorn';
 import { moduleExportsAccess } from './moduleExportsAccess';
 
 
-export function transformStaticImports(ast: acorn.Program): void {
+export function transformStaticImports(ast: acorn.Program, src?: string): void {
   ast.body = ast.body.flatMap((node): (acorn.Statement | acorn.ModuleDeclaration)[] => {
     if (node.type !== 'ImportDeclaration') return [node];
 
     // Side-effect import: import 'module' → strip
     if (node.specifiers.length === 0) return [];
 
-    const moduleCall = moduleExportsAccess(node.source, node.start, node.end);
+    const moduleCall = moduleExportsAccess(node.source, node.start, node.end, src);
     const moduleAccess: acorn.AwaitExpression = {
       type: 'AwaitExpression',
       argument: moduleCall,

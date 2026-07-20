@@ -29,10 +29,10 @@ const outputDir = resolve(__dirname, '../assets/output');
 const files = readdirSync(inputDir).filter(f => f.endsWith('.js'));
 
 const transforms = [
-  { name: 'transformStaticImports',  fn: (ast: acorn.Program, _src: string) => transformStaticImports(ast) },
+  { name: 'transformStaticImports',  fn: (ast: acorn.Program, src: string) => transformStaticImports(ast, src) },
   { name: 'combinedWalk',            fn: (ast: acorn.Program, src: string) => {
     const merged = mergeVisitors(
-      createDynamicImportsVisitor(),
+      createDynamicImportsVisitor(src),
       createImportMetaVisitor({ url: src }),
       createLookbehindVisitor(),
       createPrivateFieldsVisitor(),
