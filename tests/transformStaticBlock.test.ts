@@ -35,10 +35,38 @@ describe('transformStaticBlock', () => {
     );
   });
 
-  it('handles class expression in variable declaration', async () => {
+  it('wraps a class expression in a variable declaration in a self-contained IIFE', async () => {
     const input = `const Qux = class Qux {\n  static {\n    __name(this, "Qux");\n  }\n};`;
     expect(transpile(src,input)).toBe(
-      iife('const Qux = class Qux {\n  static _static_block__0() {\n    __name(this, "Qux");\n  }\n};\nQux._static_block__0();\n')
+      iife(
+        'const Qux = (function () {\n' +
+        '  const _static_block_class__ = class Qux {};\n' +
+        '  (function () {\n' +
+        '    __name(this, "Qux");\n' +
+        '  }).call(_static_block_class__);\n' +
+        '  return _static_block_class__;\n' +
+        '})();\n'
+      )
+    );
+  });
+
+  it('wraps a bare class expression (any position) in a self-contained IIFE', async () => {
+    // A class expression that isn't a declaration or a `const X = class` has no
+    // outer name to hang a post-class call on — this is the case that used to
+    // leak `static {` into the output and crash older Safari parsers.
+    const input = `f(class e extends Error {\n  static {\n    Object.defineProperty(this, "b", { value: 1 });\n  }\n});`;
+    expect(transpile(src,input)).toBe(
+      iife(
+        'f((function () {\n' +
+        '  const _static_block_class__ = class e extends Error {};\n' +
+        '  (function () {\n' +
+        '    Object.defineProperty(this, "b", {\n' +
+        '      value: 1\n' +
+        '    });\n' +
+        '  }).call(_static_block_class__);\n' +
+        '  return _static_block_class__;\n' +
+        '})());\n'
+      )
     );
   });
 
