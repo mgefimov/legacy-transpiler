@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circular Import (real transpiler pipeline)</title>
+</head>
+
+<body>
+    <h1>Circular Import</h1>
+    <p>Fetches, transpiles, and runs main.js through the actual LegacyTranspiler
+        runtime (not native ESM) — exercising the same importModule/exportModule
+        path that runs in production. Covers a basic a&harr;b cycle (no deadlock)
+        and a shared, non-circular diamond dependency (x, y both need z).</p>
+    <pre id="output"></pre>
+    <!-- Paths are folder-prefixed (like the other site demos, e.g.
+         import/index.html) so they resolve at the clean, no-trailing-slash
+         URL the server redirects to (/circular_import, not /circular_import/).
+         BASE_URL points at the folder too, so the transpiler's own fetches
+         (./main.js, ./a.js, ...) land in circular_import/ rather than /. -->
+    <script src="./circular_import/legacy-transpiler.js"></script>
+    <script>
+        var output = document.getElementById('output');
+        window.log = function (msg) {
+            output.textContent += msg + '\n';
+        };
+
+        function start() {
+            LegacyTranspiler.init({
+                BASE_URL: './circular_import',
+                minify: false,
+                runScript: function (code, src) {
+                    var script = document.createElement('script');
+                    script.textContent = code;
+                    document.body.appendChild(script);
+                },
+            });
+
+            LegacyTranspiler.importModule('./main.js').catch(function (e) {
+                log('ERROR: ' + (e && e.message ? e.message : e));
+            });
+        }
+
+        // The runtime caches transpiled modules in Cache Storage keyed by a
+        // pinned version (transpiled-vX.Y.Z). On a test site that means edits
+        // to the modules — or an older bundle that transpiled them differently
+        // (e.g. before the circular-import importer arg existed) — get served
+        // stale, which can even deadlock cycle detection. Wipe all caches on
+        // load so every visit re-transpiles from source.
+        if (window.caches && caches.keys) {
+            caches.keys()
+                .then(function (keys) {
+                    return Promise.all(keys.map(function (k) { return caches.delete(k); }));
+                })
+                .then(start, start);
+        } else {
+            start();
+        }
+    </script>
+</body>
+
+</html>

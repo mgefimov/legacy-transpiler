@@ -1,6 +1,6 @@
 {
   "name": "legacy-transpiler",
-  "version": "0.1.12",
+  "version": "0.1.14",
   "description": "TypeScript library for transpiling JavaScript for old iOS devices",
   "main": "dist/legacy-transpiler.js",
   "types": "dist/index.d.ts",
