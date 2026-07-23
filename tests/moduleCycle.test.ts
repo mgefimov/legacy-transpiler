@@ -9,6 +9,8 @@ const sources: Record<string, string> = {
   [`${BASE_URL}/z.js`]: `export const z = 42;`,
   [`${BASE_URL}/x.js`]: `import { z } from './z.js';\nexport const x = z + 1;`,
   [`${BASE_URL}/y.js`]: `import { z } from './z.js';\nexport const y = z + 2;`,
+  [`${BASE_URL}/greet-a.js`]: `import { useGreet } from './greet-b.js';\nexport function greet(name) { return 'hi ' + name; }\nexport const viaB = () => useGreet('circular');`,
+  [`${BASE_URL}/greet-b.js`]: `import { greet } from './greet-a.js';\nexport function useGreet(name) { return greet(name); }`,
 };
 
 function timeout(ms: number, label: string): Promise<never> {
@@ -44,6 +46,34 @@ describe('circular static imports', () => {
       timeout(1000, 'deadlock: importModule(a.js) never resolved'),
     ]);
     expect(result).toEqual({ a: 1 });
+  });
+});
+
+// RED test — reproduces the "X is not a function" bug (the production
+// `pe is not a function`). greet-b.js destructures `greet` from greet-a.js
+// while greet-a.js is still mid-cycle, so its `const greet` snapshot freezes
+// to undefined; greet-a.js later exports the real function but the frozen
+// binding never updates. Asserts the correct (live-binding) behavior, so it
+// FAILS today and will go green once bindings are made live.
+describe('circular destructured function binding (known bug)', () => {
+  beforeEach(() => setup());
+
+  it('keeps a circular function binding live instead of freezing undefined', async () => {
+    loadCode(`${BASE_URL}/greet-a.js`);
+
+    const a = await Promise.race([
+      importModule(`./greet-a.js`),
+      timeout(1000, 'deadlock: greet-a.js never resolved'),
+    ]);
+
+    if (typeof a !== 'object' || a === null || !('viaB' in a) || typeof a.viaB !== 'function') {
+      throw new Error('expected greet-a.js to export a viaB function');
+    }
+
+    // viaB() -> useGreet('circular') -> greet('circular'). With the current
+    // const snapshot, greet is undefined here and this throws
+    // "greet is not a function". Should return the real greeting.
+    expect(a.viaB()).toBe('hi circular');
   });
 });
 

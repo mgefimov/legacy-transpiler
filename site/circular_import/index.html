@@ -11,8 +11,12 @@
     <h1>Circular Import</h1>
     <p>Fetches, transpiles, and runs main.js through the actual LegacyTranspiler
         runtime (not native ESM) — exercising the same importModule/exportModule
-        path that runs in production. Covers a basic a&harr;b cycle (no deadlock)
-        and a shared, non-circular diamond dependency (x, y both need z).</p>
+        path that runs in production. Covers a basic a&harr;b cycle (no deadlock),
+        a shared non-circular diamond dependency (x, y both need z), and a
+        <strong>known bug</strong>: a circular function binding
+        (greet-a &harr; greet-b) that throws
+        <code>greet is not a function</code> &mdash; the production
+        <code>pe is not a function</code>, to be fixed.</p>
     <pre id="output"></pre>
     <!-- Paths are folder-prefixed (like the other site demos, e.g.
          import/index.html) so they resolve at the clean, no-trailing-slash
