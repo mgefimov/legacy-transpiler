@@ -14,17 +14,17 @@ window.log('===================== shared (non-circular) dependency =============
 // wait for z.js's real export, never a premature empty placeholder.
 window.log('x = ' + x + ', y = ' + y);
 
-window.log('===================== circular function binding (KNOWN BUG) =====================');
+window.log('===================== circular function binding (FIXED) =====================');
 // greet-b.js destructures `greet` from greet-a.js while greet-a.js is still
-// mid-cycle, so its `const greet` snapshot freezes to undefined. greet-a.js
-// later exports the real function, but the frozen binding never updates —
-// viaB() -> useGreet() -> greet() throws "greet is not a function" (the
-// production `pe is not a function`). Caught here so the rest of the page
-// still renders; the visible ERROR line IS the repro.
+// mid-cycle, so the snapshot starts as undefined. The `let` binding +
+// onExportsUpdated resync re-destructures once greet-a.js publishes the real
+// function, so viaB() -> useGreet() -> greet() now returns 'hi circular'
+// instead of throwing "greet is not a function" (the production
+// `pe is not a function`).
 try {
   window.log('viaB() = ' + viaB());
 } catch (e) {
-  window.log('BUG REPRODUCED: ' + (e && e.message ? e.message : e));
+  window.log('STILL BROKEN: ' + (e && e.message ? e.message : e));
 }
 
 window.log('===================== done =====================');

@@ -46,6 +46,9 @@ function targetAtLeast(platform: Target['platform'], min: [number, number]): boo
 const _moduleExports: Record<string, Record<string, unknown>> = {}
 const _moduleFinalized = new Set<string>();
 const _importWaitlist: Record<string, (() => void)[]> = {}
+// source src -> callbacks that re-sync a circular importer's destructured
+// bindings once `source` actually exports (see onExportsUpdated).
+const _exportsUpdatedWaitlist: Record<string, (() => void)[]> = {}
 // importer src -> source it is currently blocked awaiting; used to detect import cycles
 const _blockedOn: Record<string, string> = {}
 
@@ -133,6 +136,18 @@ export function exportModule(source: string, exports: Record<string, unknown>): 
   } else {
     _moduleExports[source] = exports;
   }
+
+  // A circular importer that destructured this module before it had exported
+  // anything froze `undefined` snapshots. Now that the real values exist, let
+  // it re-sync its (let) bindings. Run before resolving importers so anyone
+  // resuming from the await below already sees the refreshed values.
+  if (_exportsUpdatedWaitlist[source]) {
+    for (const callback of _exportsUpdatedWaitlist[source]) {
+      callback();
+    }
+    delete _exportsUpdatedWaitlist[source];
+  }
+
   _moduleFinalized.add(source);
   delete _blockedOn[source];
 
@@ -142,6 +157,28 @@ export function exportModule(source: string, exports: Record<string, unknown>): 
     }
     delete _importWaitlist[source];
   }
+}
+
+// Registers `callback` to run when `source` publishes its exports, so a
+// circular importer can refresh a destructured binding that was captured as
+// `undefined` mid-cycle (see the resync emitted in staticImportToDynamic.ts).
+// Fires immediately if `source` has already finalized.
+export function onExportsUpdated(source: string, callback: () => void): void {
+  source = resolveModule(source);
+  if (_moduleFinalized.has(source)) {
+    callback();
+    return;
+  }
+  if (!_exportsUpdatedWaitlist[source]) {
+    _exportsUpdatedWaitlist[source] = [];
+  }
+  _exportsUpdatedWaitlist[source].push(callback);
+}
+
+// Synchronous snapshot of a module's current exports (may be a live,
+// still-mutating object during a cycle). Used by the resync callback.
+export function getModuleExports(source: string): Record<string, unknown> | undefined {
+  return _moduleExports[resolveModule(source)];
 }
 
 export function importModule(source: string, importer?: string): Promise<unknown> {

@@ -5,6 +5,15 @@ const BASE_URL = 'https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1';
 const src = `${BASE_URL}/index.js`;
 const me = (s: string) => `await window.LegacyTranspiler.importModule('${s}', "${src}")`;
 
+// A destructured import now emits the `let` binding plus a resync callback
+// that re-destructures once the source module publishes its exports, so a
+// circular import doesn't freeze an `undefined` snapshot.
+const importBlock = (pattern: string, s: string) =>
+  `let ${pattern} = ${me(s)};\n` +
+  `window.LegacyTranspiler.onExportsUpdated("${s}", () => {\n` +
+  `  (${pattern} = window.LegacyTranspiler.getModuleExports("${s}"));\n` +
+  `});`;
+
 init({ BASE_URL, minify: false, runScript: () => {} });
 
 function iife(body: string): string {
@@ -18,28 +27,28 @@ describe('transpile', () => {
   it('converts import with resolveModule', async () => {
     const input = `import { something } from './vendor-Dfbm12k5.js';`;
     expect(transpile(src,input)).toBe(
-      iife(`const {something} = ${me(`./vendor-Dfbm12k5.js`)};\n`)
+      iife(`${importBlock('{something}', './vendor-Dfbm12k5.js')}\n`)
     );
   });
 
   it('converts import with surrounding code', async () => {
     const input = `import { something } from './vendor-Dfbm12k5.js';\nconsole.log(something);`;
     expect(transpile(src,input)).toBe(
-      iife(`const {something} = ${me(`./vendor-Dfbm12k5.js`)};\nconsole.log(something);\n`)
+      iife(`${importBlock('{something}', './vendor-Dfbm12k5.js')}\nconsole.log(something);\n`)
     );
   });
 
   it('converts multiple imports', async () => {
     const input = `import { a } from './mod-a.js';\nimport { b } from './mod-b.js';\nconsole.log(a, b);`;
     expect(transpile(src,input)).toBe(
-      iife(`const {a} = ${me(`./mod-a.js`)};\nconst {b} = ${me(`./mod-b.js`)};\nconsole.log(a, b);\n`)
+      iife(`${importBlock('{a}', './mod-a.js')}\n${importBlock('{b}', './mod-b.js')}\nconsole.log(a, b);\n`)
     );
   });
 
   it('resolves import path', async () => {
     const input = `import { something } from './some-module';`;
     expect(transpile(src,input)).toBe(
-      iife(`const {something} = ${me(`./some-module`)};\n`)
+      iife(`${importBlock('{something}', './some-module')}\n`)
     );
   });
 

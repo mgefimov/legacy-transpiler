@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { init, loadCode, importModule, exportModule } from '../src/index';
+import { init, loadCode, importModule, exportModule, onExportsUpdated, getModuleExports } from '../src/index';
 
 const BASE_URL = 'https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1';
 
@@ -25,7 +25,7 @@ function setup(delayUrl?: string): void {
     return { text: async () => sources[url] };
   }));
 
-  const windowStub = { LegacyTranspiler: { importModule, exportModule } };
+  const windowStub = { LegacyTranspiler: { importModule, exportModule, onExportsUpdated, getModuleExports } };
   init({
     BASE_URL,
     minify: false,
@@ -49,16 +49,15 @@ describe('circular static imports', () => {
   });
 });
 
-// RED test — reproduces the "X is not a function" bug (the production
+// Regression test for the "X is not a function" bug (the production
 // `pe is not a function`). greet-b.js destructures `greet` from greet-a.js
-// while greet-a.js is still mid-cycle, so its `const greet` snapshot freezes
-// to undefined; greet-a.js later exports the real function but the frozen
-// binding never updates. Asserts the correct (live-binding) behavior, so it
-// FAILS today and will go green once bindings are made live.
-describe('circular destructured function binding (known bug)', () => {
+// while greet-a.js is still mid-cycle, so its snapshot would freeze to
+// undefined. The `let` binding + onExportsUpdated resync re-destructures once
+// greet-a.js publishes the real function, so viaB() works.
+describe('circular destructured function binding', () => {
   beforeEach(() => setup());
 
-  it('keeps a circular function binding live instead of freezing undefined', async () => {
+  it('re-syncs a circular function binding instead of freezing undefined', async () => {
     loadCode(`${BASE_URL}/greet-a.js`);
 
     const a = await Promise.race([
@@ -70,9 +69,9 @@ describe('circular destructured function binding (known bug)', () => {
       throw new Error('expected greet-a.js to export a viaB function');
     }
 
-    // viaB() -> useGreet('circular') -> greet('circular'). With the current
-    // const snapshot, greet is undefined here and this throws
-    // "greet is not a function". Should return the real greeting.
+    // viaB() -> useGreet('circular') -> greet('circular'). greet was captured
+    // as undefined mid-cycle but resynced to the real function once greet-a.js
+    // finished, so this returns the real greeting instead of throwing.
     expect(a.viaB()).toBe('hi circular');
   });
 });
