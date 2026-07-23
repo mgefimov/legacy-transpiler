@@ -51,7 +51,6 @@ function noopAnimation(): Animation {
     addEventListener: noop,
     removeEventListener: noop,
     dispatchEvent: function (): boolean { return false; },
-    overallProgress: null
   };
   resolveFinished(animation);
   return animation;

@@ -92,8 +92,7 @@ re-scan all chunks for residue.
 - Each acorn walk is expensive — merge node-visitors into the single
   `mergeVisitors` walk; don't add standalone walks.
 - After changes: fix/add tests and run all tests (`yarn test` / `npx vitest run`),
-  then `yarn typecheck`. One **pre-existing** typecheck error in
-  `src/utils/patchAnimate.ts` (`overallProgress`) is unrelated — ignore it.
+  then `yarn typecheck` — it should be **fully clean** (no known pre-existing errors).
 - Only commit when explicitly asked.
 
 ## Commands
