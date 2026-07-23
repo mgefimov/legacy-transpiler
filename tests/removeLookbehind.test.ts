@@ -64,9 +64,16 @@ describe('removeLookbehind', () => {
     expect(transpile(src,input)).toBe(iife("new RegExp('^hello$', 'i');\n"));
   });
 
-  it('does not modify RegExp with non-literal pattern', async () => {
+  it('strips lookbehind from a string literal fed to RegExp via a variable', async () => {
+    // The pattern reaches RegExp indirectly (through `p`), so the call-site
+    // handlers can't see it — the string literal itself must be cleaned.
     const input = `const p = '(?<=foo)bar';\nnew RegExp(p, 'g');`;
-    expect(transpile(src,input)).toBe(iife("const p = '(?<=foo)bar';\nnew RegExp(p, 'g');\n"));
+    expect(transpile(src,input)).toBe(iife(`const p = "bar";\nnew RegExp(p, 'g');\n`));
+  });
+
+  it('leaves a plain string literal without lookbehind untouched', async () => {
+    const input = `const s = 'hello (world)';`;
+    expect(transpile(src,input)).toBe(iife(`const s = 'hello (world)';\n`));
   });
 
   it('removes lookbehind from a template-literal RegExp pattern', async () => {

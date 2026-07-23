@@ -130,7 +130,16 @@ export const createLookbehindVisitor = (): walk.SimpleVisitors<unknown> => {
       if (node.regex) {
         node.regex.pattern = applyMask(node.regex.pattern, lookbehindKeepMask(node.regex.pattern));
         node.raw = `/${node.regex.pattern}/${node.regex.flags}`;
+        return;
       }
+      // Lookbehind also hides in plain string literals that reach RegExp(...)
+      // indirectly — via a variable, concatenation, or object property — which
+      // the RegExp-call handlers below can't follow, e.g.
+      // `var p = "(?<![A-Za-z0-9_-])"; new RegExp(p)`. `(?<=` / `(?<!` are
+      // regex-specific and essentially never appear in non-regex text, so
+      // stripping them from any string literal is safe in practice and matches
+      // the lossy, best-effort lookbehind removal already done here.
+      stripLiteralPattern(node);
     },
     CallExpression(node: acorn.CallExpression) {
       if (isRegExpCallee(node.callee)) stripRegExpArg(node.arguments[0]);
