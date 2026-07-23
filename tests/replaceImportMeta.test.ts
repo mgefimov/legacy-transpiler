@@ -34,4 +34,19 @@ describe('replaceImportMeta', () => {
       iife(`console.log("${src}", "${src}");\n`)
     );
   });
+
+  // Anything other than `import.meta.url` must still be rewritten — a leftover
+  // `import.meta` makes a classic <script> throw
+  // "import.meta is only valid inside modules".
+  it('rewrites bare import.meta into an object with url', async () => {
+    const out = transpile(src, `const m = import.meta;`);
+    expect(out).not.toContain('import.meta');
+    expect(out).toContain(`url: "${src}"`);
+  });
+
+  it('rewrites non-url import.meta member access without leaving import.meta', async () => {
+    const out = transpile(src, `if (import.meta.hot) import.meta.hot.accept();`);
+    expect(out).not.toContain('import.meta');
+    expect(out).toContain(`url: "${src}"`);
+  });
 });
